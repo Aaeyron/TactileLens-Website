@@ -24,36 +24,35 @@ const features = [
 
 export default function FeaturesSection() {
   return (
-    <section className="bg-slate-50 px-6 py-20">
-      <div className="mx-auto max-w-6xl">
-        <div className="max-w-2xl">
-          <h2 className="text-3xl font-bold tracking-tight text-slate-900">
-            What TactileLens offers
-          </h2>
+    <section className="features-section">
+      <div className="home-container">
+        <span className="section-eyebrow">Key features</span>
 
-          <p className="mt-4 leading-7 text-slate-600">
-            Tools to help teachers prepare printed learning materials in a
-            more accessible format.
-          </p>
-        </div>
+        <h2 className="section-title">
+          What TactileLens offers
+        </h2>
 
-        <div className="mt-10 grid gap-5 sm:grid-cols-2">
+        <p className="section-description">
+          Tools to help teachers prepare printed learning materials in a
+          more accessible format.
+        </p>
+
+        <div className="features-grid">
           {features.map((feature) => (
-            <div
-              key={feature.title}
-              className="rounded-2xl border border-slate-200 bg-white p-7"
-            >
-              <h3 className="text-lg font-semibold text-slate-900">
+            <article className="feature-card" key={feature.title}>
+              <div className="feature-accent" aria-hidden="true" />
+
+              <h3 className="feature-title">
                 {feature.title}
               </h3>
 
-              <p className="mt-3 leading-7 text-slate-600">
+              <p className="feature-description">
                 {feature.description}
               </p>
-            </div>
+            </article>
           ))}
         </div>
       </div>
     </section>
   );
-}
+}   
