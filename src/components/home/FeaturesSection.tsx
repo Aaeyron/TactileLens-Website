@@ -24,7 +24,7 @@ const features = [
 
 export default function FeaturesSection() {
   return (
-    <section className="features-section">
+    <section id="features" className="features-section">
       <div className="home-container">
         <span className="section-eyebrow">Key features</span>
 
