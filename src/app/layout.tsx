@@ -4,6 +4,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import SkipLink from "@/components/layout/SkipLink";
 import { site } from "@/content/site";
+import { baseOpenGraph } from "@/lib/metadata";
 import "./globals.css";
 
 const inter = Inter({
@@ -16,15 +17,14 @@ const inter = Inter({
 // "summary_large_image". Next.js picks the file up automatically.
 export const metadata: Metadata = {
   ...(site.url ? { metadataBase: new URL(site.url) } : {}),
-  title: site.title,
+  // Inner pages set a short title, e.g. "Features" → "Features | TactileLens".
+  title: { default: site.title, template: `%s | ${site.name}` },
   description: site.description,
   applicationName: site.name,
   openGraph: {
-    type: "website",
-    siteName: site.name,
+    ...baseOpenGraph,
     title: site.title,
     description: site.description,
-    locale: "en_US",
     ...(site.url ? { url: "/" } : {}),
   },
   twitter: {

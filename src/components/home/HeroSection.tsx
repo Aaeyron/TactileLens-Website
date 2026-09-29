@@ -1,7 +1,6 @@
-import { hero } from "@/content/site";
+import { downloadCta, hero } from "@/content/site";
 import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
-import DownloadCta from "@/components/download/DownloadCta";
 import PhoneMockup from "./PhoneMockup";
 
 export default function HeroSection() {
@@ -19,7 +18,7 @@ export default function HeroSection() {
           <p className="hero-lead">{hero.description}</p>
 
           <div className="hero-actions">
-            <DownloadCta idPrefix="hero" />
+            <Button href={downloadCta.pageHref}>{downloadCta.label}</Button>
             <Button href={hero.secondaryCta.href} variant="secondary">
               {hero.secondaryCta.label}
             </Button>

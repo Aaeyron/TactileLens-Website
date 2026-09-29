@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { ComponentPropsWithoutRef } from "react";
 
 type ButtonProps = ComponentPropsWithoutRef<"a"> & {
@@ -8,9 +9,11 @@ type ButtonProps = ComponentPropsWithoutRef<"a"> & {
 
 /**
  * A link styled as a button. Every button on this site navigates
- * (to a section or a file), so it renders an <a>, not a <button>.
+ * (to a page or a file), so it renders a link, not a <button>.
+ * Internal pages use next/link; files and external URLs use a plain <a>.
  */
 export default function Button({
+  href,
   variant = "primary",
   size = "md",
   className = "",
@@ -25,5 +28,11 @@ export default function Button({
     .filter(Boolean)
     .join(" ");
 
-  return <a className={classes} {...props} />;
+  const isInternalPage = href.startsWith("/") && !href.startsWith("//") && !props.download;
+
+  if (isInternalPage) {
+    return <Link href={href} className={classes} {...props} />;
+  }
+
+  return <a href={href} className={classes} {...props} />;
 }
