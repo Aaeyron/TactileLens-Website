@@ -617,7 +617,7 @@ h3 {
   display: inline-flex;
   min-height: var(--button-height);
   align-items: center;
-  border: 1px dashed var(--color-border-strong);
+  border: 1px dashed var(--color-text-muted);
   border-radius: var(--radius-md);
   padding: var(--space-3) var(--space-5);
   background: var(--color-brand-subtle);

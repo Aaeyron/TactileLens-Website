@@ -31,7 +31,7 @@ const pairs = [
   ["brand on brand-subtle", "#123b70", "#e8eef7", TEXT],
   ["text on brand-subtle (CTA banner)", "#0f1f36", "#e8eef7", TEXT],
   ["text-muted on brand-subtle (CTA banner)", "#4a5a72", "#e8eef7", TEXT],
-  ["border-strong on brand-subtle (coming-soon notice)", "#7b8aa1", "#e8eef7", UI],
+  ["text-muted border on brand-subtle (coming-soon notice)", "#4a5a72", "#e8eef7", UI],
   ["accent-strong on bg", "#0b6e6a", "#ffffff", TEXT],
   ["accent-strong on surface", "#0b6e6a", "#f4f7fb", TEXT],
   ["accent-strong on accent-subtle", "#0b6e6a", "#e6f5f4", TEXT],
