@@ -67,7 +67,7 @@
   --text-lg: 1.25rem; /*    20px: lead paragraph, h3 and card titles */
   --text-xl: 1.5rem; /*     24px: reserved for larger subheadings */
   --text-2xl: clamp(1.75rem, 1.4rem + 1.5vw, 2.5rem); /*  28→40px: h2 */
-  --text-3xl: clamp(2.25rem, 1.6rem + 3vw, 3.75rem); /*   36→60px: h1 */
+  --text-3xl: clamp(2rem, 1.4rem + 3vw, 3.75rem); /*     32→60px: h1 */
   --leading-tight: 1.15;
   --leading-snug: 1.3;
   --leading-normal: 1.6;
@@ -75,6 +75,8 @@
   --weight-semibold: 600;
   --weight-bold: 700;
   --measure: 68ch;
+  --font-print: Georgia, "Times New Roman", serif; /* mock "printed page" text */
+  --font-braille: "Segoe UI Symbol", "Noto Sans Symbols 2", "DejaVu Sans", sans-serif;
 
   /* Radius */
   --radius-sm: 8px;
@@ -96,6 +98,19 @@
   --gutter: var(--space-4);
   --header-height: 72px;
   --tap-target: 44px;
+  --button-height: 48px;
+
+  /* Component: phone mockup (generic, not any real device) */
+  --device-width: 240px;
+  --device-bezel: 10px;
+  --device-radius: 40px;
+  --device-frame: var(--color-text);
+}
+
+@media (min-width: 960px) {
+  :root {
+    --device-width: 272px;
+  }
 }
 
 @media (min-width: 768px) {
@@ -189,7 +204,7 @@ h3 {
 
 .button {
   display: inline-flex;
-  min-height: 48px;
+  min-height: var(--button-height);
   align-items: center;
   justify-content: center;
   gap: var(--space-2);
@@ -466,13 +481,33 @@ h3 {
  * Hero
  * ========================================================================= */
 
+/* Mobile first: tighter top spacing so the Download button is visible
+   without scrolling on a typical phone. */
 .hero {
-  padding-block: clamp(var(--space-8), 10vw, var(--space-10));
+  padding-block: clamp(var(--space-6), 8vw, var(--space-9));
   background: var(--color-bg);
 }
 
+.hero-grid {
+  display: grid;
+  gap: var(--space-8);
+}
+
+@media (min-width: 960px) {
+  .hero-grid {
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+    align-items: center;
+    gap: var(--space-8);
+  }
+}
+
 .hero-content {
-  max-width: 760px;
+  max-width: 720px;
+}
+
+.hero-media {
+  display: flex;
+  justify-content: center;
 }
 
 .hero-badge {
@@ -500,16 +535,201 @@ h3 {
 
 .hero-lead {
   max-width: 60ch;
-  margin-top: var(--space-5);
+  margin-top: var(--space-4);
   color: var(--color-text-muted);
-  font-size: var(--text-lg);
+}
+
+@media (min-width: 768px) {
+  .hero-lead {
+    margin-top: var(--space-5);
+    font-size: var(--text-lg);
+  }
 }
 
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-3);
+  align-items: flex-start;
+  gap: var(--space-3) var(--space-4);
   margin-top: var(--space-6);
+}
+
+/* =========================================================================
+ * Download call to action
+ * ========================================================================= */
+
+.download-cta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+/* Shown instead of a link while the APK URL is still a TODO.
+   Deliberately not styled like a button: it is a notice, not a control. */
+.download-pending {
+  display: inline-flex;
+  min-height: var(--button-height);
+  align-items: center;
+  border: 1px dashed var(--color-border-strong);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-5);
+  background: var(--color-brand-subtle);
+  color: var(--color-brand);
+  font-weight: var(--weight-semibold);
+  line-height: 1.2;
+}
+
+.download-meta {
+  max-width: 32ch;
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.download-meta-separator {
+  margin-inline: var(--space-2);
+}
+
+/* =========================================================================
+ * Phone mockup
+ * ========================================================================= */
+
+.phone {
+  position: relative;
+  width: var(--device-width);
+  max-width: 100%;
+  border: var(--device-bezel) solid var(--device-frame);
+  border-radius: var(--device-radius);
+  background: var(--device-frame);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Generic speaker slot */
+.phone::before {
+  position: absolute;
+  top: var(--space-2);
+  left: 50%;
+  z-index: 1;
+  width: 30%;
+  height: var(--space-1);
+  border-radius: var(--radius-full);
+  background: var(--device-frame);
+  content: "";
+  transform: translateX(-50%);
+}
+
+.phone-screen {
+  overflow: hidden;
+  aspect-ratio: 9 / 19.5;
+  border-radius: calc(var(--device-radius) - var(--device-bezel));
+  background: var(--color-surface);
+}
+
+.phone-screenshot {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Placeholder "scan → braille" screen (TODO: replace with real screenshots) */
+
+.mock-screen {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+}
+
+.mock-appbar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-6) var(--space-4) var(--space-3);
+  background: var(--color-brand);
+  color: var(--color-text-inverse);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+}
+
+.mock-appbar-mark {
+  display: grid;
+  width: var(--space-5);
+  height: var(--space-5);
+  place-items: center;
+  border-radius: var(--radius-sm);
+  background: var(--color-text-inverse);
+  color: var(--color-brand);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+}
+
+.mock-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-4);
+}
+
+.mock-label {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+}
+
+.mock-viewfinder,
+.mock-output {
+  display: grid;
+  min-height: var(--space-8);
+  place-items: center;
+  border-radius: var(--radius-md);
+  background: var(--color-surface-raised);
+}
+
+.mock-viewfinder {
+  border: 2px dashed var(--color-accent);
+}
+
+.mock-output {
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+}
+
+.mock-printed {
+  color: var(--color-text);
+  font-family: var(--font-print);
+  font-size: var(--text-xl);
+}
+
+.mock-step {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding-block: var(--space-1);
+  color: var(--color-accent-strong);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+}
+
+.mock-step-arrow {
+  font-size: var(--text-lg);
+}
+
+.mock-braille {
+  color: var(--color-brand);
+  font-family: var(--font-braille);
+  font-size: var(--text-2xl);
+  letter-spacing: 0.1em;
+}
+
+.mock-shutter {
+  width: var(--space-8);
+  height: var(--space-8);
+  flex-shrink: 0;
+  margin: 0 auto var(--space-5);
+  border: var(--space-1) solid var(--color-brand-subtle);
+  border-radius: var(--radius-full);
+  background: var(--color-brand);
 }
 
 /* =========================================================================

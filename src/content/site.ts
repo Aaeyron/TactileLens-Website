@@ -25,10 +25,30 @@ export const navigation = [
   { label: "Team", href: "#team" },
 ];
 
+/**
+ * App release info: the one place to update for each new APK.
+ * Leave a field as "" while it is unknown. The site hides empty fields,
+ * and the download button shows "coming soon" until apkUrl is filled in.
+ */
+export const appRelease = {
+  // TODO: APK download URL. Either a GitHub Releases asset URL, or a file in
+  // /public, written as a path like "/downloads/tactilelens.apk".
+  apkUrl: "",
+  // TODO: Current version, e.g. "1.0.0".
+  version: "",
+  // TODO: APK file size, e.g. "42 MB".
+  fileSize: "",
+  // TODO: Minimum Android version, e.g. "8.0".
+  minAndroidVersion: "",
+};
+
 export const downloadCta = {
   label: "Download for Android",
+  /** Navbar button: jumps to the download and install section. */
   shortLabel: "Download App",
   href: "#download",
+  comingSoonLabel: "Download coming soon",
+  comingSoonNote: "The Android app will be available to download here soon.",
 };
 
 export const hero = {
@@ -40,6 +60,24 @@ export const hero = {
   description:
     "TactileLens helps teachers recognize printed English text and algebraic equations, review scanned content, and generate Braille output for learners who are blind or have low vision.",
   secondaryCta: { label: "See features", href: "#features" },
+  mockup: {
+    // TODO: Add a real app screenshot. Put the file in /public/screenshots/,
+    // then fill in src (e.g. "/screenshots/scan.png"), the image's real pixel
+    // width and height, and alt text describing what the screen shows.
+    // Portrait phone screenshots (about 9:19.5) fit the frame best.
+    screenshot: { src: "", width: 0, height: 0, alt: "" },
+    // Placeholder screen shown until the screenshot above is filled in.
+    placeholder: {
+      label:
+        "Illustration of a phone scanning the printed expression x + 1 and showing it in Nemeth braille.",
+      scanLabel: "Scan",
+      printed: "x + 1",
+      translateLabel: "Translate",
+      brailleLabel: "Nemeth braille",
+      // TODO: Team to verify. Intended as "x + 1" in Nemeth code (x, plus, 1).
+      braille: "⠭⠬⠂",
+    },
+  },
 };
 
 export const features = {

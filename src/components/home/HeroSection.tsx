@@ -1,11 +1,13 @@
-import { downloadCta, hero } from "@/content/site";
+import { hero } from "@/content/site";
 import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
+import DownloadCta from "@/components/download/DownloadCta";
+import PhoneMockup from "./PhoneMockup";
 
 export default function HeroSection() {
   return (
     <section className="hero" aria-labelledby="hero-title">
-      <Container>
+      <Container className="hero-grid">
         <div className="hero-content">
           <p className="hero-badge">{hero.badge}</p>
 
@@ -17,11 +19,15 @@ export default function HeroSection() {
           <p className="hero-lead">{hero.description}</p>
 
           <div className="hero-actions">
-            <Button href={downloadCta.href}>{downloadCta.label}</Button>
+            <DownloadCta idPrefix="hero" />
             <Button href={hero.secondaryCta.href} variant="secondary">
               {hero.secondaryCta.label}
             </Button>
           </div>
+        </div>
+
+        <div className="hero-media">
+          <PhoneMockup />
         </div>
       </Container>
     </section>
