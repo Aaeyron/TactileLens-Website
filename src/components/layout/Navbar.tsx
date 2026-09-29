@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { downloadCta, navigation, site } from "@/content/site";
 import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
+import LogoMark from "@/components/ui/LogoMark";
 
 function isCurrentPage(pathname: string, href: string) {
   return href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);
@@ -50,9 +51,7 @@ export default function Navbar() {
             aria-label={`${site.name} home`}
             onClick={closeMenu}
           >
-            <span className="navbar-brand-mark" aria-hidden="true">
-              T
-            </span>
+            <LogoMark />
             <span aria-hidden="true">{site.name}</span>
           </Link>
 

@@ -1,17 +1,35 @@
 import Card from "./Card";
+import type { IconName } from "./Icon";
 
-type CardGridProps = {
-  items: { title: string; description: string; note?: string }[];
-  /** Maximum columns on wide screens. */
-  columns?: 2 | 3;
+type CardGridItem = {
+  title: string;
+  description: string;
+  note?: string;
+  icon?: IconName;
+  href?: string;
 };
 
-/** A responsive list of cards, e.g. features or audiences. */
-export default function CardGrid({ items, columns = 2 }: CardGridProps) {
+type CardGridProps = {
+  items: readonly CardGridItem[];
+  /** Maximum columns on wide screens. */
+  columns?: 2 | 3;
+  /** "Learn more" text for linked cards. */
+  linkLabel?: string;
+};
+
+/** A responsive list of cards, e.g. highlights or audiences. */
+export default function CardGrid({ items, columns = 2, linkLabel }: CardGridProps) {
   return (
     <ul className={`card-grid card-grid--${columns}`} role="list">
       {items.map((item) => (
-        <Card as="li" accent key={item.title} title={item.title}>
+        <Card
+          as="li"
+          key={item.title}
+          title={item.title}
+          icon={item.icon}
+          href={item.href}
+          linkLabel={linkLabel}
+        >
           <p>{item.description}</p>
           {item.note && <p className="card-note">{item.note}</p>}
         </Card>

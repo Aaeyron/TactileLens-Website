@@ -15,7 +15,7 @@ export default function FaqPage() {
 
       <div className="section">
         <Container>
-          <FaqList items={faqPage.items} />
+          <FaqList categories={faqPage.categories} />
         </Container>
       </div>
 

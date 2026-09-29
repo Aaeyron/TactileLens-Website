@@ -3,7 +3,8 @@ import type { ComponentPropsWithoutRef } from "react";
 
 type ButtonProps = ComponentPropsWithoutRef<"a"> & {
   href: string;
-  variant?: "primary" | "secondary";
+  /** "inverse" is for dark (navy) backgrounds. */
+  variant?: "primary" | "secondary" | "inverse";
   size?: "md" | "sm";
 };
 

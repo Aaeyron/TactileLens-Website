@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/metadata";
 import { featuresPage } from "@/content/site";
 import CtaBanner from "@/components/download/CtaBanner";
-import CardGrid from "@/components/ui/CardGrid";
+import FeatureRows from "@/components/features/FeatureRows";
 import PageHeader from "@/components/ui/PageHeader";
 import Section from "@/components/ui/Section";
 import StepList from "@/components/ui/StepList";
@@ -17,7 +17,7 @@ export default function FeaturesPage() {
       <PageHeader {...header} />
 
       <Section id="all-features" eyebrow={list.eyebrow} title={list.title}>
-        <CardGrid items={list.items} columns={3} />
+        <FeatureRows items={list.items} />
       </Section>
 
       <Section
@@ -26,7 +26,7 @@ export default function FeaturesPage() {
         eyebrow={howItWorks.eyebrow}
         title={howItWorks.title}
       >
-        <StepList steps={howItWorks.steps} />
+        <StepList steps={howItWorks.steps} variant="timeline" />
       </Section>
 
       <CtaBanner />

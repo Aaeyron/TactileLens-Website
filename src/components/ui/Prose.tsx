@@ -1,5 +1,5 @@
 type ProseProps = {
-  paragraphs: string[];
+  paragraphs: readonly string[];
 };
 
 /** Plain paragraphs of running text, kept to a readable line length. */

@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import SkipLink from "@/components/layout/SkipLink";
+import RevealOnScroll from "@/components/layout/RevealOnScroll";
 import { site } from "@/content/site";
 import { baseOpenGraph } from "@/lib/metadata";
 import "./globals.css";
@@ -49,6 +50,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           {children}
         </main>
         <Footer />
+        <RevealOnScroll />
       </body>
     </html>
   );

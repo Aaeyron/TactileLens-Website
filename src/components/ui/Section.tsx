@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import Container from "./Container";
+import DotDivider from "./DotDivider";
 
 type SectionProps = {
   id: string;
@@ -26,10 +27,16 @@ export default function Section({
       id={id}
       className={`section ${tone === "soft" ? "section--soft" : ""}`.trim()}
       aria-labelledby={titleId}
+      data-reveal
     >
       <Container>
         <header className="section-header">
-          {eyebrow && <p className="section-eyebrow">{eyebrow}</p>}
+          {eyebrow && (
+            <>
+              <DotDivider />
+              <p className="section-eyebrow">{eyebrow}</p>
+            </>
+          )}
           <h2 id={titleId} className="section-title">
             {title}
           </h2>

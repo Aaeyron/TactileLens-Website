@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/metadata";
 import { downloadPage } from "@/content/site";
-import DownloadCta from "@/components/download/DownloadCta";
-import InfoList from "@/components/ui/InfoList";
+import DownloadCard from "@/components/download/DownloadCard";
 import PageHeader from "@/components/ui/PageHeader";
 import Section from "@/components/ui/Section";
 import StepList from "@/components/ui/StepList";
@@ -10,18 +9,14 @@ import StepList from "@/components/ui/StepList";
 export const metadata: Metadata = pageMetadata({ ...downloadPage.meta, path: "/download" });
 
 export default function DownloadPage() {
-  const { header, release, install } = downloadPage;
+  const { header, install } = downloadPage;
 
   return (
     <>
-      {/* The only place on the site that downloads the APK directly. */}
-      <PageHeader {...header}>
-        <DownloadCta idPrefix="download-page" />
-      </PageHeader>
+      <PageHeader {...header} />
 
-      <Section id="release" title={release.title}>
-        <InfoList items={release.details} />
-      </Section>
+      {/* The only place on the site that downloads the APK directly. */}
+      <DownloadCard />
 
       <Section
         id="install"
@@ -30,7 +25,7 @@ export default function DownloadPage() {
         title={install.title}
         description={install.description}
       >
-        <StepList steps={install.steps} layout="stack" />
+        <StepList steps={install.steps} variant="cards" />
         <ul className="tip-list">
           {install.tips.map((tip) => (
             <li key={tip}>{tip}</li>

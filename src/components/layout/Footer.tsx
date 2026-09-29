@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { downloadCta, footer, navigation, site } from "@/content/site";
 import Container from "@/components/ui/Container";
+import Icon from "@/components/ui/Icon";
+import LogoMark from "@/components/ui/LogoMark";
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -11,7 +13,10 @@ export default function Footer() {
     <footer className="site-footer">
       <Container className="footer-grid">
         <div className="footer-about">
-          <p className="footer-brand">{site.name}</p>
+          <p className="footer-brand">
+            <LogoMark />
+            {site.name}
+          </p>
           <p>{site.tagline}</p>
           <p>{footer.platformNote}</p>
         </div>
@@ -31,7 +36,8 @@ export default function Footer() {
 
         <div>
           <p className="footer-heading">{footer.contactLabel}</p>
-          <p>
+          <p className="footer-contact">
+            <Icon name="mail" size={18} />
             {hasEmail ? (
               <a className="footer-link" href={`mailto:${footer.contactEmail}`}>
                 {footer.contactEmail}

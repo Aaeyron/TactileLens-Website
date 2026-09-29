@@ -1,6 +1,7 @@
 import { downloadCta, hero } from "@/content/site";
 import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
+import Icon from "@/components/ui/Icon";
 import PhoneMockup from "./PhoneMockup";
 
 export default function HeroSection() {
@@ -23,10 +24,27 @@ export default function HeroSection() {
               {hero.secondaryCta.label}
             </Button>
           </div>
+
+          <ul className="trust-badges" role="list">
+            {hero.trustBadges.map((badge) => (
+              <li className="trust-badge" key={badge.label}>
+                <Icon name={badge.icon} size={18} />
+                {badge.label}
+              </li>
+            ))}
+          </ul>
         </div>
 
-        <div className="hero-media">
+        <div className="hero-visual">
           <PhoneMockup />
+          {hero.floatingCards.map((card, index) => (
+            <div className={`float-card float-card--${index + 1}`} key={card.label} aria-hidden="true">
+              <span className="float-card-icon">
+                <Icon name={card.icon} size={18} />
+              </span>
+              {card.label}
+            </div>
+          ))}
         </div>
       </Container>
     </section>

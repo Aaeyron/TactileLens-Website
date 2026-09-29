@@ -14,11 +14,43 @@ const contrast = (a, b) => {
   return (hi + 0.05) / (lo + 0.05);
 };
 
+/** Blend `top` over `base` at opacity `alpha` (for tints and dot patterns). */
+const mix = (base, top, alpha) => {
+  const channel = (hex, i) => parseInt(hex.slice(i, i + 2), 16);
+  return (
+    "#" +
+    [1, 3, 5]
+      .map((i) => Math.round(channel(base, i) * (1 - alpha) + channel(top, i) * alpha))
+      .map((v) => v.toString(16).padStart(2, "0"))
+      .join("")
+  );
+};
+
 const TEXT = 4.5;
 const UI = 3;
 
+// Worst-case decorative backgrounds: the strongest point of each tint, with
+// a pattern dot directly underneath (hero tint 14% teal, page-header tint 8%,
+// dots 8% navy / 10% white).
+const heroWorst = mix(mix("#ffffff", "#16a6a1", 0.14), "#123b70", 0.08);
+const pageHeaderWorst = mix(mix("#f4f7fb", "#16a6a1", 0.08), "#123b70", 0.08);
+const navyBandWorst = mix("#123b70", "#ffffff", 0.1);
+
 // [label, foreground, background, required ratio]
 const pairs = [
+  ["text on hero tint + dots (worst case)", "#0f1f36", heroWorst, TEXT],
+  ["text-muted on hero tint + dots (worst case)", "#4a5a72", heroWorst, TEXT],
+  ["text on page-header tint + dots (worst case)", "#0f1f36", pageHeaderWorst, TEXT],
+  ["text-muted on page-header tint + dots (worst case)", "#4a5a72", pageHeaderWorst, TEXT],
+  ["accent-strong eyebrow on page-header (worst case)", "#0b6e6a", pageHeaderWorst, TEXT],
+  ["text-inverse on navy band + dots (worst case)", "#ffffff", navyBandWorst, TEXT],
+  ["text-inverse-muted on navy band", "#c9d6ea", "#123b70", TEXT],
+  ["text-inverse-muted on navy band + dots (worst case)", "#c9d6ea", navyBandWorst, TEXT],
+  ["focus ring (white) on navy band", "#ffffff", navyBandWorst, UI],
+  ["inverse button: brand on white", "#123b70", "#ffffff", TEXT],
+  ["inverse button hover: brand on brand-subtle", "#123b70", "#e8eef7", TEXT],
+  ["accent-strong icon on accent-subtle tile", "#0b6e6a", "#e6f5f4", UI],
+  ["brand icon on brand-subtle tile", "#123b70", "#e8eef7", UI],
   ["text on bg", "#0f1f36", "#ffffff", TEXT],
   ["text on surface", "#0f1f36", "#f4f7fb", TEXT],
   ["text-muted on bg", "#4a5a72", "#ffffff", TEXT],

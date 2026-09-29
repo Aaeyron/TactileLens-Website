@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/metadata";
 import { teamPage } from "@/content/site";
 import CtaBanner from "@/components/download/CtaBanner";
-import Card from "@/components/ui/Card";
+import MemberCard from "@/components/team/MemberCard";
 import InfoList from "@/components/ui/InfoList";
 import PageHeader from "@/components/ui/PageHeader";
 import Section from "@/components/ui/Section";
@@ -17,12 +17,10 @@ export default function TeamPage() {
       <PageHeader {...header} />
 
       <Section id="members" eyebrow={members.eyebrow} title={members.title}>
-        <ul className="card-grid card-grid--3" role="list">
+        <ul className="card-grid card-grid--4" role="list">
           {members.list.map((member, index) => (
             // Index in the key: placeholder entries share the same name.
-            <Card as="li" key={`${member.name}-${index}`} title={member.name}>
-              <p>{member.role}</p>
-            </Card>
+            <MemberCard key={`${member.name}-${index}`} name={member.name} role={member.role} />
           ))}
         </ul>
       </Section>
