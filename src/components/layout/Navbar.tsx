@@ -1,23 +1,31 @@
-
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useState } from "react";
-
-const navigation = [
-  { label: "Home", href: "/" },
-  { label: "Features", href: "/#features" },
-  { label: "About", href: "/about" },
-];
+import { useEffect, useRef, useState } from "react";
+import { downloadCta, navigation, site } from "@/content/site";
 
 export default function Navbar() {
-  const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
+  const toggleRef = useRef<HTMLButtonElement>(null);
+
+  // Close the mobile menu with Escape and return focus to the toggle button.
+  useEffect(() => {
+    if (!menuOpen) return;
+
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setMenuOpen(false);
+        toggleRef.current?.focus();
+      }
+    }
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [menuOpen]);
 
   return (
     <header className="site-header">
-      <nav className="navbar home-container" aria-label="Main navigation">
+      <nav className="navbar home-container" aria-label="Main">
         <Link
           href="/"
           className="navbar-brand"
@@ -26,10 +34,11 @@ export default function Navbar() {
           <span className="navbar-brand-mark" aria-hidden="true">
             T
           </span>
-          <span>TactileLens</span>
+          <span>{site.name}</span>
         </Link>
 
         <button
+          ref={toggleRef}
           type="button"
           className="navbar-menu-toggle"
           aria-label={menuOpen ? "Close menu" : "Open menu"}
@@ -44,32 +53,24 @@ export default function Navbar() {
           id="navbar-links"
           className={`navbar-links ${menuOpen ? "navbar-links-open" : ""}`}
         >
-          {navigation.map((item) => {
-            const isActive =
-              item.href === "/"
-                ? pathname === "/"
-                : item.href === "/about" && pathname === "/about";
+          {navigation.map((item) => (
+            <a
+              key={item.href}
+              href={item.href}
+              className="navbar-link"
+              onClick={() => setMenuOpen(false)}
+            >
+              {item.label}
+            </a>
+          ))}
 
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`navbar-link ${isActive ? "navbar-link-active" : ""}`}
-                aria-current={isActive ? "page" : undefined}
-                onClick={() => setMenuOpen(false)}
-              >
-                {item.label}
-              </Link>
-            );
-          })}
-
-          <Link
-            href="/download"
+          <a
+            href={downloadCta.href}
             className="navbar-download"
             onClick={() => setMenuOpen(false)}
           >
-            Download App
-          </Link>
+            {downloadCta.shortLabel}
+          </a>
         </div>
       </nav>
     </header>

@@ -1,58 +1,33 @@
-
-const features = [
-  {
-    title: "Printed Text Recognition",
-    description:
-      "Recognize printed English text from uploaded or captured learning materials.",
-  },
-  {
-    title: "Algebra Recognition",
-    description:
-      "Recognize algebraic equations and mathematical notation in printed materials.",
-  },
-  {
-    title: "Content Preview",
-    description:
-      "Review recognized text and mathematical expressions in a readable document view.",
-  },
-  {
-    title: "Braille Translation",
-    description:
-      "Generate Braille output from recognized content for review and accessible use.",
-  },
-];
+import { features } from "@/content/site";
 
 export default function FeaturesSection() {
   return (
-    <section id="features" className="features-section">
+    <section
+      id="features"
+      className="features-section"
+      aria-labelledby="features-title"
+    >
       <div className="home-container">
-        <span className="section-eyebrow">Key features</span>
+        <p className="section-eyebrow">{features.eyebrow}</p>
 
-        <h2 className="section-title">
-          What TactileLens offers
+        <h2 id="features-title" className="section-title">
+          {features.title}
         </h2>
 
-        <p className="section-description">
-          Tools to help teachers prepare printed learning materials in a
-          more accessible format.
-        </p>
+        <p className="section-description">{features.description}</p>
 
-        <div className="features-grid">
-          {features.map((feature) => (
-            <article className="feature-card" key={feature.title}>
+        <ul className="features-grid" role="list">
+          {features.items.map((feature) => (
+            <li className="feature-card" key={feature.title}>
               <div className="feature-accent" aria-hidden="true" />
 
-              <h3 className="feature-title">
-                {feature.title}
-              </h3>
+              <h3 className="feature-title">{feature.title}</h3>
 
-              <p className="feature-description">
-                {feature.description}
-              </p>
-            </article>
+              <p className="feature-description">{feature.description}</p>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     </section>
   );
-}   
+}

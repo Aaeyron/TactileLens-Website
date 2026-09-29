@@ -1,7 +1,16 @@
-
 @import "tailwindcss";
 
+/*
+ * Design tokens.
+ * Contrast notes (WCAG 2.2 AA):
+ * - --color-secondary (teal) is decorative only: accents, tints, selection.
+ *   It is ~3:1 on white, so never use it for text or focus rings.
+ * - --color-focus / --color-accent-strong are the accessible teal variants
+ *   (≥ 4.5:1 on the page and surface colors in both themes).
+ */
 :root {
+  color-scheme: light dark;
+
   /* Three main theme colors */
   --color-primary: #123b70;
   --color-secondary: #16a6a1;
@@ -12,9 +21,43 @@
   --color-text: #17243a;
   --color-muted: #526179;
 
+  /* Interaction */
+  --color-on-primary: #ffffff;
+  --color-primary-hover: #0c2d57;
+  --color-accent-strong: #0e7a76;
+  --color-focus: #0e7a76;
+  --color-border: rgba(18, 59, 112, 0.12);
+  --color-border-strong: rgba(18, 59, 112, 0.24);
+
   /* Shared design settings */
   --radius-card: 20px;
   --shadow-card: 0 12px 35px rgba(18, 59, 112, 0.08);
+  --shadow-card-hover: 0 18px 40px rgba(18, 59, 112, 0.12);
+  --shadow-button: 0 8px 24px rgba(18, 59, 112, 0.18);
+  --header-offset: 100px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-primary: #8cc0ff;
+    --color-secondary: #16a6a1;
+    --color-background: #0b1524;
+
+    --color-surface: #111f33;
+    --color-text: #e6edf7;
+    --color-muted: #a9b6c9;
+
+    --color-on-primary: #0b1524;
+    --color-primary-hover: #b3d5ff;
+    --color-accent-strong: #3fd2cc;
+    --color-focus: #3fd2cc;
+    --color-border: rgba(140, 192, 255, 0.14);
+    --color-border-strong: rgba(140, 192, 255, 0.3);
+
+    --shadow-card: 0 12px 35px rgba(0, 0, 0, 0.35);
+    --shadow-card-hover: 0 18px 40px rgba(0, 0, 0, 0.45);
+    --shadow-button: 0 8px 24px rgba(0, 0, 0, 0.4);
+  }
 }
 
 * {
@@ -23,6 +66,8 @@
 
 html {
   scroll-behavior: smooth;
+  /* Keeps anchor targets and keyboard-focused elements clear of the sticky navbar */
+  scroll-padding-top: var(--header-offset);
 }
 
 body {
@@ -32,9 +77,54 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+.site-body {
+  display: flex;
+  min-height: 100%;
+  flex-direction: column;
+}
+
+.site-main {
+  flex: 1;
+}
+
+.site-main:focus {
+  outline: none;
+}
+
 ::selection {
   background: var(--color-secondary);
-  color: var(--color-text);
+  color: #17243a;
+}
+
+/* Fallback focus style for anything without its own */
+:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+/* Skip link: hidden until focused with the keyboard */
+
+.skip-link {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 100;
+  border-radius: 10px;
+  padding: 12px 18px;
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  font-weight: 700;
+  text-decoration: none;
+  transform: translateY(-200%);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+.skip-link:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 3px;
 }
 
 /* Home page */
@@ -128,17 +218,17 @@ body {
 
 .button-primary {
   background: var(--color-primary);
-  color: var(--color-surface);
+  color: var(--color-on-primary);
 }
 
 .button-primary:hover {
-  background: #0c2d57;
-  box-shadow: 0 8px 24px rgba(18, 59, 112, 0.18);
+  background: var(--color-primary-hover);
+  box-shadow: var(--shadow-button);
   transform: translateY(-2px);
 }
 
 .button-secondary {
-  border: 1px solid rgba(18, 59, 112, 0.24);
+  border: 1px solid var(--color-border-strong);
   background: var(--color-surface);
   color: var(--color-primary);
 }
@@ -150,7 +240,7 @@ body {
 
 .button-primary:focus-visible,
 .button-secondary:focus-visible {
-  outline: 3px solid var(--color-secondary);
+  outline: 3px solid var(--color-focus);
   outline-offset: 3px;
 }
 
@@ -188,11 +278,13 @@ body {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 22px;
-  margin-top: 42px;
+  margin: 42px 0 0;
+  padding: 0;
+  list-style: none;
 }
 
 .feature-card {
-  border: 1px solid rgba(18, 59, 112, 0.1);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-card);
   padding: 32px;
   background: var(--color-background);
@@ -204,7 +296,7 @@ body {
 
 .feature-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 18px 40px rgba(18, 59, 112, 0.12);
+  box-shadow: var(--shadow-card-hover);
 }
 
 .feature-accent {
@@ -250,31 +342,13 @@ body {
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
-  .button-primary,
-  .button-secondary,
-  .feature-card {
-    transition: none;
-  }
-
-    .button-primary:hover,
-  .button-secondary:hover,
-  .feature-card:hover {
-    transform: none;
-  }
-}
-
 /* Navbar */
 
 .site-header {
   position: sticky;
   top: 0;
   z-index: 50;
-  border-bottom: 1px solid rgba(18, 59, 112, 0.1);
+  border-bottom: 1px solid var(--color-border);
   background: var(--color-surface);
 }
 
@@ -307,7 +381,7 @@ body {
   place-items: center;
   border-radius: 11px;
   background: var(--color-primary);
-  color: var(--color-surface);
+  color: var(--color-on-primary);
   font-size: 22px;
   font-weight: 800;
 }
@@ -330,8 +404,7 @@ body {
     border-color 0.2s ease;
 }
 
-.navbar-link:hover,
-.navbar-link-active {
+.navbar-link:hover {
   border-color: var(--color-secondary);
   color: var(--color-primary);
 }
@@ -344,7 +417,7 @@ body {
   border-radius: 10px;
   padding: 10px 18px;
   background: var(--color-primary);
-  color: var(--color-surface);
+  color: var(--color-on-primary);
   font-size: 14px;
   font-weight: 700;
   text-decoration: none;
@@ -352,12 +425,14 @@ body {
 }
 
 .navbar-download:hover {
-  background: #0c2d57;
+  background: var(--color-primary-hover);
 }
 
 .navbar-menu-toggle {
   display: none;
-  border: 1px solid rgba(18, 59, 112, 0.18);
+  min-width: 44px;
+  min-height: 44px;
+  border: 1px solid var(--color-border-strong);
   border-radius: 10px;
   padding: 8px 12px;
   background: var(--color-surface);
@@ -370,13 +445,8 @@ body {
 .navbar-link:focus-visible,
 .navbar-download:focus-visible,
 .navbar-menu-toggle:focus-visible {
-  outline: 3px solid var(--color-secondary);
+  outline: 3px solid var(--color-focus);
   outline-offset: 4px;
-}
-
-/* Prevent the sticky navbar from covering linked sections */
-#features {
-  scroll-margin-top: 100px;
 }
 
 @media (max-width: 760px) {
@@ -414,9 +484,62 @@ body {
   }
 }
 
+/* Footer */
+
+.site-footer {
+  border-top: 1px solid var(--color-border);
+  padding: 48px 24px;
+  background: var(--color-surface);
+}
+
+.footer-inner {
+  display: grid;
+  gap: 10px;
+}
+
+.footer-brand {
+  color: var(--color-primary);
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.footer-text {
+  color: var(--color-muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.footer-link {
+  color: var(--color-primary);
+  font-weight: 600;
+  text-underline-offset: 3px;
+}
+
+@media (max-width: 700px) {
+  .site-footer {
+    padding: 40px 20px;
+  }
+}
+
+/* Reduced motion */
+
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .button-primary,
+  .button-secondary,
+  .feature-card,
   .navbar-link,
   .navbar-download {
     transition: none;
+  }
+
+  .button-primary:hover,
+  .button-secondary:hover,
+  .feature-card:hover {
+    transform: none;
   }
 }
