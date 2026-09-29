@@ -1,29 +1,29 @@
 import { downloadCta, hero } from "@/content/site";
+import Button from "@/components/ui/Button";
+import Container from "@/components/ui/Container";
 
 export default function HeroSection() {
   return (
-    <section className="home-hero" aria-labelledby="hero-title">
-      <div className="home-container">
+    <section className="hero" aria-labelledby="hero-title">
+      <Container>
         <div className="hero-content">
           <p className="hero-badge">{hero.badge}</p>
 
           <h1 id="hero-title" className="hero-title">
-            {hero.titleLead} <span>{hero.titleHighlight}</span>
+            {hero.titleLead}{" "}
+            <span className="hero-title-highlight">{hero.titleHighlight}</span>
           </h1>
 
-          <p className="hero-description">{hero.description}</p>
+          <p className="hero-lead">{hero.description}</p>
 
           <div className="hero-actions">
-            <a href={downloadCta.href} className="button-primary">
-              {downloadCta.label}
-            </a>
-
-            <a href={hero.secondaryCta.href} className="button-secondary">
+            <Button href={downloadCta.href}>{downloadCta.label}</Button>
+            <Button href={hero.secondaryCta.href} variant="secondary">
               {hero.secondaryCta.label}
-            </a>
+            </Button>
           </div>
         </div>
-      </div>
+      </Container>
     </section>
   );
 }

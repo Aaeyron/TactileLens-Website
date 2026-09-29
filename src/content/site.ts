@@ -8,6 +8,9 @@
 
 export const site = {
   name: "TactileLens",
+  // TODO: Production URL (e.g. the Vercel domain), such as "https://tactilelens.vercel.app".
+  // Needed for absolute Open Graph URLs. Leave empty until it is known.
+  url: "",
   title: "TactileLens: Braille from printed text and math",
   description:
     "TactileLens is an Android app for teachers of visually impaired students. It scans printed text and math with the phone camera and translates them into braille, using the Nemeth code for math.",

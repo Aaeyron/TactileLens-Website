@@ -1,4 +1,5 @@
 import { footer, site } from "@/content/site";
+import Container from "@/components/ui/Container";
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -6,10 +7,10 @@ export default function Footer() {
 
   return (
     <footer className="site-footer">
-      <div className="home-container footer-inner">
+      <Container className="footer-inner">
         <p className="footer-brand">{site.name}</p>
 
-        <p className="footer-text">
+        <p>
           {footer.contactLabel}:{" "}
           {hasEmail ? (
             <a className="footer-link" href={`mailto:${footer.contactEmail}`}>
@@ -20,12 +21,12 @@ export default function Footer() {
           )}
         </p>
 
-        <p className="footer-text">{footer.capstone}</p>
+        <p>{footer.capstone}</p>
 
-        <p className="footer-text">
+        <p>
           © {year} {site.name}. {footer.platformNote}
         </p>
-      </div>
+      </Container>
     </footer>
   );
 }

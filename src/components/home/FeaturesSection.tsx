@@ -1,33 +1,23 @@
 import { features } from "@/content/site";
+import Card from "@/components/ui/Card";
+import Section from "@/components/ui/Section";
 
 export default function FeaturesSection() {
   return (
-    <section
+    <Section
       id="features"
-      className="features-section"
-      aria-labelledby="features-title"
+      tone="soft"
+      eyebrow={features.eyebrow}
+      title={features.title}
+      description={features.description}
     >
-      <div className="home-container">
-        <p className="section-eyebrow">{features.eyebrow}</p>
-
-        <h2 id="features-title" className="section-title">
-          {features.title}
-        </h2>
-
-        <p className="section-description">{features.description}</p>
-
-        <ul className="features-grid" role="list">
-          {features.items.map((feature) => (
-            <li className="feature-card" key={feature.title}>
-              <div className="feature-accent" aria-hidden="true" />
-
-              <h3 className="feature-title">{feature.title}</h3>
-
-              <p className="feature-description">{feature.description}</p>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </section>
+      <ul className="card-grid" role="list">
+        {features.items.map((feature) => (
+          <Card as="li" accent key={feature.title} title={feature.title}>
+            <p>{feature.description}</p>
+          </Card>
+        ))}
+      </ul>
+    </Section>
   );
 }
