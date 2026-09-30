@@ -1,18 +1,21 @@
 import Card from "./Card";
 import type { IconName } from "./Icon";
+import RichText from "./RichText";
 
 type CardGridItem = {
   title: string;
   description: string;
   note?: string;
   icon?: IconName;
+  chip?: string;
+  bullets?: readonly string[];
   href?: string;
 };
 
 type CardGridProps = {
   items: readonly CardGridItem[];
   /** Maximum columns on wide screens. */
-  columns?: 2 | 3;
+  columns?: 2 | 3 | 4;
   /** "Learn more" text for linked cards. */
   linkLabel?: string;
 };
@@ -27,10 +30,14 @@ export default function CardGrid({ items, columns = 2, linkLabel }: CardGridProp
           key={item.title}
           title={item.title}
           icon={item.icon}
+          chip={item.chip}
+          bullets={item.bullets}
           href={item.href}
           linkLabel={linkLabel}
         >
-          <p>{item.description}</p>
+          <p>
+            <RichText text={item.description} />
+          </p>
           {item.note && <p className="card-note">{item.note}</p>}
         </Card>
       ))}

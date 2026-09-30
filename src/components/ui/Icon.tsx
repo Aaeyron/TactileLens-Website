@@ -34,6 +34,16 @@ import {
   UserCheck,
   Users,
   WifiOff,
+  Backpack,
+  BookA,
+  Code,
+  Hand,
+  Keyboard,
+  Lightbulb,
+  Scan,
+  Sparkles,
+  Sun,
+  Wifi,
 } from "lucide-react";
 import BrailleT from "./BrailleT";
 
@@ -78,6 +88,16 @@ const icons = {
   user: User,
   "user-check": UserCheck,
   users: Users,
+  backpack: Backpack,
+  "book-a": BookA,
+  code: Code,
+  hand: Hand,
+  keyboard: Keyboard,
+  lightbulb: Lightbulb,
+  scan: Scan,
+  sparkles: Sparkles,
+  sun: Sun,
+  wifi: Wifi,
   "wifi-off": WifiOff,
 };
 

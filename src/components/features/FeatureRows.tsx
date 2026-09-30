@@ -1,3 +1,5 @@
+import CheckList from "@/components/ui/CheckList";
+import Chip from "@/components/ui/Chip";
 import Icon, { type IconName } from "@/components/ui/Icon";
 
 type Feature = {
@@ -5,6 +7,8 @@ type Feature = {
   description: string;
   icon: IconName;
   secondaryIcon?: IconName;
+  chip?: string;
+  bullets?: readonly string[];
   note?: string;
 };
 
@@ -29,8 +33,10 @@ export default function FeatureRows({ items }: FeatureRowsProps) {
             )}
           </div>
           <div className="feature-text">
+            {item.chip && <Chip>{item.chip}</Chip>}
             <h3 className="feature-title">{item.title}</h3>
             <p className="feature-description">{item.description}</p>
+            {item.bullets && <CheckList items={item.bullets} />}
             {item.note && <p className="card-note">{item.note}</p>}
           </div>
         </li>

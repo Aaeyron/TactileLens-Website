@@ -4,8 +4,14 @@
  * Anything starting with "TODO" is a placeholder that still needs real
  * information from the team. Search this file for "TODO" to find them all.
  * Do not replace a TODO with a guess — only with confirmed product facts.
- * Text marked "DRAFT: review" was written for the team to check and edit.
+ * Text marked "DRAFT: review" was written for the team to check and edit
+ * (braille content should be checked by a teammate who reads braille).
  *
+ * Offline rule: only TEXT recognition is confirmed to work offline. Never say
+ * or imply that math works offline.
+ * TODO: Confirm whether math recognition works offline.
+ *
+ * Formatting: **double asterisks** mark a key term, shown in bold blue.
  * `icon` values are names from src/components/ui/Icon.tsx. Objects that use
  * icons end in `as const` so a misspelled icon name is a type error.
  */
@@ -70,13 +76,15 @@ export const downloadCta = {
   comingSoonNote: "The Android app will be available to download here soon.",
 };
 
-/** Navy "Ready to try" band at the end of every page except /download. */
+/** Blue "Ready to try" band at the end of every page except /download. */
 export const ctaBanner = {
   title: "Ready to try TactileLens?",
   text: "Get the Android app and follow our step-by-step install guide.",
 };
 
 export const footer = {
+  // DRAFT: review.
+  audienceLine: "Built for teachers of students who read braille.",
   navLabel: "Pages",
   contactLabel: "Contact",
   contactEmail: "TODO: contact email",
@@ -97,17 +105,17 @@ export const hero = {
   description:
     "TactileLens helps teachers recognize printed English text and algebraic equations, review scanned content, and generate Braille output for learners who are blind or have low vision.",
   secondaryCta: { label: "See features", href: "/features" },
-  // Confirmed facts only.
+  // Confirmed facts only. Offline = text only (see the offline rule at the top).
   trustBadges: [
     { icon: "smartphone", label: "Android" },
-    { icon: "wifi-off", label: "Works offline" },
+    { icon: "wifi-off", label: "Offline text scanning" },
     { icon: "sigma", label: "Nemeth math" },
   ],
   // Decorative cards floating around the phone (hidden from screen readers).
   floatingCards: [
     { icon: "camera", label: "Scan" },
     { icon: "check", label: "Nemeth" },
-    { icon: "wifi-off", label: "Works offline" },
+    { icon: "wifi-off", label: "Offline text" },
   ],
   mockup: {
     // TODO: Add a real app screenshot. Put the file in /public/screenshots/,
@@ -124,6 +132,18 @@ export const hero = {
       brailleLabel: "Nemeth braille",
     },
   },
+} as const;
+
+/** Fact strip under the hero. Confirmed facts only. */
+export const homeFacts = {
+  label: "TactileLens at a glance",
+  items: [
+    { icon: "smartphone", title: "Android app", text: "Runs on Android phones." },
+    // TODO: Confirm whether math recognition works offline.
+    { icon: "wifi-off", title: "Offline text", text: "Printed text can be recognized without internet." },
+    { icon: "sigma", title: "Nemeth for math", text: "Algebra is written in Nemeth code." },
+    { icon: "file-text", title: "Printed pages", text: "Made for printed text and algebra." },
+  ],
 } as const;
 
 export const homeSteps = {
@@ -154,34 +174,46 @@ export const seeItInAction = {
   afterLabel: "Nemeth braille",
   /** What screen readers hear instead of the visual comparison. */
   srText: "Example: the printed expression x + 1, shown as Nemeth braille.",
+  // DRAFT: review (braille reader to check).
+  fact: "In **Nemeth code**, numbers are written in the lower part of the braille cell.",
 };
 
 export const homeHighlights = {
   eyebrow: "Highlights",
   title: "Built for teachers",
   description: "The main things TactileLens does for you and your students.",
+  // DRAFT: review (chips and bullets).
   items: [
     {
       icon: "type",
+      chip: "Text",
       title: "Text to braille",
       description: "Turn printed text into braille.",
+      bullets: ["Works with printed pages", "No retyping needed"],
       href: "/features",
     },
     {
       icon: "sigma",
+      chip: "Math",
       title: "Math to Nemeth",
       description:
         "Turn printed algebra equations into Nemeth code, the braille code for math.",
+      bullets: ["Made for general algebra", "Uses **Nemeth**, the braille code for math"],
       href: "/features",
     },
     {
+      // TODO: Confirm whether math recognition works offline.
       icon: "wifi-off",
-      title: "Works offline",
-      description: "Use TactileLens with or without an internet connection.",
+      chip: "Offline",
+      title: "Offline text scanning",
+      description: "Recognize printed text even without an internet connection.",
+      bullets: ["Offline: text is recognized on the phone", "Online: pages are recognized on our server"],
       href: "/features",
     },
   ],
   cardLinkLabel: "Learn more",
+  // DRAFT: review.
+  fact: "A braille cell has six dots. That makes 64 possible patterns, counting the blank cell.",
   link: { label: "See all features", href: "/features" },
 } as const;
 
@@ -205,6 +237,8 @@ export const aboutPage = {
   comparison: {
     eyebrow: "Why it matters",
     title: "Braille takes time to prepare",
+    // DRAFT: review.
+    description: "Here is what makes braille slow today, and how TactileLens helps.",
     // DRAFT: review. Plain-language draft, no statistics.
     problem: {
       title: "The problem",
@@ -213,10 +247,14 @@ export const aboutPage = {
           icon: "file-text",
           text: "Most worksheets, handouts and textbooks are printed. Students who read braille need them in braille.",
         },
-        { icon: "clock", text: "Turning printed text into braille takes time." },
+        {
+          icon: "keyboard",
+          text: "Materials often have to be **retyped** before they can be turned into braille.",
+        },
+        { icon: "clock", text: "Turning printed text into braille takes time, and every page needs **checking**." },
         {
           icon: "sigma",
-          text: "Math takes even longer, because equations must be written in a special braille code called Nemeth.",
+          text: "Math takes even longer, because equations must be written in a special braille code called **Nemeth**.",
         },
       ],
     },
@@ -226,10 +264,57 @@ export const aboutPage = {
       points: [
         { icon: "camera", text: "Scan printed pages with an Android phone camera." },
         { icon: "type", text: "Turn printed text into braille." },
-        { icon: "sigma", text: "Turn printed algebra into Nemeth code." },
-        { icon: "wifi-off", text: "Use it online or offline." },
+        { icon: "sigma", text: "Turn printed algebra into **Nemeth** code." },
+        // TODO: Confirm whether math recognition works offline.
+        { icon: "wifi-off", text: "Recognize printed text online or offline." },
       ],
     },
+  },
+  // DRAFT: review — general braille knowledge; a braille reader should check it.
+  basics: {
+    eyebrow: "Braille basics",
+    title: "A quick guide to braille",
+    description: "A few ideas that explain why braille, and math braille, take care to prepare.",
+    diagramLabel:
+      "Diagram of a braille cell: six dot positions in two columns. Dots 1, 2 and 3 run down the left column; dots 4, 5 and 6 run down the right column.",
+    diagramCaption: "The six dot positions of a braille cell",
+    items: [
+      {
+        icon: "braille",
+        chip: "Basics",
+        title: "What braille is",
+        description: "Braille is a system of **raised dots** that people read by touch.",
+        bullets: ["Each character sits in a **cell** of six dots", "Dots are numbered 1 to 6"],
+      },
+      {
+        icon: "type",
+        chip: "Text",
+        title: "Grade 1 and Grade 2",
+        description: "Braille for text comes in two main forms.",
+        bullets: [
+          "**Grade 1** spells words letter by letter",
+          "**Grade 2** uses **contractions** that shorten common words",
+        ],
+      },
+      {
+        icon: "book-a",
+        chip: "Code",
+        title: "UEB",
+        description: "**Unified English Braille** is a braille code for English used in many countries.",
+        bullets: ["Covers letters, numbers and punctuation", "Can be written in Grade 1 or Grade 2"],
+      },
+      {
+        icon: "sigma",
+        chip: "Math",
+        title: "Nemeth, and why math is harder",
+        description:
+          "Math has fractions, exponents and symbols laid out on the page. In braille, math is usually written in a single line.",
+        bullets: [
+          "**Nemeth code** is a braille code for math and science",
+          "Spacing and **indicators** show where parts begin and end",
+        ],
+      },
+    ],
   },
   // DRAFT: review.
   mission: {
@@ -239,21 +324,42 @@ export const aboutPage = {
       "We want to help teachers turn printed text and math into braille faster, so students who read braille can work with the same materials as their classmates, at the same time.",
     attribution: "The TactileLens team",
   },
+  // DRAFT: review.
   audience: {
-    eyebrow: "Who it's for",
+    eyebrow: "Who benefits",
     title: "Made for the people who prepare braille",
+    description: "TactileLens is built for teachers, and it helps everyone around them.",
     items: [
       {
         icon: "graduation-cap",
+        chip: "Teachers",
         title: "Teachers of visually impaired students",
         description: "Prepare braille versions of printed text and math for your students.",
+        bullets: ["Scan with the phone you already have", "Math in **Nemeth** code"],
       },
       {
         icon: "heart-handshake",
+        chip: "SPED",
         title: "Special education (SPED) staff",
         description: "Help students who read braille get their class materials sooner.",
+        bullets: ["Quick to learn", "Useful for everyday handouts"],
+      },
+      {
+        icon: "keyboard",
+        chip: "Transcribers",
+        title: "Braille transcribers",
+        description: "Get printed text and math into braille with less retyping.",
+        bullets: ["Start from a scan, not a blank page", "Text and algebra in one app"],
+      },
+      {
+        icon: "backpack",
+        chip: "Students",
+        title: "Students who read braille",
+        description: "Get learning materials sooner, so you can start with your classmates.",
+        bullets: ["Same lesson, same time", "Math written in **Nemeth**"],
       },
     ],
+    fact: "The **Nemeth Code** was developed by Abraham Nemeth, a blind mathematician.",
   },
   capstone: {
     eyebrow: "Capstone project",
@@ -274,7 +380,7 @@ export const featuresPage = {
   meta: {
     title: "Features",
     description:
-      "See what TactileLens can do: camera scanning, text to braille, math to Nemeth code, and online or offline use.",
+      "See what TactileLens can do: camera scanning, text to braille, math to Nemeth code, and offline text recognition.",
   },
   header: {
     icon: "layout-grid",
@@ -285,40 +391,57 @@ export const featuresPage = {
   list: {
     eyebrow: "All features",
     title: "Everything in the app",
+    description: "Four features that take a printed page to braille.",
     // Removed until confirmed: "Review before you use it — check the recognized
     // text and math in a readable view." (from the earlier draft copy).
     items: [
       {
         icon: "camera",
+        chip: "Camera",
         title: "Camera scanning",
         // TODO: Confirm whether teachers can also pick existing photos from the gallery.
         description: "Use your phone camera to scan printed pages, such as worksheets and handouts.",
+        // DRAFT: review.
+        bullets: ["Works with printed worksheets and handouts", "No separate scanner needed"],
       },
       {
         icon: "type",
+        chip: "Text",
         title: "Text to braille",
         description: "Turn printed text into braille.",
+        // DRAFT: review.
+        bullets: ["No retyping needed", "Text recognition also works offline"],
         note: "TODO: braille code used for text (for example, UEB Grade 1 or Grade 2).",
       },
       {
         icon: "sigma",
+        chip: "Math",
         title: "Math to Nemeth",
         description:
           "Turn printed algebra equations into Nemeth code, the braille code for math.",
+        // DRAFT: review.
+        bullets: ["Built for general algebra", "Nemeth is the braille code for math"],
       },
       {
+        // TODO: Confirm whether math recognition works offline.
         icon: "cloud",
         secondaryIcon: "wifi-off",
+        chip: "Online + offline",
         title: "Online and offline",
         description:
-          "With internet, TactileLens reads the page using our server. Without internet, it reads the page on the phone itself.",
+          "With internet, TactileLens reads the page using our server. Without internet, it recognizes printed text on the phone itself.",
+        // DRAFT: review.
+        bullets: ["Online: pages are recognized on our server", "Offline: printed text is recognized on the phone"],
       },
     ],
+    // DRAFT: review.
+    tip: "Good scans give better braille. See our **tips for good scans** below.",
   },
   howItWorks: {
     id: "how-it-works",
     eyebrow: "How it works",
     title: "Four simple steps",
+    description: "From a printed page to braille you can use.",
     steps: [
       {
         icon: "camera",
@@ -326,9 +449,11 @@ export const featuresPage = {
         description: "Take a photo of the printed page with your phone camera.",
       },
       {
+        // TODO: Confirm whether math recognition works offline.
         icon: "scan-text",
         title: "Recognize",
-        description: "TactileLens finds the text and math on the page, online or offline.",
+        description:
+          "TactileLens finds the text and math on the page. Text recognition also works offline.",
       },
       {
         icon: "languages",
@@ -343,6 +468,44 @@ export const featuresPage = {
           "TODO: what teachers do with the braille (for example, view it on screen, save a BRF file, or send it to an embosser).",
       },
     ],
+  },
+  // DRAFT: review. General camera advice, not product claims.
+  scanTips: {
+    id: "scan-tips",
+    eyebrow: "Tips",
+    title: "Tips for good scans",
+    description: "A clear photo helps the app read the page correctly.",
+    items: [
+      {
+        icon: "sun",
+        chip: "Light",
+        title: "Use good light",
+        description: "Scan in bright, even light.",
+        bullets: ["Avoid shadows across the page", "Tilt the page to stop glare"],
+      },
+      {
+        icon: "file-text",
+        chip: "Page",
+        title: "Keep the page flat",
+        description: "Flat pages are easier to read than curved ones.",
+        bullets: ["Press down folds and creases", "Hold book pages open and flat"],
+      },
+      {
+        icon: "scan",
+        chip: "Frame",
+        title: "Fit the whole equation",
+        description: "Keep the full expression inside the camera view.",
+        bullets: ["Don't cut off exponents or fractions", "Move closer for small print"],
+      },
+      {
+        icon: "hand",
+        chip: "Steady",
+        title: "Hold steady",
+        description: "A still camera takes a sharper photo.",
+        bullets: ["Rest your elbows on the table", "Wait for the camera to focus"],
+      },
+    ],
+    note: "TactileLens is made for **printed** text. Handwriting may not be recognized.",
   },
 } as const;
 
@@ -412,9 +575,9 @@ export const faqPage = {
       items: [
         {
           question: "Does it work without internet?",
-          // TODO: Confirm that math recognition and translation also work offline.
+          // TODO: Confirm whether math recognition works offline.
           answer:
-            "Yes. TactileLens works online and offline. With internet, it reads the page using our server. Without internet, it reads the page on the phone itself.",
+            "Yes, for printed text. With internet, TactileLens reads the page using our server. Without internet, it recognizes printed text on the phone itself.",
         },
         {
           question: "What happens to the photos I scan?",
@@ -424,6 +587,42 @@ export const faqPage = {
       ],
     },
   ],
+  // DRAFT: review — plain-language definitions; a braille reader should check them.
+  glossary: {
+    id: "glossary",
+    eyebrow: "Glossary",
+    title: "Words you may see",
+    description: "Short, plain definitions of terms used on this site.",
+    items: [
+      {
+        term: "Braille cell",
+        definition: "The space for one braille character: six dot positions in two columns of three.",
+      },
+      {
+        term: "Grade 1 / Grade 2 braille",
+        definition:
+          "Grade 1 spells words letter by letter. Grade 2 uses contractions that shorten common words.",
+      },
+      {
+        term: "UEB",
+        definition: "Unified English Braille, a braille code for English used in many countries.",
+      },
+      {
+        term: "Nemeth Code",
+        definition: "A braille code for math and science.",
+      },
+      {
+        term: "OCR",
+        definition:
+          "Optical character recognition: turning a photo of text into text a computer can read.",
+      },
+      {
+        term: "APK",
+        definition: "The file used to install an app on an Android phone.",
+      },
+    ],
+  },
+  contactNote: "Can't find your answer? Contact the team. TODO: contact email.",
 } as const;
 
 /* ---------------------------------------------------------------------------
@@ -451,6 +650,19 @@ export const teamPage = {
       { name: "TODO: Name", role: "TODO: Role" },
       { name: "TODO: Name", role: "TODO: Role" },
       { name: "TODO: Name", role: "TODO: Role" },
+    ],
+  },
+  // Confirmed facts only.
+  projectFacts: {
+    eyebrow: "The project",
+    title: "About the project",
+    label: "About the project",
+    items: [
+      { icon: "graduation-cap", title: "Capstone project", text: "Built by students." },
+      { icon: "code", title: "Built with Flutter", text: "A cross-platform app toolkit." },
+      { icon: "smartphone", title: "Android app", text: "Released for Android." },
+      // TODO: Confirm whether math recognition works offline.
+      { icon: "wifi-off", title: "Offline text", text: "Printed text works without internet." },
     ],
   },
   school: {
@@ -484,6 +696,12 @@ export const downloadPage = {
   card: {
     title: "TactileLens for Android",
     subtitle: "Android app (APK)",
+    chips: ["Android", "APK file", "Not on Google Play"],
+  },
+  // DRAFT: review.
+  beforeYouStart: {
+    title: "Before you start",
+    items: ["An Android phone", "An internet connection for the download", "Free space for the app file"],
   },
   release: {
     title: "Release information",
@@ -540,10 +758,10 @@ export const downloadPage = {
         description: "Tap Open, or find TactileLens on your home screen or in your app list.",
       },
     ],
-    tips: [
-      "Setting names can look a little different on different phone brands and Android versions.",
-      'After installing, you can turn "Allow from this source" off again in Settings.',
-    ],
+    // DRAFT: review.
+    safetyTip: "Only download TactileLens from **this website**.",
+    note: 'Setting names can look a little different on different phone brands and Android versions. After installing, you can turn "Allow from this source" off again in Settings.',
+    scanTipsLink: { label: "Once installed, see our tips for good scans", href: "/features#scan-tips" },
   },
 } as const;
 

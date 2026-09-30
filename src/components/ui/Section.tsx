@@ -9,6 +9,8 @@ type SectionProps = {
   description?: string;
   /** "soft" uses the tinted surface color, for alternating sections. */
   tone?: "default" | "soft";
+  /** Small supporting visual beside the header on wide screens. */
+  aside?: ReactNode;
   children?: ReactNode;
 };
 
@@ -18,9 +20,25 @@ export default function Section({
   eyebrow,
   description,
   tone = "default",
+  aside,
   children,
 }: SectionProps) {
   const titleId = `${id}-title`;
+
+  const header = (
+    <header className="section-header">
+      {eyebrow && (
+        <>
+          <DotDivider />
+          <p className="section-eyebrow">{eyebrow}</p>
+        </>
+      )}
+      <h2 id={titleId} className="section-title">
+        {title}
+      </h2>
+      {description && <p className="section-description">{description}</p>}
+    </header>
+  );
 
   return (
     <section
@@ -30,18 +48,14 @@ export default function Section({
       data-reveal
     >
       <Container>
-        <header className="section-header">
-          {eyebrow && (
-            <>
-              <DotDivider />
-              <p className="section-eyebrow">{eyebrow}</p>
-            </>
-          )}
-          <h2 id={titleId} className="section-title">
-            {title}
-          </h2>
-          {description && <p className="section-description">{description}</p>}
-        </header>
+        {aside ? (
+          <div className="section-header-row">
+            {header}
+            <div className="section-aside">{aside}</div>
+          </div>
+        ) : (
+          header
+        )}
 
         {children}
       </Container>

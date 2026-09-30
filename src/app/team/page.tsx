@@ -3,6 +3,7 @@ import { pageMetadata } from "@/lib/metadata";
 import { teamPage } from "@/content/site";
 import CtaBanner from "@/components/download/CtaBanner";
 import MemberCard from "@/components/team/MemberCard";
+import FactStrip from "@/components/ui/FactStrip";
 import InfoList from "@/components/ui/InfoList";
 import PageHeader from "@/components/ui/PageHeader";
 import Section from "@/components/ui/Section";
@@ -10,7 +11,7 @@ import Section from "@/components/ui/Section";
 export const metadata: Metadata = pageMetadata({ ...teamPage.meta, path: "/team" });
 
 export default function TeamPage() {
-  const { header, members, school } = teamPage;
+  const { header, members, projectFacts, school } = teamPage;
 
   return (
     <>
@@ -25,7 +26,11 @@ export default function TeamPage() {
         </ul>
       </Section>
 
-      <Section id="school" tone="soft" eyebrow={school.eyebrow} title={school.title}>
+      <Section id="project" tone="soft" eyebrow={projectFacts.eyebrow} title={projectFacts.title}>
+        <FactStrip label={projectFacts.label} items={projectFacts.items} />
+      </Section>
+
+      <Section id="school" eyebrow={school.eyebrow} title={school.title}>
         <InfoList items={school.details} />
       </Section>
 

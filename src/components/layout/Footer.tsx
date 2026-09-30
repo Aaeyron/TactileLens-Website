@@ -18,6 +18,7 @@ export default function Footer() {
             {site.name}
           </p>
           <p>{site.tagline}</p>
+          <p>{footer.audienceLine}</p>
           <p>{footer.platformNote}</p>
         </div>
 

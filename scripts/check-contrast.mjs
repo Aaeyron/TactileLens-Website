@@ -76,6 +76,16 @@ const pairs = [
   ["primaryDark text on surface", primaryDark, surface, TEXT],
   ["primaryDark text on pale blue (badges, notices, avatars)", primaryDark, pale, TEXT],
 
+  // Detail components
+  ["chip text (primaryDark) on pale blue", primaryDark, pale, TEXT],
+  ["callout label (primaryDark) on pale blue", primaryDark, pale, TEXT],
+  ["callout text on pale blue", text, pale, TEXT],
+  ["key term (primaryDark) on white", primaryDark, white, TEXT],
+  ["key term (primaryDark) on surface", primaryDark, surface, TEXT],
+  ["key term (primaryDark) on pale blue (inside callouts)", primaryDark, pale, TEXT],
+  ["check-list icon (primaryDark) on pale circle (UI)", primaryDark, pale, UI],
+  ["braille diagram numbers (primaryDark) on pale dots", primaryDark, pale, TEXT],
+
   // Icons and large text on pale blue
   ["primary icon on pale blue (UI)", primary, pale, UI],
   ["primary large braille text on pale blue", primary, pale, LARGE],

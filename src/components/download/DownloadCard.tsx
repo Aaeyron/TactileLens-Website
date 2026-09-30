@@ -1,4 +1,6 @@
 import { downloadCta, downloadPage, site } from "@/content/site";
+import CheckList from "@/components/ui/CheckList";
+import Chip from "@/components/ui/Chip";
 import Container from "@/components/ui/Container";
 import InfoList from "@/components/ui/InfoList";
 import LogoMark from "@/components/ui/LogoMark";
@@ -7,7 +9,7 @@ import DownloadQr from "./DownloadQr";
 
 /** The main card on /download: app icon, download button, release info, QR code. */
 export default function DownloadCard() {
-  const { card, release, qr } = downloadPage;
+  const { card, beforeYouStart, release, qr } = downloadPage;
 
   return (
     <section className="section download-section" aria-labelledby="download-card-title">
@@ -24,7 +26,18 @@ export default function DownloadCard() {
               </div>
             </div>
 
+            <ul className="chip-row" role="list" aria-label="App details">
+              {card.chips.map((chip) => (
+                <li key={chip}>
+                  <Chip>{chip}</Chip>
+                </li>
+              ))}
+            </ul>
+
             <DownloadCta idPrefix="download-page" />
+
+            <h3 className="download-card-heading">{beforeYouStart.title}</h3>
+            <CheckList items={beforeYouStart.items} />
 
             <h3 className="download-card-heading">{release.title}</h3>
             <InfoList items={release.details} />

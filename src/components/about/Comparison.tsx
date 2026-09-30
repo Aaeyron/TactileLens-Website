@@ -1,4 +1,5 @@
 import Icon, { type IconName } from "@/components/ui/Icon";
+import RichText from "@/components/ui/RichText";
 
 type Column = {
   title: string;
@@ -26,7 +27,9 @@ export default function Comparison({ problem, solution }: ComparisonProps) {
                 <span className="comparison-icon" aria-hidden="true">
                   <Icon name={point.icon} size={20} />
                 </span>
-                {point.text}
+                <span>
+                  <RichText text={point.text} />
+                </span>
               </li>
             ))}
           </ul>
