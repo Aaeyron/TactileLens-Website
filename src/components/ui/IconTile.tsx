@@ -2,7 +2,7 @@ import Icon, { type IconName } from "./Icon";
 
 type IconTileProps = {
   icon: IconName;
-  /** Teal tint (default) or navy tint. */
+  /** Both use the pale blue tile; "accent" has a primaryDark icon, "brand" a primary icon. */
   tone?: "accent" | "brand";
   size?: "md" | "lg" | "xl";
   /** Circle instead of rounded square. */

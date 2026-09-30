@@ -113,11 +113,12 @@
   --radius-xl: 24px;
   --radius-full: 999px;
 
-  /* Shadows (soft, navy-tinted) */
+  /* Shadows (soft, tinted with the text color) */
   --shadow-sm: 0 1px 2px rgb(15 31 54 / 0.06);
   --shadow-md: 0 4px 12px rgb(15 31 54 / 0.08);
   --shadow-lg: 0 12px 32px rgb(15 31 54 / 0.1);
   --shadow-xl: 0 24px 48px rgb(15 31 54 / 0.16);
+  --shadow-pressed: inset 0 2px 4px rgb(6 47 122 / 0.35);
 
   /* Motion */
   --duration-fast: 150ms;
@@ -387,13 +388,13 @@ h3 {
 
 .button--primary:active {
   background: var(--color-brand-active);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-pressed);
 }
 
 .button--secondary {
   border-color: var(--color-border-strong);
   background: var(--color-bg);
-  color: var(--color-brand);
+  color: var(--color-brand-text);
 }
 
 .button--secondary:hover {
@@ -405,16 +406,38 @@ h3 {
   background: var(--color-brand-subtle);
 }
 
-/* For navy backgrounds */
+/* For the blue header gradient */
 .button--inverse {
   background: var(--color-text-inverse);
-  color: var(--color-brand);
+  color: var(--color-brand-text);
   box-shadow: var(--shadow-sm);
 }
 
 .button--inverse:hover {
   background: var(--color-brand-subtle);
   box-shadow: var(--shadow-md);
+}
+
+.button--inverse:active {
+  background: var(--color-brand-subtle);
+  box-shadow: var(--shadow-pressed);
+}
+
+/* Secondary action on the blue header gradient. Hover gets darker, never
+   lighter, so white text keeps its contrast. */
+.button--outline-inverse {
+  border-color: var(--color-text-inverse);
+  background: transparent;
+  color: var(--color-text-inverse);
+}
+
+.button--outline-inverse:hover {
+  background: rgb(6 47 122 / 0.25);
+}
+
+.button--outline-inverse:active {
+  background: rgb(6 47 122 / 0.35);
+  box-shadow: var(--shadow-pressed);
 }
 
 .button--sm {
@@ -588,7 +611,7 @@ h3 {
   align-items: center;
   gap: var(--space-2);
   margin-top: var(--space-4);
-  color: var(--color-brand);
+  color: var(--color-brand-text);
   font-weight: var(--weight-semibold);
 }
 
@@ -619,7 +642,7 @@ h3 {
   align-items: center;
   gap: var(--space-3);
   border-radius: var(--radius-sm);
-  color: var(--color-brand);
+  color: var(--color-brand-text);
   font-size: var(--text-lg);
   font-weight: var(--weight-bold);
   letter-spacing: -0.02em;
@@ -635,7 +658,7 @@ h3 {
   border: 1px solid var(--color-border-strong);
   border-radius: var(--radius-md);
   background: var(--color-bg);
-  color: var(--color-brand);
+  color: var(--color-brand-text);
   font-size: var(--text-lg);
   cursor: pointer;
 }
@@ -672,7 +695,7 @@ h3 {
 }
 
 .navbar-link:hover {
-  color: var(--color-brand);
+  color: var(--color-brand-text);
   text-decoration: underline;
   text-decoration-color: var(--color-accent);
   text-decoration-thickness: 2px;
@@ -747,10 +770,12 @@ h3 {
    without scrolling on a typical phone. */
 .hero {
   padding-block: clamp(var(--space-6), 8vw, var(--space-9));
-  background:
-    radial-gradient(55% 70% at 85% 35%, var(--tint-accent), transparent 70%),
-    radial-gradient(45% 60% at 0% 100%, var(--tint-brand), transparent 70%),
-    var(--color-bg);
+  background: var(--background-header);
+  color: var(--color-text-inverse);
+}
+
+.hero :focus-visible {
+  outline-color: var(--color-focus-inverse);
 }
 
 .hero-grid {
@@ -773,15 +798,15 @@ h3 {
   display: inline-flex;
   border-radius: var(--radius-full);
   padding: var(--space-1) var(--space-4);
-  background: var(--color-brand-subtle);
-  color: var(--color-brand);
+  background: var(--color-surface-raised);
+  color: var(--color-brand-text);
   font-size: var(--text-sm);
   font-weight: var(--weight-semibold);
 }
 
 .hero-title {
   margin-top: var(--space-5);
-  color: var(--color-text);
+  color: var(--color-text-inverse);
   font-size: var(--text-3xl);
   font-weight: var(--weight-bold);
   line-height: var(--leading-tight);
@@ -789,13 +814,13 @@ h3 {
 }
 
 .hero-title-highlight {
-  color: var(--color-brand);
+  color: var(--color-brand-subtle);
 }
 
 .hero-lead {
   max-width: 60ch;
   margin-top: var(--space-4);
-  color: var(--color-text-muted);
+  color: var(--color-text-inverse);
 }
 
 @media (min-width: 768px) {
@@ -824,7 +849,7 @@ h3 {
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
-  border: 1px solid var(--color-border);
+  border: 1px solid transparent;
   border-radius: var(--radius-full);
   padding: var(--space-1) var(--space-3);
   background: var(--color-surface-raised);
@@ -850,7 +875,7 @@ h3 {
   position: absolute;
   z-index: 0;
   inset: 0;
-  background: var(--pattern-dots);
+  background: var(--pattern-dots-on-blue);
   content: "";
   mask-image: radial-gradient(circle at 50% 50%, #000 30%, transparent 70%);
   pointer-events: none;
@@ -947,7 +972,7 @@ h3 {
   border-radius: var(--radius-md);
   padding: var(--space-3) var(--space-5);
   background: var(--color-brand-subtle);
-  color: var(--color-brand);
+  color: var(--color-brand-text);
   font-weight: var(--weight-semibold);
   line-height: 1.2;
 }
@@ -1017,7 +1042,7 @@ h3 {
   align-items: center;
   gap: var(--space-2);
   padding: var(--space-6) var(--space-4) var(--space-3);
-  background: var(--color-brand);
+  background: var(--background-header);
   color: var(--color-text-inverse);
   font-size: var(--text-sm);
   font-weight: var(--weight-semibold);
@@ -1178,7 +1203,7 @@ h3 {
   border-bottom: 1px solid var(--color-border);
   padding-block: clamp(var(--space-7), 6vw, var(--space-9));
   background:
-    radial-gradient(50% 90% at 100% 0%, var(--tint-accent-soft), transparent 70%),
+    radial-gradient(50% 90% at 100% 0%, var(--tint-brand-soft), transparent 70%),
     var(--color-surface);
 }
 
@@ -1275,7 +1300,7 @@ h3 {
   min-height: var(--tap-target);
   align-items: center;
   gap: var(--space-2);
-  color: var(--color-brand);
+  color: var(--color-brand-text);
   font-weight: var(--weight-semibold);
   text-decoration: underline;
   text-decoration-thickness: 1px;
@@ -1510,7 +1535,7 @@ h3 {
   border: 1px solid var(--color-border);
   border-radius: var(--radius-xl);
   background:
-    radial-gradient(60% 80% at 30% 30%, var(--tint-accent), transparent 70%),
+    radial-gradient(60% 80% at 30% 30%, var(--tint-brand), transparent 70%),
     var(--color-surface);
 }
 
@@ -1688,7 +1713,7 @@ h3 {
   box-shadow:
     0 0 0 4px var(--color-surface-raised),
     0 0 0 5px var(--color-border);
-  color: var(--color-brand);
+  color: var(--color-brand-text);
   font-size: var(--text-xl);
   font-weight: var(--weight-bold);
 }
@@ -1764,7 +1789,7 @@ h3 {
 }
 
 .faq-question:hover {
-  color: var(--color-brand);
+  color: var(--color-brand-text);
 }
 
 /* Plus/minus icon drawn with two bars */
@@ -1918,7 +1943,7 @@ h3 {
   padding: var(--space-3);
   background: var(--color-bg);
   box-shadow: var(--shadow-sm);
-  color: var(--color-brand);
+  color: var(--color-brand-text);
 }
 
 .qr-placeholder {
@@ -1940,14 +1965,14 @@ h3 {
 
 .qr-url {
   margin-top: var(--space-2);
-  color: var(--color-brand);
+  color: var(--color-brand-text);
   font-size: var(--text-sm);
   font-weight: var(--weight-semibold);
   overflow-wrap: anywhere;
 }
 
 /* =========================================================================
- * CTA band — full-width navy "Ready to try TactileLens?"
+ * CTA band — full-width blue header gradient "Ready to try TactileLens?"
  * ========================================================================= */
 
 .cta-band {
@@ -1955,7 +1980,7 @@ h3 {
   isolation: isolate;
   overflow: hidden;
   padding-block: var(--section-pad-y);
-  background: var(--color-brand);
+  background: var(--background-header);
   color: var(--color-text-inverse);
 }
 
@@ -1963,7 +1988,7 @@ h3 {
   position: absolute;
   z-index: -1;
   inset: 0;
-  background: var(--pattern-dots-inverse);
+  background: var(--pattern-dots-on-blue);
   content: "";
   mask-image: radial-gradient(ellipse 60% 120% at 100% 50%, #000 20%, transparent 75%);
   pointer-events: none;
@@ -2008,7 +2033,7 @@ h3 {
 
 .cta-band-description {
   margin-top: var(--space-2);
-  color: var(--color-text-inverse-muted);
+  color: var(--color-text-inverse);
 }
 
 /* =========================================================================
@@ -2043,7 +2068,7 @@ h3 {
   align-items: center;
   gap: var(--space-3);
   margin-bottom: var(--space-3);
-  color: var(--color-brand);
+  color: var(--color-brand-text);
   font-size: var(--text-lg);
   font-weight: var(--weight-bold);
 }
@@ -2061,7 +2086,7 @@ h3 {
 .footer-link {
   display: inline-block;
   padding-block: var(--space-1);
-  color: var(--color-brand);
+  color: var(--color-brand-text);
   font-weight: var(--weight-semibold);
   text-underline-offset: 3px;
 }
