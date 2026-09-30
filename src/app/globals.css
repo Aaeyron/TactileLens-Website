@@ -2,15 +2,20 @@
 
 /* =========================================================================
  * Design tokens — the single source of truth for every design value.
+ * Colors follow the TactileLens app's official color guide; the app's own
+ * names are noted in comments so designers and developers can match them.
  * Light theme only for now. To add dark mode later, redefine these tokens
  * inside a (prefers-color-scheme: dark) block; components need no changes.
  *
  * Contrast (WCAG 2.2 AA), verified by `npm run check:contrast`:
- * - --color-accent (teal #16a6a1) is 3.0:1 on white → decoration only.
- * - --color-accent-strong is the accessible teal for text, links and focus.
+ * - --color-brand (#1268F3) is for button backgrounds and icons. White on it
+ *   is 4.88:1. It is NOT used for small text: on pale blue it is only 4.36:1.
+ * - --color-brand-text (#0B4FCC) is used for ALL small blue text and links.
+ * - --color-brand-light (#4894FF) is 3.02:1 with white → decoration only.
+ * - The header gradient gets a 10% deep-blue overlay so small white text
+ *   passes everywhere on it (worst point 4.78:1). Dots on the gradient are
+ *   darker than the gradient, so they can only raise contrast.
  * - --color-border is decorative; control edges use --color-border-strong.
- * - Dot patterns and tints are kept faint enough that text on top of them
- *   still passes (the script checks the darkest blended background).
  * ========================================================================= */
 :root {
   color-scheme: light;
@@ -18,31 +23,34 @@
 
   /* Color: surfaces */
   --color-bg: #ffffff;
-  --color-surface: #f4f7fb;
+  --color-surface: #f4f7fc; /* app: backgroundColor */
   --color-surface-raised: #ffffff;
 
-  /* Color: text */
+  /* Color: text (blue-tinted near-black and gray; unchanged, they already match the blue hue) */
   --color-text: #0f1f36;
   --color-text-muted: #4a5a72;
   --color-text-inverse: #ffffff;
-  --color-text-inverse-muted: #c9d6ea; /* secondary text on navy */
 
-  /* Color: brand (navy) */
-  --color-brand: #123b70;
-  --color-brand-hover: #0e2f5a;
-  --color-brand-active: #0a2445;
-  --color-brand-subtle: #e8eef7;
+  /* Color: brand (blue) */
+  --color-brand: #1268f3; /* app: primaryColor — buttons, icons, logo tile */
+  --color-brand-hover: #0b4fcc; /* app: primaryDarkColor */
+  --color-brand-active: #0b4fcc; /* app: primaryDarkColor ("pressed states"); pressed also gets an inset shadow */
+  --color-brand-text: #0b4fcc; /* app: primaryDarkColor — all small blue text and links */
+  --color-brand-light: #4894ff; /* app: primaryLightColor — decoration and large text only */
+  --color-brand-subtle: #eaf3ff; /* app: quickScanIconBackgroundColor */
+  --color-brand-deep: #062f7a; /* derived: 10% overlay on the header gradient, dots on blue */
 
-  /* Color: accent (teal) */
-  --color-accent: #16a6a1;
-  --color-accent-strong: #0b6e6a;
-  --color-accent-subtle: #e6f5f4;
+  /* Color: accent — teal was removed; these names now point at the blue family
+     so existing components keep working. */
+  --color-accent: var(--color-brand-light); /* decorative lines, dividers, bars */
+  --color-accent-strong: var(--color-brand-text); /* small text and list icons */
+  --color-accent-subtle: var(--color-brand-subtle); /* tinted icon tiles */
 
   /* Color: borders and focus */
-  --color-border: #dde4ee;
+  --color-border: #dce5f3;
   --color-border-strong: #7b8aa1;
-  --color-focus: var(--color-accent-strong);
-  --color-focus-inverse: var(--color-text-inverse); /* focus ring on navy */
+  --color-focus: var(--color-brand-text); /* focus ring on light backgrounds */
+  --color-focus-inverse: var(--color-text-inverse); /* focus ring on the blue gradient */
 
   /* Color: status (for later) */
   --color-success: #157032;
@@ -52,12 +60,18 @@
   --color-error: #b42318;
   --color-error-subtle: #fdecea;
 
+  /* Header gradient — app: header gradient start #1474F5 → end #0758DD
+     (top-left to bottom-right), with the 10% deep-blue overlay for contrast. */
+  --gradient-header: linear-gradient(135deg, #1474f5, #0758dd);
+  --overlay-header: rgb(6 47 122 / 0.1);
+  --background-header:
+    linear-gradient(var(--overlay-header), var(--overlay-header)), var(--gradient-header);
+
   /* Decorative backgrounds: an even dot grid (not braille cells) and soft tints */
-  --pattern-dots: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22'%3E%3Ccircle cx='3' cy='3' r='1.5' fill='%23123b70' fill-opacity='0.08'/%3E%3C/svg%3E");
-  --pattern-dots-inverse: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22'%3E%3Ccircle cx='3' cy='3' r='1.5' fill='%23ffffff' fill-opacity='0.1'/%3E%3C/svg%3E");
-  --tint-accent: rgb(22 166 161 / 0.14); /* hero, feature visuals */
-  --tint-accent-soft: rgb(22 166 161 / 0.08); /* page headers (behind teal eyebrow text) */
-  --tint-brand: rgb(18 59 112 / 0.08);
+  --pattern-dots: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22'%3E%3Ccircle cx='3' cy='3' r='1.5' fill='%231268f3' fill-opacity='0.08'/%3E%3C/svg%3E");
+  --pattern-dots-on-blue: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22'%3E%3Ccircle cx='3' cy='3' r='1.5' fill='%23062f7a' fill-opacity='0.3'/%3E%3C/svg%3E");
+  --tint-brand: rgb(18 104 243 / 0.1); /* feature visuals */
+  --tint-brand-soft: rgb(18 104 243 / 0.06); /* page headers (behind small blue text) */
 
   /* Spacing: 4/8px scale */
   --space-1: 0.25rem; /*   4px */
