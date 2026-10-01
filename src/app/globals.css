@@ -97,7 +97,6 @@
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 16px;
-  --radius-xl: 24px;
   --radius-full: 999px;
 
   /* Shadows (soft, tinted with the text color) */
@@ -120,7 +119,6 @@
   --tap-target: 44px;
   --button-height: 48px;
   --step-number-size: 2.5rem;
-  --step-number-size-lg: 3.5rem;
   --qr-size: 10.5rem;
 
   /* Component: phone mockup (generic, not any real device) */
@@ -298,45 +296,6 @@ h3 {
 }
 
 /* =========================================================================
- * Icon tile — an icon in a soft tinted square or circle
- * ========================================================================= */
-
-.icon-tile {
-  display: inline-grid;
-  width: var(--space-7);
-  height: var(--space-7);
-  flex-shrink: 0;
-  place-items: center;
-  border-radius: var(--radius-md);
-}
-
-.icon-tile--accent {
-  background: var(--color-bg);
-  color: var(--color-brand);
-}
-
-.icon-tile--brand {
-  background: var(--color-bg);
-  color: var(--color-brand);
-}
-
-.icon-tile--lg {
-  width: var(--space-8);
-  height: var(--space-8);
-  border-radius: var(--radius-lg);
-}
-
-.icon-tile--xl {
-  width: var(--space-9);
-  height: var(--space-9);
-  border-radius: var(--radius-xl);
-}
-
-.icon-tile--round {
-  border-radius: var(--radius-full);
-}
-
-/* =========================================================================
  * Button
  * ========================================================================= */
 
@@ -445,7 +404,6 @@ h3 {
    white; white containers inside (cards, callouts, ...) switch back to the
    normal colors, so their content stays dark on white. */
 .section--brand {
-  --section-bg: var(--color-brand);
   --color-text: var(--color-text-inverse);
   --color-text-muted: var(--color-text-inverse);
   --color-brand-text: var(--color-text-inverse);
@@ -839,8 +797,7 @@ h3 {
 
 
 
-/* Phone + floating cards. The cards stay inside this box, so nothing
-   overflows sideways on small screens. */
+/* Phone frame next to the hero text */
 .hero-visual {
   position: relative;
   display: flex;
@@ -855,69 +812,12 @@ h3 {
   transform: rotate(-3deg);
 }
 
-.float-card {
-  position: absolute;
-  z-index: 2;
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  padding: var(--space-2) var(--space-3);
-  background: var(--color-bg);
-  box-shadow: var(--shadow-lg);
-  color: var(--color-text);
-  font-size: var(--text-sm);
-  font-weight: var(--weight-semibold);
-  white-space: nowrap;
-}
 
-.float-card-icon {
-  display: grid;
-  width: 1.75rem;
-  height: 1.75rem;
-  place-items: center;
-  border-radius: var(--radius-full);
-  background: var(--color-bg);
-  color: var(--color-brand);
-}
 
-.float-card--1 {
-  top: 14%;
-  left: 0;
-}
 
-.float-card--2 {
-  top: 46%;
-  right: 0;
-}
 
-.float-card--3 {
-  bottom: 12%;
-  left: 0;
-}
 
-@media (min-width: 480px) {
-  .float-card--1,
-  .float-card--3 {
-    left: 8%;
-  }
 
-  .float-card--2 {
-    right: 8%;
-  }
-}
-
-@media (min-width: 960px) {
-  .float-card--1,
-  .float-card--3 {
-    left: -4%;
-  }
-
-  .float-card--2 {
-    right: -4%;
-  }
-}
 
 /* =========================================================================
  * Download call to action
@@ -1142,23 +1042,7 @@ h3 {
   line-height: 1.2;
 }
 
-.compare-arrow {
-  display: grid;
-  width: var(--space-7);
-  height: var(--space-7);
-  justify-self: center;
-  place-items: center;
-  border-radius: var(--radius-full);
-  background: var(--color-bg);
-  color: var(--color-brand);
-  transform: rotate(90deg);
-}
 
-@media (min-width: 640px) {
-  .compare-arrow {
-    transform: none;
-  }
-}
 
 /* =========================================================================
  * Page header — top of every inner page, holds the page's only <h1>
@@ -1183,17 +1067,7 @@ h3 {
 
 
 
-.page-header-grid {
-  display: grid;
-  align-items: center;
-  gap: var(--space-6);
-}
 
-@media (min-width: 768px) {
-  .page-header-grid {
-    grid-template-columns: minmax(0, 1fr) auto;
-  }
-}
 
 .page-header-content {
   max-width: var(--measure);
@@ -1223,31 +1097,7 @@ h3 {
   margin-top: var(--space-6);
 }
 
-/* The page icon is decorative, so it is left out on small screens */
-.page-header-visual {
-  display: none;
-}
 
-@media (min-width: 768px) {
-  .page-header-visual {
-    display: block;
-    padding-right: var(--space-6);
-  }
-
-  .page-header-visual .icon-tile {
-    width: var(--space-10);
-    height: var(--space-10);
-    border: 0;
-    background: var(--color-bg);
-    box-shadow: var(--shadow-lg);
-    transform: rotate(-4deg);
-  }
-
-  .page-header-visual svg {
-    width: 56px;
-    height: 56px;
-  }
-}
 
 /* =========================================================================
  * Text: prose, links, tips
@@ -1311,23 +1161,14 @@ p a:not(.button) {
   font-weight: var(--weight-bold);
 }
 
-.step-title {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-}
 
-.step-title svg {
-  flex-shrink: 0;
-  color: var(--color-brand);
-}
 
 .step-description {
   margin-top: var(--space-2);
   color: var(--color-text-muted);
 }
 
-/* "cards": numbered cards with an icon (install guide) */
+/* "cards": numbered step cards (How it works, install guide) */
 
 @media (min-width: 640px) {
   .step-list--cards {
@@ -1350,8 +1191,7 @@ p a:not(.button) {
   box-shadow: var(--shadow-sm);
 }
 
-/* "flow": big icon circles in a row, joined by a dashed line (home page).
-   Stacked on mobile with arrows between the steps. */
+/* "flow": steps in a row with a number circle (home page); stacked on mobile */
 
 .step-list--flow {
   gap: var(--space-3);
@@ -1370,39 +1210,15 @@ p a:not(.button) {
   max-width: 28ch;
 }
 
-.step-list--flow .step-title {
-  justify-content: center;
-}
-
-.step-connector {
-  display: grid;
-  color: var(--color-brand);
-}
-
 @media (min-width: 768px) {
   .step-list--flow {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: var(--space-6);
   }
-
-  .step-connector {
-    display: none;
-  }
-
-  .step-list--flow .step:not(:last-child)::after {
-    position: absolute;
-    top: calc(var(--space-9) / 2 - 1px);
-    right: calc(-1 * (var(--space-6) + 50% - var(--space-9) / 2 - var(--space-3)));
-    left: calc(50% + var(--space-9) / 2 + var(--space-3));
-    height: 2px;
-    background: repeating-linear-gradient(
-      to right,
-      var(--color-brand) 0 8px,
-      transparent 8px 14px
-    );
-    content: "";
-  }
 }
+
+
+
 
 
 
@@ -1452,24 +1268,7 @@ p a:not(.button) {
 }
 
 
-.feature-visual-icon {
-  display: grid;
-  width: 7rem;
-  height: 7rem;
-  place-items: center;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-xl);
-  background: var(--color-bg);
-  box-shadow: var(--shadow-lg);
-  color: var(--color-brand);
-}
 
-.feature-visual-icon--secondary {
-  width: 5rem;
-  height: 5rem;
-  color: var(--color-brand);
-  transform: translateY(var(--space-5));
-}
 
 
 .feature-description {
@@ -1508,11 +1307,6 @@ p a:not(.button) {
   }
 }
 
-.mission-icon {
-  display: block;
-  margin-bottom: var(--space-4);
-  color: var(--color-brand);
-}
 
 .mission-quote p {
   color: var(--color-text);
@@ -1692,17 +1486,10 @@ p a:not(.button) {
 }
 
 .info-label {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
   color: var(--color-text);
   font-weight: var(--weight-semibold);
 }
 
-.info-icon {
-  flex-shrink: 0;
-  color: var(--color-brand);
-}
 
 .info-value {
   color: var(--color-text-muted);
@@ -1939,10 +1726,6 @@ p a:not(.button) {
   margin-bottom: var(--space-2);
 }
 
-.footer-contact svg {
-  flex-shrink: 0;
-  color: var(--color-brand);
-}
 
 .footer-copyright {
   border-top: 1px solid var(--color-border-inverse);
@@ -1988,7 +1771,7 @@ p a:not(.button) {
   margin-bottom: var(--space-5);
 }
 
-/* Icon tile + chip at the top of a card */
+/* Chip row at the top of a card */
 .card-top {
   display: flex;
   align-items: center;
@@ -2004,26 +1787,25 @@ p a:not(.button) {
 }
 
 .check-list li {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--space-2);
+  position: relative;
+  padding-left: var(--space-5);
   color: var(--color-text);
 }
 
-.check-list-icon {
-  display: grid;
-  width: 1.25rem;
-  height: 1.25rem;
-  flex-shrink: 0;
-  place-items: center;
-  margin-top: 0.2em;
-  border-radius: var(--radius-full);
-  background: var(--color-bg);
-  color: var(--color-brand);
+/* Small blue square bullet (drawn in CSS, not an icon) */
+.check-list li::before {
+  position: absolute;
+  top: 0.6em;
+  left: var(--space-1);
+  width: 0.4rem;
+  height: 0.4rem;
+  background: var(--color-brand);
+  content: "";
 }
 
+
 .callout {
-  display: flex;
+  display: block;
   max-width: var(--width-narrow);
   align-items: flex-start;
   gap: var(--space-4);
@@ -2034,16 +1816,6 @@ p a:not(.button) {
   background: var(--color-bg);
 }
 
-.callout-icon {
-  display: grid;
-  width: 2.5rem;
-  height: 2.5rem;
-  flex-shrink: 0;
-  place-items: center;
-  border-radius: var(--radius-full);
-  background: var(--color-bg);
-  color: var(--color-brand);
-}
 
 .callout-label {
   color: var(--color-brand-text);
@@ -2112,10 +1884,6 @@ p a:not(.button) {
   }
 }
 
-/* Flow steps: chip above the title */
-.step-chip {
-  margin-bottom: var(--space-2);
-}
 
 /* Feature rows: chip above the title */
 .feature-text > .chip {

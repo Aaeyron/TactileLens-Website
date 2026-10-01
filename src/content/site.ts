@@ -12,8 +12,6 @@
  * TODO: Confirm whether math recognition works offline.
  *
  * Formatting: **double asterisks** mark a key term, shown in bold logo blue.
- * `icon` values are names from src/components/ui/Icon.tsx. Objects that use
- * icons end in `as const` so a misspelled icon name is a type error.
  */
 
 /* ---------------------------------------------------------------------------
@@ -107,15 +105,9 @@ export const hero = {
   secondaryCta: { label: "See features", href: "/features" },
   // Confirmed facts only. Offline = text only (see the offline rule at the top).
   trustBadges: [
-    { icon: "smartphone", label: "Android" },
-    { icon: "wifi-off", label: "Offline text scanning" },
-    { icon: "sigma", label: "Nemeth math" },
-  ],
-  // Decorative cards floating around the phone (hidden from screen readers).
-  floatingCards: [
-    { icon: "camera", label: "Scan" },
-    { icon: "check", label: "Nemeth" },
-    { icon: "wifi-off", label: "Offline text" },
+    { label: "Android" },
+    { label: "Offline text scanning" },
+    { label: "Nemeth math" },
   ],
   mockup: {
     // TODO: Add a real app screenshot. Put the file in /public/screenshots/,
@@ -139,14 +131,12 @@ export const homeSteps = {
   title: "From printed page to braille",
   description: "TactileLens turns printed text and math into braille in three steps.",
   steps: [
-    { icon: "camera", title: "Scan", description: "Point your phone camera at a printed page." },
+    { title: "Scan", description: "Point your phone camera at a printed page." },
     {
-      icon: "scan-text",
       title: "Recognize",
       description: "The app reads the text and math on the page.",
     },
     {
-      icon: "braille",
       title: "Braille",
       description: "TactileLens turns it into braille. Math uses the Nemeth code.",
     },
@@ -173,7 +163,6 @@ export const homeHighlights = {
   // DRAFT: review (chips and bullets).
   items: [
     {
-      icon: "type",
       chip: "Text",
       title: "Text to braille",
       description: "Turn printed text into braille.",
@@ -181,7 +170,6 @@ export const homeHighlights = {
       href: "/features",
     },
     {
-      icon: "sigma",
       chip: "Math",
       title: "Math to Nemeth",
       description:
@@ -191,7 +179,6 @@ export const homeHighlights = {
     },
     {
       // TODO: Confirm whether math recognition works offline.
-      icon: "wifi-off",
       chip: "Offline",
       title: "Offline text scanning",
       description: "Recognize printed text even without an internet connection.",
@@ -216,7 +203,6 @@ export const aboutPage = {
       "Why we built TactileLens: helping teachers turn printed text and math into braille faster.",
   },
   header: {
-    icon: "info",
     eyebrow: "About",
     title: "Why we built TactileLens",
     intro:
@@ -261,14 +247,12 @@ export const aboutPage = {
     diagramCaption: "The six dot positions of a braille cell",
     items: [
       {
-        icon: "braille",
         chip: "Basics",
         title: "What braille is",
         description: "Braille is a system of **raised dots** that people read by touch.",
         bullets: ["Each character sits in a **cell** of six dots", "Dots are numbered 1 to 6"],
       },
       {
-        icon: "type",
         chip: "Text",
         title: "Grade 1 and Grade 2",
         description: "Braille for text comes in two main forms.",
@@ -278,14 +262,12 @@ export const aboutPage = {
         ],
       },
       {
-        icon: "book-a",
         chip: "Code",
         title: "UEB",
         description: "**Unified English Braille** is a braille code for English used in many countries.",
         bullets: ["Covers letters, numbers and punctuation", "Can be written in Grade 1 or Grade 2"],
       },
       {
-        icon: "sigma",
         chip: "Math",
         title: "Nemeth, and why math is harder",
         description:
@@ -312,28 +294,24 @@ export const aboutPage = {
     description: "TactileLens is built for teachers, and it helps everyone around them.",
     items: [
       {
-        icon: "graduation-cap",
         chip: "Teachers",
         title: "Teachers of visually impaired students",
         description: "Prepare braille versions of printed text and math for your students.",
         bullets: ["Scan with the phone you already have", "Math in **Nemeth** code"],
       },
       {
-        icon: "heart-handshake",
         chip: "SPED",
         title: "Special education (SPED) staff",
         description: "Help students who read braille get their class materials sooner.",
         bullets: ["Quick to learn", "Useful for everyday handouts"],
       },
       {
-        icon: "keyboard",
         chip: "Transcribers",
         title: "Braille transcribers",
         description: "Get printed text and math into braille with less retyping.",
         bullets: ["Start from a scan, not a blank page", "Text and algebra in one app"],
       },
       {
-        icon: "backpack",
         chip: "Students",
         title: "Students who read braille",
         description: "Get learning materials sooner, so you can start with your classmates.",
@@ -364,7 +342,6 @@ export const featuresPage = {
       "See what TactileLens can do: camera scanning, text to braille, math to Nemeth code, and offline text recognition.",
   },
   header: {
-    icon: "layout-grid",
     eyebrow: "Features",
     title: "What TactileLens can do",
     intro: "TactileLens scans printed text and math with your phone camera and turns them into braille.",
@@ -377,7 +354,6 @@ export const featuresPage = {
     // text and math in a readable view." (from the earlier draft copy).
     items: [
       {
-        icon: "camera",
         chip: "Camera",
         title: "Camera scanning",
         // TODO: Confirm whether teachers can also pick existing photos from the gallery.
@@ -386,7 +362,6 @@ export const featuresPage = {
         bullets: ["Works with printed worksheets and handouts", "No separate scanner needed"],
       },
       {
-        icon: "type",
         chip: "Text",
         title: "Text to braille",
         description: "Turn printed text into braille.",
@@ -395,7 +370,6 @@ export const featuresPage = {
         note: "TODO: braille code used for text (for example, UEB Grade 1 or Grade 2).",
       },
       {
-        icon: "sigma",
         chip: "Math",
         title: "Math to Nemeth",
         description:
@@ -405,8 +379,6 @@ export const featuresPage = {
       },
       {
         // TODO: Confirm whether math recognition works offline.
-        icon: "cloud",
-        secondaryIcon: "wifi-off",
         chip: "Online + offline",
         title: "Online and offline",
         description:
@@ -425,25 +397,20 @@ export const featuresPage = {
     description: "From a printed page to braille you can use.",
     steps: [
       {
-        icon: "camera",
         title: "Scan",
         description: "Take a photo of the printed page with your phone camera.",
       },
       {
         // TODO: Confirm whether math recognition works offline.
-        icon: "scan-text",
         title: "Recognize",
         description:
           "TactileLens finds the text and math on the page. Text recognition also works offline.",
       },
       {
-        icon: "languages",
         title: "Translate",
         description: "Text is turned into braille, and math into Nemeth code.",
       },
       {
-        // Neutral icon until the output method is confirmed (no embosser icon).
-        icon: "circle-check",
         title: "Use",
         description:
           "TODO: what teachers do with the braille (for example, view it on screen, save a BRF file, or send it to an embosser).",
@@ -458,28 +425,24 @@ export const featuresPage = {
     description: "A clear photo helps the app read the page correctly.",
     items: [
       {
-        icon: "sun",
         chip: "Light",
         title: "Use good light",
         description: "Scan in bright, even light.",
         bullets: ["Avoid shadows across the page", "Tilt the page to stop glare"],
       },
       {
-        icon: "file-text",
         chip: "Page",
         title: "Keep the page flat",
         description: "Flat pages are easier to read than curved ones.",
         bullets: ["Press down folds and creases", "Hold book pages open and flat"],
       },
       {
-        icon: "scan",
         chip: "Frame",
         title: "Fit the whole equation",
         description: "Keep the full expression inside the camera view.",
         bullets: ["Don't cut off exponents or fractions", "Move closer for small print"],
       },
       {
-        icon: "hand",
         chip: "Steady",
         title: "Hold steady",
         description: "A still camera takes a sharper photo.",
@@ -501,14 +464,12 @@ export const faqPage = {
       "Answers to common questions about TactileLens: price, offline use, braille codes, iOS, and installing the Android app.",
   },
   header: {
-    icon: "circle-help",
     eyebrow: "FAQ",
     title: "Frequently asked questions",
     intro: "Short answers to the questions teachers ask most.",
   },
   categories: [
     {
-      icon: "info",
       title: "General",
       items: [
         {
@@ -522,7 +483,6 @@ export const faqPage = {
       ],
     },
     {
-      icon: "sigma",
       title: "Braille and math",
       items: [
         {
@@ -533,7 +493,6 @@ export const faqPage = {
       ],
     },
     {
-      icon: "download",
       title: "Installing",
       items: [
         {
@@ -551,7 +510,6 @@ export const faqPage = {
       ],
     },
     {
-      icon: "shield-check",
       title: "Privacy and offline use",
       items: [
         {
@@ -616,7 +574,6 @@ export const teamPage = {
     description: "Meet the student team behind TactileLens, a capstone project.",
   },
   header: {
-    icon: "users",
     eyebrow: "Team",
     title: "Meet the team",
     intro: "TactileLens was built by a team of students as a capstone project.",
@@ -638,21 +595,21 @@ export const teamPage = {
     eyebrow: "The project",
     title: "About the project",
     items: [
-      { icon: "graduation-cap", title: "Capstone project", description: "Built by students." },
-      { icon: "code", title: "Built with Flutter", description: "A cross-platform app toolkit." },
-      { icon: "smartphone", title: "Android app", description: "Released for Android." },
+      { title: "Capstone project", description: "Built by students." },
+      { title: "Built with Flutter", description: "A cross-platform app toolkit." },
+      { title: "Android app", description: "Released for Android." },
       // TODO: Confirm whether math recognition works offline.
-      { icon: "wifi-off", title: "Offline text", description: "Printed text works without internet." },
+      { title: "Offline text", description: "Printed text works without internet." },
     ],
   },
   school: {
     eyebrow: "School",
     title: "Our school and adviser",
     details: [
-      { icon: "school", label: "School", value: "TODO: school name" },
-      { icon: "book-open", label: "Course", value: "TODO: capstone course" },
-      { icon: "user-check", label: "Adviser", value: "TODO: adviser name" },
-      { icon: "calendar", label: "School year", value: "TODO: school year" },
+      { label: "School", value: "TODO: school name" },
+      { label: "Course", value: "TODO: capstone course" },
+      { label: "Adviser", value: "TODO: adviser name" },
+      { label: "School year", value: "TODO: school year" },
     ],
   },
 } as const;
@@ -668,7 +625,6 @@ export const downloadPage = {
       "Download the TactileLens Android app (APK) and follow the step-by-step guide to install it.",
   },
   header: {
-    icon: "download",
     eyebrow: "Download",
     title: "Download TactileLens for Android",
     intro: "Download the app file (APK) and install it on your Android phone. The steps below show you how.",
@@ -686,16 +642,15 @@ export const downloadPage = {
   release: {
     title: "Release information",
     details: [
-      { icon: "tag", label: "Version", value: appRelease.version || "TODO: version" },
-      { icon: "hard-drive", label: "File size", value: appRelease.fileSize || "TODO: file size" },
+      { label: "Version", value: appRelease.version || "TODO: version" },
+      { label: "File size", value: appRelease.fileSize || "TODO: file size" },
       {
-        icon: "smartphone",
         label: "Requires",
         value: appRelease.minAndroidVersion
           ? `Android ${appRelease.minAndroidVersion} or newer`
           : "TODO: minimum Android version",
       },
-      { icon: "package", label: "Distribution", value: "APK file (not on the Google Play Store)" },
+      { label: "Distribution", value: "APK file (not on the Google Play Store)" },
     ],
   },
   qr: {
@@ -709,31 +664,26 @@ export const downloadPage = {
       "TactileLens is not on the Google Play Store, so Android will ask you to allow the install. Follow these steps on your phone.",
     steps: [
       {
-        icon: "download",
         title: "Download the app",
         description:
           "Tap Download for Android on this page. Your phone saves the APK file to your Downloads folder.",
       },
       {
-        icon: "folder-open",
         title: "Open the file",
         description:
           "When the download finishes, tap the notification. Or open the Files app, go to Downloads, and tap the APK file.",
       },
       {
-        icon: "shield-check",
         title: "Allow the install",
         description:
           'Android may say your browser is not allowed to install unknown apps. Tap Settings, turn on "Allow from this source", then go back.',
       },
       {
-        icon: "package-check",
         title: "Install",
         description:
           "Tap Install. Because the app is not from the Play Store, Google Play Protect may show a warning. If you downloaded the file from this website, you can choose to install anyway.",
       },
       {
-        icon: "smartphone",
         title: "Open TactileLens",
         description: "Tap Open, or find TactileLens on your home screen or in your app list.",
       },
@@ -752,7 +702,6 @@ export const downloadPage = {
 export const notFoundPage = {
   meta: { title: "Page not found" },
   header: {
-    icon: "search-x",
     eyebrow: "Error 404",
     title: "Page not found",
     intro: "The page you are looking for doesn't exist or has moved.",

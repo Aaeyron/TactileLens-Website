@@ -2,7 +2,6 @@ import { downloadCta, hero } from "@/content/site";
 import Button from "@/components/ui/Button";
 import Chip from "@/components/ui/Chip";
 import Container from "@/components/ui/Container";
-import Icon from "@/components/ui/Icon";
 import PhoneMockup from "./PhoneMockup";
 
 export default function HeroSection() {
@@ -31,7 +30,7 @@ export default function HeroSection() {
           <ul className="chip-row hero-chips" role="list">
             {hero.trustBadges.map((badge) => (
               <li key={badge.label}>
-                <Chip icon={badge.icon}>{badge.label}</Chip>
+                <Chip>{badge.label}</Chip>
               </li>
             ))}
           </ul>
@@ -39,14 +38,6 @@ export default function HeroSection() {
 
         <div className="hero-visual">
           <PhoneMockup />
-          {hero.floatingCards.map((card, index) => (
-            <div className={`float-card float-card--${index + 1}`} key={card.label} aria-hidden="true">
-              <span className="float-card-icon">
-                <Icon name={card.icon} size={18} />
-              </span>
-              {card.label}
-            </div>
-          ))}
         </div>
       </Container>
     </section>

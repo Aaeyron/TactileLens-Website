@@ -1,9 +1,5 @@
-import type { IconName } from "./Icon";
-import IconTile from "./IconTile";
-
 type FaqCategory = {
   title: string;
-  icon: IconName;
   items: readonly { question: string; answer: string }[];
 };
 
@@ -24,7 +20,6 @@ export default function FaqList({ categories }: FaqListProps) {
         return (
           <section className="faq-group" key={category.title} aria-labelledby={headingId}>
             <h2 id={headingId} className="block-title">
-              <IconTile icon={category.icon} />
               {category.title}
             </h2>
             <div className="faq-card">

@@ -1,12 +1,10 @@
 import Card from "./Card";
-import type { IconName } from "./Icon";
 import RichText from "./RichText";
 
 type CardGridItem = {
   title: string;
   description?: string;
   note?: string;
-  icon?: IconName;
   chip?: string;
   bullets?: readonly string[];
   href?: string;
@@ -20,7 +18,7 @@ type CardGridProps = {
   linkLabel?: string;
 };
 
-/** A responsive list of cards, e.g. highlights or audiences. */
+/** A responsive list of cards: the one card pattern used on every page. */
 export default function CardGrid({ items, columns = 2, linkLabel }: CardGridProps) {
   return (
     <ul className={`card-grid card-grid--${columns}`} role="list">
@@ -29,7 +27,6 @@ export default function CardGrid({ items, columns = 2, linkLabel }: CardGridProp
           as="li"
           key={item.title}
           title={item.title}
-          icon={item.icon}
           chip={item.chip}
           bullets={item.bullets}
           href={item.href}

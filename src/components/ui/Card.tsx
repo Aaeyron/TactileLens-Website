@@ -2,19 +2,16 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import CheckList from "./CheckList";
 import Chip from "./Chip";
-import Icon, { type IconName } from "./Icon";
-import IconTile from "./IconTile";
+import Icon from "./Icon";
 
 type CardProps = {
   title: string;
   children: ReactNode;
   /** Use "li" when the card is an item in a list of cards. */
   as?: "article" | "li" | "div";
-  /** Icon in a tinted tile above the title. */
-  icon?: IconName;
-  /** Small label next to the icon, e.g. "Math" or "Offline". */
+  /** Small label above the title, e.g. "Math" or "Offline". */
   chip?: string;
-  /** Up to three short points with check icons. */
+  /** Short points in a bulleted list. */
   bullets?: readonly string[];
   /** Makes the whole card a link (via the title link) with a hover lift. */
   href?: string;
@@ -22,22 +19,12 @@ type CardProps = {
   linkLabel?: string;
 };
 
-export default function Card({
-  title,
-  children,
-  as: Tag = "div",
-  icon,
-  chip,
-  bullets,
-  href,
-  linkLabel,
-}: CardProps) {
+export default function Card({ title, children, as: Tag = "div", chip, bullets, href, linkLabel }: CardProps) {
   return (
     <Tag className={`card ${href ? "card--link" : ""}`.trim()}>
-      {(icon || chip) && (
+      {chip && (
         <div className="card-top">
-          {icon && <IconTile icon={icon} />}
-          {chip && <Chip>{chip}</Chip>}
+          <Chip>{chip}</Chip>
         </div>
       )}
       <h3 className="card-title">
