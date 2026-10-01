@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { footer, site } from "@/content/site";
 import Container from "@/components/ui/Container";
+import LogoMark from "@/components/ui/LogoMark";
+import Icon from "@/components/ui/Icon";
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -11,19 +13,25 @@ export default function Footer() {
       <Container>
         <div className="footer-grid">
           <div className="footer-about">
-            <p className="footer-brand">{site.name}</p>
-            <p>{site.tagline}</p>
-            <p>{footer.audienceLine}</p>
-            <p className="footer-contact">
+            <Link className="footer-brand" href="/">
+              <LogoMark />
+              <span>{site.name}</span>
+            </Link>
+            <p className="footer-tagline">{site.tagline}</p>
+            <p className="footer-audience">{footer.audienceLine}</p>
+            <div className="footer-contact">
               <span className="footer-heading">{footer.contactLabel}</span>
               {hasEmail ? (
                 <a className="footer-link" href={`mailto:${footer.contactEmail}`}>
                   {footer.contactEmail}
                 </a>
               ) : (
-                footer.contactEmail
+                <Link className="footer-link" href="/faq">
+                  {footer.helpLabel}
+                  <Icon name="arrow-right" size={16} />
+                </Link>
               )}
-            </p>
+            </div>
           </div>
 
           <nav className="footer-columns" aria-label="Footer">
@@ -39,6 +47,7 @@ export default function Footer() {
                       <li key={link.href}>
                         <Link className="footer-link" href={link.href}>
                           {link.label}
+                          <Icon name="arrow-right" size={14} />
                         </Link>
                       </li>
                     ))}
@@ -50,15 +59,10 @@ export default function Footer() {
         </div>
 
         <div className="footer-bottom">
-          <p>{footer.capstone}</p>
           <p>
             © {year} {site.name}. {footer.platformNote}
           </p>
-          {/* #top is <body>; the arrow is decorative text. */}
-          <a className="footer-link footer-top" href="#top">
-            {footer.backToTop}
-            <span aria-hidden="true"> ↑</span>
-          </a>
+          <p className="footer-credit">{footer.capstone}</p>
         </div>
       </Container>
     </footer>

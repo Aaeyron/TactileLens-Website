@@ -119,6 +119,7 @@ export const footer = {
   audienceLine: "Built for teachers of students who read braille.",
   contactLabel: "Contact",
   contactEmail: "TODO: contact email",
+  helpLabel: "Browse the FAQ",
   platformNote: "Available for Android.",
   /** Three link columns. */
   columns: [
@@ -149,9 +150,7 @@ export const footer = {
       ],
     },
   ],
-  // DRAFT: review. TODO: course, school and adviser.
-  capstone: "TactileLens is a student capstone project. TODO: capstone course, school, and adviser.",
-  backToTop: "Back to top",
+  capstone: "TactileLens is a student capstone project.",
 };
 
 /* ---------------------------------------------------------------------------
