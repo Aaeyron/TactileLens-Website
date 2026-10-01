@@ -66,14 +66,15 @@ export const appRelease = {
 };
 
 /**
- * App screenshots. Until `src` is filled in, each spot shows an empty
- * placeholder box with the label and file path below (hidden from screen
- * readers). To add a screenshot:
+ * App screenshots. Until `src` is filled in, each spot shows a branded
+ * placeholder and a coming-soon caption. To add a screenshot:
  *   1. Save the image at the `file` path (inside web-app/).
  *   2. Fill in `src` (the path without "public") and a short `alt`.
  *   3. Check `width`/`height` match the image (1080×2340 is a common phone size).
  * The same entry can be used in more than one place (e.g. scanResult).
  */
+export const screenPreview = { pending: "Screenshot coming soon", label: "App preview" };
+
 export const screens = {
   // TODO: Screenshot — used in the Home hero and Home "How it works" step 2.
   scanResult: { label: "App screen: Scan result (printed equation converted to text and braille)", file: "public/screenshots/scan-result.png", src: "", width: 1080, height: 2340, alt: "" },

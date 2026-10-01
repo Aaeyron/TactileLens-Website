@@ -1,4 +1,6 @@
 import Image from "next/image";
+import { screenPreview, site } from "@/content/site";
+import BrailleT from "./BrailleT";
 
 export type ScreenConfig = {
   /** Which app screen goes here, e.g. "App screen: Camera". */
@@ -24,9 +26,8 @@ type ScreenshotProps = {
 };
 
 /**
- * An app screenshot spot. Until `src` is filled in (see `screens` in
- * site.ts), it shows an empty dashed box labeled with the screen it is for
- * and the file path to use. The placeholder is hidden from screen readers.
+ * A captioned app screenshot. Missing images get a branded placeholder
+ * and an explicit coming-soon caption.
  */
 export default function Screenshot({ screen, frame = false, preload = false, sizes }: ScreenshotProps) {
   const content = screen.src ? (
@@ -41,16 +42,32 @@ export default function Screenshot({ screen, frame = false, preload = false, siz
     />
   ) : (
     <div className="screenshot-placeholder" aria-hidden="true">
-      <p className="screenshot-label">{screen.label}</p>
-      <p className="screenshot-file">→ {screen.file}</p>
+      <div className="screenshot-emblem">
+        <BrailleT size={48} />
+      </div>
+      <p className="screenshot-label">{site.name}</p>
+      <p className="screenshot-preview-label">{screenPreview.label}</p>
+      <span className="screenshot-preview-lines">
+        <span /><span /><span />
+      </span>
     </div>
   );
 
-  if (!frame) return <div className="screenshot">{content}</div>;
-
   return (
-    <div className="phone">
-      <div className="phone-screen">{content}</div>
-    </div>
+    <figure className={`screen-preview ${frame ? "screen-preview--phone" : ""}`.trim()}>
+      <div className="screen-preview-stage">
+        {frame ? (
+          <div className="phone">
+            <div className="phone-screen">{content}</div>
+          </div>
+        ) : (
+          <div className="screenshot">{content}</div>
+        )}
+      </div>
+      <figcaption className="screen-caption">
+        {screen.label.replace(/^App screen: /, "")}
+        {!screen.src && <span className="screen-caption-status">{screenPreview.pending}</span>}
+      </figcaption>
+    </figure>
   );
 }

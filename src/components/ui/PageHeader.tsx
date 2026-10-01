@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import Container from "./Container";
+import SectionDecoration from "./SectionDecoration";
 
 type PageHeaderProps = {
   eyebrow: string;
@@ -13,7 +14,7 @@ type PageHeaderProps = {
 export default function PageHeader({ eyebrow, title, intro, children }: PageHeaderProps) {
   return (
     <section className="page-header" aria-labelledby="page-title">
-      <Container>
+      <Container className="page-header-grid">
         <div className="page-header-content">
           <p className="section-eyebrow">{eyebrow}</p>
           <h1 id="page-title" className="page-title">
@@ -22,6 +23,7 @@ export default function PageHeader({ eyebrow, title, intro, children }: PageHead
           <p className="page-intro">{intro}</p>
           {children && <div className="page-header-actions">{children}</div>}
         </div>
+        <SectionDecoration className="section-decoration--page" />
       </Container>
     </section>
   );

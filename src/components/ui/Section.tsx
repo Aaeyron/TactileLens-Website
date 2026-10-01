@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import Container from "./Container";
+import SectionDecoration from "./SectionDecoration";
 
 type SectionProps = {
   id: string;
@@ -26,11 +27,14 @@ export default function Section({
 
   const header = (
     <header className="section-header">
-      {eyebrow && <p className="section-eyebrow">{eyebrow}</p>}
-      <h2 id={titleId} className="section-title">
-        {title}
-      </h2>
-      {description && <p className="section-description">{description}</p>}
+      <div className="section-heading-copy">
+        {eyebrow && <p className="section-eyebrow">{eyebrow}</p>}
+        <h2 id={titleId} className="section-title">
+          {title}
+        </h2>
+        {description && <p className="section-description">{description}</p>}
+      </div>
+      <SectionDecoration />
     </header>
   );
 
