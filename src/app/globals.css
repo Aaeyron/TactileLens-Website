@@ -429,6 +429,11 @@ h3 {
 
 
 
+/* Two white sections in a row are separated by a thin line */
+.section:not(.section--brand) + .section:not(.section--brand) {
+  border-top: 1px solid var(--color-border);
+}
+
 .section-header {
   max-width: var(--measure);
   margin-bottom: var(--space-7);
@@ -1323,7 +1328,24 @@ p a:not(.button) {
 
 .member-role {
   margin-top: var(--space-2);
+}
+
+.member-description {
+  margin-top: var(--space-3);
   color: var(--color-text-muted);
+}
+
+/* Two columns: a single card beside a list (Team: adviser + school details) */
+.split {
+  display: grid;
+  align-items: start;
+  gap: var(--space-6);
+}
+
+@media (min-width: 768px) {
+  .split {
+    grid-template-columns: minmax(0, 18rem) minmax(0, 1fr);
+  }
 }
 
 /* =========================================================================

@@ -1,6 +1,10 @@
 type MemberCardProps = {
   name: string;
   role: string;
+  /** Short description of what the person did. */
+  description?: string;
+  /** "div" for a single card outside a list (e.g. the adviser). */
+  as?: "li" | "div";
 };
 
 function initials(name: string) {
@@ -17,16 +21,17 @@ function initials(name: string) {
  * an empty circle while the name is still a TODO.
  * TODO: Swap the avatar for a photo (next/image) when team photos are ready.
  */
-export default function MemberCard({ name, role }: MemberCardProps) {
+export default function MemberCard({ name, role, description, as: Tag = "li" }: MemberCardProps) {
   const isPlaceholder = name.startsWith("TODO");
 
   return (
-    <li className="card member-card">
+    <Tag className="card member-card">
       <span className="avatar" aria-hidden="true">
         {isPlaceholder ? null : initials(name)}
       </span>
       <h3 className="card-title">{name}</h3>
-      <p className="member-role">{role}</p>
-    </li>
+      <p className="label member-role">{role}</p>
+      {description && <p className="member-description">{description}</p>}
+    </Tag>
   );
 }

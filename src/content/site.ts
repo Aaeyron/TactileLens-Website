@@ -732,13 +732,14 @@ export const teamPage = {
   members: {
     eyebrow: "Members",
     title: "The people behind TactileLens",
-    // TODO: Replace with real names and roles. Add or remove entries as needed.
+    // TODO: Replace with real names, roles and a short description of what
+    // each person did. Add or remove entries as needed.
     // Avatars show initials once a real name is set.
     list: [
-      { name: "TODO: Name", role: "TODO: Role" },
-      { name: "TODO: Name", role: "TODO: Role" },
-      { name: "TODO: Name", role: "TODO: Role" },
-      { name: "TODO: Name", role: "TODO: Role" },
+      { name: "TODO: Name", role: "TODO: Role", description: "TODO: One or two sentences about what this person worked on." },
+      { name: "TODO: Name", role: "TODO: Role", description: "TODO: One or two sentences about what this person worked on." },
+      { name: "TODO: Name", role: "TODO: Role", description: "TODO: One or two sentences about what this person worked on." },
+      { name: "TODO: Name", role: "TODO: Role", description: "TODO: One or two sentences about what this person worked on." },
     ],
   },
   // Confirmed facts only.
@@ -756,11 +757,24 @@ export const teamPage = {
   school: {
     eyebrow: "School",
     title: "Our school and adviser",
+    // TODO: Adviser details.
+    adviser: {
+      name: "TODO: Adviser name",
+      role: "Capstone adviser",
+      description: "TODO: One sentence about the adviser (for example, their department).",
+    },
     details: [
       { label: "School", value: "TODO: school name" },
       { label: "Course", value: "TODO: capstone course" },
-      { label: "Adviser", value: "TODO: adviser name" },
       { label: "School year", value: "TODO: school year" },
+    ],
+  },
+  // TODO: Who the team wants to thank.
+  acknowledgements: {
+    eyebrow: "Acknowledgements",
+    title: "Thank you",
+    paragraphs: [
+      "TODO: People and organizations the team wants to thank (for example, teachers or schools who gave feedback, and family and friends).",
     ],
   },
 } as const;
