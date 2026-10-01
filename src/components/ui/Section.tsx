@@ -1,6 +1,5 @@
 import type { ReactNode } from "react";
 import Container from "./Container";
-import SectionDecoration from "./SectionDecoration";
 
 type SectionProps = {
   id: string;
@@ -34,7 +33,6 @@ export default function Section({
         </h2>
         {description && <p className="section-description">{description}</p>}
       </div>
-      <SectionDecoration />
     </header>
   );
 
