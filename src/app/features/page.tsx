@@ -27,7 +27,7 @@ export default function FeaturesPage() {
 
       <Section
         id={howItWorks.id}
-        tone="soft"
+        tone="brand"
         eyebrow={howItWorks.eyebrow}
         title={howItWorks.title}
         description={howItWorks.description}

@@ -18,72 +18,43 @@
 
 /* =========================================================================
  * Design tokens — the single source of truth for every design value.
- * Palette: matches the TactileLens app logo (background #003797).
- * Light theme only for now. To add dark mode later, redefine these tokens
- * inside a (prefers-color-scheme: dark) block; components need no changes.
+ * Palette: two colors only — white and the app logo's dark blue (#003797),
+ * plus darker shades of that blue (hover, pressed) and dark navy body text.
+ * No tints, gradients or patterns.
  *
  * Contrast (WCAG 2.2 AA), verified by `npm run check:contrast`:
- * - --color-brand (logo blue #003797) is for buttons, links, eyebrows,
- *   chips, key terms, icons and the focus ring on light backgrounds.
- * - --color-accent is decoration only (dot dividers, connector lines,
- *   timeline, card accent bars, quote border). Never text.
- * - The header gradient (#0A4BB8 → #002A75) keeps white text at 7.7:1 or
- *   better, so it needs no overlay. Faint bright-blue dots on it keep white
- *   text above 7:1 (the script checks the worst point).
- * - --color-border is decorative; control edges use --color-border-strong.
+ * - Blue #003797 on white and white on blue are both 10.5:1.
+ * - Body text #0f1f36 is 16.5:1 and muted text #4a5a72 is 7.0:1 on white.
+ * - On solid blue areas, all text is white.
+ * - --color-border is a light border made from the same blue (decorative);
+ *   controls use the full blue.
  * ========================================================================= */
 :root {
   color-scheme: light;
   interpolate-size: allow-keywords; /* lets <details> animate to height: auto */
 
-  /* Color: surfaces */
-  --color-bg: #ffffff;
-  --color-surface: #f4f7fb;
-  --color-surface-raised: #ffffff;
+  /* The two colors */
+  --white: #ffffff;
+  --blue: #003797; /* app logo blue */
+  --blue-hover: #002a75;
+  --blue-pressed: #00205c;
+  --ink: #0f1f36; /* body text */
+  --ink-muted: #4a5a72; /* secondary text (7.0:1 on white) */
+  --blue-border: #ccd7ea; /* light border: 20% of the blue on white */
 
-  /* Color: text */
-  --color-text: #0f1f36;
-  --color-text-muted: #4a5a72;
-  --color-text-inverse: #ffffff;
-
-  /* Color: brand (app logo blue) */
-  --color-brand: #003797; /* logo background: buttons, logo tile, step numbers, icons */
-  --color-brand-hover: #002a75;
-  --color-brand-active: #00205c; /* pressed; also gets an inset shadow */
-  --color-brand-text: #003797; /* links, eyebrows, chips, key terms (10.5:1 on white) */
-  --color-brand-subtle: #e8eef7; /* pale tint: icon tiles, chips, callouts (brand on it 9.0:1) */
-
-  /* Color: accent — the accessible text/icon uses now share the brand blue */
-  --color-accent: #0077fa; /* logo bright blue — decoration only, never text */
-  --color-accent-strong: var(--color-brand-text); /* eyebrows, list icons, focus ring */
-  --color-accent-subtle: var(--color-brand-subtle); /* icon tiles, check circles */
-  --color-icon: var(--color-accent); /* 10% accent: decorative icons (≥3:1 as UI, never text) */
-
-  /* Color: borders and focus */
-  --color-border: #dde4ee;
-  --color-border-strong: #7b8aa1;
-  --color-focus: var(--color-brand-text); /* focus ring on light backgrounds */
-  --color-focus-inverse: var(--color-text-inverse); /* focus ring on the header gradient and footer */
-  --color-footer: #002a75; /* dark brand-blue footer band */
-  --color-border-inverse: rgb(255 255 255 / 0.18); /* dividers on dark blue */
-
-  /* Color: status (for later) */
-  --color-success: #157032;
-  --color-success-subtle: #e9f6ec;
-  --color-warning: #8a5a00;
-  --color-warning-subtle: #fdf4e3;
-  --color-error: #b42318;
-  --color-error-subtle: #fdecea;
-
-  /* Header gradient matching the logo (hero, "Ready to try" band, mock app
-     bar), top-left to bottom-right. No overlay needed. */
-  --gradient-header: linear-gradient(135deg, #0a4bb8, #002a75);
-  --background-header: var(--gradient-header);
-
-  /* Decorative backgrounds: an even dot grid (not braille cells) and soft tints */
-  --pattern-dots: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22'%3E%3Ccircle cx='3' cy='3' r='1.5' fill='%23003797' fill-opacity='0.08'/%3E%3C/svg%3E");
-  --pattern-dots-on-gradient: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22'%3E%3Ccircle cx='3' cy='3' r='1.5' fill='%230077fa' fill-opacity='0.15'/%3E%3C/svg%3E");
-  --tint-accent: rgb(0 119 250 / 0.1); /* feature visuals */
+  /* Roles (components use these; .section--brand remaps them for blue areas) */
+  --color-bg: var(--white);
+  --color-text: var(--ink);
+  --color-text-muted: var(--ink-muted);
+  --color-text-inverse: var(--white);
+  --color-brand: var(--blue); /* buttons, step numbers, logo, solid blue areas */
+  --color-brand-hover: var(--blue-hover);
+  --color-brand-active: var(--blue-pressed); /* pressed; also gets an inset shadow */
+  --color-brand-text: var(--blue); /* links, eyebrows, chips, key terms */
+  --color-border: var(--blue-border);
+  --color-border-inverse: rgb(255 255 255 / 0.25); /* dividers on blue */
+  --color-focus: var(--blue); /* focus ring on white */
+  --color-focus-inverse: var(--white); /* focus ring on blue */
 
   /* Spacing: 4/8px scale */
   --space-1: 0.25rem; /*   4px */
@@ -150,7 +121,6 @@
   --step-number-size: 2.5rem;
   --step-number-size-lg: 3.5rem;
   --qr-size: 10.5rem;
-  --accent-bar: 3px solid var(--color-accent); /* thin decorative bright-blue top bar on cards */
 
   /* Component: phone mockup (generic, not any real device) */
   --device-width: 240px;
@@ -213,8 +183,8 @@ h3 {
 }
 
 ::selection {
-  background: var(--color-accent-subtle);
-  color: var(--color-text);
+  background: var(--color-brand);
+  color: var(--color-text-inverse);
 }
 
 :focus-visible {
@@ -278,7 +248,7 @@ h3 {
 }
 
 /* =========================================================================
- * Brand: logo mark (braille "t"), dot divider, braille text
+ * Brand: logo mark (braille "t"), braille text
  * ========================================================================= */
 
 .logo-mark {
@@ -316,26 +286,9 @@ h3 {
   box-shadow: var(--shadow-md);
 }
 
-.dot-divider {
-  display: flex;
-  gap: 6px;
-  margin-bottom: var(--space-3);
-}
 
-.dot-divider span {
-  width: 6px;
-  height: 6px;
-  border-radius: var(--radius-full);
-  background: var(--color-accent);
-}
 
-.dot-divider span:nth-child(2) {
-  opacity: 0.6;
-}
 
-.dot-divider span:nth-child(3) {
-  opacity: 0.3;
-}
 
 .braille-text {
   color: var(--color-brand);
@@ -357,12 +310,12 @@ h3 {
 }
 
 .icon-tile--accent {
-  background: var(--color-accent-subtle);
-  color: var(--color-icon);
+  background: var(--color-bg);
+  color: var(--color-brand);
 }
 
 .icon-tile--brand {
-  background: var(--color-brand-subtle);
+  background: var(--color-bg);
   color: var(--color-brand);
 }
 
@@ -423,21 +376,21 @@ h3 {
 }
 
 .button--secondary {
-  border-color: var(--color-border-strong);
+  border-color: var(--color-brand);
   background: var(--color-bg);
   color: var(--color-brand-text);
 }
 
 .button--secondary:hover {
   border-color: var(--color-brand);
-  background: var(--color-surface);
+  background: var(--color-bg);
 }
 
 .button--secondary:active {
-  background: var(--color-brand-subtle);
+  background: var(--color-bg);
 }
 
-/* For the blue header gradient */
+/* For solid blue backgrounds */
 .button--inverse {
   background: var(--color-text-inverse);
   color: var(--color-brand-text);
@@ -445,16 +398,17 @@ h3 {
 }
 
 .button--inverse:hover {
-  background: var(--color-brand-subtle);
+  background: var(--color-bg);
   box-shadow: var(--shadow-md);
+  color: var(--color-brand-hover);
 }
 
 .button--inverse:active {
-  background: var(--color-brand-subtle);
+  background: var(--color-bg);
   box-shadow: var(--shadow-pressed);
 }
 
-/* Secondary action on the blue header gradient. Hover gets darker, never
+/* Secondary action on solid blue backgrounds. Hover gets darker, never
    lighter, so white text keeps its contrast. */
 .button--outline-inverse {
   border-color: var(--color-text-inverse);
@@ -486,8 +440,49 @@ h3 {
   background: var(--color-bg);
 }
 
-.section--soft {
-  background: var(--color-surface);
+/* Solid blue section. Text, links and lines directly on the blue become
+   white; white containers inside (cards, callouts, ...) switch back to the
+   normal colors, so their content stays dark on white. */
+.section--brand {
+  --section-bg: var(--color-brand);
+  --color-text: var(--color-text-inverse);
+  --color-text-muted: var(--color-text-inverse);
+  --color-brand-text: var(--color-text-inverse);
+  --color-border: var(--color-border-inverse);
+  --color-focus: var(--color-focus-inverse);
+  background: var(--color-brand);
+  color: var(--color-text);
+}
+
+.section--brand :is(
+    .card,
+    .callout,
+    .step-list--cards .step,
+    .faq-card,
+    .glossary,
+    .comparison-column,
+    .mission,
+    .compare-panel,
+    .fact,
+    .qr,
+    .cell-diagram-svg
+  ) {
+  --color-text: var(--ink);
+  --color-text-muted: var(--ink-muted);
+  --color-brand-text: var(--blue);
+  --color-border: var(--blue-border);
+  --color-focus: var(--blue);
+  color: var(--color-text);
+}
+
+/* Blue fills directly on the blue band turn white */
+.section--brand .step-list--timeline .step-number {
+  background: var(--color-text-inverse);
+  color: var(--color-brand);
+}
+
+.section--brand .step-list--timeline .step:not(:last-child)::before {
+  background: var(--color-text-inverse);
 }
 
 .section-header {
@@ -496,7 +491,7 @@ h3 {
 }
 
 .section-eyebrow {
-  color: var(--color-accent-strong);
+  color: var(--color-brand-text);
   font-size: var(--text-sm);
   font-weight: var(--weight-bold);
   letter-spacing: 0.08em;
@@ -553,10 +548,9 @@ h3 {
   display: flex;
   flex-direction: column;
   border: 1px solid var(--color-border);
-  border-top: var(--accent-bar);
   border-radius: var(--radius-lg);
   padding: var(--space-5);
-  background: var(--color-surface-raised);
+  background: var(--color-bg);
   box-shadow: var(--shadow-sm);
   transition:
     box-shadow var(--duration-medium) var(--ease),
@@ -586,7 +580,7 @@ h3 {
 /* Visible TODO / extra detail under a description */
 .card-note {
   margin-top: var(--space-3);
-  border-top: 1px dashed var(--color-border-strong);
+  border-top: 1px dashed var(--color-brand);
   padding-top: var(--space-3);
   color: var(--color-text-muted);
   font-size: var(--text-sm);
@@ -681,7 +675,7 @@ h3 {
   min-height: var(--tap-target);
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--color-border-strong);
+  border: 1px solid var(--color-brand);
   border-radius: var(--radius-md);
   background: var(--color-bg);
   color: var(--color-brand-text);
@@ -723,11 +717,11 @@ h3 {
   color: var(--color-brand-text);
 }
 
-/* Current page: soft pill background plus bold text, so it never relies on
+/* Current page: solid blue pill with bold white text, so it never relies on
    color alone. No animation. */
 .navbar-link[aria-current="page"] {
-  background: var(--color-brand-subtle);
-  color: var(--color-brand-text);
+  background: var(--color-brand);
+  color: var(--color-text-inverse);
   font-weight: var(--weight-bold);
 }
 
@@ -736,9 +730,9 @@ h3 {
   width: 100%;
 }
 
-/* On /download, a soft ring marks the button as the current page */
+/* On /download, a light ring marks the button as the current page */
 .navbar-download[aria-current="page"] {
-  box-shadow: 0 0 0 3px var(--color-brand-subtle);
+  box-shadow: 0 0 0 3px var(--color-border);
 }
 
 /* Desktop: logo left, links truly centered, Download App right.
@@ -788,7 +782,7 @@ h3 {
    without scrolling on a typical phone. */
 .hero {
   padding-block: clamp(var(--space-6), 8vw, var(--space-9));
-  background: var(--background-header);
+  background: var(--color-brand);
   color: var(--color-text-inverse);
 }
 
@@ -816,7 +810,7 @@ h3 {
   display: inline-flex;
   border-radius: var(--radius-full);
   padding: var(--space-1) var(--space-4);
-  background: var(--color-surface-raised);
+  background: var(--color-bg);
   color: var(--color-brand-text);
   font-size: var(--text-sm);
   font-weight: var(--weight-semibold);
@@ -832,7 +826,7 @@ h3 {
 }
 
 .hero-title-highlight {
-  color: var(--color-brand-subtle);
+  color: var(--color-text-inverse);
 }
 
 .hero-lead {
@@ -870,14 +864,14 @@ h3 {
   border: 1px solid transparent;
   border-radius: var(--radius-full);
   padding: var(--space-1) var(--space-3);
-  background: var(--color-surface-raised);
+  background: var(--color-bg);
   color: var(--color-text);
   font-size: var(--text-sm);
   font-weight: var(--weight-semibold);
 }
 
 .trust-badge svg {
-  color: var(--color-icon);
+  color: var(--color-brand);
 }
 
 /* Phone + floating cards. The cards stay inside this box, so nothing
@@ -889,15 +883,6 @@ h3 {
   padding: var(--space-5) var(--space-5);
 }
 
-.hero-visual::before {
-  position: absolute;
-  z-index: 0;
-  inset: 0;
-  background: var(--pattern-dots-on-gradient);
-  content: "";
-  mask-image: radial-gradient(circle at 50% 50%, #000 30%, transparent 70%);
-  pointer-events: none;
-}
 
 .hero-visual .phone {
   z-index: 1;
@@ -914,7 +899,7 @@ h3 {
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   padding: var(--space-2) var(--space-3);
-  background: var(--color-surface-raised);
+  background: var(--color-bg);
   box-shadow: var(--shadow-lg);
   color: var(--color-text);
   font-size: var(--text-sm);
@@ -928,8 +913,8 @@ h3 {
   height: 1.75rem;
   place-items: center;
   border-radius: var(--radius-full);
-  background: var(--color-accent-subtle);
-  color: var(--color-icon);
+  background: var(--color-bg);
+  color: var(--color-brand);
 }
 
 .float-card--1 {
@@ -986,10 +971,10 @@ h3 {
   min-height: var(--button-height);
   align-items: center;
   align-self: flex-start;
-  border: 1px dashed var(--color-text-muted);
+  border: 1px dashed var(--color-brand);
   border-radius: var(--radius-md);
   padding: var(--space-3) var(--space-5);
-  background: var(--color-brand-subtle);
+  background: var(--color-bg);
   color: var(--color-brand-text);
   font-weight: var(--weight-semibold);
   line-height: 1.2;
@@ -1037,7 +1022,7 @@ h3 {
   overflow: hidden;
   aspect-ratio: 9 / 19.5;
   border-radius: calc(var(--device-radius) - var(--device-bezel));
-  background: var(--color-surface);
+  background: var(--color-bg);
 }
 
 .phone-screenshot {
@@ -1060,7 +1045,7 @@ h3 {
   align-items: center;
   gap: var(--space-2);
   padding: var(--space-6) var(--space-4) var(--space-3);
-  background: var(--background-header);
+  background: var(--color-brand);
   color: var(--color-text-inverse);
   font-size: var(--text-sm);
   font-weight: var(--weight-semibold);
@@ -1091,11 +1076,11 @@ h3 {
   min-height: var(--space-8);
   place-items: center;
   border-radius: var(--radius-md);
-  background: var(--color-surface-raised);
+  background: var(--color-bg);
 }
 
 .mock-viewfinder {
-  border: 2px dashed var(--color-accent);
+  border: 2px dashed var(--color-brand);
 }
 
 .mock-output {
@@ -1116,7 +1101,7 @@ h3 {
   justify-content: center;
   gap: var(--space-2);
   padding-block: var(--space-1);
-  color: var(--color-accent-strong);
+  color: var(--color-brand-text);
   font-size: var(--text-sm);
   font-weight: var(--weight-semibold);
 }
@@ -1130,7 +1115,7 @@ h3 {
   height: var(--space-8);
   flex-shrink: 0;
   margin: 0 auto var(--space-5);
-  border: var(--space-1) solid var(--color-brand-subtle);
+  border: var(--space-1) solid var(--color-bg);
   border-radius: var(--radius-full);
   background: var(--color-brand);
 }
@@ -1163,14 +1148,14 @@ h3 {
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   padding: var(--space-6);
-  background: var(--color-surface-raised);
+  background: var(--color-bg);
   box-shadow: var(--shadow-md);
   text-align: center;
 }
 
 .compare-panel--output {
-  border-color: transparent;
-  background: var(--color-brand-subtle);
+  border-color: var(--color-brand);
+  background: var(--color-bg);
 }
 
 .compare-label {
@@ -1199,8 +1184,8 @@ h3 {
   justify-self: center;
   place-items: center;
   border-radius: var(--radius-full);
-  background: var(--color-accent-subtle);
-  color: var(--color-icon);
+  background: var(--color-bg);
+  color: var(--color-brand);
   transform: rotate(90deg);
 }
 
@@ -1219,7 +1204,7 @@ h3 {
   isolation: isolate;
   overflow: hidden;
   padding-block: clamp(var(--space-7), 6vw, var(--space-9));
-  background: var(--background-header);
+  background: var(--color-brand);
   color: var(--color-text-inverse);
 }
 
@@ -1228,22 +1213,10 @@ h3 {
 }
 
 .page-header .section-eyebrow {
-  color: var(--color-brand-subtle);
+  color: var(--color-text-inverse);
 }
 
-.page-header .dot-divider span {
-  background: var(--color-text-inverse);
-}
 
-.page-header::before {
-  position: absolute;
-  z-index: -1;
-  inset: 0;
-  background: var(--pattern-dots-on-gradient);
-  content: "";
-  mask-image: radial-gradient(ellipse 50% 100% at 90% 50%, #000 25%, transparent 75%);
-  pointer-events: none;
-}
 
 .page-header-grid {
   display: grid;
@@ -1300,7 +1273,7 @@ h3 {
     width: var(--space-10);
     height: var(--space-10);
     border: 0;
-    background: var(--color-surface-raised);
+    background: var(--color-bg);
     box-shadow: var(--shadow-lg);
     transform: rotate(-4deg);
   }
@@ -1381,7 +1354,7 @@ p a:not(.button) {
 
 .step-title svg {
   flex-shrink: 0;
-  color: var(--color-icon);
+  color: var(--color-brand);
 }
 
 .step-description {
@@ -1406,10 +1379,9 @@ p a:not(.button) {
 .step-list--cards .step {
   position: relative;
   border: 1px solid var(--color-border);
-  border-top: var(--accent-bar);
   border-radius: var(--radius-lg);
   padding: var(--space-5);
-  background: var(--color-surface-raised);
+  background: var(--color-bg);
   box-shadow: var(--shadow-sm);
 }
 
@@ -1439,7 +1411,7 @@ p a:not(.button) {
 
 .step-connector {
   display: grid;
-  color: var(--color-icon);
+  color: var(--color-brand);
 }
 
 @media (min-width: 768px) {
@@ -1460,7 +1432,7 @@ p a:not(.button) {
     height: 2px;
     background: repeating-linear-gradient(
       to right,
-      var(--color-accent) 0 8px,
+      var(--color-brand) 0 8px,
       transparent 8px 14px
     );
     content: "";
@@ -1489,7 +1461,7 @@ p a:not(.button) {
 .step-list--timeline .step-number {
   width: var(--step-number-size-lg);
   height: var(--step-number-size-lg);
-  box-shadow: 0 0 0 6px var(--color-surface);
+  box-shadow: 0 0 0 6px var(--section-bg, var(--color-bg));
   font-size: var(--text-lg);
 }
 
@@ -1500,7 +1472,7 @@ p a:not(.button) {
   bottom: 0;
   left: calc(var(--step-number-size-lg) / 2 - 1px);
   width: 2px;
-  background: var(--color-accent);
+  background: var(--color-brand);
   content: "";
 }
 
@@ -1545,18 +1517,9 @@ p a:not(.button) {
   gap: var(--space-5);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-xl);
-  background:
-    radial-gradient(60% 80% at 30% 30%, var(--tint-accent), transparent 70%),
-    var(--color-surface);
+  background: var(--color-bg);
 }
 
-.feature-visual::before {
-  position: absolute;
-  z-index: -1;
-  inset: 0;
-  background: var(--pattern-dots);
-  content: "";
-}
 
 .feature-visual-icon {
   display: grid;
@@ -1565,9 +1528,9 @@ p a:not(.button) {
   place-items: center;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-xl);
-  background: var(--color-surface-raised);
+  background: var(--color-bg);
   box-shadow: var(--shadow-lg);
-  color: var(--color-icon);
+  color: var(--color-brand);
 }
 
 .feature-visual-icon--secondary {
@@ -1611,12 +1574,12 @@ p a:not(.button) {
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   padding: var(--space-6);
-  background: var(--color-surface);
+  background: var(--color-bg);
 }
 
 .comparison-column--solution {
-  border-color: transparent;
-  background: var(--color-accent-subtle);
+  border-color: var(--color-brand);
+  background: var(--color-bg);
 }
 
 .comparison-points {
@@ -1638,12 +1601,12 @@ p a:not(.button) {
   flex-shrink: 0;
   place-items: center;
   border-radius: var(--radius-sm);
-  background: var(--color-surface-raised);
+  background: var(--color-bg);
   color: var(--color-text-muted);
 }
 
 .comparison-column--solution .comparison-icon {
-  color: var(--color-icon);
+  color: var(--color-brand);
 }
 
 .comparison-arrow {
@@ -1671,10 +1634,10 @@ p a:not(.button) {
 .mission {
   max-width: 52rem;
   border: 1px solid var(--color-border);
-  border-left: var(--space-1) solid var(--color-accent);
+  border-left: var(--space-1) solid var(--color-brand);
   border-radius: var(--radius-lg);
   padding: var(--space-6);
-  background: var(--color-surface-raised);
+  background: var(--color-bg);
   box-shadow: var(--shadow-md);
 }
 
@@ -1687,7 +1650,7 @@ p a:not(.button) {
 .mission-icon {
   display: block;
   margin-bottom: var(--space-4);
-  color: var(--color-icon);
+  color: var(--color-brand);
 }
 
 .mission-quote p {
@@ -1720,13 +1683,14 @@ p a:not(.button) {
   place-items: center;
   margin-bottom: var(--space-4);
   border-radius: var(--radius-full);
-  background: var(--color-brand-subtle);
+  background: var(--color-bg);
   box-shadow:
-    0 0 0 4px var(--color-surface-raised),
+    0 0 0 4px var(--color-bg),
     0 0 0 5px var(--color-border);
   color: var(--color-brand-text);
   font-size: var(--text-xl);
   font-weight: var(--weight-bold);
+  border: 1px solid var(--color-brand);
 }
 
 .member-role {
@@ -1757,10 +1721,9 @@ p a:not(.button) {
 
 .faq-card {
   border: 1px solid var(--color-border);
-  border-top: var(--accent-bar);
   border-radius: var(--radius-lg);
   padding-inline: var(--space-5);
-  background: var(--color-surface-raised);
+  background: var(--color-bg);
   box-shadow: var(--shadow-sm);
 }
 
@@ -1873,7 +1836,7 @@ p a:not(.button) {
 
 .info-icon {
   flex-shrink: 0;
-  color: var(--color-icon);
+  color: var(--color-brand);
 }
 
 .info-value {
@@ -1890,7 +1853,7 @@ p a:not(.button) {
   border: 1px solid var(--color-border);
   border-radius: var(--radius-xl);
   padding: var(--space-5);
-  background: var(--color-surface-raised);
+  background: var(--color-bg);
   box-shadow: var(--shadow-lg);
 }
 
@@ -1944,7 +1907,7 @@ p a:not(.button) {
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   padding: var(--space-6);
-  background: var(--color-surface);
+  background: var(--color-bg);
   text-align: center;
 }
 
@@ -1984,7 +1947,7 @@ p a:not(.button) {
 }
 
 /* =========================================================================
- * CTA band — full-width blue header gradient "Ready to try TactileLens?"
+ * CTA band — full-width solid blue "Ready to try TactileLens?"
  * ========================================================================= */
 
 .cta-band {
@@ -1992,19 +1955,10 @@ p a:not(.button) {
   isolation: isolate;
   overflow: hidden;
   padding-block: var(--section-pad-y);
-  background: var(--background-header);
+  background: var(--color-brand);
   color: var(--color-text-inverse);
 }
 
-.cta-band::before {
-  position: absolute;
-  z-index: -1;
-  inset: 0;
-  background: var(--pattern-dots-on-gradient);
-  content: "";
-  mask-image: radial-gradient(ellipse 60% 120% at 100% 50%, #000 20%, transparent 75%);
-  pointer-events: none;
-}
 
 .cta-band :focus-visible {
   outline-color: var(--color-focus-inverse);
@@ -2052,12 +2006,12 @@ p a:not(.button) {
  * Footer
  * ========================================================================= */
 
-/* Dark brand-blue band with white text and white links. The top border
-   separates it from the "Ready to try" band, which ends in the same blue. */
+/* Solid blue band with white text and white links. The top border
+   separates it from the "Ready to try" band, which is the same blue. */
 .site-footer {
   border-top: 1px solid var(--color-border-inverse);
   padding-block: var(--space-8) var(--space-6);
-  background: var(--color-footer);
+  background: var(--color-brand);
   color: var(--color-text-inverse);
   font-size: var(--text-sm);
 }
@@ -2128,7 +2082,7 @@ p a:not(.button) {
 
 .footer-contact svg {
   flex-shrink: 0;
-  color: var(--color-icon);
+  color: var(--color-brand);
 }
 
 .footer-copyright {
@@ -2159,12 +2113,13 @@ p a:not(.button) {
   gap: var(--space-1);
   border-radius: var(--radius-full);
   padding: 2px var(--space-3);
-  background: var(--color-brand-subtle);
+  background: var(--color-bg);
   color: var(--color-brand-text);
   font-size: var(--text-sm);
   font-weight: var(--weight-semibold);
   line-height: 1.5;
   white-space: nowrap;
+  border: 1px solid var(--color-brand);
 }
 
 .chip-row {
@@ -2204,8 +2159,8 @@ p a:not(.button) {
   place-items: center;
   margin-top: 0.2em;
   border-radius: var(--radius-full);
-  background: var(--color-accent-subtle);
-  color: var(--color-icon);
+  background: var(--color-bg);
+  color: var(--color-brand);
 }
 
 .callout {
@@ -2213,10 +2168,11 @@ p a:not(.button) {
   max-width: 48rem;
   align-items: flex-start;
   gap: var(--space-4);
+  border: 1px solid var(--color-border);
   border-left: var(--space-1) solid var(--color-brand);
   border-radius: var(--radius-md);
   padding: var(--space-5);
-  background: var(--color-brand-subtle);
+  background: var(--color-bg);
 }
 
 .callout-icon {
@@ -2226,8 +2182,8 @@ p a:not(.button) {
   flex-shrink: 0;
   place-items: center;
   border-radius: var(--radius-full);
-  background: var(--color-surface-raised);
-  color: var(--color-icon);
+  background: var(--color-bg);
+  color: var(--color-brand);
 }
 
 .callout-label {
@@ -2306,10 +2262,9 @@ p a:not(.button) {
   align-items: center;
   gap: var(--space-4);
   border: 1px solid var(--color-border);
-  border-top: var(--accent-bar);
   border-radius: var(--radius-lg);
   padding: var(--space-4);
-  background: var(--color-surface-raised);
+  background: var(--color-bg);
   box-shadow: var(--shadow-sm);
 }
 
@@ -2361,13 +2316,13 @@ p a:not(.button) {
 }
 
 .cell-diagram-frame {
-  fill: var(--color-surface-raised);
+  fill: var(--color-bg);
   stroke: var(--color-border);
   stroke-width: 2;
 }
 
 .cell-diagram-dot {
-  fill: var(--color-brand-subtle);
+  fill: var(--color-bg);
   stroke: var(--color-brand);
   stroke-width: 2;
 }
@@ -2393,10 +2348,9 @@ p a:not(.button) {
   max-width: 52rem;
   gap: var(--space-4);
   border: 1px solid var(--color-border);
-  border-top: var(--accent-bar);
   border-radius: var(--radius-lg);
   padding: var(--space-5);
-  background: var(--color-surface-raised);
+  background: var(--color-bg);
   box-shadow: var(--shadow-sm);
 }
 

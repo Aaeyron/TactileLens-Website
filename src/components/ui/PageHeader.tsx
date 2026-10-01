@@ -1,6 +1,5 @@
 import type { ReactNode } from "react";
 import Container from "./Container";
-import DotDivider from "./DotDivider";
 import type { IconName } from "./Icon";
 import IconTile from "./IconTile";
 
@@ -20,7 +19,6 @@ export default function PageHeader({ eyebrow, title, intro, icon, children }: Pa
     <section className="page-header" aria-labelledby="page-title">
       <Container className="page-header-grid">
         <div className="page-header-content">
-          <DotDivider />
           <p className="section-eyebrow">{eyebrow}</p>
           <h1 id="page-title" className="page-title">
             {title}

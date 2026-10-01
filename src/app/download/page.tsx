@@ -22,7 +22,6 @@ export default function DownloadPage() {
 
       <Section
         id="install"
-        tone="soft"
         eyebrow={install.eyebrow}
         title={install.title}
         description={install.description}

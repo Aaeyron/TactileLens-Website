@@ -27,7 +27,6 @@ export default function HomePage() {
 
       <Section
         id="what-it-does"
-        tone="soft"
         eyebrow={homeSteps.eyebrow}
         title={homeSteps.title}
         description={homeSteps.description}
@@ -42,7 +41,6 @@ export default function HomePage() {
 
       <Section
         id="highlights"
-        tone="soft"
         eyebrow={homeHighlights.eyebrow}
         title={homeHighlights.title}
         description={homeHighlights.description}

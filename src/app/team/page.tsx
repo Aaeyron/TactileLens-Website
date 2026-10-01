@@ -26,7 +26,7 @@ export default function TeamPage() {
         </ul>
       </Section>
 
-      <Section id="project" tone="soft" eyebrow={projectFacts.eyebrow} title={projectFacts.title}>
+      <Section id="project" tone="brand" eyebrow={projectFacts.eyebrow} title={projectFacts.title}>
         <FactStrip label={projectFacts.label} items={projectFacts.items} />
       </Section>
 

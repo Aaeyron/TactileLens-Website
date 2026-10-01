@@ -1,7 +1,8 @@
 // Checks WCAG 2.x contrast for every text/UI color pair in the design tokens.
 // Run with: npm run check:contrast
 // Keep these values in sync with the tokens in src/app/globals.css.
-// Palette: matches the TactileLens app logo (background #003797).
+// Palette: two colors only — white and the app logo blue #003797, plus darker
+// shades of that blue (hover, pressed) and dark navy body text.
 
 const luminance = (hex) => {
   const [r, g, b] = [1, 3, 5]
@@ -15,7 +16,7 @@ const contrast = (a, b) => {
   return (hi + 0.05) / (lo + 0.05);
 };
 
-/** Blend `top` over `base` at opacity `alpha` (for tints, overlays and dot patterns). */
+/** Blend `top` over `base` at opacity `alpha` (for translucent overlays). */
 const mix = (base, top, alpha) => {
   const channel = (hex, i) => parseInt(hex.slice(i, i + 2), 16);
   return (
@@ -33,107 +34,52 @@ const UI = 3; // icons, borders, focus rings
 
 // Tokens
 const white = "#ffffff";
-const surface = "#f4f7fb";
-const text = "#0f1f36";
-const muted = "#4a5a72";
-const brand = "#003797"; // logo blue: brand, brand-text, accent-strong, focus
-const brandHover = "#002a75";
-const brandActive = "#00205c";
-const subtle = "#e8eef7"; // pale tint (brand-subtle = accent-subtle)
-const bright = "#0077fa"; // logo bright blue: decoration only
-const gradientStart = "#0a4bb8";
-const gradientEnd = "#002a75";
-const borderStrong = "#7b8aa1";
+const blue = "#003797"; // app logo blue
+const blueHover = "#002a75";
+const bluePressed = "#00205c";
+const ink = "#0f1f36"; // body text
+const inkMuted = "#4a5a72"; // secondary text
+const blueBorder = "#ccd7ea"; // light border made from the blue (decorative)
 
-// Worst-case decorative backgrounds.
-// Header gradient: lightest point (start) with a 15% bright-blue dot on top.
-const gradientWorst = mix(gradientStart, bright, 0.15);
-// Page headers now use the same header gradient (see gradientWorst).
-const footer = "#002a75"; // dark brand-blue footer band
-// Outline button hover on the gradient: 25% pressed-blue overlay (only darker).
-const outlineHover = mix(gradientStart, brandActive, 0.25);
+// Outline button hover on blue: 25% pressed-blue overlay (only darker).
+const outlineHover = mix(blue, bluePressed, 0.25);
 
 // [label, foreground, background, required ratio]
 const pairs = [
-  // Base text
-  ["text on white", text, white, TEXT],
-  ["text on surface", text, surface, TEXT],
-  ["text on pale tint (callouts)", text, subtle, TEXT],
-  ["text-muted on white", muted, white, TEXT],
-  ["text-muted on surface", muted, surface, TEXT],
-  ["text-muted on pale tint", muted, subtle, TEXT],
+  // White areas
+  ["body text on white", ink, white, TEXT],
+  ["muted text on white", inkMuted, white, TEXT],
+  ["blue text (links, eyebrows, chips, key terms) on white", blue, white, TEXT],
+  ["arrow-link hover (#002A75) on white", blueHover, white, TEXT],
+  ["large braille (blue) on white", blue, white, LARGE],
 
   // Buttons
-  ["white on brand (primary button, step numbers, skip link)", white, brand, TEXT],
-  ["white on brand hover", white, brandHover, TEXT],
-  ["white on brand pressed", white, brandActive, TEXT],
-  ["brand on white (secondary + inverse buttons)", brand, white, TEXT],
-  ["brand on pale tint (inverse hover, secondary pressed)", brand, subtle, TEXT],
+  ["white on blue (primary button, step numbers, nav pill)", white, blue, TEXT],
+  ["white on blue hover", white, blueHover, TEXT],
+  ["white on blue pressed", white, bluePressed, TEXT],
+  ["blue on white (secondary + inverse buttons)", blue, white, TEXT],
+  ["inverse button hover text (#002A75) on white", blueHover, white, TEXT],
+  ["white on outline-button hover (on blue)", white, outlineHover, TEXT],
 
-  // Small blue text: links, eyebrows, chips, key terms
-  ["link / eyebrow on white", brand, white, TEXT],
-  ["link / eyebrow on surface", brand, surface, TEXT],
-  ["navbar current-page pill: brand on pale tint", brand, subtle, TEXT],
-  ["arrow link hover (#002A75) on white", brandHover, white, TEXT],
-  ["arrow link hover (#002A75) on surface", brandHover, surface, TEXT],
-  ["chip text on pale tint", brand, subtle, TEXT],
-  ["callout label on pale tint", brand, subtle, TEXT],
-  ["key term on white", brand, white, TEXT],
-  ["key term on surface", brand, surface, TEXT],
-  ["key term on pale tint (inside callouts)", brand, subtle, TEXT],
-  ["braille diagram numbers on pale dots", brand, subtle, TEXT],
-  ["coming-soon notice on pale tint", brand, subtle, TEXT],
-  ["coming-soon border (text-muted) on pale tint (UI)", muted, subtle, UI],
+  // Solid blue areas: hero, page headers, blue sections, "Ready to try", footer
+  ["white text on solid blue", white, blue, TEXT],
+  ["white links on solid blue (footer, blue sections)", white, blue, TEXT],
+  ["timeline numbers (blue on white circle) in a blue section", blue, white, TEXT],
 
-  // Icons
-  ["icon on pale icon tile (UI)", brand, subtle, UI],
-  ["check icon on pale circle (UI)", brand, subtle, UI],
-  ["10% accent icon (#0077FA) on pale tile (UI)", bright, subtle, UI],
-  ["10% accent icon (#0077FA) on surface (UI)", bright, surface, UI],
-  ["10% accent icon (#0077FA) on white (UI)", bright, white, UI],
-  ["large braille on pale tint", brand, subtle, LARGE],
-
-  // Header gradient (hero, CTA band, mock app bar)
-  ["white small text on gradient start", white, gradientStart, TEXT],
-  ["white small text on gradient end", white, gradientEnd, TEXT],
-  ["white small text on gradient start + bright dot (worst)", white, gradientWorst, TEXT],
-  ["white on outline-button hover (gradient)", white, outlineHover, TEXT],
-  ["pale hero highlight on gradient (worst)", subtle, gradientWorst, LARGE],
-  ["white outline-button border on gradient (UI, worst)", white, gradientWorst, UI],
-
-  // Page headers on the gradient
-  ["page header title/intro (white) on gradient (worst)", white, gradientWorst, TEXT],
-  ["page header eyebrow (pale) on gradient (worst)", subtle, gradientWorst, TEXT],
-
-  // Dark blue footer
-  ["footer text (white) on #002A75", white, footer, TEXT],
-  ["footer links (white) on #002A75", white, footer, TEXT],
-  ["footer focus ring (white) on #002A75", white, footer, UI],
-  ["footer contact icon (#0077FA) on #002A75 (UI)", bright, footer, UI],
-  ["footer logo tile: brand dots on white (UI)", brand, white, UI],
-
-  // Focus rings
-  ["focus (brand) on white", brand, white, UI],
-  ["focus (brand) on surface", brand, surface, UI],
-  ["focus (brand) on pale tint", brand, subtle, UI],
-  ["focus (white) on gradient (worst)", white, gradientWorst, UI],
-
-  // Borders and underlines
-  ["border-strong on white", borderStrong, white, UI],
-  ["border-strong on surface", borderStrong, surface, UI],
-  ["current-page underline (brand) on white", brand, white, UI],
-
-  // Status (for later)
-  ["success on white", "#157032", white, TEXT],
-  ["success on success-subtle", "#157032", "#e9f6ec", TEXT],
-  ["warning on white", "#8a5a00", white, TEXT],
-  ["warning on warning-subtle", "#8a5a00", "#fdf4e3", TEXT],
-  ["error on white", "#b42318", white, TEXT],
-  ["error on error-subtle", "#b42318", "#fdecea", TEXT],
+  // UI parts
+  ["focus ring (blue) on white", blue, white, UI],
+  ["focus ring (white) on blue", white, blue, UI],
+  ["control borders (blue) on white (secondary button, chips, menu)", blue, white, UI],
+  ["outline button border (white) on blue", white, blue, UI],
+  ["download icon / arrows (blue) on white", blue, white, UI],
+  ["FAQ open/close indicator (blue) on white", blue, white, UI],
 ];
 
-// Decorative only: reported for reference, never used for text.
-const decorative = [["bright blue #0077FA on white (lines, dividers, bars; never text)", bright, white]];
+// Decorative only: card borders and dividers, reported for reference.
+const decorative = [
+  ["light card border #CCD7EA on white (decorative)", blueBorder, white],
+  ["divider rgba(255,255,255,0.25) on blue (decorative)", mix(blue, white, 0.25), blue],
+];
 
 let failures = 0;
 for (const [label, fg, bg, min] of pairs) {

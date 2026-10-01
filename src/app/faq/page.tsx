@@ -29,7 +29,6 @@ export default function FaqPage() {
 
       <Section
         id={glossary.id}
-        tone="soft"
         eyebrow={glossary.eyebrow}
         title={glossary.title}
         description={glossary.description}

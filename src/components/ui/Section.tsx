@@ -1,14 +1,13 @@
 import type { ReactNode } from "react";
 import Container from "./Container";
-import DotDivider from "./DotDivider";
 
 type SectionProps = {
   id: string;
   title: string;
   eyebrow?: string;
   description?: string;
-  /** "soft" uses the tinted surface color, for alternating sections. */
-  tone?: "default" | "soft";
+  /** "brand" is a solid blue section (white text); "default" is white. */
+  tone?: "default" | "brand";
   /** Small supporting visual beside the header on wide screens. */
   aside?: ReactNode;
   children?: ReactNode;
@@ -27,12 +26,7 @@ export default function Section({
 
   const header = (
     <header className="section-header">
-      {eyebrow && (
-        <>
-          <DotDivider />
-          <p className="section-eyebrow">{eyebrow}</p>
-        </>
-      )}
+      {eyebrow && <p className="section-eyebrow">{eyebrow}</p>}
       <h2 id={titleId} className="section-title">
         {title}
       </h2>
@@ -43,7 +37,7 @@ export default function Section({
   return (
     <section
       id={id}
-      className={`section ${tone === "soft" ? "section--soft" : ""}`.trim()}
+      className={`section ${tone === "brand" ? "section--brand" : ""}`.trim()}
       aria-labelledby={titleId}
       data-reveal
     >

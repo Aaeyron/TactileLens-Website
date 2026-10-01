@@ -3,7 +3,7 @@ import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
 import LogoMark from "@/components/ui/LogoMark";
 
-/** Full-width blue-gradient "Ready to try TactileLens?" band. Ends every page except /download. */
+/** Full-width solid blue "Ready to try TactileLens?" band. Ends every page except /download. */
 export default function CtaBanner() {
   return (
     <section className="cta-band" aria-labelledby="cta-band-title" data-reveal>

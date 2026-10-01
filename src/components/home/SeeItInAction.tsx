@@ -8,6 +8,7 @@ export default function SeeItInAction() {
   return (
     <Section
       id="see-it-in-action"
+      tone="brand"
       eyebrow={seeItInAction.eyebrow}
       title={seeItInAction.title}
       description={seeItInAction.description}

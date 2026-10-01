@@ -32,7 +32,7 @@ export default function AboutPage() {
 
       <Section
         id="braille-basics"
-        tone="soft"
+        tone="brand"
         eyebrow={basics.eyebrow}
         title={basics.title}
         description={basics.description}
@@ -47,7 +47,7 @@ export default function AboutPage() {
 
       <Section
         id="audience"
-        tone="soft"
+        tone="brand"
         eyebrow={audience.eyebrow}
         title={audience.title}
         description={audience.description}
