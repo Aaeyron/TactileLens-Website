@@ -11,8 +11,10 @@ export default function NotFound() {
 
   return (
     <PageHeader {...header}>
-      <Button href={links.home.href}>{links.home.label}</Button>
-      <Button href={links.download.href} variant="secondary">
+      <Button href={links.home.href} variant="inverse">
+        {links.home.label}
+      </Button>
+      <Button href={links.download.href} variant="outline-inverse">
         {links.download.label}
       </Button>
     </PageHeader>
