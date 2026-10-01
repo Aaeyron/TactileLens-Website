@@ -38,7 +38,7 @@
   --color-brand-subtle: #e8eef7; /* pale tint: icon tiles, chips, callouts (brand on it 9.0:1) */
 
   /* Color: accent — the accessible text/icon uses now share the brand blue */
-  --color-accent: #16a6a1; /* decoration only */
+  --color-accent: #0077fa; /* logo bright blue — decoration only, never text */
   --color-accent-strong: var(--color-brand-text); /* eyebrows, list icons, focus ring */
   --color-accent-subtle: var(--color-brand-subtle); /* icon tiles, check circles */
 
@@ -64,8 +64,8 @@
   /* Decorative backgrounds: an even dot grid (not braille cells) and soft tints */
   --pattern-dots: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22'%3E%3Ccircle cx='3' cy='3' r='1.5' fill='%23003797' fill-opacity='0.08'/%3E%3C/svg%3E");
   --pattern-dots-on-navy: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22'%3E%3Ccircle cx='3' cy='3' r='1.5' fill='%23ffffff' fill-opacity='0.1'/%3E%3C/svg%3E");
-  --tint-accent: rgb(22 166 161 / 0.14); /* feature visuals */
-  --tint-accent-soft: rgb(22 166 161 / 0.08); /* page headers (behind teal eyebrow text) */
+  --tint-accent: rgb(0 119 250 / 0.1); /* feature visuals */
+  --tint-accent-soft: rgb(0 119 250 / 0.08); /* page headers (behind small blue text) */
 
   /* Spacing: 4/8px scale */
   --space-1: 0.25rem; /*   4px */
@@ -129,7 +129,7 @@
   --step-number-size: 2.5rem;
   --step-number-size-lg: 3.5rem;
   --qr-size: 10.5rem;
-  --accent-bar: 3px solid var(--color-accent); /* thin decorative teal top bar on cards */
+  --accent-bar: 3px solid var(--color-accent); /* thin decorative bright-blue top bar on cards */
 
   /* Component: phone mockup (generic, not any real device) */
   --device-width: 240px;
