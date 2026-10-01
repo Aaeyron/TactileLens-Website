@@ -47,7 +47,9 @@
   --color-border: #dde4ee;
   --color-border-strong: #7b8aa1;
   --color-focus: var(--color-brand-text); /* focus ring on light backgrounds */
-  --color-focus-inverse: var(--color-text-inverse); /* focus ring on the header gradient */
+  --color-focus-inverse: var(--color-text-inverse); /* focus ring on the header gradient and footer */
+  --color-footer: #002a75; /* dark brand-blue footer band */
+  --color-border-inverse: rgb(255 255 255 / 0.18); /* dividers on dark blue */
 
   /* Color: status (for later) */
   --color-success: #157032;
@@ -2034,12 +2036,23 @@ p a:not(.button) {
  * Footer
  * ========================================================================= */
 
+/* Dark brand-blue band with white text and white links. The top border
+   separates it from the "Ready to try" band, which ends in the same blue. */
 .site-footer {
-  border-top: 1px solid var(--color-border);
+  border-top: 1px solid var(--color-border-inverse);
   padding-block: var(--space-8) var(--space-6);
-  background: var(--color-surface);
-  color: var(--color-text-muted);
+  background: var(--color-footer);
+  color: var(--color-text-inverse);
   font-size: var(--text-sm);
+}
+
+.site-footer :focus-visible {
+  outline-color: var(--color-focus-inverse);
+}
+
+.site-footer .logo-mark {
+  background: var(--color-text-inverse);
+  color: var(--color-brand);
 }
 
 .footer-grid {
@@ -2062,15 +2075,15 @@ p a:not(.button) {
   align-items: center;
   gap: var(--space-3);
   margin-bottom: var(--space-3);
-  color: var(--color-brand-text);
+  color: var(--color-text-inverse);
   font-size: var(--text-lg);
   font-weight: var(--weight-bold);
 }
 
 .footer-heading {
   margin-bottom: var(--space-3);
-  color: var(--color-text);
-  font-weight: var(--weight-semibold);
+  color: var(--color-text-inverse);
+  font-weight: var(--weight-bold);
 }
 
 .footer-links li + li {
@@ -2080,12 +2093,13 @@ p a:not(.button) {
 .footer-link {
   display: inline-block;
   padding-block: var(--space-1);
-  color: var(--color-brand-text);
+  color: var(--color-text-inverse);
   font-weight: var(--weight-semibold);
   text-underline-offset: 3px;
 }
 
 .footer-link:hover {
+  text-decoration: underline;
   text-decoration-thickness: 2px;
 }
 
@@ -2098,11 +2112,11 @@ p a:not(.button) {
 
 .footer-contact svg {
   flex-shrink: 0;
-  color: var(--color-accent-strong);
+  color: var(--color-icon);
 }
 
 .footer-copyright {
-  border-top: 1px solid var(--color-border);
+  border-top: 1px solid var(--color-border-inverse);
   padding-top: var(--space-5);
 }
 
