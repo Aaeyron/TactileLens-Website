@@ -1,6 +1,7 @@
 // Checks WCAG 2.x contrast for every text/UI color pair in the design tokens.
 // Run with: npm run check:contrast
 // Keep these values in sync with the tokens in src/app/globals.css.
+// Palette: matches the TactileLens app logo (background #003797).
 
 const luminance = (hex) => {
   const [r, g, b] = [1, 3, 5]
@@ -35,84 +36,82 @@ const white = "#ffffff";
 const surface = "#f4f7fb";
 const text = "#0f1f36";
 const muted = "#4a5a72";
-const navy = "#123b70"; // brand, brand-text
-const navyHover = "#0e2f5a";
-const navyActive = "#0a2445";
-const navySubtle = "#e8eef7";
-const teal = "#16a6a1"; // decoration only
-const tealStrong = "#0b6e6a";
-const tealSubtle = "#e6f5f4";
-const gradientStart = "#1a4f8f";
-const gradientEnd = "#0e2f5a";
+const brand = "#003797"; // logo blue: brand, brand-text, accent-strong, focus
+const brandHover = "#002a75";
+const brandActive = "#00205c";
+const subtle = "#e8eef7"; // pale tint (brand-subtle = accent-subtle)
+const bright = "#0077fa"; // logo bright blue: decoration only
+const gradientStart = "#0a4bb8";
+const gradientEnd = "#002a75";
 const borderStrong = "#7b8aa1";
 
 // Worst-case decorative backgrounds.
-// Navy gradient: its lightest point (start) with a 10% white dot on top.
-const gradientWorst = mix(gradientStart, white, 0.1);
-// Page header: 8% teal tint at its strongest, with an 8% navy dot on top.
-const pageHeaderWorst = mix(mix(surface, teal, 0.08), navy, 0.08);
-// Outline button hover on the gradient: 25% dark-navy overlay (only darker).
-const outlineHover = mix(gradientStart, navyActive, 0.25);
+// Header gradient: lightest point (start) with a 15% bright-blue dot on top.
+const gradientWorst = mix(gradientStart, bright, 0.15);
+// Page header: 8% bright-blue tint at its strongest, with an 8% brand dot on top.
+const pageHeaderWorst = mix(mix(surface, bright, 0.08), brand, 0.08);
+// Feature visuals: 10% bright-blue tint + 8% brand dot (icons only sit here).
+const featureVisualWorst = mix(mix(surface, bright, 0.1), brand, 0.08);
+// Outline button hover on the gradient: 25% pressed-blue overlay (only darker).
+const outlineHover = mix(gradientStart, brandActive, 0.25);
 
 // [label, foreground, background, required ratio]
 const pairs = [
   // Base text
   ["text on white", text, white, TEXT],
   ["text on surface", text, surface, TEXT],
-  ["text on navy-subtle (callouts)", text, navySubtle, TEXT],
-  ["text on teal-subtle", text, tealSubtle, TEXT],
+  ["text on pale tint (callouts)", text, subtle, TEXT],
   ["text-muted on white", muted, white, TEXT],
   ["text-muted on surface", muted, surface, TEXT],
-  ["text-muted on navy-subtle", muted, navySubtle, TEXT],
+  ["text-muted on pale tint", muted, subtle, TEXT],
 
   // Buttons
-  ["white on navy (primary button, step numbers, skip link)", white, navy, TEXT],
-  ["white on navy hover", white, navyHover, TEXT],
-  ["white on navy pressed", white, navyActive, TEXT],
-  ["navy on white (secondary + inverse buttons, links)", navy, white, TEXT],
-  ["navy on navy-subtle (inverse hover, secondary pressed)", navy, navySubtle, TEXT],
+  ["white on brand (primary button, step numbers, skip link)", white, brand, TEXT],
+  ["white on brand hover", white, brandHover, TEXT],
+  ["white on brand pressed", white, brandActive, TEXT],
+  ["brand on white (secondary + inverse buttons)", brand, white, TEXT],
+  ["brand on pale tint (inverse hover, secondary pressed)", brand, subtle, TEXT],
 
-  // Small navy text: links, chips, labels, key terms
-  ["navy link on surface (footer)", navy, surface, TEXT],
-  ["chip text (navy) on navy-subtle", navy, navySubtle, TEXT],
-  ["callout label (navy) on navy-subtle", navy, navySubtle, TEXT],
-  ["key term (navy) on white", navy, white, TEXT],
-  ["key term (navy) on surface", navy, surface, TEXT],
-  ["key term (navy) on navy-subtle (inside callouts)", navy, navySubtle, TEXT],
-  ["braille diagram numbers (navy) on navy-subtle dots", navy, navySubtle, TEXT],
-  ["coming-soon notice: navy on navy-subtle", navy, navySubtle, TEXT],
-  ["coming-soon border (text-muted) on navy-subtle (UI)", muted, navySubtle, UI],
-
-  // Teal text and icons
-  ["teal-strong eyebrow on white", tealStrong, white, TEXT],
-  ["teal-strong eyebrow on surface", tealStrong, surface, TEXT],
-  ["teal-strong eyebrow on page header (worst case)", tealStrong, pageHeaderWorst, TEXT],
+  // Small blue text: links, eyebrows, chips, key terms
+  ["link / eyebrow on white", brand, white, TEXT],
+  ["link / eyebrow on surface", brand, surface, TEXT],
+  ["eyebrow on page header (worst case)", brand, pageHeaderWorst, TEXT],
   ["text on page header (worst case)", text, pageHeaderWorst, TEXT],
   ["text-muted on page header (worst case)", muted, pageHeaderWorst, TEXT],
-  ["teal-strong icon on teal-subtle tile (UI)", tealStrong, tealSubtle, UI],
-  ["teal-strong check icon on teal-subtle circle (UI)", tealStrong, tealSubtle, UI],
-  ["navy icon on navy-subtle tile (UI)", navy, navySubtle, UI],
-  ["navy large braille on navy-subtle", navy, navySubtle, LARGE],
+  ["chip text on pale tint", brand, subtle, TEXT],
+  ["callout label on pale tint", brand, subtle, TEXT],
+  ["key term on white", brand, white, TEXT],
+  ["key term on surface", brand, surface, TEXT],
+  ["key term on pale tint (inside callouts)", brand, subtle, TEXT],
+  ["braille diagram numbers on pale dots", brand, subtle, TEXT],
+  ["coming-soon notice on pale tint", brand, subtle, TEXT],
+  ["coming-soon border (text-muted) on pale tint (UI)", muted, subtle, UI],
 
-  // Navy header gradient (hero, CTA band, mock app bar)
+  // Icons
+  ["icon on pale icon tile (UI)", brand, subtle, UI],
+  ["check icon on pale circle (UI)", brand, subtle, UI],
+  ["icon on feature visual (worst case, UI)", brand, featureVisualWorst, UI],
+  ["large braille on pale tint", brand, subtle, LARGE],
+
+  // Header gradient (hero, CTA band, mock app bar)
   ["white small text on gradient start", white, gradientStart, TEXT],
   ["white small text on gradient end", white, gradientEnd, TEXT],
-  ["white small text on gradient start + white dot (worst)", white, gradientWorst, TEXT],
+  ["white small text on gradient start + bright dot (worst)", white, gradientWorst, TEXT],
   ["white on outline-button hover (gradient)", white, outlineHover, TEXT],
-  ["navy-subtle hero highlight on gradient (worst)", navySubtle, gradientWorst, LARGE],
+  ["pale hero highlight on gradient (worst)", subtle, gradientWorst, LARGE],
   ["white outline-button border on gradient (UI, worst)", white, gradientWorst, UI],
 
   // Focus rings
-  ["focus (teal-strong) on white", tealStrong, white, UI],
-  ["focus (teal-strong) on surface", tealStrong, surface, UI],
-  ["focus (teal-strong) on navy-subtle", tealStrong, navySubtle, UI],
-  ["focus (teal-strong) on page header (worst case)", tealStrong, pageHeaderWorst, UI],
+  ["focus (brand) on white", brand, white, UI],
+  ["focus (brand) on surface", brand, surface, UI],
+  ["focus (brand) on pale tint", brand, subtle, UI],
+  ["focus (brand) on page header (worst case)", brand, pageHeaderWorst, UI],
   ["focus (white) on gradient (worst)", white, gradientWorst, UI],
 
   // Borders and underlines
   ["border-strong on white", borderStrong, white, UI],
   ["border-strong on surface", borderStrong, surface, UI],
-  ["current-page underline (teal-strong) on white", tealStrong, white, UI],
+  ["current-page underline (brand) on white", brand, white, UI],
 
   // Status (for later)
   ["success on white", "#157032", white, TEXT],
@@ -124,7 +123,7 @@ const pairs = [
 ];
 
 // Decorative only: reported for reference, never used for text.
-const decorative = [["teal accent on white (lines, dividers, bars)", teal, white]];
+const decorative = [["bright blue #0077FA on white (lines, dividers, bars)", bright, white]];
 
 let failures = 0;
 for (const [label, fg, bg, min] of pairs) {
