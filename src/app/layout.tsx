@@ -4,6 +4,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import SkipLink from "@/components/layout/SkipLink";
 import RevealOnScroll from "@/components/layout/RevealOnScroll";
+import SmoothScroll from "@/components/layout/SmoothScroll";
 import { site } from "@/content/site";
 import { baseOpenGraph } from "@/lib/metadata";
 import "./globals.css";
@@ -65,7 +66,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${bodyFont.variable} ${headingFont.variable}`}
       data-scroll-behavior="smooth"
     >
-      <body className="site-body">
+      <body className="site-body" id="top">
         <SkipLink />
         <Navbar />
         <main id="content" className="site-main" tabIndex={-1}>
@@ -73,6 +74,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </main>
         <Footer />
         <RevealOnScroll />
+        <SmoothScroll />
       </body>
     </html>
   );

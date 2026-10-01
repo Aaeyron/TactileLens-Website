@@ -153,9 +153,40 @@
  * Base
  * ========================================================================= */
 
-/* Smooth scrolling for anchor links (plain CSS; no scroll-hijacking library) */
+/* Smooth scrolling for anchor links. This CSS version is the fallback when
+   Lenis is off (touch devices, reduced motion); while Lenis runs it adds
+   the .lenis class to <html> and handles smoothing itself. */
 html {
   scroll-behavior: smooth;
+}
+
+/* Lenis (see SmoothScroll.tsx): turn off CSS smoothing so they don't fight.
+   Rules from lenis/dist/lenis.css. */
+html.lenis {
+  scroll-behavior: auto;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis:not(.lenis-autoToggle).lenis-stopped {
+  overflow: clip;
+}
+
+.lenis [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+/* Anchor targets focused after a smooth scroll show no outline (like a
+   native fragment jump); real controls keep their focus ring. */
+[data-scroll-focus]:focus {
+  outline: none;
 }
 
 /* Anchor targets and keyboard-focused elements stop below the sticky header */

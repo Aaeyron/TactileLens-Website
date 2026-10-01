@@ -42,7 +42,7 @@ export default function Navbar() {
   const closeMenu = () => setMenuOpen(false);
 
   return (
-    <header className="site-header" id="top">
+    <header className="site-header">
       <Container>
         <nav className="navbar" aria-label="Main">
           {/* The visible "TactileLens" text is the Home link's accessible name. */}

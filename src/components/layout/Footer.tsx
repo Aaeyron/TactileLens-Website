@@ -54,7 +54,7 @@ export default function Footer() {
           <p>
             © {year} {site.name}. {footer.platformNote}
           </p>
-          {/* #top is the site header; the arrow is decorative text. */}
+          {/* #top is <body>; the arrow is decorative text. */}
           <a className="footer-link footer-top" href="#top">
             {footer.backToTop}
             <span aria-hidden="true"> ↑</span>
