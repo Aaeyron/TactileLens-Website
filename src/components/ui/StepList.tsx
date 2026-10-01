@@ -20,7 +20,7 @@ type StepListProps = {
 /** Numbered steps. Uses <ol> so screen readers announce the count and order. */
 export default function StepList({ steps, variant = "cards" }: StepListProps) {
   return (
-    <ol className={`step-list step-list--${variant}`} role="list">
+    <ol className={`step-list step-list--${variant}`} role="list" data-reveal-group>
       {steps.map((step, index) => (
         <li className="step" key={step.title}>
           {variant === "flow" && step.screen && (

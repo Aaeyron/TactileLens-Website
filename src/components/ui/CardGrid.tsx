@@ -26,7 +26,7 @@ export default function CardGrid({ items, columns = 2, numbered = false, linkLab
   const List = numbered ? "ol" : "ul";
 
   return (
-    <List className={`card-grid card-grid--${columns}`} role="list">
+    <List className={`card-grid card-grid--${columns}`} role="list" data-reveal-group>
       {items.map((item, index) => (
         <Card
           as="li"

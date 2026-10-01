@@ -5,6 +5,7 @@ import { useEffect } from "react";
 
 /** Matches --page-distance in globals.css (page transition upward move). */
 const PAGE_TRANSITION_SHIFT = 8;
+const STAGGER_MS = 70;
 
 /**
  * Subtle fade-in for elements marked with `data-reveal`.
@@ -19,11 +20,20 @@ export default function RevealOnScroll() {
   const pathname = usePathname();
 
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
     if (!("IntersectionObserver" in window)) return;
 
     let observer: IntersectionObserver | undefined;
     let frame2 = 0;
+    const elements = new Set<HTMLElement>();
+
+    const clear = () => {
+      observer?.disconnect();
+      elements.forEach((element) => {
+        element.classList.remove("reveal-pending", "reveal-instant");
+        element.style.removeProperty("--reveal-delay");
+      });
+    };
 
     const reveal = (element: Element, instant = false) => {
       if (instant) element.classList.add("reveal-instant");
@@ -32,8 +42,12 @@ export default function RevealOnScroll() {
     };
 
     const hashTarget = () => {
-      const id = decodeURIComponent(window.location.hash.slice(1));
-      return id ? document.getElementById(id) : null;
+      try {
+        const id = decodeURIComponent(window.location.hash.slice(1));
+        return id ? document.getElementById(id) : null;
+      } catch {
+        return null;
+      }
     };
 
     const revealHashTarget = () => {
@@ -47,17 +61,37 @@ export default function RevealOnScroll() {
     };
 
     const setup = () => {
+      clear();
+      if (motion.matches) return;
       observer = new IntersectionObserver(
         (entries) => {
-          for (const entry of entries) {
-            if (entry.isIntersecting) reveal(entry.target);
+          // Stagger only siblings entering together; a later row starts fresh.
+          const groups = new Map<Element, HTMLElement[]>();
+          for (const entry of entries.filter((entry) => entry.isIntersecting)) {
+            const element = entry.target as HTMLElement;
+            const group = element.parentElement;
+            if (group?.hasAttribute("data-reveal-group")) {
+              const siblings = groups.get(group) ?? [];
+              siblings.push(element);
+              groups.set(group, siblings);
+            } else {
+              reveal(element);
+            }
           }
+          groups.forEach((siblings, group) => {
+            siblings.sort((a, b) => Array.from(group.children).indexOf(a) - Array.from(group.children).indexOf(b));
+            siblings.forEach((element, index) => {
+              element.style.setProperty("--reveal-delay", `${index * STAGGER_MS}ms`);
+              reveal(element);
+            });
+          });
         },
         { rootMargin: "0px 0px -10% 0px" },
       );
 
       const target = hashTarget();
-      document.querySelectorAll<HTMLElement>("[data-reveal]").forEach((element) => {
+      document.querySelectorAll<HTMLElement>("[data-reveal], [data-reveal-group] > *").forEach((element) => {
+        elements.add(element);
         // The page transition (app/template.tsx) briefly shifts content down by
         // up to 8px. Allow for that, so content already on screen gets only the
         // page transition and never a second reveal.
@@ -65,7 +99,10 @@ export default function RevealOnScroll() {
         const isHashTarget =
           target !== null &&
           (element === target || element.contains(target) || target.contains(element));
-        if (!belowFold || isHashTarget) return;
+        if (!belowFold || isHashTarget) {
+          reveal(element, true);
+          return;
+        }
         element.classList.add("reveal-pending");
         observer?.observe(element);
       });
@@ -84,16 +121,23 @@ export default function RevealOnScroll() {
     };
     window.addEventListener("hashchange", revealHashTarget);
     document.addEventListener("click", onClick);
+    motion.addEventListener("change", setup);
+    const onFocus = (event: FocusEvent) => {
+      if (!(event.target instanceof HTMLElement)) return;
+      elements.forEach((element) => {
+        if (element.contains(event.target as Node)) reveal(element, true);
+      });
+    };
+    document.addEventListener("focusin", onFocus);
 
     return () => {
       cancelAnimationFrame(frame1);
       cancelAnimationFrame(frame2);
-      observer?.disconnect();
+      clear();
+      motion.removeEventListener("change", setup);
+      document.removeEventListener("focusin", onFocus);
       window.removeEventListener("hashchange", revealHashTarget);
       document.removeEventListener("click", onClick);
-      document
-        .querySelectorAll(".reveal-pending, .reveal-instant")
-        .forEach((element) => element.classList.remove("reveal-pending", "reveal-instant"));
     };
   }, [pathname]);
 

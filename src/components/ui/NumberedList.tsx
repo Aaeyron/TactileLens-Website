@@ -19,7 +19,7 @@ type NumberedListProps = {
  */
 export default function NumberedList({ items }: NumberedListProps) {
   return (
-    <ol className="numbered-list" role="list">
+    <ol className="numbered-list" role="list" data-reveal-group>
       {items.map((item, index) => (
         <li className="numbered-item" key={`${item.title ?? item.text}-${index}`}>
           <span className="card-number" aria-hidden="true">
