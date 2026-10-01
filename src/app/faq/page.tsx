@@ -6,6 +6,7 @@ import Callout from "@/components/ui/Callout";
 import Container from "@/components/ui/Container";
 import FaqList from "@/components/ui/FaqList";
 import InfoList from "@/components/ui/InfoList";
+import OnThisPage from "@/components/ui/OnThisPage";
 import PageHeader from "@/components/ui/PageHeader";
 import Section from "@/components/ui/Section";
 
@@ -20,6 +21,12 @@ export default function FaqPage() {
 
       <div className="section">
         <Container>
+          <OnThisPage
+            links={[
+              ...categories.map((category) => ({ label: category.title, href: `#${category.id}` })),
+              { label: glossary.title, href: `#${glossary.id}` },
+            ]}
+          />
           <FaqList categories={categories} />
           <div className="section-callout faq-contact">
             <Callout variant="note" text={contactNote} />

@@ -1,4 +1,6 @@
 type FaqCategory = {
+  /** Anchor id for the category heading (used by "On this page"). */
+  id: string;
   title: string;
   items: readonly { question: string; answer: string }[];
 };
@@ -16,10 +18,9 @@ export default function FaqList({ categories }: FaqListProps) {
   return (
     <div className="faq-groups">
       {categories.map((category) => {
-        const headingId = `faq-${category.title.toLowerCase().replace(/[^a-z]+/g, "-")}`;
         return (
-          <section className="faq-group" key={category.title} aria-labelledby={headingId}>
-            <h2 id={headingId} className="block-title">
+          <section className="faq-group" key={category.id} aria-labelledby={category.id}>
+            <h2 id={category.id} className="block-title">
               {category.title}
             </h2>
             <div className="faq-card">

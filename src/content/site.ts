@@ -601,8 +601,15 @@ export const faqPage = {
   },
   categories: [
     {
+      id: "faq-general",
       title: "General",
       items: [
+        {
+          // Confirmed audience.
+          question: "Who is TactileLens for?",
+          answer:
+            "Teachers of visually impaired students and special education (SPED) staff who prepare braille materials.",
+        },
         {
           question: "Is TactileLens free?",
           answer: "TODO: confirm whether the app is free.",
@@ -614,6 +621,7 @@ export const faqPage = {
       ],
     },
     {
+      id: "faq-braille-and-math",
       title: "Braille and math",
       items: [
         {
@@ -621,9 +629,20 @@ export const faqPage = {
           answer:
             "Math is translated into Nemeth code. TODO: braille code used for regular text (for example, UEB Grade 1 or Grade 2).",
         },
+        {
+          // Confirmed: general algebra.
+          question: "What kind of math can it read?",
+          answer: "General algebra, written out in Nemeth code.",
+        },
+        {
+          // DRAFT: review.
+          question: "Can it read handwriting?",
+          answer: "TactileLens is made for printed text and printed math. Handwriting may not be recognized.",
+        },
       ],
     },
     {
+      id: "faq-installing",
       title: "Installing",
       items: [
         {
@@ -633,21 +652,22 @@ export const faqPage = {
             "No. You download the app file (APK) from this website. The download page shows how to install it, step by step.",
         },
         {
-          question: "Which Android version do I need?",
+          question: "What phone do I need?",
           answer: appRelease.minAndroidVersion
-            ? `Android ${appRelease.minAndroidVersion} or newer.`
-            : "TODO: minimum Android version.",
+            ? `An Android phone with a camera, running Android ${appRelease.minAndroidVersion} or newer.`
+            : "An Android phone with a camera. TODO: minimum Android version and free storage space.",
         },
       ],
     },
     {
-      title: "Privacy and offline use",
+      id: "faq-internet-and-privacy",
+      title: "Internet and privacy",
       items: [
         {
-          question: "Does it work without internet?",
+          question: "Do I need internet?",
           // TODO: Confirm whether math recognition works offline.
           answer:
-            "Yes, for printed text. With internet, TactileLens reads the page using our server. Without internet, it recognizes printed text on the phone itself.",
+            "Only for online mode, where TactileLens reads the page using our server. Without internet, you can still scan printed text: it is recognized on the phone itself.",
         },
         {
           question: "What happens to the photos I scan?",
