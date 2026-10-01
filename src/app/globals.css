@@ -53,6 +53,7 @@
   --color-brand-text: var(--blue); /* links, eyebrows, chips, key terms */
   --color-border: var(--blue-border);
   --color-border-inverse: rgb(255 255 255 / 0.25); /* dividers on blue */
+  --line-inverse: rgb(255 255 255 / 0.35); /* thin decorative outline shapes on blue */
   --color-focus: var(--blue); /* focus ring on white */
   --color-focus-inverse: var(--white); /* focus ring on blue */
 
@@ -753,6 +754,8 @@ h3 {
 /* Mobile first: tighter top spacing so the Download button is visible
    without scrolling on a typical phone. */
 .hero {
+  position: relative;
+  overflow: hidden; /* clips the outline shapes, so nothing scrolls sideways */
   padding-block: clamp(var(--space-6), 8vw, var(--space-9));
   background: var(--color-brand);
   color: var(--color-text-inverse);
@@ -831,7 +834,35 @@ h3 {
 
 
 .hero-visual .phone {
+  z-index: 1;
   box-shadow: var(--shadow-xl);
+}
+
+/* Decorative outline shapes in thin white lines, partly behind the phone.
+   They stay inside the visual column, never under the hero text. */
+.hero-visual::before,
+.hero-visual::after {
+  position: absolute;
+  z-index: 0;
+  top: 50%;
+  left: 50%;
+  border: 1px solid var(--line-inverse);
+  content: "";
+  pointer-events: none;
+}
+
+.hero-visual::before {
+  width: min(26rem, 95vw);
+  aspect-ratio: 1;
+  border-radius: var(--radius-full);
+  transform: translate(-35%, -58%);
+}
+
+.hero-visual::after {
+  width: min(15rem, 60vw);
+  aspect-ratio: 15 / 19;
+  border-radius: 2rem;
+  transform: translate(-92%, -18%) rotate(-8deg);
 }
 
 
