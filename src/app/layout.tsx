@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Atkinson_Hyperlegible_Next, Manrope } from "next/font/google";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import SkipLink from "@/components/layout/SkipLink";
@@ -8,9 +8,22 @@ import { site } from "@/content/site";
 import { baseOpenGraph } from "@/lib/metadata";
 import "./globals.css";
 
-const inter = Inter({
-  variable: "--font-inter",
+// Body: designed by the Braille Institute for low-vision readers.
+// Next.js has no fallback metrics for this font, so a late swap could shift
+// the layout. "optional" avoids that: the font is preloaded, and if it is not
+// ready in time on a first visit, that page keeps the system font (no shift).
+const bodyFont = Atkinson_Hyperlegible_Next({
+  variable: "--font-body",
   subsets: ["latin"],
+  weight: ["400", "700"],
+  display: "optional",
+});
+
+// Headings, buttons and the navbar: clean, straight geometric sans.
+const headingFont = Manrope({
+  variable: "--font-heading",
+  subsets: ["latin"],
+  weight: ["600", "700", "800"],
 });
 
 // TODO: When the social preview image is ready, add src/app/opengraph-image.png
@@ -42,7 +55,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={`${bodyFont.variable} ${headingFont.variable}`}>
       <body className="site-body">
         <SkipLink />
         <Navbar />
