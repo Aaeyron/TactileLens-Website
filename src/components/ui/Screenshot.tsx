@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { screenPreview, site } from "@/content/site";
-import BrailleT from "./BrailleT";
 
 export type ScreenConfig = {
   /** Which app screen goes here, e.g. "App screen: Camera". */
@@ -42,14 +41,8 @@ export default function Screenshot({ screen, frame = false, preload = false, siz
     />
   ) : (
     <div className="screenshot-placeholder" aria-hidden="true">
-      <div className="screenshot-emblem">
-        <BrailleT size={48} />
-      </div>
       <p className="screenshot-label">{site.name}</p>
       <p className="screenshot-preview-label">{screenPreview.label}</p>
-      <span className="screenshot-preview-lines">
-        <span /><span /><span />
-      </span>
     </div>
   );
 

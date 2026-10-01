@@ -1090,33 +1090,6 @@ h3 {
   font-size: var(--text-sm);
 }
 
-.screenshot-emblem {
-  display: grid;
-  width: 5rem;
-  aspect-ratio: 1;
-  place-items: center;
-  border: 1px solid var(--blue-border);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
-  color: var(--blue);
-}
-
-.screenshot-preview-lines {
-  display: grid;
-  width: min(7rem, 80%);
-  gap: var(--space-2);
-  margin-top: var(--space-3);
-}
-
-.screenshot-preview-lines span {
-  height: 4px;
-  border-radius: var(--radius-full);
-  background: var(--blue-border);
-}
-
-.screenshot-preview-lines span:nth-child(2) { width: 80%; }
-.screenshot-preview-lines span:nth-child(3) { width: 60%; }
-
 .screen-preview {
   --screen-outline: var(--color-border);
   width: min(100%, 15rem);

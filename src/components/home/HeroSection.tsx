@@ -3,16 +3,13 @@ import Button from "@/components/ui/Button";
 import Chip from "@/components/ui/Chip";
 import Container from "@/components/ui/Container";
 import Screenshot from "@/components/ui/Screenshot";
-import BrailleT from "@/components/ui/BrailleT";
 
 export default function HeroSection() {
   return (
     <section className="hero" aria-labelledby="hero-title">
       <Container className="hero-grid">
         <div className="hero-content">
-          <Chip>
-            <BrailleT size={20} />{hero.badge}
-          </Chip>
+          <Chip>{hero.badge}</Chip>
 
           <h1 id="hero-title" className="hero-title">
             {hero.titleLead}{" "}
