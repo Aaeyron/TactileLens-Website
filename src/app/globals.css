@@ -469,6 +469,12 @@ h3 {
     .compare-panel,
     .table-wrap,
     .qr,
+    .fact-number,
+    .feature-row,
+    .step-list--flow .step,
+    .numbered-list,
+    .info-list,
+    .on-this-page,
     .cell-diagram-svg
   ) {
   --color-text: var(--ink);
@@ -2311,6 +2317,75 @@ p a:not(.button) {
 
 .site-header {
   box-shadow: 0 4px 18px -8px rgb(0 55 151 / 0.2);
+}
+
+/* Frame each main content container, with breathing room on small screens. */
+:is(.section, .hero, .page-header, .cta-band, .site-footer) > .site-container {
+  position: relative;
+  width: calc(100% - 2 * var(--gutter));
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: clamp(var(--space-4), 3vw, var(--space-6));
+  box-shadow: var(--shadow-panel);
+}
+
+:is(.hero, .page-header, .cta-band, .site-footer) > .site-container,
+.section--brand > .site-container {
+  border-color: var(--color-border-inverse);
+  box-shadow: 0 12px 32px -12px rgb(0 32 92 / 0.35), inset 0 1px 0 rgb(255 255 255 / 0.12);
+}
+
+:is(.section, .hero, .page-header, .cta-band) > .site-container::after {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+  width: var(--space-5);
+  height: var(--space-5);
+  border-top: 2px solid var(--color-border);
+  border-right: 2px solid var(--color-border);
+  border-top-right-radius: var(--radius-sm);
+  content: "";
+  pointer-events: none;
+}
+
+:is(.hero, .page-header, .cta-band) > .site-container::after {
+  border-color: var(--color-border-inverse);
+}
+
+:is(.feature-row, .step-list--flow .step, .fact-number) {
+  min-width: 0;
+  border: 1px solid var(--color-border);
+  border-top: var(--border-accent);
+  border-radius: var(--radius-lg);
+  padding: clamp(var(--space-4), 2.5vw, var(--space-6));
+  background: var(--color-bg);
+  box-shadow: var(--shadow-panel);
+}
+
+.fact-number {
+  border-top: 1px solid var(--color-border);
+  border-left: var(--border-accent);
+}
+
+:is(.numbered-list, .info-list, .on-this-page) {
+  border: 1px solid var(--color-border);
+  border-top: var(--border-accent);
+  border-radius: var(--radius-lg);
+  padding-inline: var(--space-5);
+  background: var(--color-bg);
+  box-shadow: var(--shadow-panel);
+}
+
+.numbered-item:last-child,
+.info-row:last-child {
+  border-bottom: 0;
+}
+
+@media print {
+  .site-container,
+  :is(.card, .step, .compare-panel, .faq-card, .download-card, .qr, .callout, .table-wrap, .screenshot, .feature-row, .fact-number, .numbered-list, .info-list, .on-this-page) {
+    box-shadow: none !important;
+  }
 }
 
 /* =========================================================================
