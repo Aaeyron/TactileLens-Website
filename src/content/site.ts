@@ -799,10 +799,30 @@ export const downloadPage = {
     subtitle: "Android app (APK)",
     chips: ["Android", "APK file", "Not on Google Play"],
   },
-  // DRAFT: review.
-  beforeYouStart: {
-    title: "Before you start",
-    items: ["An Android phone", "An internet connection for the download", "Free space for the app file"],
+  // DRAFT: review. Confirmed facts plus TODO values.
+  requirements: {
+    eyebrow: "Before you download",
+    title: "System requirements",
+    description: "What your phone needs to run TactileLens.",
+    caption: "TactileLens system requirements",
+    columns: ["Requirement", "Details"],
+    rows: [
+      { label: "Phone", value: "An Android phone (there is no iPhone version)" },
+      {
+        label: "Android version",
+        value: appRelease.minAndroidVersion
+          ? `Android ${appRelease.minAndroidVersion} or newer`
+          : "TODO: minimum Android version",
+      },
+      { label: "Camera", value: "A working camera, used to scan printed pages" },
+      { label: "Storage", value: "TODO: free space needed for the app" },
+      { label: "Memory (RAM)", value: "TODO: recommended memory, if any" },
+      {
+        // TODO: Confirm whether math recognition works offline.
+        label: "Internet",
+        value: "Needed to download the app and for online mode. Printed text can be scanned offline.",
+      },
+    ],
   },
   release: {
     title: "Release information",
@@ -863,6 +883,65 @@ export const downloadPage = {
       text: "When you open TactileLens, the app starts on its home screen.",
       screen: screens.home,
     },
+  },
+  // DRAFT: review — general Android tips, not app-specific facts.
+  troubleshooting: {
+    eyebrow: "Troubleshooting",
+    title: "If something goes wrong",
+    description: "Common install problems on Android, and what to try.",
+    items: [
+      {
+        chip: "Install blocked",
+        title: "Android blocks the install",
+        description: "Android blocks apps from outside the Play Store until you allow them.",
+        bullets: [
+          "Tap Settings when Android asks",
+          'Turn on "Allow from this source" for your browser or Files app',
+          "Go back and tap Install again",
+        ],
+      },
+      {
+        chip: "App not installed",
+        title: "\"App not installed\" message",
+        description: "Android could not finish installing the app.",
+        bullets: [
+          "Free up storage space and try again",
+          "If an older version of TactileLens is installed, remove it first",
+          "Download the file again in case it did not finish",
+        ],
+      },
+      {
+        chip: "File missing",
+        title: "You can't find the downloaded file",
+        description: "The APK file is usually saved in Downloads.",
+        bullets: [
+          "Open the Files app and look in Downloads",
+          "Or pull down the notification bar and tap the finished download",
+        ],
+      },
+      {
+        chip: "Warning",
+        title: "Google Play Protect shows a warning",
+        description: "Android may warn you about apps that are not from the Play Store.",
+        bullets: [
+          "Check that you downloaded the file from this website",
+          "Then choose the option to install anyway",
+        ],
+      },
+    ],
+  },
+  // TODO: Add one entry per release, newest first.
+  versions: {
+    eyebrow: "Version history",
+    title: "Release notes",
+    description: "What changed in each version of the app.",
+    items: [
+      {
+        meta: "TODO: release date",
+        title: "TODO: version number (first release)",
+        text: "TODO: What is in this version.",
+      },
+    ],
   },
 } as const;
 

@@ -416,6 +416,7 @@ h3 {
     .step-list--cards .step,
     .faq-card,
     .compare-panel,
+    .table-wrap,
     .qr,
     .cell-diagram-svg
   ) {
@@ -1830,6 +1831,46 @@ p a:not(.button) {
 .feature-helps .label {
   display: block;
   margin-bottom: var(--space-1);
+}
+
+/* Two-column table (Download: system requirements) in a white box */
+.table-wrap {
+  max-width: var(--width-narrow);
+  overflow-x: auto;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.data-table th,
+.data-table td {
+  padding: var(--space-4) var(--space-5);
+  text-align: left;
+  vertical-align: top;
+}
+
+.data-table thead th {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.data-table tbody tr + tr {
+  border-top: 1px solid var(--color-border);
+}
+
+.data-table tbody th {
+  width: 38%;
+  color: var(--color-text);
+  font-weight: var(--weight-semibold);
+}
+
+.data-table td {
+  color: var(--color-text-muted);
 }
 
 /* A thin 1px divider between groups of content in one section */

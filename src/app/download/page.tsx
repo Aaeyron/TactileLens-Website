@@ -3,6 +3,9 @@ import { pageMetadata } from "@/lib/metadata";
 import { downloadPage } from "@/content/site";
 import DownloadCard from "@/components/download/DownloadCard";
 import Callout from "@/components/ui/Callout";
+import CardGrid from "@/components/ui/CardGrid";
+import DataTable from "@/components/ui/DataTable";
+import NumberedList from "@/components/ui/NumberedList";
 import PageHeader from "@/components/ui/PageHeader";
 import Screenshot from "@/components/ui/Screenshot";
 import Section from "@/components/ui/Section";
@@ -12,7 +15,7 @@ import TextLink from "@/components/ui/TextLink";
 export const metadata: Metadata = pageMetadata({ ...downloadPage.meta, path: "/download" });
 
 export default function DownloadPage() {
-  const { header, install } = downloadPage;
+  const { header, requirements, install, troubleshooting, versions } = downloadPage;
 
   return (
     <>
@@ -20,6 +23,16 @@ export default function DownloadPage() {
 
       {/* The only place on the site that downloads the APK directly. */}
       <DownloadCard />
+
+      <Section
+        id="requirements"
+        tone="brand"
+        eyebrow={requirements.eyebrow}
+        title={requirements.title}
+        description={requirements.description}
+      >
+        <DataTable caption={requirements.caption} columns={requirements.columns} rows={requirements.rows} />
+      </Section>
 
       <Section
         id="install"
@@ -44,6 +57,25 @@ export default function DownloadPage() {
         <div className="section-footer">
           <TextLink href={install.scanTipsLink.href}>{install.scanTipsLink.label}</TextLink>
         </div>
+      </Section>
+
+      <Section
+        id="troubleshooting"
+        tone="brand"
+        eyebrow={troubleshooting.eyebrow}
+        title={troubleshooting.title}
+        description={troubleshooting.description}
+      >
+        <CardGrid items={troubleshooting.items} />
+      </Section>
+
+      <Section
+        id="version-history"
+        eyebrow={versions.eyebrow}
+        title={versions.title}
+        description={versions.description}
+      >
+        <NumberedList items={versions.items} />
       </Section>
     </>
   );
