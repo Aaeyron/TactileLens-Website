@@ -403,6 +403,30 @@ export const aboutPage = {
     ],
     fact: "The **Nemeth Code** was developed by Abraham Nemeth, a blind mathematician.",
   },
+  // TODO: Copy the objectives from the capstone paper.
+  objectives: {
+    eyebrow: "Project objectives",
+    title: "What this project set out to do",
+    description: "The goals of our capstone project, from our capstone paper.",
+    items: [
+      { text: "TODO: General objective from the capstone paper." },
+      { text: "TODO: Specific objective 1." },
+      { text: "TODO: Specific objective 2." },
+      { text: "TODO: Specific objective 3." },
+    ],
+  },
+  // DRAFT: review — phase names; all dates are TODO.
+  timeline: {
+    eyebrow: "Project timeline",
+    title: "How the project came together",
+    description: "The main phases of our capstone project.",
+    items: [
+      { meta: "TODO: date", title: "Research and proposal" },
+      { meta: "TODO: date", title: "App design and development" },
+      { meta: "TODO: date", title: "Testing and improvements" },
+      { meta: "TODO: date", title: "Capstone defense" },
+    ],
+  },
   capstone: {
     eyebrow: "Capstone project",
     title: "A student capstone project",

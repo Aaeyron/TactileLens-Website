@@ -415,7 +415,6 @@ h3 {
     .callout,
     .step-list--cards .step,
     .faq-card,
-    .mission,
     .compare-panel,
     .qr,
     .cell-diagram-svg
@@ -1265,31 +1264,31 @@ p a:not(.button) {
 
 
 
-.mission {
+/* Mission pull-quote: large text on the solid blue band, with a thin
+   white line on the left. Colors follow the section (white on blue). */
+.pull-quote {
   max-width: var(--width-narrow);
-  border: 1px solid var(--color-border);
-  border-left: var(--space-1) solid var(--color-brand);
-  border-radius: var(--radius-lg);
-  padding: var(--space-5);
-  background: var(--color-bg);
-  box-shadow: var(--shadow-sm);
+  border-left: var(--space-1) solid currentColor;
+  padding-left: var(--space-5);
 }
 
 @media (min-width: 768px) {
-  .mission {
-    padding: var(--space-6);
+  .pull-quote {
+    padding-left: var(--space-7);
   }
 }
 
 
-.mission-quote p {
+.pull-quote-text p {
   color: var(--color-text);
-  font-size: var(--text-xl);
-  font-weight: var(--weight-regular);
-  line-height: 1.5;
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-bold);
+  letter-spacing: -0.01em;
+  line-height: 1.35;
 }
 
-.mission-attribution {
+.pull-quote-attribution {
   margin-top: var(--space-4);
   color: var(--color-text-muted);
   font-size: var(--text-sm);
@@ -1742,6 +1741,29 @@ p a:not(.button) {
 .step-list--flow .step-top {
   justify-content: center;
   margin-bottom: 0;
+}
+
+/* Numbered list with large numbers and thin dividers (objectives, timeline) */
+.numbered-list {
+  max-width: var(--width-narrow);
+  border-top: 1px solid var(--color-border);
+}
+
+.numbered-item {
+  display: grid;
+  grid-template-columns: 3.5rem minmax(0, 1fr);
+  align-items: baseline;
+  gap: var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+  padding-block: var(--space-5);
+}
+
+.numbered-meta {
+  margin-bottom: var(--space-1);
+}
+
+.numbered-text {
+  color: var(--color-text);
 }
 
 /* A thin 1px divider between groups of content in one section */
