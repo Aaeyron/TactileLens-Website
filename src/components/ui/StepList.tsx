@@ -1,8 +1,11 @@
 import Chip from "./Chip";
+import Screenshot, { type ScreenConfig } from "./Screenshot";
 
 type Step = {
   title: string;
   description: string;
+  /** Optional app screenshot shown above the step (flow variant). */
+  screen?: ScreenConfig;
 };
 
 type StepListProps = {
@@ -20,6 +23,9 @@ export default function StepList({ steps, variant = "cards" }: StepListProps) {
     <ol className={`step-list step-list--${variant}`} role="list">
       {steps.map((step, index) => (
         <li className="step" key={step.title}>
+          {variant === "flow" && step.screen && (
+            <Screenshot screen={step.screen} frame sizes="11rem" />
+          )}
           {/* Visual step number; screen readers get "Step n:" in the heading instead. */}
           {variant === "flow" ? (
             <span className="step-number" aria-hidden="true">

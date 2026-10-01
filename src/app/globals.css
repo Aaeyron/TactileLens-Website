@@ -125,7 +125,7 @@
   --device-width: 240px;
   --device-bezel: 10px;
   --device-radius: 40px;
-  --device-frame: var(--color-text);
+  --device-frame: var(--blue-pressed);
 }
 
 @media (min-width: 960px) {
@@ -266,11 +266,6 @@ h3 {
   height: 75%;
 }
 
-.logo-mark--xs {
-  width: var(--space-5);
-  height: var(--space-5);
-  border-radius: 6px;
-}
 
 .logo-mark--md {
   width: var(--space-7);
@@ -807,9 +802,7 @@ h3 {
 
 
 .hero-visual .phone {
-  z-index: 1;
   box-shadow: var(--shadow-xl);
-  transform: rotate(-3deg);
 }
 
 
@@ -856,7 +849,7 @@ h3 {
 }
 
 /* =========================================================================
- * Phone mockup
+ * Screenshots: phone frame + labeled placeholder (until real images exist)
  * ========================================================================= */
 
 .phone {
@@ -890,99 +883,57 @@ h3 {
   background: var(--color-bg);
 }
 
-.phone-screenshot {
+
+/* A screenshot without the phone frame (Features rows) */
+.screenshot {
+  width: 100%;
+  max-width: 15rem;
+  aspect-ratio: 9 / 19.5;
+  margin-inline: auto;
+}
+
+.screenshot-image {
   display: block;
   width: 100%;
   height: 100%;
+  border-radius: var(--radius-md);
   object-fit: cover;
 }
 
-/* Placeholder "scan → braille" screen (TODO: replace with real screenshots) */
+.phone .screenshot-image {
+  border-radius: 0;
+}
 
-.mock-screen {
+/* Empty placeholder: dashed blue border on white, with the screen name and
+   the file path to use. Hidden from screen readers (aria-hidden). */
+.screenshot-placeholder {
   display: flex;
   height: 100%;
   flex-direction: column;
-}
-
-.mock-appbar {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-  padding: var(--space-6) var(--space-4) var(--space-3);
-  background: var(--color-brand);
-  color: var(--color-text-inverse);
-  font-size: var(--text-sm);
-  font-weight: var(--weight-semibold);
-}
-
-.mock-appbar .logo-mark {
-  background: var(--color-text-inverse);
-  color: var(--color-brand);
-}
-
-.mock-body {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  gap: var(--space-2);
-  padding: var(--space-4);
-}
-
-.mock-label {
-  color: var(--color-text-muted);
-  font-size: var(--text-sm);
-  font-weight: var(--weight-semibold);
-}
-
-.mock-viewfinder,
-.mock-output {
-  display: grid;
-  min-height: var(--space-8);
-  place-items: center;
-  border-radius: var(--radius-md);
-  background: var(--color-bg);
-}
-
-.mock-viewfinder {
-  border: 2px dashed var(--color-brand);
-}
-
-.mock-output {
-  border: 1px solid var(--color-border);
-  box-shadow: var(--shadow-sm);
-  font-size: var(--text-2xl);
-}
-
-.mock-printed {
-  color: var(--color-text);
-  font-family: var(--font-print);
-  font-size: var(--text-xl);
-}
-
-.mock-step {
-  display: flex;
-  align-items: center;
   justify-content: center;
   gap: var(--space-2);
-  padding-block: var(--space-1);
-  color: var(--color-brand-text);
+  border: 2px dashed var(--color-brand);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  background: var(--white);
+  text-align: center;
+}
+
+.phone .screenshot-placeholder {
+  border-radius: calc(var(--device-radius) - var(--device-bezel));
+}
+
+.screenshot-label {
+  color: var(--ink);
   font-size: var(--text-sm);
-  font-weight: var(--weight-semibold);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-snug);
 }
 
-.mock-step-arrow {
-  font-size: var(--text-lg);
-}
-
-.mock-shutter {
-  width: var(--space-8);
-  height: var(--space-8);
-  flex-shrink: 0;
-  margin: 0 auto var(--space-5);
-  border: var(--space-1) solid var(--color-bg);
-  border-radius: var(--radius-full);
-  background: var(--color-brand);
+.screenshot-file {
+  color: var(--ink-muted);
+  font-size: var(--text-sm);
+  overflow-wrap: anywhere;
 }
 
 /* =========================================================================
@@ -1210,6 +1161,13 @@ p a:not(.button) {
   max-width: 28ch;
 }
 
+.step-list--flow .phone {
+  --device-width: 11rem;
+  --device-bezel: 7px;
+  --device-radius: 26px;
+  margin-bottom: var(--space-2);
+}
+
 @media (min-width: 768px) {
   .step-list--flow {
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1254,17 +1212,8 @@ p a:not(.button) {
 }
 
 .feature-visual {
-  position: relative;
-  isolation: isolate;
   display: flex;
-  overflow: hidden;
-  aspect-ratio: 16 / 10;
-  align-items: center;
   justify-content: center;
-  gap: var(--space-5);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  background: var(--color-bg);
 }
 
 

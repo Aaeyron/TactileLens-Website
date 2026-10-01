@@ -2,7 +2,7 @@ import { downloadCta, hero } from "@/content/site";
 import Button from "@/components/ui/Button";
 import Chip from "@/components/ui/Chip";
 import Container from "@/components/ui/Container";
-import PhoneMockup from "./PhoneMockup";
+import Screenshot from "@/components/ui/Screenshot";
 
 export default function HeroSection() {
   return (
@@ -37,7 +37,8 @@ export default function HeroSection() {
         </div>
 
         <div className="hero-visual">
-          <PhoneMockup />
+          {/* TODO: screenshot — see screens.scanResult in site.ts */}
+          <Screenshot screen={hero.screen} frame preload sizes="(min-width: 960px) 272px, 240px" />
         </div>
       </Container>
     </section>

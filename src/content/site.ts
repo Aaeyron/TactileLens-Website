@@ -56,7 +56,31 @@ export const appRelease = {
 };
 
 /**
- * Sample shown in the hero mockup and the "See it in action" card.
+ * App screenshots. Until `src` is filled in, each spot shows an empty
+ * placeholder box with the label and file path below (hidden from screen
+ * readers). To add a screenshot:
+ *   1. Save the image at the `file` path (inside web-app/).
+ *   2. Fill in `src` (the path without "public") and a short `alt`.
+ *   3. Check `width`/`height` match the image (1080×2340 is a common phone size).
+ * The same entry can be used in more than one place (e.g. scanResult).
+ */
+export const screens = {
+  // TODO: Screenshot — used in the Home hero and Home "How it works" step 2.
+  scanResult: { label: "App screen: Scan result (printed equation converted to text and braille)", file: "public/screenshots/scan-result.png", src: "", width: 1080, height: 2340, alt: "" },
+  // TODO: Screenshot — Home "How it works" step 1.
+  camera: { label: "App screen: Camera", file: "public/screenshots/camera.png", src: "", width: 1080, height: 2340, alt: "" },
+  // TODO: Screenshot — Home "How it works" step 3 and Features "Math to Nemeth".
+  brailleOutput: { label: "App screen: Braille output", file: "public/screenshots/braille-output.png", src: "", width: 1080, height: 2340, alt: "" },
+  // TODO: Screenshot — Features "Camera scanning".
+  home: { label: "App screen: Home", file: "public/screenshots/home.png", src: "", width: 1080, height: 2340, alt: "" },
+  // TODO: Screenshot — Features "Text to braille".
+  materials: { label: "App screen: Materials", file: "public/screenshots/materials.png", src: "", width: 1080, height: 2340, alt: "" },
+  // TODO: Screenshot — Features "Online and offline".
+  onlineOffline: { label: "App screen: Online/offline mode", file: "public/screenshots/online-offline-mode.png", src: "", width: 1080, height: 2340, alt: "" },
+};
+
+/**
+ * Sample shown in the "See it in action" card.
  * TODO: A teammate who reads Nemeth must verify this braille before launch.
  * Intended as "x + 1" in Nemeth code: x (⠭), plus (⠬), 1 (⠂).
  */
@@ -109,36 +133,24 @@ export const hero = {
     { label: "Offline text scanning" },
     { label: "Nemeth math" },
   ],
-  mockup: {
-    // TODO: Add a real app screenshot. Put the file in /public/screenshots/,
-    // then fill in src (e.g. "/screenshots/scan.png"), the image's real pixel
-    // width and height, and alt text describing what the screen shows.
-    // Portrait phone screenshots (about 9:19.5) fit the frame best.
-    screenshot: { src: "", width: 0, height: 0, alt: "" },
-    // Placeholder screen shown until the screenshot above is filled in.
-    placeholder: {
-      label:
-        "Illustration of a phone scanning the printed expression x + 1 and showing it in Nemeth braille.",
-      scanLabel: "Scan",
-      translateLabel: "Translate",
-      brailleLabel: "Nemeth braille",
-    },
-  },
+  screen: screens.scanResult,
 } as const;
 
 export const homeSteps = {
-  eyebrow: "What it does",
+  eyebrow: "How it works",
   title: "From printed page to braille",
   description: "TactileLens turns printed text and math into braille in three steps.",
   steps: [
-    { title: "Scan", description: "Point your phone camera at a printed page." },
+    { title: "Scan", description: "Point your phone camera at a printed page.", screen: screens.camera },
     {
       title: "Recognize",
       description: "The app reads the text and math on the page.",
+      screen: screens.scanResult,
     },
     {
       title: "Braille",
       description: "TactileLens turns it into braille. Math uses the Nemeth code.",
+      screen: screens.brailleOutput,
     },
   ],
   link: { label: "Learn how it works", href: "/features#how-it-works" },
@@ -355,6 +367,7 @@ export const featuresPage = {
     items: [
       {
         chip: "Camera",
+        screen: screens.home,
         title: "Camera scanning",
         // TODO: Confirm whether teachers can also pick existing photos from the gallery.
         description: "Use your phone camera to scan printed pages, such as worksheets and handouts.",
@@ -363,6 +376,7 @@ export const featuresPage = {
       },
       {
         chip: "Text",
+        screen: screens.materials,
         title: "Text to braille",
         description: "Turn printed text into braille.",
         // DRAFT: review.
@@ -371,6 +385,7 @@ export const featuresPage = {
       },
       {
         chip: "Math",
+        screen: screens.brailleOutput,
         title: "Math to Nemeth",
         description:
           "Turn printed algebra equations into Nemeth code, the braille code for math.",
@@ -380,6 +395,7 @@ export const featuresPage = {
       {
         // TODO: Confirm whether math recognition works offline.
         chip: "Online + offline",
+        screen: screens.onlineOffline,
         title: "Online and offline",
         description:
           "With internet, TactileLens reads the page using our server. Without internet, it recognizes printed text on the phone itself.",

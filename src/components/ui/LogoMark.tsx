@@ -1,8 +1,8 @@
 import BrailleT from "./BrailleT";
 
 type LogoMarkProps = {
-  /** "xs" in the phone mockup, "sm" navbar/footer, "lg" download card app icon. */
-  size?: "xs" | "sm" | "md" | "lg";
+  /** "sm" navbar, "md" medium, "lg" download card app icon. */
+  size?: "sm" | "md" | "lg";
 };
 
 /** Logo-blue rounded square with the braille "t" (⠞). Decorative. */
