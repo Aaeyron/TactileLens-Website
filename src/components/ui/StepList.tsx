@@ -11,11 +11,10 @@ type Step = {
 type StepListProps = {
   steps: readonly Step[];
   /**
-   * - "flow": big icon circles in a row joined by a line (home page)
-   * - "timeline": big number circles joined by a vertical line
-   * - "cards": step cards with an icon and a "Step n" chip (install guide)
+   * - "flow": steps in a row joined by a line (home page)
+   * - "cards": numbered step cards (How it works, install guide)
    */
-  variant?: "flow" | "timeline" | "cards";
+  variant?: "flow" | "cards";
 };
 
 /** Numbered steps. Uses <ol> so screen readers announce the count and order. */
@@ -33,11 +32,6 @@ export default function StepList({ steps, variant = "cards" }: StepListProps) {
         return (
           <li className="step" key={step.title}>
             {variant === "flow" && step.icon && <IconTile icon={step.icon} size="xl" tone="brand" round />}
-            {variant === "timeline" && (
-              <span className="step-number" aria-hidden="true">
-                {index + 1}
-              </span>
-            )}
 
             <div className="step-content">
               {variant === "cards" && (
@@ -48,7 +42,6 @@ export default function StepList({ steps, variant = "cards" }: StepListProps) {
               )}
               {variant === "flow" && <div className="step-chip">{chip}</div>}
               <h3 className="card-title step-title">
-                {variant === "timeline" && step.icon && <Icon name={step.icon} size={22} />}
                 <span>
                   <span className="visually-hidden">Step {index + 1}: </span>
                   {step.title}

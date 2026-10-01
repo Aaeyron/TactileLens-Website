@@ -32,7 +32,7 @@ export default function FeaturesPage() {
         title={howItWorks.title}
         description={howItWorks.description}
       >
-        <StepList steps={howItWorks.steps} variant="timeline" />
+        <StepList steps={howItWorks.steps} variant="cards" />
       </Section>
 
       <Section

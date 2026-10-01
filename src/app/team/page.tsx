@@ -3,7 +3,7 @@ import { pageMetadata } from "@/lib/metadata";
 import { teamPage } from "@/content/site";
 import CtaBanner from "@/components/download/CtaBanner";
 import MemberCard from "@/components/team/MemberCard";
-import FactStrip from "@/components/ui/FactStrip";
+import CardGrid from "@/components/ui/CardGrid";
 import InfoList from "@/components/ui/InfoList";
 import PageHeader from "@/components/ui/PageHeader";
 import Section from "@/components/ui/Section";
@@ -27,7 +27,7 @@ export default function TeamPage() {
       </Section>
 
       <Section id="project" tone="brand" eyebrow={projectFacts.eyebrow} title={projectFacts.title}>
-        <FactStrip label={projectFacts.label} items={projectFacts.items} />
+        <CardGrid items={projectFacts.items} columns={4} />
       </Section>
 
       <Section id="school" eyebrow={school.eyebrow} title={school.title}>

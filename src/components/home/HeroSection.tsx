@@ -1,5 +1,6 @@
 import { downloadCta, hero } from "@/content/site";
 import Button from "@/components/ui/Button";
+import Chip from "@/components/ui/Chip";
 import Container from "@/components/ui/Container";
 import Icon from "@/components/ui/Icon";
 import PhoneMockup from "./PhoneMockup";
@@ -9,7 +10,7 @@ export default function HeroSection() {
     <section className="hero" aria-labelledby="hero-title">
       <Container className="hero-grid">
         <div className="hero-content">
-          <p className="hero-badge">{hero.badge}</p>
+          <Chip>{hero.badge}</Chip>
 
           <h1 id="hero-title" className="hero-title">
             {hero.titleLead}{" "}
@@ -27,11 +28,10 @@ export default function HeroSection() {
             </Button>
           </div>
 
-          <ul className="trust-badges" role="list">
+          <ul className="chip-row hero-chips" role="list">
             {hero.trustBadges.map((badge) => (
-              <li className="trust-badge" key={badge.label}>
-                <Icon name={badge.icon} size={18} />
-                {badge.label}
+              <li key={badge.label}>
+                <Chip icon={badge.icon}>{badge.label}</Chip>
               </li>
             ))}
           </ul>

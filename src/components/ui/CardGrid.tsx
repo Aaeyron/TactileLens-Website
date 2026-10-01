@@ -4,7 +4,7 @@ import RichText from "./RichText";
 
 type CardGridItem = {
   title: string;
-  description: string;
+  description?: string;
   note?: string;
   icon?: IconName;
   chip?: string;
@@ -35,9 +35,11 @@ export default function CardGrid({ items, columns = 2, linkLabel }: CardGridProp
           href={item.href}
           linkLabel={linkLabel}
         >
-          <p>
-            <RichText text={item.description} />
-          </p>
+          {item.description && (
+            <p>
+              <RichText text={item.description} />
+            </p>
+          )}
           {item.note && <p className="card-note">{item.note}</p>}
         </Card>
       ))}

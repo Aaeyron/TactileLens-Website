@@ -134,18 +134,6 @@ export const hero = {
   },
 } as const;
 
-/** Fact strip under the hero. Confirmed facts only. */
-export const homeFacts = {
-  label: "TactileLens at a glance",
-  items: [
-    { icon: "smartphone", title: "Android app", text: "Runs on Android phones." },
-    // TODO: Confirm whether math recognition works offline.
-    { icon: "wifi-off", title: "Offline text", text: "Printed text can be recognized without internet." },
-    { icon: "sigma", title: "Nemeth for math", text: "Algebra is written in Nemeth code." },
-    { icon: "file-text", title: "Printed pages", text: "Made for printed text and algebra." },
-  ],
-} as const;
-
 export const homeSteps = {
   eyebrow: "What it does",
   title: "From printed page to braille",
@@ -239,36 +227,29 @@ export const aboutPage = {
     title: "Braille takes time to prepare",
     // DRAFT: review.
     description: "Here is what makes braille slow today, and how TactileLens helps.",
-    // DRAFT: review. Plain-language draft, no statistics.
-    problem: {
-      title: "The problem",
-      points: [
-        {
-          icon: "file-text",
-          text: "Most worksheets, handouts and textbooks are printed. Students who read braille need them in braille.",
-        },
-        {
-          icon: "keyboard",
-          text: "Materials often have to be **retyped** before they can be turned into braille.",
-        },
-        { icon: "clock", text: "Turning printed text into braille takes time, and every page needs **checking**." },
-        {
-          icon: "sigma",
-          text: "Math takes even longer, because equations must be written in a special braille code called **Nemeth**.",
-        },
-      ],
-    },
-    // Confirmed facts only.
-    solution: {
-      title: "Our solution",
-      points: [
-        { icon: "camera", text: "Scan printed pages with an Android phone camera." },
-        { icon: "type", text: "Turn printed text into braille." },
-        { icon: "sigma", text: "Turn printed algebra into **Nemeth** code." },
+    items: [
+      {
+        // DRAFT: review. Plain-language draft, no statistics.
+        title: "The problem",
+        bullets: [
+          "Most worksheets, handouts and textbooks are printed. Students who read braille need them in braille.",
+          "Materials often have to be **retyped** before they can be turned into braille.",
+          "Turning printed text into braille takes time, and every page needs **checking**.",
+          "Math takes even longer, because equations must be written in a special braille code called **Nemeth**.",
+        ],
+      },
+      {
+        // Confirmed facts only.
         // TODO: Confirm whether math recognition works offline.
-        { icon: "wifi-off", text: "Recognize printed text online or offline." },
-      ],
-    },
+        title: "Our solution",
+        bullets: [
+          "Scan printed pages with an Android phone camera.",
+          "Turn printed text into braille.",
+          "Turn printed algebra into **Nemeth** code.",
+          "Recognize printed text online or offline.",
+        ],
+      },
+    ],
   },
   // DRAFT: review — general braille knowledge; a braille reader should check it.
   basics: {
@@ -595,30 +576,30 @@ export const faqPage = {
     description: "Short, plain definitions of terms used on this site.",
     items: [
       {
-        term: "Braille cell",
-        definition: "The space for one braille character: six dot positions in two columns of three.",
+        label: "Braille cell",
+        value: "The space for one braille character: six dot positions in two columns of three.",
       },
       {
-        term: "Grade 1 / Grade 2 braille",
-        definition:
+        label: "Grade 1 / Grade 2 braille",
+        value:
           "Grade 1 spells words letter by letter. Grade 2 uses contractions that shorten common words.",
       },
       {
-        term: "UEB",
-        definition: "Unified English Braille, a braille code for English used in many countries.",
+        label: "UEB",
+        value: "Unified English Braille, a braille code for English used in many countries.",
       },
       {
-        term: "Nemeth Code",
-        definition: "A braille code for math and science.",
+        label: "Nemeth Code",
+        value: "A braille code for math and science.",
       },
       {
-        term: "OCR",
-        definition:
+        label: "OCR",
+        value:
           "Optical character recognition: turning a photo of text into text a computer can read.",
       },
       {
-        term: "APK",
-        definition: "The file used to install an app on an Android phone.",
+        label: "APK",
+        value: "The file used to install an app on an Android phone.",
       },
     ],
   },
@@ -656,13 +637,12 @@ export const teamPage = {
   projectFacts: {
     eyebrow: "The project",
     title: "About the project",
-    label: "About the project",
     items: [
-      { icon: "graduation-cap", title: "Capstone project", text: "Built by students." },
-      { icon: "code", title: "Built with Flutter", text: "A cross-platform app toolkit." },
-      { icon: "smartphone", title: "Android app", text: "Released for Android." },
+      { icon: "graduation-cap", title: "Capstone project", description: "Built by students." },
+      { icon: "code", title: "Built with Flutter", description: "A cross-platform app toolkit." },
+      { icon: "smartphone", title: "Android app", description: "Released for Android." },
       // TODO: Confirm whether math recognition works offline.
-      { icon: "wifi-off", title: "Offline text", text: "Printed text works without internet." },
+      { icon: "wifi-off", title: "Offline text", description: "Printed text works without internet." },
     ],
   },
   school: {

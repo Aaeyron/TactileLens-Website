@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/metadata";
 import { aboutPage } from "@/content/site";
-import Comparison from "@/components/about/Comparison";
 import MissionQuote from "@/components/about/MissionQuote";
 import CtaBanner from "@/components/download/CtaBanner";
 import BrailleCellDiagram from "@/components/ui/BrailleCellDiagram";
@@ -27,7 +26,7 @@ export default function AboutPage() {
         title={comparison.title}
         description={comparison.description}
       >
-        <Comparison problem={comparison.problem} solution={comparison.solution} />
+        <CardGrid items={comparison.items} />
       </Section>
 
       <Section

@@ -19,7 +19,7 @@ export default function DownloadCard() {
             <div className="download-card-app">
               <LogoMark size="lg" />
               <div>
-                <h2 id="download-card-title" className="download-card-title">
+                <h2 id="download-card-title" className="block-title">
                   {card.title}
                 </h2>
                 <p className="download-card-subtitle">{card.subtitle}</p>

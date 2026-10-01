@@ -23,7 +23,7 @@ export default function FaqList({ categories }: FaqListProps) {
         const headingId = `faq-${category.title.toLowerCase().replace(/[^a-z]+/g, "-")}`;
         return (
           <section className="faq-group" key={category.title} aria-labelledby={headingId}>
-            <h2 id={headingId} className="faq-group-title">
+            <h2 id={headingId} className="block-title">
               <IconTile icon={category.icon} />
               {category.title}
             </h2>

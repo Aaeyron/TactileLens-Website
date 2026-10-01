@@ -88,7 +88,8 @@
   --weight-semibold: 600;
   --weight-bold: 700;
   --weight-extrabold: 800; /* page and hero h1 (Manrope) */
-  --measure: 68ch;
+  --measure: 68ch; /* text: paragraphs, headers, intros */
+  --width-narrow: 52rem; /* single-column blocks: FAQ, lists, callouts, quotes */
   --font-print: Georgia, "Times New Roman", serif; /* mock "printed page" text */
   --font-braille: "Segoe UI Symbol", "Noto Sans Symbols 2", "DejaVu Sans", sans-serif;
 
@@ -459,11 +460,8 @@ h3 {
     .callout,
     .step-list--cards .step,
     .faq-card,
-    .glossary,
-    .comparison-column,
     .mission,
     .compare-panel,
-    .fact,
     .qr,
     .cell-diagram-svg
   ) {
@@ -475,15 +473,7 @@ h3 {
   color: var(--color-text);
 }
 
-/* Blue fills directly on the blue band turn white */
-.section--brand .step-list--timeline .step-number {
-  background: var(--color-text-inverse);
-  color: var(--color-brand);
-}
 
-.section--brand .step-list--timeline .step:not(:last-child)::before {
-  background: var(--color-text-inverse);
-}
 
 .section-header {
   max-width: var(--measure);
@@ -806,14 +796,10 @@ h3 {
   max-width: 720px;
 }
 
-.hero-badge {
-  display: inline-flex;
-  border-radius: var(--radius-full);
-  padding: var(--space-1) var(--space-4);
-  background: var(--color-bg);
-  color: var(--color-brand-text);
-  font-size: var(--text-sm);
-  font-weight: var(--weight-semibold);
+
+.hero-chips {
+  margin-top: var(--space-5);
+  margin-bottom: 0;
 }
 
 .hero-title {
@@ -830,7 +816,7 @@ h3 {
 }
 
 .hero-lead {
-  max-width: 60ch;
+  max-width: var(--measure);
   margin-top: var(--space-4);
   color: var(--color-text-inverse);
 }
@@ -850,29 +836,8 @@ h3 {
   margin-top: var(--space-6);
 }
 
-.trust-badges {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2);
-  margin-top: var(--space-5);
-}
 
-.trust-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-  border: 1px solid transparent;
-  border-radius: var(--radius-full);
-  padding: var(--space-1) var(--space-3);
-  background: var(--color-bg);
-  color: var(--color-text);
-  font-size: var(--text-sm);
-  font-weight: var(--weight-semibold);
-}
 
-.trust-badge svg {
-  color: var(--color-brand);
-}
 
 /* Phone + floating cards. The cards stay inside this box, so nothing
    overflows sideways on small screens. */
@@ -1126,7 +1091,7 @@ h3 {
 
 .compare {
   display: grid;
-  max-width: 52rem;
+  max-width: var(--width-narrow);
   align-items: center;
   gap: var(--space-4);
 }
@@ -1149,7 +1114,7 @@ h3 {
   border-radius: var(--radius-lg);
   padding: var(--space-6);
   background: var(--color-bg);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-sm);
   text-align: center;
 }
 
@@ -1244,7 +1209,7 @@ h3 {
 }
 
 .page-intro {
-  max-width: 60ch;
+  max-width: var(--measure);
   margin-top: var(--space-4);
   color: var(--color-text-inverse);
   font-size: var(--text-lg);
@@ -1439,46 +1404,12 @@ p a:not(.button) {
   }
 }
 
-/* "timeline": big number circles joined by a vertical line */
 
-.step-list--timeline {
-  max-width: var(--measure);
-  gap: 0;
-}
 
-.step-list--timeline .step {
-  position: relative;
-  display: grid;
-  grid-template-columns: var(--step-number-size-lg) minmax(0, 1fr);
-  gap: var(--space-5);
-  padding-bottom: var(--space-7);
-}
 
-.step-list--timeline .step:last-child {
-  padding-bottom: 0;
-}
 
-.step-list--timeline .step-number {
-  width: var(--step-number-size-lg);
-  height: var(--step-number-size-lg);
-  box-shadow: 0 0 0 6px var(--section-bg, var(--color-bg));
-  font-size: var(--text-lg);
-}
 
-.step-list--timeline .step:not(:last-child)::before {
-  position: absolute;
-  z-index: -1;
-  top: var(--step-number-size-lg);
-  bottom: 0;
-  left: calc(var(--step-number-size-lg) / 2 - 1px);
-  width: 2px;
-  background: var(--color-brand);
-  content: "";
-}
 
-.step-list--timeline .step-content {
-  padding-top: var(--space-3);
-}
 
 /* =========================================================================
  * Feature rows — zig-zag (Features page)
@@ -1516,7 +1447,7 @@ p a:not(.button) {
   justify-content: center;
   gap: var(--space-5);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-xl);
+  border-radius: var(--radius-lg);
   background: var(--color-bg);
 }
 
@@ -1540,110 +1471,40 @@ p a:not(.button) {
   transform: translateY(var(--space-5));
 }
 
-.feature-title {
-  color: var(--color-text);
-  font-size: var(--text-xl);
-  font-weight: var(--weight-bold);
-  line-height: var(--leading-snug);
-}
 
 .feature-description {
-  max-width: 48ch;
+  max-width: var(--measure);
   margin-top: var(--space-3);
   color: var(--color-text-muted);
 }
 
 /* =========================================================================
- * About: problem → solution comparison, mission quote
+ * About: mission quote
  * ========================================================================= */
 
-.comparison {
-  display: grid;
-  gap: var(--space-5);
-}
 
-@media (min-width: 768px) {
-  .comparison {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--space-7);
-  }
-}
 
-.comparison-column {
-  position: relative;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  padding: var(--space-6);
-  background: var(--color-bg);
-}
 
-.comparison-column--solution {
-  border-color: var(--color-brand);
-  background: var(--color-bg);
-}
 
-.comparison-points {
-  display: grid;
-  gap: var(--space-4);
-  margin-top: var(--space-5);
-}
 
-.comparison-point {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--space-3);
-}
 
-.comparison-icon {
-  display: grid;
-  width: var(--space-6);
-  height: var(--space-6);
-  flex-shrink: 0;
-  place-items: center;
-  border-radius: var(--radius-sm);
-  background: var(--color-bg);
-  color: var(--color-text-muted);
-}
 
-.comparison-column--solution .comparison-icon {
-  color: var(--color-brand);
-}
 
-.comparison-arrow {
-  display: none;
-}
 
-@media (min-width: 768px) {
-  .comparison-arrow {
-    position: absolute;
-    z-index: 1;
-    top: 50%;
-    right: calc(-1 * (var(--space-7) / 2 + 1.25rem));
-    display: grid;
-    width: 2.5rem;
-    height: 2.5rem;
-    place-items: center;
-    border-radius: var(--radius-full);
-    background: var(--color-brand);
-    box-shadow: var(--shadow-md);
-    color: var(--color-text-inverse);
-    transform: translateY(-50%);
-  }
-}
 
 .mission {
-  max-width: 52rem;
+  max-width: var(--width-narrow);
   border: 1px solid var(--color-border);
   border-left: var(--space-1) solid var(--color-brand);
   border-radius: var(--radius-lg);
-  padding: var(--space-6);
+  padding: var(--space-5);
   background: var(--color-bg);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-sm);
 }
 
 @media (min-width: 768px) {
   .mission {
-    padding: var(--space-7);
+    padding: var(--space-6);
   }
 }
 
@@ -1704,19 +1565,23 @@ p a:not(.button) {
 
 .faq-groups {
   display: grid;
-  max-width: 52rem;
+  max-width: var(--width-narrow);
   gap: var(--space-8);
 }
 
-.faq-group-title {
+/* Subsection heading inside a page section (FAQ groups, download card) */
+.block-title {
   display: flex;
   align-items: center;
   gap: var(--space-3);
-  margin-bottom: var(--space-4);
   color: var(--color-text);
   font-size: var(--text-xl);
   font-weight: var(--weight-bold);
   line-height: var(--leading-snug);
+}
+
+.faq-group .block-title {
+  margin-bottom: var(--space-4);
 }
 
 .faq-card {
@@ -1808,7 +1673,7 @@ p a:not(.button) {
  * ========================================================================= */
 
 .info-list {
-  max-width: 40rem;
+  max-width: var(--width-narrow);
   border-top: 1px solid var(--color-border);
 }
 
@@ -1851,15 +1716,15 @@ p a:not(.button) {
   display: grid;
   gap: var(--space-7);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-xl);
+  border-radius: var(--radius-lg);
   padding: var(--space-5);
   background: var(--color-bg);
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--shadow-sm);
 }
 
 @media (min-width: 768px) {
   .download-card {
-    padding: var(--space-7);
+    padding: var(--space-6);
   }
 }
 
@@ -1877,12 +1742,6 @@ p a:not(.button) {
   margin-bottom: var(--space-6);
 }
 
-.download-card-title {
-  color: var(--color-text);
-  font-size: var(--text-xl);
-  font-weight: var(--weight-bold);
-  line-height: var(--leading-snug);
-}
 
 .download-card-subtitle {
   color: var(--color-text-muted);
@@ -2097,8 +1956,8 @@ p a:not(.button) {
 }
 
 /* =========================================================================
- * Detail components: key terms, chips, check lists, callouts, facts,
- * braille cell diagram, glossary
+ * Detail components: key terms, chips, check lists, callouts,
+ * braille cell diagram
  * ========================================================================= */
 
 /* Key terms marked **like this** in site.ts */
@@ -2165,7 +2024,7 @@ p a:not(.button) {
 
 .callout {
   display: flex;
-  max-width: 48rem;
+  max-width: var(--width-narrow);
   align-items: flex-start;
   gap: var(--space-4);
   border: 1px solid var(--color-border);
@@ -2233,51 +2092,12 @@ p a:not(.button) {
   }
 }
 
-/* Fact strip (confirmed facts only) */
-.facts-band {
-  border-bottom: 1px solid var(--color-border);
-  padding-block: var(--space-6);
-  background: var(--color-bg);
-}
 
-.fact-strip {
-  display: grid;
-  gap: var(--space-4);
-}
 
-@media (min-width: 640px) {
-  .fact-strip {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
 
-@media (min-width: 1024px) {
-  .fact-strip {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-}
 
-.fact {
-  display: flex;
-  align-items: center;
-  gap: var(--space-4);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  padding: var(--space-4);
-  background: var(--color-bg);
-  box-shadow: var(--shadow-sm);
-}
 
-.fact-title {
-  color: var(--color-text);
-  font-weight: var(--weight-bold);
-  line-height: var(--leading-snug);
-}
 
-.fact-text {
-  color: var(--color-text-muted);
-  font-size: var(--text-sm);
-}
 
 /* "See it in action": comparison + fact side by side on wide screens */
 .compare-layout {
@@ -2342,51 +2162,12 @@ p a:not(.button) {
   font-size: var(--text-sm);
 }
 
-/* Glossary card */
-.glossary {
-  display: grid;
-  max-width: 52rem;
-  gap: var(--space-4);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  padding: var(--space-5);
-  background: var(--color-bg);
-  box-shadow: var(--shadow-sm);
-}
 
-@media (min-width: 768px) {
-  .glossary {
-    padding: var(--space-6);
-  }
-}
 
-.glossary-row {
-  display: grid;
-  gap: var(--space-1);
-  border-bottom: 1px solid var(--color-border);
-  padding-block: var(--space-4);
-}
 
-.glossary-row:last-child {
-  border-bottom: 0;
-  padding-bottom: 0;
-}
 
-@media (min-width: 640px) {
-  .glossary-row {
-    grid-template-columns: 13rem minmax(0, 1fr);
-    gap: var(--space-5);
-  }
-}
 
-.glossary-term {
-  color: var(--color-brand-text);
-  font-weight: var(--weight-bold);
-}
 
-.glossary-definition {
-  color: var(--color-text-muted);
-}
 
 /* =========================================================================
  * Fade-in on scroll (see RevealOnScroll.tsx). Nothing is hidden unless the

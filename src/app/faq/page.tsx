@@ -5,7 +5,7 @@ import CtaBanner from "@/components/download/CtaBanner";
 import Callout from "@/components/ui/Callout";
 import Container from "@/components/ui/Container";
 import FaqList from "@/components/ui/FaqList";
-import Glossary from "@/components/ui/Glossary";
+import InfoList from "@/components/ui/InfoList";
 import PageHeader from "@/components/ui/PageHeader";
 import Section from "@/components/ui/Section";
 
@@ -33,7 +33,7 @@ export default function FaqPage() {
         title={glossary.title}
         description={glossary.description}
       >
-        <Glossary items={glossary.items} />
+        <InfoList items={glossary.items} />
       </Section>
 
       <CtaBanner />

@@ -34,7 +34,7 @@ export default function FeatureRows({ items }: FeatureRowsProps) {
           </div>
           <div className="feature-text">
             {item.chip && <Chip>{item.chip}</Chip>}
-            <h3 className="feature-title">{item.title}</h3>
+            <h3 className="card-title">{item.title}</h3>
             <p className="feature-description">{item.description}</p>
             {item.bullets && <CheckList items={item.bullets} />}
             {item.note && <p className="card-note">{item.note}</p>}
