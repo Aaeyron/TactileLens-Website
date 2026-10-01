@@ -293,24 +293,9 @@ h3 {
 }
 
 /* =========================================================================
- * Brand: logo mark (braille "t"), braille text
+ * Brand: braille text
  * ========================================================================= */
 
-.logo-mark {
-  display: inline-grid;
-  width: 2.25rem;
-  height: 2.25rem;
-  flex-shrink: 0;
-  place-items: center;
-  border-radius: var(--radius-sm);
-  background: var(--color-brand);
-  color: var(--color-text-inverse);
-}
-
-.logo-mark-dots {
-  width: 75%;
-  height: 75%;
-}
 
 
 
@@ -1861,13 +1846,13 @@ p a:not(.button) {
   gap: var(--space-4);
 }
 
-.cta-band-heading .logo-mark {
+/* White ring so the blue logo stands out on the blue band. */
+.cta-band-logo {
+  width: 2.25rem;
+  height: 2.25rem;
   flex-shrink: 0;
-}
-
-.cta-band .logo-mark {
-  background: var(--color-text-inverse);
-  color: var(--color-brand);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 0 0 2px var(--color-text-inverse);
 }
 
 .cta-band-title {
@@ -1940,6 +1925,13 @@ p a:not(.button) {
 
 .footer-about p + p {
   margin-top: var(--space-2);
+}
+
+.footer-logo {
+  width: 2.25rem;
+  height: 2.25rem;
+  flex-shrink: 0;
+  border-radius: var(--radius-sm);
 }
 
 .footer-brand {

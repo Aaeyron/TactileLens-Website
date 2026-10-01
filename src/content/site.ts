@@ -30,8 +30,8 @@ export const site = {
 };
 
 /**
- * Navbar logo (left of the "TactileLens" text), also used as the download
- * page app icon. width/height are the image's real pixel size (it is shown
+ * Official logo: navbar (left of the "TactileLens" text), footer, the
+ * "Ready to try" banner and the download page app icon. width/height are the image's real pixel size (it is shown
  * at 40×40 in the navbar).
  * alt stays "" because the "TactileLens" text next to it already names the
  * Home link (a filled alt would make screen readers say the name twice).

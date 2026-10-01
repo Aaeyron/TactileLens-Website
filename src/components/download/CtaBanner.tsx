@@ -1,7 +1,7 @@
-import { ctaBanner, downloadCta } from "@/content/site";
+import Image from "next/image";
+import { ctaBanner, downloadCta, logo } from "@/content/site";
 import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
-import LogoMark from "@/components/ui/LogoMark";
 
 /** Full-width solid blue "Ready to try TactileLens?" band. Ends every page except /download. */
 export default function CtaBanner() {
@@ -10,7 +10,14 @@ export default function CtaBanner() {
       <Container className="cta-band-inner">
         <div className="cta-band-text">
           <div className="cta-band-heading">
-            <LogoMark />
+            <Image
+              className="cta-band-logo"
+              src={logo.src}
+              alt={logo.alt}
+              width={logo.width}
+              height={logo.height}
+              sizes="2.25rem"
+            />
             <h2 id="cta-band-title" className="cta-band-title">
               {ctaBanner.title}
             </h2>

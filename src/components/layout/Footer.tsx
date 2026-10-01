@@ -1,7 +1,7 @@
+import Image from "next/image";
 import Link from "next/link";
-import { footer, site } from "@/content/site";
+import { footer, logo, site } from "@/content/site";
 import Container from "@/components/ui/Container";
-import LogoMark from "@/components/ui/LogoMark";
 import Icon from "@/components/ui/Icon";
 
 export default function Footer() {
@@ -14,7 +14,14 @@ export default function Footer() {
         <div className="footer-grid">
           <div className="footer-about">
             <Link className="footer-brand" href="/">
-              <LogoMark />
+              <Image
+                className="footer-logo"
+                src={logo.src}
+                alt={logo.alt}
+                width={logo.width}
+                height={logo.height}
+                sizes="2.25rem"
+              />
               <span>{site.name}</span>
             </Link>
             <p className="footer-tagline">{site.tagline}</p>
