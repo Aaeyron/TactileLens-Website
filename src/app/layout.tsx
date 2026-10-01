@@ -58,7 +58,13 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${bodyFont.variable} ${headingFont.variable}`}>
+    // data-scroll-behavior="smooth": anchor links scroll smoothly, but page
+    // changes jump straight to the top (Next.js 16 opt-in).
+    <html
+      lang="en"
+      className={`${bodyFont.variable} ${headingFont.variable}`}
+      data-scroll-behavior="smooth"
+    >
       <body className="site-body">
         <SkipLink />
         <Navbar />

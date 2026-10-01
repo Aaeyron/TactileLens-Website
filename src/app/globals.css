@@ -109,8 +109,10 @@
   /* Motion */
   --duration-fast: 150ms;
   --duration-medium: 250ms;
-  --duration-reveal: 600ms;
+  --duration-reveal: 650ms; /* section fade-in */
   --ease: cubic-bezier(0.2, 0, 0, 1);
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1); /* gentle ease-out for reveals */
+  --reveal-distance: 10px; /* small upward move */
 
   /* Layout */
   --container-max: 1200px;
@@ -144,10 +146,14 @@
  * Base
  * ========================================================================= */
 
+/* Smooth scrolling for anchor links (plain CSS; no scroll-hijacking library) */
 html {
   scroll-behavior: smooth;
-  /* Keeps anchor targets and keyboard-focused elements clear of the sticky header */
-  scroll-padding-top: calc(var(--header-height) + var(--space-4));
+}
+
+/* Anchor targets and keyboard-focused elements stop below the sticky header */
+:where([id], a, button, summary, [tabindex]) {
+  scroll-margin-top: calc(var(--header-height) + var(--space-4));
 }
 
 body {
@@ -1893,13 +1899,13 @@ p a:not(.button) {
 
 [data-reveal] {
   transition:
-    opacity var(--duration-reveal) var(--ease),
-    transform var(--duration-reveal) var(--ease);
+    opacity var(--duration-reveal) var(--ease-out-soft),
+    transform var(--duration-reveal) var(--ease-out-soft);
 }
 
 .reveal-pending {
   opacity: 0;
-  transform: translateY(var(--space-5));
+  transform: translateY(var(--reveal-distance));
 }
 
 .reveal-instant {
