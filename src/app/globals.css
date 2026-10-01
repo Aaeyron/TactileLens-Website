@@ -100,10 +100,12 @@
   --radius-full: 999px;
 
   /* Shadows (soft, tinted with the text color) */
-  --shadow-sm: 0 1px 2px rgb(15 31 54 / 0.06);
-  --shadow-md: 0 4px 12px rgb(15 31 54 / 0.08);
-  --shadow-lg: 0 12px 32px rgb(15 31 54 / 0.1);
-  --shadow-xl: 0 24px 48px rgb(15 31 54 / 0.16);
+  /* Shadows tinted with the brand blue #003797 */
+  --shadow-sm: 0 1px 2px rgb(0 55 151 / 0.06), 0 4px 12px rgb(0 55 151 / 0.06);
+  --shadow-md: 0 6px 16px rgb(0 55 151 / 0.1);
+  --shadow-lg: 0 14px 32px rgb(0 55 151 / 0.14);
+  --shadow-xl: 0 24px 48px rgb(0 32 92 / 0.28);
+  --border-accent: 2px solid var(--color-brand); /* top edge of cards and boxes */
   --shadow-pressed: inset 0 2px 4px rgb(0 32 92 / 0.35);
 
   /* Motion */
@@ -498,6 +500,7 @@ h3 {
   display: flex;
   flex-direction: column;
   border: 1px solid var(--color-border);
+  border-top: var(--border-accent);
   border-radius: var(--radius-lg);
   padding: var(--space-5);
   background: var(--color-bg);
@@ -1166,6 +1169,7 @@ p a:not(.button) {
 .step-list--cards .step {
   position: relative;
   border: 1px solid var(--color-border);
+  border-top: var(--border-accent);
   border-radius: var(--radius-lg);
   padding: var(--space-5);
   background: var(--color-bg);
@@ -1376,6 +1380,7 @@ p a:not(.button) {
 
 .faq-card {
   border: 1px solid var(--color-border);
+  border-top: var(--border-accent);
   border-radius: var(--radius-lg);
   padding-inline: var(--space-5);
   background: var(--color-bg);
@@ -1499,6 +1504,7 @@ p a:not(.button) {
   display: grid;
   gap: var(--space-7);
   border: 1px solid var(--color-border);
+  border-top: var(--border-accent);
   border-radius: var(--radius-lg);
   padding: var(--space-5);
   background: var(--color-bg);
@@ -1858,8 +1864,10 @@ p a:not(.button) {
   max-width: var(--width-narrow);
   overflow-x: auto;
   border: 1px solid var(--color-border);
+  border-top: var(--border-accent);
   border-radius: var(--radius-lg);
   background: var(--color-bg);
+  box-shadow: var(--shadow-sm);
   color: var(--color-text);
 }
 
@@ -2010,9 +2018,10 @@ p a:not(.button) {
   gap: var(--space-4);
   border: 1px solid var(--color-border);
   border-left: var(--space-1) solid var(--color-brand);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   padding: var(--space-5);
   background: var(--color-bg);
+  box-shadow: var(--shadow-sm);
 }
 
 
