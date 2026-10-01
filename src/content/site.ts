@@ -11,7 +11,7 @@
  * or imply that math works offline.
  * TODO: Confirm whether math recognition works offline.
  *
- * Formatting: **double asterisks** mark a key term, shown in bold blue.
+ * Formatting: **double asterisks** mark a key term, shown in bold navy.
  * `icon` values are names from src/components/ui/Icon.tsx. Objects that use
  * icons end in `as const` so a misspelled icon name is a type error.
  */
@@ -76,7 +76,7 @@ export const downloadCta = {
   comingSoonNote: "The Android app will be available to download here soon.",
 };
 
-/** Blue "Ready to try" band at the end of every page except /download. */
+/** Navy "Ready to try" band at the end of every page except /download. */
 export const ctaBanner = {
   title: "Ready to try TactileLens?",
   text: "Get the Android app and follow our step-by-step install guide.",

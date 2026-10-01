@@ -17,7 +17,7 @@ type CalloutProps = {
   children?: ReactNode;
 };
 
-/** "Tip", "Note" or "Did you know?" box: pale blue, left border, icon. */
+/** "Tip", "Note" or "Did you know?" box: pale navy tint, left border, icon. */
 export default function Callout({ variant, text, children }: CalloutProps) {
   const { icon, label } = variants[variant];
 

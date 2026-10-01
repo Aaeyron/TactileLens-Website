@@ -5,7 +5,7 @@ type CheckListProps = {
   items: readonly string[];
 };
 
-/** A list with blue check icons instead of plain bullets. */
+/** A list with teal check icons instead of plain bullets. */
 export default function CheckList({ items }: CheckListProps) {
   return (
     <ul className="check-list" role="list">
