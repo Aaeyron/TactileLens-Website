@@ -1,5 +1,21 @@
 @import "tailwindcss";
 
+/* Tuned fallback for Atkinson Hyperlegible Next (body font, display: swap).
+   Local Arial is scaled and given the web font's vertical metrics, so text
+   keeps the same size and line positions when the real font arrives.
+   Values were calculated from the font file (unitsPerEm 1000, ascent 984,
+   descent -316, lineGap 0) with Next.js's own fallback algorithm (fontkit,
+   average width of "aaabcdeeeefghiijklmnnoopqrrssttuvwxyz" vs Arial).
+   Liberation Sans is metric-compatible with Arial (Linux). */
+@font-face {
+  font-family: "Atkinson Hyperlegible Next Fallback";
+  src: local("Arial"), local("ArialMT"), local("Liberation Sans");
+  size-adjust: 99.36%;
+  ascent-override: 99.04%;
+  descent-override: 31.8%;
+  line-gap-override: 0%;
+}
+
 /* =========================================================================
  * Design tokens — the single source of truth for every design value.
  * Palette: matches the TactileLens app logo (background #003797).

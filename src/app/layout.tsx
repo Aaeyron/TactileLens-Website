@@ -9,14 +9,17 @@ import { baseOpenGraph } from "@/lib/metadata";
 import "./globals.css";
 
 // Body: designed by the Braille Institute for low-vision readers.
-// Next.js has no fallback metrics for this font, so a late swap could shift
-// the layout. "optional" avoids that: the font is preloaded, and if it is not
-// ready in time on a first visit, that page keeps the system font (no shift).
+// "swap" so the font always appears, even on slow Wi-Fi. Next.js has no
+// built-in fallback metrics for this font, so we provide our own tuned
+// fallback ("Atkinson Hyperlegible Next Fallback" in globals.css) to keep the
+// layout from shifting when the font arrives.
 const bodyFont = Atkinson_Hyperlegible_Next({
   variable: "--font-body",
   subsets: ["latin"],
   weight: ["400", "700"],
-  display: "optional",
+  display: "swap",
+  adjustFontFallback: false,
+  fallback: ["Atkinson Hyperlegible Next Fallback"],
 });
 
 // Headings, buttons and the navbar: clean, straight geometric sans.
