@@ -1766,6 +1766,50 @@ p a:not(.button) {
   color: var(--color-text);
 }
 
+/* "On this page" mini navigation between thin lines */
+.on-this-page {
+  max-width: var(--width-narrow);
+  margin-bottom: var(--space-7);
+  border-block: 1px solid var(--color-border);
+  padding-block: var(--space-4);
+}
+
+.on-this-page-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-5);
+  margin-top: var(--space-2);
+}
+
+.on-this-page-link {
+  display: inline-flex;
+  min-height: var(--tap-target);
+  align-items: center;
+  color: var(--color-brand-text);
+  font-weight: var(--weight-semibold);
+  text-decoration: none;
+}
+
+.on-this-page-link:hover {
+  color: var(--color-brand-hover);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Features: "How it helps teachers" line under a thin divider */
+.feature-helps {
+  max-width: var(--measure);
+  margin-top: var(--space-5);
+  border-top: 1px solid var(--color-border);
+  padding-top: var(--space-4);
+  color: var(--color-text);
+}
+
+.feature-helps .label {
+  display: block;
+  margin-bottom: var(--space-1);
+}
+
 /* A thin 1px divider between groups of content in one section */
 .section-block {
   margin-top: var(--space-7);
@@ -1957,10 +2001,6 @@ p a:not(.button) {
 }
 
 
-/* Feature rows: chip above the title */
-.feature-text > .chip {
-  margin-bottom: var(--space-3);
-}
 
 /* Braille cell teaching diagram */
 .cell-diagram {

@@ -5,6 +5,7 @@ import CtaBanner from "@/components/download/CtaBanner";
 import FeatureRows from "@/components/features/FeatureRows";
 import Callout from "@/components/ui/Callout";
 import CardGrid from "@/components/ui/CardGrid";
+import OnThisPage from "@/components/ui/OnThisPage";
 import PageHeader from "@/components/ui/PageHeader";
 import Section from "@/components/ui/Section";
 import StepList from "@/components/ui/StepList";
@@ -12,13 +13,14 @@ import StepList from "@/components/ui/StepList";
 export const metadata: Metadata = pageMetadata({ ...featuresPage.meta, path: "/features" });
 
 export default function FeaturesPage() {
-  const { header, list, howItWorks, scanTips } = featuresPage;
+  const { header, onThisPage, list, howItWorks, scanTips } = featuresPage;
 
   return (
     <>
       <PageHeader {...header} />
 
       <Section id="all-features" eyebrow={list.eyebrow} title={list.title} description={list.description}>
+        <OnThisPage links={onThisPage} />
         <FeatureRows items={list.items} />
         <div className="section-callout">
           <Callout variant="tip" text={list.tip} />

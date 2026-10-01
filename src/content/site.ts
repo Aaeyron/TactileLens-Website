@@ -443,6 +443,14 @@ export const aboutPage = {
  * ------------------------------------------------------------------------- */
 
 export const featuresPage = {
+  onThisPage: [
+    { label: "Camera scanning", href: "#camera-scanning" },
+    { label: "Text to braille", href: "#text-to-braille" },
+    { label: "Math to Nemeth", href: "#math-to-nemeth" },
+    { label: "Online and offline", href: "#online-and-offline" },
+    { label: "How it works", href: "#how-it-works" },
+    { label: "Tips for good scans", href: "#scan-tips" },
+  ],
   meta: {
     title: "Features",
     description:
@@ -461,6 +469,7 @@ export const featuresPage = {
     // text and math in a readable view." (from the earlier draft copy).
     items: [
       {
+        id: "camera-scanning",
         chip: "Camera",
         screen: screens.camera,
         title: "Camera scanning",
@@ -468,17 +477,23 @@ export const featuresPage = {
         description: "Use your phone camera to scan printed pages, such as worksheets and handouts.",
         // DRAFT: review.
         bullets: ["Works with printed worksheets and handouts", "No separate scanner needed"],
+        // DRAFT: review.
+        helps: "Start from the printed page you already have, with the phone you already carry.",
       },
       {
+        id: "text-to-braille",
         chip: "Text",
         screen: screens.materials,
         title: "Text to braille",
         description: "Turn printed text into braille.",
         // DRAFT: review.
         bullets: ["No retyping needed", "Text recognition also works offline"],
+        // DRAFT: review.
+        helps: "Get a braille version of a handout without typing it again.",
         note: "TODO: braille code used for text (for example, UEB Grade 1 or Grade 2).",
       },
       {
+        id: "math-to-nemeth",
         chip: "Math",
         screen: screens.brailleOutput,
         title: "Math to Nemeth",
@@ -486,9 +501,12 @@ export const featuresPage = {
           "Turn printed algebra equations into Nemeth code, the braille code for math.",
         // DRAFT: review.
         bullets: ["Built for general algebra", "Nemeth is the braille code for math"],
+        // DRAFT: review.
+        helps: "Algebra comes out in Nemeth, so math worksheets are not left for later.",
       },
       {
         // TODO: Confirm whether math recognition works offline.
+        id: "online-and-offline",
         chip: "Online + offline",
         screen: screens.onlineOffline,
         title: "Online and offline",
@@ -496,6 +514,8 @@ export const featuresPage = {
           "With internet, TactileLens reads the page using our server. Without internet, it recognizes printed text on the phone itself.",
         // DRAFT: review.
         bullets: ["Online: pages are recognized on our server", "Offline: printed text is recognized on the phone"],
+        // DRAFT: review. TODO: Confirm whether math recognition works offline.
+        helps: "Keep scanning printed text in rooms with weak or no internet.",
       },
     ],
     // DRAFT: review.
