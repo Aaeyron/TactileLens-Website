@@ -77,11 +77,11 @@ export const appRelease = {
 export const screens = {
   // TODO: Screenshot — used in the Home hero and Home "How it works" step 2.
   scanResult: { label: "App screen: Scan result (printed equation converted to text and braille)", file: "public/screenshots/scan-result.png", src: "", width: 1080, height: 2340, alt: "" },
-  // TODO: Screenshot — Home "How it works" step 1.
+  // TODO: Screenshot — Home "How it works" step 1 and Features "Camera scanning".
   camera: { label: "App screen: Camera", file: "public/screenshots/camera.png", src: "", width: 1080, height: 2340, alt: "" },
   // TODO: Screenshot — Home "How it works" step 3 and Features "Math to Nemeth".
   brailleOutput: { label: "App screen: Braille output", file: "public/screenshots/braille-output.png", src: "", width: 1080, height: 2340, alt: "" },
-  // TODO: Screenshot — Features "Camera scanning".
+  // TODO: Screenshot — Download page, "What you'll see after installing".
   home: { label: "App screen: Home", file: "public/screenshots/home.png", src: "", width: 1080, height: 2340, alt: "" },
   // TODO: Screenshot — Features "Text to braille".
   materials: { label: "App screen: Materials", file: "public/screenshots/materials.png", src: "", width: 1080, height: 2340, alt: "" },
@@ -377,7 +377,7 @@ export const featuresPage = {
     items: [
       {
         chip: "Camera",
-        screen: screens.home,
+        screen: screens.camera,
         title: "Camera scanning",
         // TODO: Confirm whether teachers can also pick existing photos from the gallery.
         description: "Use your phone camera to scan printed pages, such as worksheets and handouts.",
@@ -718,6 +718,12 @@ export const downloadPage = {
     safetyTip: "Only download TactileLens from **this website**.",
     note: 'Setting names can look a little different on different phone brands and Android versions. After installing, you can turn "Allow from this source" off again in Settings.',
     scanTipsLink: { label: "Once installed, see our tips for good scans", href: "/features#scan-tips" },
+    // DRAFT: review.
+    afterInstall: {
+      title: "What you'll see after installing",
+      text: "When you open TactileLens, the app starts on its home screen.",
+      screen: screens.home,
+    },
   },
 } as const;
 

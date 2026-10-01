@@ -4,6 +4,7 @@ import { downloadPage } from "@/content/site";
 import DownloadCard from "@/components/download/DownloadCard";
 import Callout from "@/components/ui/Callout";
 import PageHeader from "@/components/ui/PageHeader";
+import Screenshot from "@/components/ui/Screenshot";
 import Section from "@/components/ui/Section";
 import StepList from "@/components/ui/StepList";
 import TextLink from "@/components/ui/TextLink";
@@ -31,6 +32,15 @@ export default function DownloadPage() {
         </div>
         <StepList steps={install.steps} variant="cards" />
         <p className="section-note">{install.note}</p>
+
+        <div className="after-install">
+          <div>
+            <h3 className="card-title">{install.afterInstall.title}</h3>
+            <p className="section-description">{install.afterInstall.text}</p>
+          </div>
+          {/* TODO: screenshot — see screens.home in site.ts */}
+          <Screenshot screen={install.afterInstall.screen} sizes="15rem" />
+        </div>
         <div className="section-footer">
           <TextLink href={install.scanTipsLink.href}>{install.scanTipsLink.label}</TextLink>
         </div>
