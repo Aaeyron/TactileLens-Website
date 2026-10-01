@@ -273,11 +273,6 @@ h3 {
 }
 
 
-.logo-mark--md {
-  width: var(--space-7);
-  height: var(--space-7);
-  border-radius: var(--radius-md);
-}
 
 .logo-mark--lg {
   width: 4.5rem;
@@ -616,6 +611,23 @@ h3 {
   font-weight: var(--weight-bold);
   letter-spacing: -0.02em;
   text-decoration: none;
+}
+
+/* 40×40 logo: the real image once logo.src is set, otherwise an empty slot */
+.navbar-logo,
+.navbar-logo-slot {
+  width: 2.5rem;
+  height: 2.5rem;
+  flex-shrink: 0;
+}
+
+.navbar-logo {
+  object-fit: contain;
+}
+
+.navbar-logo-slot {
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius-sm);
 }
 
 .navbar-menu-toggle {

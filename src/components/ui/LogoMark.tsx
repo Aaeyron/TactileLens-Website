@@ -1,8 +1,8 @@
 import BrailleT from "./BrailleT";
 
 type LogoMarkProps = {
-  /** "sm" navbar, "md" medium, "lg" download card app icon. */
-  size?: "sm" | "md" | "lg";
+  /** "lg" is the download card app icon. TODO: replace with the real logo. */
+  size?: "sm" | "lg";
 };
 
 /** Logo-blue rounded square with the braille "t" (⠞). Decorative. */

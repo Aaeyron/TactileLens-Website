@@ -1,12 +1,12 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { downloadCta, navigation, site } from "@/content/site";
+import { downloadCta, logo, navigation, site } from "@/content/site";
 import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
-import LogoMark from "@/components/ui/LogoMark";
 
 function isCurrentPage(pathname: string, href: string) {
   return href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);
@@ -45,14 +45,22 @@ export default function Navbar() {
     <header className="site-header">
       <Container>
         <nav className="navbar" aria-label="Main">
-          <Link
-            href="/"
-            className="navbar-brand"
-            aria-label={`${site.name} home`}
-            onClick={closeMenu}
-          >
-            <LogoMark />
-            <span aria-hidden="true">{site.name}</span>
+          {/* The visible "TactileLens" text is the Home link's accessible name. */}
+          <Link href="/" className="navbar-brand" onClick={closeMenu}>
+            {logo.src ? (
+              <Image
+                className="navbar-logo"
+                src={logo.src}
+                alt={logo.alt}
+                width={logo.width}
+                height={logo.height}
+                preload
+              />
+            ) : (
+              // TODO: Empty slot for the real logo — see `logo` in site.ts.
+              <span className="navbar-logo-slot" aria-hidden="true" />
+            )}
+            <span>{site.name}</span>
           </Link>
 
           <button

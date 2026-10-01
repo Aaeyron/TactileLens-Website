@@ -29,6 +29,16 @@ export const site = {
   tagline: "An Android app that turns printed text and math into braille.",
 };
 
+/**
+ * Navbar logo (left of the "TactileLens" text). Until `src` is set, the
+ * navbar shows an empty 40×40 slot.
+ * TODO: Save the real logo at web-app/public/logo.png and set src: "/logo.png".
+ * Set width/height to the image's real pixel size (it is shown at 40×40).
+ * alt stays "" because the "TactileLens" text next to it already names the
+ * Home link (a filled alt would make screen readers say the name twice).
+ */
+export const logo = { src: "", width: 40, height: 40, alt: "" };
+
 /** Main pages, in navbar order. Also used for the footer links. */
 export const navigation = [
   { label: "Home", href: "/" },
