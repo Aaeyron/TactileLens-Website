@@ -11,7 +11,7 @@
  * or imply that math works offline.
  * TODO: Confirm whether math recognition works offline.
  *
- * Formatting: **double asterisks** mark a key term, shown in bold navy.
+ * Formatting: **double asterisks** mark a key term, shown in bold logo blue.
  * `icon` values are names from src/components/ui/Icon.tsx. Objects that use
  * icons end in `as const` so a misspelled icon name is a type error.
  */

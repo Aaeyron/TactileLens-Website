@@ -5,7 +5,7 @@ type LogoMarkProps = {
   size?: "xs" | "sm" | "md" | "lg";
 };
 
-/** Navy rounded square with the braille "t" (⠞). Decorative. */
+/** Logo-blue rounded square with the braille "t" (⠞). Decorative. */
 export default function LogoMark({ size = "sm" }: LogoMarkProps) {
   return (
     <span className={`logo-mark logo-mark--${size}`} aria-hidden="true">
