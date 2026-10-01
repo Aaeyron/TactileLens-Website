@@ -11,9 +11,9 @@
  *   chips, key terms, icons and the focus ring on light backgrounds.
  * - --color-accent is decoration only (dot dividers, connector lines,
  *   timeline, card accent bars, quote border). Never text.
- * - The navy header gradient (#1A4F8F → #0E2F5A) keeps white text at 8.2:1
- *   or better, so it needs no overlay. Faint white dots on it stay well
- *   above 4.5:1 (the script checks the worst point).
+ * - The header gradient (#0A4BB8 → #002A75) keeps white text at 7.7:1 or
+ *   better, so it needs no overlay. Faint bright-blue dots on it keep white
+ *   text above 7:1 (the script checks the worst point).
  * - --color-border is decorative; control edges use --color-border-strong.
  * ========================================================================= */
 :root {
@@ -56,14 +56,14 @@
   --color-error: #b42318;
   --color-error-subtle: #fdecea;
 
-  /* Navy header gradient (hero, "Ready to try" band, mock app bar),
-     top-left to bottom-right. No overlay needed. */
-  --gradient-header: linear-gradient(135deg, #1a4f8f, #0e2f5a);
+  /* Header gradient matching the logo (hero, "Ready to try" band, mock app
+     bar), top-left to bottom-right. No overlay needed. */
+  --gradient-header: linear-gradient(135deg, #0a4bb8, #002a75);
   --background-header: var(--gradient-header);
 
   /* Decorative backgrounds: an even dot grid (not braille cells) and soft tints */
   --pattern-dots: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22'%3E%3Ccircle cx='3' cy='3' r='1.5' fill='%23003797' fill-opacity='0.08'/%3E%3C/svg%3E");
-  --pattern-dots-on-navy: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22'%3E%3Ccircle cx='3' cy='3' r='1.5' fill='%23ffffff' fill-opacity='0.1'/%3E%3C/svg%3E");
+  --pattern-dots-on-gradient: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22'%3E%3Ccircle cx='3' cy='3' r='1.5' fill='%230077fa' fill-opacity='0.15'/%3E%3C/svg%3E");
   --tint-accent: rgb(0 119 250 / 0.1); /* feature visuals */
   --tint-accent-soft: rgb(0 119 250 / 0.08); /* page headers (behind small blue text) */
 
@@ -401,7 +401,7 @@ h3 {
   background: var(--color-brand-subtle);
 }
 
-/* For the navy header gradient */
+/* For the blue header gradient */
 .button--inverse {
   background: var(--color-text-inverse);
   color: var(--color-brand-text);
@@ -418,7 +418,7 @@ h3 {
   box-shadow: var(--shadow-pressed);
 }
 
-/* Secondary action on the navy header gradient. Hover gets darker, never
+/* Secondary action on the blue header gradient. Hover gets darker, never
    lighter, so white text keeps its contrast. */
 .button--outline-inverse {
   border-color: var(--color-text-inverse);
@@ -859,7 +859,7 @@ h3 {
   position: absolute;
   z-index: 0;
   inset: 0;
-  background: var(--pattern-dots-on-navy);
+  background: var(--pattern-dots-on-gradient);
   content: "";
   mask-image: radial-gradient(circle at 50% 50%, #000 30%, transparent 70%);
   pointer-events: none;
@@ -1935,7 +1935,7 @@ h3 {
 }
 
 /* =========================================================================
- * CTA band — full-width navy header gradient "Ready to try TactileLens?"
+ * CTA band — full-width blue header gradient "Ready to try TactileLens?"
  * ========================================================================= */
 
 .cta-band {
@@ -1951,7 +1951,7 @@ h3 {
   position: absolute;
   z-index: -1;
   inset: 0;
-  background: var(--pattern-dots-on-navy);
+  background: var(--pattern-dots-on-gradient);
   content: "";
   mask-image: radial-gradient(ellipse 60% 120% at 100% 50%, #000 20%, transparent 75%);
   pointer-events: none;

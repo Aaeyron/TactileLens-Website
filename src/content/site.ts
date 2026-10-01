@@ -76,7 +76,7 @@ export const downloadCta = {
   comingSoonNote: "The Android app will be available to download here soon.",
 };
 
-/** Navy "Ready to try" band at the end of every page except /download. */
+/** Blue-gradient "Ready to try" band at the end of every page except /download. */
 export const ctaBanner = {
   title: "Ready to try TactileLens?",
   text: "Get the Android app and follow our step-by-step install guide.",

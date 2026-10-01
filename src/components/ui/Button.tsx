@@ -3,7 +3,7 @@ import type { ComponentPropsWithoutRef } from "react";
 
 type ButtonProps = ComponentPropsWithoutRef<"a"> & {
   href: string;
-  /** "inverse" and "outline-inverse" are for the navy header gradient. */
+  /** "inverse" and "outline-inverse" are for the blue header gradient. */
   variant?: "primary" | "secondary" | "inverse" | "outline-inverse";
   size?: "md" | "sm";
 };
