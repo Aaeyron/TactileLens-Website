@@ -462,6 +462,25 @@ h3 {
   letter-spacing: -0.02em;
 }
 
+/* Accent rule under section and page titles: a thin 1px line with a short
+   3px segment at its start. Blue on white sections, white on blue ones
+   (the colors follow the section tokens). Decorative, empty content. */
+.section-title::after,
+.page-title::after {
+  display: block;
+  width: min(16rem, 100%);
+  height: 3px;
+  margin-top: var(--space-4);
+  border-left: 2.5rem solid var(--color-brand-text);
+  box-shadow: inset 0 -1px 0 var(--color-border);
+  content: "";
+}
+
+.page-title::after {
+  border-left-color: var(--color-text-inverse);
+  box-shadow: inset 0 -1px 0 var(--color-border-inverse);
+}
+
 .section-description {
   margin-top: var(--space-4);
   color: var(--color-text-muted);
