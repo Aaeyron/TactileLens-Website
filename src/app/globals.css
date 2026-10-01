@@ -107,6 +107,8 @@
   --shadow-md: 0 6px 16px rgb(0 55 151 / 0.1);
   --shadow-lg: 0 14px 32px rgb(0 55 151 / 0.14);
   --shadow-xl: 0 24px 48px rgb(0 32 92 / 0.28);
+  --shadow-panel: 0 2px 4px rgb(0 55 151 / 0.04), 0 12px 30px -8px rgb(0 55 151 / 0.16);
+  --shadow-panel-raised: 0 4px 8px rgb(0 55 151 / 0.06), 0 20px 40px -12px rgb(0 55 151 / 0.22);
   --border-accent: 2px solid var(--color-brand); /* top edge of cards and boxes */
   --shadow-pressed: inset 0 2px 4px rgb(0 32 92 / 0.35);
 
@@ -2268,6 +2270,48 @@ p a:not(.button) {
 
 
 
+
+/* Content surfaces share a soft blue shadow and a small corner detail. */
+:is(.card, .step-list--cards .step, .compare-panel, .faq-card, .download-card, .qr, .callout, .table-wrap) {
+  position: relative;
+  box-shadow: var(--shadow-panel);
+}
+
+:is(.compare-panel, .qr) {
+  border-top: var(--border-accent);
+}
+
+:is(.card, .step-list--cards .step, .compare-panel, .download-card, .qr, .callout)::before {
+  position: absolute;
+  right: var(--space-3);
+  bottom: var(--space-3);
+  width: 14px;
+  height: 14px;
+  border-right: 2px solid var(--color-border);
+  border-bottom: 2px solid var(--color-border);
+  border-bottom-right-radius: var(--space-1);
+  content: "";
+  pointer-events: none;
+}
+
+.card-title {
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: var(--space-3);
+}
+
+.card--link:hover,
+:is(.card, .faq-card, .download-card, .callout, .qr):focus-within {
+  box-shadow: var(--shadow-panel-raised);
+}
+
+.screenshot {
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-panel);
+}
+
+.site-header {
+  box-shadow: 0 4px 18px -8px rgb(0 55 151 / 0.2);
+}
 
 /* =========================================================================
  * Page transition (see app/template.tsx). Plays once each time a page opens.
