@@ -1667,14 +1667,26 @@ p a:not(.button) {
   color: var(--color-brand);
 }
 
+/* Brand + contact on the left, three link columns on the right */
 .footer-grid {
+  display: grid;
+  gap: var(--space-7);
+}
+
+@media (min-width: 960px) {
+  .footer-grid {
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 3fr);
+  }
+}
+
+.footer-columns {
   display: grid;
   gap: var(--space-6);
 }
 
-@media (min-width: 768px) {
-  .footer-grid {
-    grid-template-columns: 2fr 1fr 1.5fr;
+@media (min-width: 640px) {
+  .footer-columns {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
@@ -1715,23 +1727,31 @@ p a:not(.button) {
   text-decoration-thickness: 2px;
 }
 
-.footer-contact {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-  margin-bottom: var(--space-2);
+.footer-about .footer-contact {
+  margin-top: var(--space-5);
 }
 
+.footer-contact .footer-heading {
+  display: block;
+  margin-bottom: var(--space-1);
+}
 
-.footer-copyright {
+/* Bottom row: capstone credit, copyright and "Back to top", under a thin line */
+.footer-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3) var(--space-6);
+  margin-top: var(--space-7);
   border-top: 1px solid var(--color-border-inverse);
   padding-top: var(--space-5);
 }
 
-@media (min-width: 768px) {
-  .footer-copyright {
-    grid-column: 1 / -1;
-  }
+.footer-top {
+  min-height: var(--tap-target);
+  display: inline-flex;
+  align-items: center;
 }
 
 /* =========================================================================

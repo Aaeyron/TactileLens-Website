@@ -117,11 +117,41 @@ export const ctaBanner = {
 export const footer = {
   // DRAFT: review.
   audienceLine: "Built for teachers of students who read braille.",
-  navLabel: "Pages",
   contactLabel: "Contact",
   contactEmail: "TODO: contact email",
-  capstone: "TODO: capstone course, school, and adviser",
   platformNote: "Available for Android.",
+  /** Three link columns. */
+  columns: [
+    {
+      title: "Product",
+      links: [
+        { label: "Features", href: "/features" },
+        { label: "Download", href: "/download" },
+        { label: "System requirements", href: "/download#requirements" },
+      ],
+    },
+    {
+      title: "Learn",
+      links: [
+        { label: "About", href: "/about" },
+        { label: "FAQ", href: "/faq" },
+        { label: "Braille basics", href: "/about#braille-basics" },
+        { label: "Tips for good scans", href: "/features#scan-tips" },
+      ],
+    },
+    {
+      title: "Project",
+      links: [
+        { label: "Team", href: "/team" },
+        { label: "Project objectives", href: "/about#objectives" },
+        { label: "Project timeline", href: "/about#timeline" },
+        { label: "Acknowledgements", href: "/team#acknowledgements" },
+      ],
+    },
+  ],
+  // DRAFT: review. TODO: course, school and adviser.
+  capstone: "TactileLens is a student capstone project. TODO: capstone course, school, and adviser.",
+  backToTop: "Back to top",
 };
 
 /* ---------------------------------------------------------------------------
