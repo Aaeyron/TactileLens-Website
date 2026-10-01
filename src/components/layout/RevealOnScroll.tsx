@@ -3,6 +3,9 @@
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
+/** Matches --page-distance in globals.css (page transition upward move). */
+const PAGE_TRANSITION_SHIFT = 8;
+
 /**
  * Subtle fade-in for elements marked with `data-reveal`.
  *
@@ -55,7 +58,10 @@ export default function RevealOnScroll() {
 
       const target = hashTarget();
       document.querySelectorAll<HTMLElement>("[data-reveal]").forEach((element) => {
-        const belowFold = element.getBoundingClientRect().top > window.innerHeight;
+        // The page transition (app/template.tsx) briefly shifts content down by
+        // up to 8px. Allow for that, so content already on screen gets only the
+        // page transition and never a second reveal.
+        const belowFold = element.getBoundingClientRect().top - PAGE_TRANSITION_SHIFT > window.innerHeight;
         const isHashTarget =
           target !== null &&
           (element === target || element.contains(target) || target.contains(element));

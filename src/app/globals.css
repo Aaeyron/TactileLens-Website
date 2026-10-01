@@ -113,6 +113,8 @@
   --ease: cubic-bezier(0.2, 0, 0, 1);
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1); /* gentle ease-out for reveals */
   --reveal-distance: 10px; /* small upward move */
+  --duration-page: 300ms; /* page transition on navigation */
+  --page-distance: 8px;
 
   /* Layout */
   --container-max: 1200px;
@@ -1922,6 +1924,29 @@ p a:not(.button) {
 
 
 /* =========================================================================
+ * Page transition (see app/template.tsx). Plays once each time a page opens.
+ * Only page content animates; the navbar and footer stay still. "backwards"
+ * fill means no transform is left behind after it ends, so sticky/fixed
+ * positioning and scroll targets behave normally.
+ * ========================================================================= */
+
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(var(--page-distance));
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.page-transition {
+  animation: page-enter var(--duration-page) var(--ease-out-soft) backwards;
+}
+
+/* =========================================================================
  * Fade-in on scroll (see RevealOnScroll.tsx). Nothing is hidden unless the
  * script adds .reveal-pending, which it never does under reduced motion.
  * ========================================================================= */
@@ -1968,6 +1993,10 @@ p a:not(.button) {
   .reveal-pending {
     opacity: 1;
     transform: none;
+  }
+
+  .page-transition {
+    animation: none;
   }
 
   .card--link:hover,
