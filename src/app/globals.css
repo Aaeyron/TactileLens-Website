@@ -314,12 +314,7 @@ h3 {
 
 
 
-.logo-mark--lg {
-  width: 4.5rem;
-  height: 4.5rem;
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
-}
+
 
 
 
@@ -718,6 +713,7 @@ h3 {
 }
 
 .navbar-logo {
+  border-radius: var(--radius-sm);
   object-fit: contain;
 }
 
@@ -1749,6 +1745,14 @@ p a:not(.button) {
   align-items: center;
   gap: var(--space-4);
   margin-bottom: var(--space-6);
+}
+
+.download-card-logo {
+  width: 4.5rem;
+  height: 4.5rem;
+  flex-shrink: 0;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
 }
 
 

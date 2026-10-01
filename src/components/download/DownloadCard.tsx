@@ -1,8 +1,8 @@
-import { downloadCta, downloadPage, site } from "@/content/site";
+import Image from "next/image";
+import { downloadCta, downloadPage, logo, site } from "@/content/site";
 import Chip from "@/components/ui/Chip";
 import Container from "@/components/ui/Container";
 import InfoList from "@/components/ui/InfoList";
-import LogoMark from "@/components/ui/LogoMark";
 import DownloadCta from "./DownloadCta";
 import DownloadQr from "./DownloadQr";
 
@@ -16,7 +16,14 @@ export default function DownloadCard() {
         <div className="download-card">
           <div className="download-card-main">
             <div className="download-card-app">
-              <LogoMark size="lg" />
+              <Image
+                className="download-card-logo"
+                src={logo.src}
+                alt={logo.alt}
+                width={logo.width}
+                height={logo.height}
+                sizes="4.5rem"
+              />
               <div>
                 <h2 id="download-card-title" className="block-title">
                   {card.title}

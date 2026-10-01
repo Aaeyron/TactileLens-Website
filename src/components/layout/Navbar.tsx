@@ -54,6 +54,7 @@ export default function Navbar() {
                 alt={logo.alt}
                 width={logo.width}
                 height={logo.height}
+                sizes="2.5rem"
                 preload
               />
             ) : (
