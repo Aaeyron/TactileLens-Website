@@ -2,16 +2,15 @@
 
 /* =========================================================================
  * Design tokens — the single source of truth for every design value.
- * Palette: navy + teal (TactileLens website brand).
+ * Palette: matches the TactileLens app logo (background #003797).
  * Light theme only for now. To add dark mode later, redefine these tokens
  * inside a (prefers-color-scheme: dark) block; components need no changes.
  *
  * Contrast (WCAG 2.2 AA), verified by `npm run check:contrast`:
- * - --color-brand (navy #123b70) is for buttons, links and small text.
- * - --color-accent (teal #16a6a1) is 3.0:1 on white → decoration only
- *   (dot dividers, connector lines, timeline, card accent bars, quote border).
- * - --color-accent-strong (#0b6e6a) is the accessible teal for eyebrows,
- *   list icons and the focus ring on light backgrounds.
+ * - --color-brand (logo blue #003797) is for buttons, links, eyebrows,
+ *   chips, key terms, icons and the focus ring on light backgrounds.
+ * - --color-accent is decoration only (dot dividers, connector lines,
+ *   timeline, card accent bars, quote border). Never text.
  * - The navy header gradient (#1A4F8F → #0E2F5A) keeps white text at 8.2:1
  *   or better, so it needs no overlay. Faint white dots on it stay well
  *   above 4.5:1 (the script checks the worst point).
@@ -31,23 +30,23 @@
   --color-text-muted: #4a5a72;
   --color-text-inverse: #ffffff;
 
-  /* Color: brand (navy) */
-  --color-brand: #123b70; /* buttons, logo tile, step numbers */
-  --color-brand-hover: #0e2f5a;
-  --color-brand-active: #0a2445; /* pressed; also gets an inset shadow */
-  --color-brand-text: #123b70; /* links, chips, labels and other small navy text */
-  --color-brand-subtle: #e8eef7; /* navy tint: chips, callouts, badges */
+  /* Color: brand (app logo blue) */
+  --color-brand: #003797; /* logo background: buttons, logo tile, step numbers, icons */
+  --color-brand-hover: #002a75;
+  --color-brand-active: #00205c; /* pressed; also gets an inset shadow */
+  --color-brand-text: #003797; /* links, eyebrows, chips, key terms (10.5:1 on white) */
+  --color-brand-subtle: #e8eef7; /* pale tint: icon tiles, chips, callouts (brand on it 9.0:1) */
 
-  /* Color: accent (teal) */
+  /* Color: accent — the accessible text/icon uses now share the brand blue */
   --color-accent: #16a6a1; /* decoration only */
-  --color-accent-strong: #0b6e6a; /* eyebrows, list icons, focus ring */
-  --color-accent-subtle: #e6f5f4; /* teal tint: icon tiles */
+  --color-accent-strong: var(--color-brand-text); /* eyebrows, list icons, focus ring */
+  --color-accent-subtle: var(--color-brand-subtle); /* icon tiles, check circles */
 
   /* Color: borders and focus */
   --color-border: #dde4ee;
   --color-border-strong: #7b8aa1;
-  --color-focus: var(--color-accent-strong); /* focus ring on light backgrounds */
-  --color-focus-inverse: var(--color-text-inverse); /* focus ring on navy */
+  --color-focus: var(--color-brand-text); /* focus ring on light backgrounds */
+  --color-focus-inverse: var(--color-text-inverse); /* focus ring on the header gradient */
 
   /* Color: status (for later) */
   --color-success: #157032;
@@ -63,7 +62,7 @@
   --background-header: var(--gradient-header);
 
   /* Decorative backgrounds: an even dot grid (not braille cells) and soft tints */
-  --pattern-dots: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22'%3E%3Ccircle cx='3' cy='3' r='1.5' fill='%23123b70' fill-opacity='0.08'/%3E%3C/svg%3E");
+  --pattern-dots: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22'%3E%3Ccircle cx='3' cy='3' r='1.5' fill='%23003797' fill-opacity='0.08'/%3E%3C/svg%3E");
   --pattern-dots-on-navy: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22'%3E%3Ccircle cx='3' cy='3' r='1.5' fill='%23ffffff' fill-opacity='0.1'/%3E%3C/svg%3E");
   --tint-accent: rgb(22 166 161 / 0.14); /* feature visuals */
   --tint-accent-soft: rgb(22 166 161 / 0.08); /* page headers (behind teal eyebrow text) */
@@ -113,7 +112,7 @@
   --shadow-md: 0 4px 12px rgb(15 31 54 / 0.08);
   --shadow-lg: 0 12px 32px rgb(15 31 54 / 0.1);
   --shadow-xl: 0 24px 48px rgb(15 31 54 / 0.16);
-  --shadow-pressed: inset 0 2px 4px rgb(10 36 69 / 0.35);
+  --shadow-pressed: inset 0 2px 4px rgb(0 32 92 / 0.35);
 
   /* Motion */
   --duration-fast: 150ms;
@@ -428,11 +427,11 @@ h3 {
 }
 
 .button--outline-inverse:hover {
-  background: rgb(10 36 69 / 0.25);
+  background: rgb(0 32 92 / 0.25);
 }
 
 .button--outline-inverse:active {
-  background: rgb(10 36 69 / 0.35);
+  background: rgb(0 32 92 / 0.35);
   box-shadow: var(--shadow-pressed);
 }
 
