@@ -122,7 +122,6 @@
   --header-height: 72px;
   --tap-target: 44px;
   --button-height: 48px;
-  --step-number-size: 2.5rem;
   --qr-size: 10.5rem;
 
   /* Component: phone mockup (generic, not any real device) */
@@ -1137,17 +1136,6 @@ p a:not(.button) {
   gap: var(--space-5);
 }
 
-.step-number {
-  display: grid;
-  width: var(--step-number-size);
-  height: var(--step-number-size);
-  flex-shrink: 0;
-  place-items: center;
-  border-radius: var(--radius-full);
-  background: var(--color-brand);
-  color: var(--color-text-inverse);
-  font-weight: var(--weight-bold);
-}
 
 
 
@@ -1722,6 +1710,82 @@ p a:not(.button) {
   .footer-copyright {
     grid-column: 1 / -1;
   }
+}
+
+/* =========================================================================
+ * Typographic details: labels, numbers, dividers, fact numbers
+ * ========================================================================= */
+
+/* Small uppercase label (e.g. "STEP", table headings) */
+.label {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Large "01" number in a card or step header */
+.card-number {
+  color: var(--color-brand-text);
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: var(--weight-extrabold);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.step-top {
+  justify-content: flex-start;
+}
+
+.step-list--flow .step-top {
+  justify-content: center;
+  margin-bottom: 0;
+}
+
+/* A thin 1px divider between groups of content in one section */
+.section-block {
+  margin-top: var(--space-7);
+  border-top: 1px solid var(--color-border);
+  padding-top: var(--space-7);
+}
+
+/* Big typographic facts, each with a thin blue line on its left */
+.fact-numbers {
+  display: grid;
+  gap: var(--space-6) var(--space-5);
+}
+
+@media (min-width: 640px) {
+  .fact-numbers {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .fact-numbers {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.fact-number {
+  border-left: 2px solid var(--color-brand);
+  padding-left: var(--space-4);
+}
+
+.fact-number-value {
+  color: var(--color-brand-text);
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-extrabold);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.fact-number-text {
+  margin-top: var(--space-2);
+  color: var(--color-text-muted);
 }
 
 /* =========================================================================

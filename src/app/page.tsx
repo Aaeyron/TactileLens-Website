@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { homeHighlights, homeSteps, site } from "@/content/site";
+import { homeBeforeAfter, homeHighlights, homeSteps, homeWhy, site } from "@/content/site";
 import HeroSection from "@/components/home/HeroSection";
 import SeeItInAction from "@/components/home/SeeItInAction";
 import CtaBanner from "@/components/download/CtaBanner";
-import Callout from "@/components/ui/Callout";
 import CardGrid from "@/components/ui/CardGrid";
+import FactNumbers from "@/components/ui/FactNumbers";
 import Section from "@/components/ui/Section";
 import StepList from "@/components/ui/StepList";
 import TextLink from "@/components/ui/TextLink";
@@ -29,6 +29,25 @@ export default function HomePage() {
         </div>
       </Section>
 
+      <Section
+        id="why"
+        tone="brand"
+        eyebrow={homeWhy.eyebrow}
+        title={homeWhy.title}
+        description={homeWhy.description}
+      >
+        <CardGrid items={homeWhy.items} columns={3} numbered />
+      </Section>
+
+      <Section
+        id="before-and-after"
+        eyebrow={homeBeforeAfter.eyebrow}
+        title={homeBeforeAfter.title}
+        description={homeBeforeAfter.description}
+      >
+        <CardGrid items={homeBeforeAfter.items} />
+      </Section>
+
       <SeeItInAction />
 
       <Section
@@ -38,8 +57,8 @@ export default function HomePage() {
         description={homeHighlights.description}
       >
         <CardGrid items={homeHighlights.items} columns={3} linkLabel={homeHighlights.cardLinkLabel} />
-        <div className="section-callout">
-          <Callout variant="fact" text={homeHighlights.fact} />
+        <div className="section-block">
+          <FactNumbers label={homeHighlights.facts.label} items={homeHighlights.facts.items} />
         </div>
         <div className="section-footer">
           <TextLink href={homeHighlights.link.href}>{homeHighlights.link.label}</TextLink>

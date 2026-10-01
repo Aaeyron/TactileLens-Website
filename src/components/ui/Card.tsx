@@ -9,7 +9,9 @@ type CardProps = {
   children: ReactNode;
   /** Use "li" when the card is an item in a list of cards. */
   as?: "article" | "li" | "div";
-  /** Small label above the title, e.g. "Math" or "Offline". */
+  /** Large number in the card header, e.g. "01" (numbered lists). */
+  number?: string;
+  /** Small label in the card header, e.g. "Math" or "Offline". */
   chip?: string;
   /** Short points in a bulleted list. */
   bullets?: readonly string[];
@@ -19,12 +21,27 @@ type CardProps = {
   linkLabel?: string;
 };
 
-export default function Card({ title, children, as: Tag = "div", chip, bullets, href, linkLabel }: CardProps) {
+export default function Card({
+  title,
+  children,
+  as: Tag = "div",
+  number,
+  chip,
+  bullets,
+  href,
+  linkLabel,
+}: CardProps) {
   return (
     <Tag className={`card ${href ? "card--link" : ""}`.trim()}>
-      {chip && (
+      {(number || chip) && (
         <div className="card-top">
-          <Chip>{chip}</Chip>
+          {/* The number is visual; numbered card lists are <ol>, so screen readers count them. */}
+          {number && (
+            <span className="card-number" aria-hidden="true">
+              {number}
+            </span>
+          )}
+          {chip && <Chip>{chip}</Chip>}
         </div>
       )}
       <h3 className="card-title">

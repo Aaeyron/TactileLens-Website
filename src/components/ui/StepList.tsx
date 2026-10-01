@@ -1,4 +1,4 @@
-import Chip from "./Chip";
+import { pad } from "@/lib/format";
 import Screenshot, { type ScreenConfig } from "./Screenshot";
 
 type Step = {
@@ -11,7 +11,7 @@ type Step = {
 type StepListProps = {
   steps: readonly Step[];
   /**
-   * - "flow": steps in a row with a number circle (home page)
+   * - "flow": steps in a row, each under a framed screenshot (home page)
    * - "cards": numbered step cards (How it works, install guide)
    */
   variant?: "flow" | "cards";
@@ -26,16 +26,11 @@ export default function StepList({ steps, variant = "cards" }: StepListProps) {
           {variant === "flow" && step.screen && (
             <Screenshot screen={step.screen} frame sizes="11rem" />
           )}
-          {/* Visual step number; screen readers get "Step n:" in the heading instead. */}
-          {variant === "flow" ? (
-            <span className="step-number" aria-hidden="true">
-              {index + 1}
-            </span>
-          ) : (
-            <div className="card-top" aria-hidden="true">
-              <Chip>Step {index + 1}</Chip>
-            </div>
-          )}
+          {/* Visual "STEP 01"; screen readers get "Step n:" in the heading instead. */}
+          <div className="card-top step-top" aria-hidden="true">
+            <span className="card-number">{pad(index + 1)}</span>
+            <span className="label">Step</span>
+          </div>
 
           <div className="step-content">
             <h3 className="card-title">

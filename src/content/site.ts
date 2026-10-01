@@ -166,6 +166,59 @@ export const homeSteps = {
   link: { label: "Learn how it works", href: "/features#how-it-works" },
 } as const;
 
+// DRAFT: review — new Home copy.
+export const homeWhy = {
+  eyebrow: "Why TactileLens",
+  title: "Made for the work teachers do",
+  description: "Three things that matter when you prepare braille.",
+  items: [
+    {
+      title: "Built for teachers",
+      description:
+        "Made for teachers of visually impaired students and SPED staff, who prepare braille every week.",
+    },
+    {
+      title: "Math included",
+      description: "Algebra is written in **Nemeth**, the braille code for math, not just plain text.",
+    },
+    {
+      // TODO: Confirm whether math recognition works offline.
+      title: "Works where you are",
+      description: "Scan with an Android phone. Printed text can be recognized even without internet.",
+    },
+  ],
+} as const;
+
+// DRAFT: review — general and careful; no statistics.
+export const homeBeforeAfter = {
+  eyebrow: "Before and after",
+  title: "A faster way to prepare braille",
+  description: "How the work changes when you start from a scan.",
+  items: [
+    {
+      chip: "Before",
+      title: "Preparing braille by hand",
+      bullets: [
+        "Retype the printed page",
+        "Format the text for braille",
+        "Write each equation in **Nemeth** code",
+        "Check every page for mistakes",
+      ],
+    },
+    {
+      // TODO: Confirm whether math recognition works offline.
+      chip: "With TactileLens",
+      title: "Starting from a scan",
+      bullets: [
+        "Scan the page with an Android phone",
+        "Text and algebra are recognized for you",
+        "Math comes out in **Nemeth** code",
+        "Printed text can be scanned offline",
+      ],
+    },
+  ],
+} as const;
+
 export const seeItInAction = {
   eyebrow: "See it in action",
   title: "Printed math in, Nemeth braille out",
@@ -209,8 +262,16 @@ export const homeHighlights = {
     },
   ],
   cardLinkLabel: "Learn more",
-  // DRAFT: review.
-  fact: "A braille cell has six dots. That makes 64 possible patterns, counting the blank cell.",
+  // DRAFT: review. Big typographic facts — confirmed or general facts only.
+  facts: {
+    label: "TactileLens at a glance",
+    items: [
+      { value: "6", text: "dots in a braille cell" },
+      { value: "2", text: "modes: online and offline" },
+      { value: "Android", text: "the app runs on Android phones" },
+      { value: "Nemeth", text: "the braille code used for math" },
+    ],
+  },
   link: { label: "See all features", href: "/features" },
 } as const;
 
