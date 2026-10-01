@@ -48,10 +48,8 @@ const borderStrong = "#7b8aa1";
 // Worst-case decorative backgrounds.
 // Header gradient: lightest point (start) with a 15% bright-blue dot on top.
 const gradientWorst = mix(gradientStart, bright, 0.15);
-// Page header: 8% bright-blue tint at its strongest, with an 8% brand dot on top.
-const pageHeaderWorst = mix(mix(surface, bright, 0.08), brand, 0.08);
-// Feature visuals: 10% bright-blue tint + 8% brand dot (icons only sit here).
-const featureVisualWorst = mix(mix(surface, bright, 0.1), brand, 0.08);
+// Page headers now use the same header gradient (see gradientWorst).
+const footer = "#002a75"; // dark brand-blue footer band
 // Outline button hover on the gradient: 25% pressed-blue overlay (only darker).
 const outlineHover = mix(gradientStart, brandActive, 0.25);
 
@@ -75,9 +73,9 @@ const pairs = [
   // Small blue text: links, eyebrows, chips, key terms
   ["link / eyebrow on white", brand, white, TEXT],
   ["link / eyebrow on surface", brand, surface, TEXT],
-  ["eyebrow on page header (worst case)", brand, pageHeaderWorst, TEXT],
-  ["text on page header (worst case)", text, pageHeaderWorst, TEXT],
-  ["text-muted on page header (worst case)", muted, pageHeaderWorst, TEXT],
+  ["navbar current-page pill: brand on pale tint", brand, subtle, TEXT],
+  ["arrow link hover (#002A75) on white", brandHover, white, TEXT],
+  ["arrow link hover (#002A75) on surface", brandHover, surface, TEXT],
   ["chip text on pale tint", brand, subtle, TEXT],
   ["callout label on pale tint", brand, subtle, TEXT],
   ["key term on white", brand, white, TEXT],
@@ -90,7 +88,9 @@ const pairs = [
   // Icons
   ["icon on pale icon tile (UI)", brand, subtle, UI],
   ["check icon on pale circle (UI)", brand, subtle, UI],
-  ["icon on feature visual (worst case, UI)", brand, featureVisualWorst, UI],
+  ["10% accent icon (#0077FA) on pale tile (UI)", bright, subtle, UI],
+  ["10% accent icon (#0077FA) on surface (UI)", bright, surface, UI],
+  ["10% accent icon (#0077FA) on white (UI)", bright, white, UI],
   ["large braille on pale tint", brand, subtle, LARGE],
 
   // Header gradient (hero, CTA band, mock app bar)
@@ -101,11 +101,21 @@ const pairs = [
   ["pale hero highlight on gradient (worst)", subtle, gradientWorst, LARGE],
   ["white outline-button border on gradient (UI, worst)", white, gradientWorst, UI],
 
+  // Page headers on the gradient
+  ["page header title/intro (white) on gradient (worst)", white, gradientWorst, TEXT],
+  ["page header eyebrow (pale) on gradient (worst)", subtle, gradientWorst, TEXT],
+
+  // Dark blue footer
+  ["footer text (white) on #002A75", white, footer, TEXT],
+  ["footer links (white) on #002A75", white, footer, TEXT],
+  ["footer focus ring (white) on #002A75", white, footer, UI],
+  ["footer contact icon (#0077FA) on #002A75 (UI)", bright, footer, UI],
+  ["footer logo tile: brand dots on white (UI)", brand, white, UI],
+
   // Focus rings
   ["focus (brand) on white", brand, white, UI],
   ["focus (brand) on surface", brand, surface, UI],
   ["focus (brand) on pale tint", brand, subtle, UI],
-  ["focus (brand) on page header (worst case)", brand, pageHeaderWorst, UI],
   ["focus (white) on gradient (worst)", white, gradientWorst, UI],
 
   // Borders and underlines
@@ -123,7 +133,7 @@ const pairs = [
 ];
 
 // Decorative only: reported for reference, never used for text.
-const decorative = [["bright blue #0077FA on white (lines, dividers, bars)", bright, white]];
+const decorative = [["bright blue #0077FA on white (lines, dividers, bars; never text)", bright, white]];
 
 let failures = 0;
 for (const [label, fg, bg, min] of pairs) {
