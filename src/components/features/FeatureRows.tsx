@@ -4,7 +4,7 @@ import Chip from "@/components/ui/Chip";
 import Screenshot, { type ScreenConfig } from "@/components/ui/Screenshot";
 
 type Feature = {
-  /** Anchor id, used by the "On this page" links. */
+  /** Anchor id for in-page links. */
   id: string;
   title: string;
   description: string;
@@ -20,7 +20,7 @@ type FeatureRowsProps = {
   items: readonly Feature[];
 };
 
-/** Zig-zag rows: an app screenshot on one side, numbered text on the other. */
+/** A row of feature cards: an app screenshot above numbered text. */
 export default function FeatureRows({ items }: FeatureRowsProps) {
   return (
     <ol className="feature-rows" role="list">

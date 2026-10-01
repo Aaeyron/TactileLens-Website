@@ -1439,36 +1439,30 @@ p a:not(.button) {
 
 
 /* =========================================================================
- * Feature rows — zig-zag (Features page)
+ * Feature rows — a row of cards (Features page)
  * ========================================================================= */
 
 .feature-rows {
   display: grid;
-  gap: var(--space-8);
-}
-
-.feature-row {
-  display: grid;
-  align-items: center;
   gap: var(--space-5);
 }
 
-/* Asymmetric rows on wider screens: screenshot 5 columns, text 7 columns,
-   alternating sides. The DOM order (screenshot, then text) stays the same,
-   so the reading order never changes. */
-@media (min-width: 768px) {
-  .feature-row {
-    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-    gap: var(--space-8);
+@media (min-width: 640px) {
+  .feature-rows {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+}
 
-  .feature-row:nth-child(even) {
-    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+@media (min-width: 1024px) {
+  .feature-rows {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
+}
 
-  .feature-row:nth-child(even) .feature-visual {
-    order: 2;
-  }
+.feature-row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
 }
 
 .feature-visual {
@@ -1889,22 +1883,14 @@ p a:not(.button) {
  * Footer
  * ========================================================================= */
 
-/* Deep navy footer with a clear brand block, navigation and project credit. */
+/* White footer (the blue CTA band sits right above it) with a clear brand
+   block, navigation and project credit. */
 .site-footer {
-  border-top: 3px solid var(--blue);
+  border-top: 1px solid var(--color-border);
   padding-block: clamp(var(--space-7), 6vw, var(--space-8)) var(--space-5);
-  background: var(--blue-pressed);
-  color: var(--color-text-inverse);
+  background: var(--color-bg);
+  color: var(--color-text);
   font-size: var(--text-sm);
-}
-
-.site-footer :focus-visible {
-  outline-color: var(--color-focus-inverse);
-}
-
-.site-footer .logo-mark {
-  background: var(--color-text-inverse);
-  color: var(--color-brand);
 }
 
 /* Brand + contact on the left, three link columns on the right */
@@ -1923,7 +1909,7 @@ p a:not(.button) {
 .footer-columns {
   display: grid;
   gap: var(--space-6);
-  border-top: 1px solid var(--color-border-inverse);
+  border-top: 1px solid var(--color-border);
   padding-top: var(--space-6);
 }
 
@@ -1942,7 +1928,7 @@ p a:not(.button) {
 @media (min-width: 960px) {
   .footer-columns {
     border-top: 0;
-    border-left: 1px solid var(--color-border-inverse);
+    border-left: 1px solid var(--color-border);
     padding-top: 0;
     padding-left: var(--space-7);
   }
@@ -1957,7 +1943,7 @@ p a:not(.button) {
   align-items: center;
   gap: var(--space-3);
   margin-bottom: var(--space-3);
-  color: var(--color-text-inverse);
+  color: var(--color-brand-text);
   font-family: var(--font-display);
   font-size: var(--text-xl);
   font-weight: var(--weight-bold);
@@ -1978,7 +1964,7 @@ p a:not(.button) {
 
 .footer-heading {
   margin-bottom: var(--space-3);
-  color: var(--color-text-inverse);
+  color: var(--color-brand-text);
   font-weight: var(--weight-bold);
   font-size: 0.75rem;
   letter-spacing: 0.12em;
@@ -1990,7 +1976,7 @@ p a:not(.button) {
   width: var(--space-5);
   height: 2px;
   margin-top: var(--space-3);
-  background: var(--color-border-inverse);
+  background: var(--color-border);
   content: "";
 }
 
@@ -2004,7 +1990,7 @@ p a:not(.button) {
   align-items: center;
   gap: var(--space-2);
   padding-block: var(--space-2);
-  color: var(--color-text-inverse);
+  color: var(--color-text);
   font-weight: var(--weight-semibold);
   text-underline-offset: 3px;
   text-decoration: none;
@@ -2042,7 +2028,7 @@ p a:not(.button) {
   justify-content: space-between;
   gap: var(--space-3) var(--space-6);
   margin-top: var(--space-7);
-  border-top: 1px solid var(--color-border-inverse);
+  border-top: 1px solid var(--color-border);
   padding-top: var(--space-5);
 }
 

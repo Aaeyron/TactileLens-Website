@@ -473,14 +473,6 @@ export const aboutPage = {
  * ------------------------------------------------------------------------- */
 
 export const featuresPage = {
-  onThisPage: [
-    { label: "Camera scanning", href: "#camera-scanning" },
-    { label: "Text to braille", href: "#text-to-braille" },
-    { label: "Math to Nemeth", href: "#math-to-nemeth" },
-    { label: "Online and offline", href: "#online-and-offline" },
-    { label: "How it works", href: "#how-it-works" },
-    { label: "Tips for good scans", href: "#scan-tips" },
-  ],
   meta: {
     title: "Features",
     description:
