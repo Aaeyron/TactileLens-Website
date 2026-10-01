@@ -319,7 +319,17 @@ h3 {
   transition:
     background-color var(--duration-fast) var(--ease),
     border-color var(--duration-fast) var(--ease),
-    box-shadow var(--duration-fast) var(--ease);
+    box-shadow var(--duration-fast) var(--ease),
+    transform var(--duration-fast) var(--ease);
+}
+
+/* Every button lifts 1px on hover and settles back when pressed */
+.button:hover {
+  transform: translateY(-1px);
+}
+
+.button:active {
+  transform: translateY(0);
 }
 
 .button--primary {
@@ -347,10 +357,12 @@ h3 {
 .button--secondary:hover {
   border-color: var(--color-brand);
   background: var(--color-bg);
+  box-shadow: var(--shadow-md);
 }
 
 .button--secondary:active {
   background: var(--color-bg);
+  box-shadow: var(--shadow-pressed);
 }
 
 /* For solid blue backgrounds */
@@ -585,7 +597,16 @@ h3 {
   outline-offset: 3px;
 }
 
+.card--link {
+  transition:
+    border-color var(--duration-medium) var(--ease),
+    box-shadow var(--duration-medium) var(--ease),
+    transform var(--duration-medium) var(--ease);
+}
+
+/* Linked cards: border deepens to the full blue, deeper shadow, small lift */
 .card--link:hover {
+  border-color: var(--color-brand);
   box-shadow: var(--shadow-lg);
   transform: translateY(-4px);
 }
@@ -2288,7 +2309,9 @@ p a:not(.button) {
 
   .card--link:hover,
   .card--link:hover .card-more svg,
-  .text-link:hover .text-link-arrow {
+  .text-link:hover .text-link-arrow,
+  .button:hover,
+  .button:active {
     transform: none;
   }
 }
