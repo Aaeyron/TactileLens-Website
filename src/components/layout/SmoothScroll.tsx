@@ -10,6 +10,7 @@ const REDUCED_MOTION = "(prefers-reduced-motion: reduce)";
 
 /** Lenis settings: short and gentle, never floaty. */
 const LENIS_OPTIONS = {
+  lerp: 0, // use the explicit duration for wheel and anchor animations
   duration: 1.05, // seconds for a wheel "step" to settle
   easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // smooth exponential ease-out
   smoothWheel: true, // mouse wheel and trackpad only
@@ -18,6 +19,31 @@ const LENIS_OPTIONS = {
   stopInertiaOnNavigate: true, // stop leftover momentum when a link is followed
   autoRaf: true,
 };
+
+function hashTarget(hash: string) {
+  try {
+    return document.getElementById(decodeURIComponent(hash.slice(1)));
+  } catch {
+    return null;
+  }
+}
+
+function scrollToTarget(lenis: Lenis, target: HTMLElement, immediate = false) {
+  const margin = parseFloat(getComputedStyle(target).scrollMarginTop) || 0;
+  const headerHeight = document.querySelector(".site-header")?.getBoundingClientRect().height || 0;
+  const expectedHeight = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--header-height")) || 0;
+  const page = target.closest(".page-transition");
+  const transform = page ? getComputedStyle(page).transform : "none";
+  const pageShift = transform === "none" ? 0 : new DOMMatrixReadOnly(transform).m42;
+  // A numeric target avoids Lenis subtracting CSS scroll-margin a second time.
+  // Ignore the temporary page-enter translation so the final landing is exact.
+  const position = target.getBoundingClientRect().top + window.scrollY - pageShift;
+  lenis.scrollTo(target === document.body ? 0 : position, {
+    offset: target === document.body ? 0 : -(margin + Math.max(0, headerHeight - expectedHeight)),
+    immediate,
+    force: true,
+  });
+}
 
 /**
  * Move keyboard focus to an anchor target without scrolling, like a native
@@ -73,47 +99,75 @@ export default function SmoothScroll() {
       if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
 
       const link = (event.target as Element | null)?.closest?.("a[href]");
-      if (!(link instanceof HTMLAnchorElement) || link.target === "_blank") return;
+      if (!(link instanceof HTMLAnchorElement) || (link.target && link.target !== "_self") || link.hasAttribute("download")) return;
 
       const url = new URL(link.href, window.location.href);
-      if (url.origin !== window.location.origin || url.pathname !== window.location.pathname || !url.hash) return;
+      if (url.origin !== window.location.origin || url.pathname !== window.location.pathname || url.search !== window.location.search || !url.hash) return;
 
-      const target = document.getElementById(decodeURIComponent(url.hash.slice(1)));
+      const target = hashTarget(url.hash);
       if (!target) return;
 
       event.preventDefault();
-      if (target === document.body) {
-        lenis.scrollTo(0);
-      } else {
-        const headerOffset = parseFloat(getComputedStyle(target).scrollMarginTop) || 0;
-        lenis.scrollTo(target, { offset: -headerOffset });
-      }
-      if (url.hash !== window.location.hash) window.history.pushState(null, "", url.hash);
       focusTarget(target);
+      scrollToTarget(lenis, target);
+      if (url.hash !== window.location.hash) window.history.pushState(window.history.state, "", url.hash);
+    };
+
+    // Stop wheel momentum before the browser handles keys, clicks or scrollbar
+    // dragging. Never prevent default: native input owns the next scroll.
+    const cancelMomentum = () => {
+      lenisRef.current?.scrollTo(window.scrollY, { immediate: true, force: true });
+    };
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "PageUp", "PageDown", " ", "Home", "End"].includes(event.key)) {
+        cancelMomentum();
+      }
+    };
+    const onHashChange = () => {
+      const lenis = lenisRef.current;
+      const target = hashTarget(window.location.hash);
+      if (lenis && target) {
+        focusTarget(target);
+        scrollToTarget(lenis, target, true);
+      }
     };
 
     update();
     pointer.addEventListener("change", update);
     motion.addEventListener("change", update);
     document.addEventListener("click", onClick, true);
+    document.addEventListener("keydown", onKeyDown, true);
+    window.addEventListener("pointerdown", cancelMomentum, true);
+    window.addEventListener("hashchange", onHashChange);
 
     return () => {
       pointer.removeEventListener("change", update);
       motion.removeEventListener("change", update);
       document.removeEventListener("click", onClick, true);
+      document.removeEventListener("keydown", onKeyDown, true);
+      window.removeEventListener("pointerdown", cancelMomentum, true);
+      window.removeEventListener("hashchange", onHashChange);
       lenisRef.current?.destroy();
       lenisRef.current = null;
     };
   }, []);
 
-  // Page change: Next.js has already scrolled (to the top, or to a #hash
-  // target). Re-measure the new page and sync Lenis to that position so it
-  // never animates back to the old page's scroll target.
+  // Wait for Next.js to mount and perform its own scroll, then reset inertia.
+  // Route anchors go through Lenis too, with the same header offset as clicks.
   useEffect(() => {
-    const lenis = lenisRef.current;
-    if (!lenis) return;
-    lenis.resize();
-    lenis.scrollTo(window.scrollY, { immediate: true, force: true });
+    const frame = requestAnimationFrame(() => {
+      const lenis = lenisRef.current;
+      if (!lenis) return;
+      lenis.resize();
+      const target = hashTarget(window.location.hash);
+      if (target) {
+        focusTarget(target);
+        scrollToTarget(lenis, target, true);
+      } else {
+        lenis.scrollTo(0, { immediate: true, force: true });
+      }
+    });
+    return () => cancelAnimationFrame(frame);
   }, [pathname]);
 
   return null;

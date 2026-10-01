@@ -77,6 +77,7 @@ export default function Navbar() {
 
           <div
             id="navbar-menu"
+            data-lenis-prevent
             className={`navbar-menu ${menuOpen ? "navbar-menu--open" : ""}`.trim()}
           >
             <ul className="navbar-links" role="list">
