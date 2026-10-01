@@ -128,9 +128,11 @@
 
   /* Component: phone mockup (generic, not any real device) */
   --device-width: 240px;
-  --device-bezel: 10px;
-  --device-radius: 40px;
+  --device-bezel: 12px;
+  --device-radius: 44px;
   --device-frame: var(--blue-pressed);
+  --device-hole: 10px; /* punch-hole camera */
+  --device-button-gap: 3.5rem; /* power button to volume button */
 }
 
 @media (min-width: 960px) {
@@ -889,18 +891,31 @@ h3 {
   box-shadow: var(--shadow-lg);
 }
 
-/* Generic speaker slot */
+/* Generic Android phone: round punch-hole camera at the top center */
 .phone::before {
   position: absolute;
-  top: var(--space-2);
+  top: var(--space-3);
   left: 50%;
-  z-index: 1;
-  width: 30%;
-  height: var(--space-1);
+  z-index: 2;
+  width: var(--device-hole);
+  height: var(--device-hole);
   border-radius: var(--radius-full);
   background: var(--device-frame);
   content: "";
   transform: translateX(-50%);
+}
+
+/* Side buttons on the right edge: power, and volume below it (box-shadow copy) */
+.phone::after {
+  position: absolute;
+  top: 18%;
+  right: calc(-1 * var(--device-bezel) - 3px);
+  width: 3px;
+  height: 9%;
+  border-radius: 0 3px 3px 0;
+  background: var(--device-frame);
+  box-shadow: 0 var(--device-button-gap) 0 var(--device-frame);
+  content: "";
 }
 
 .phone-screen {
@@ -1197,8 +1212,10 @@ p a:not(.button) {
 
 .step-list--flow .phone {
   --device-width: 11rem;
-  --device-bezel: 7px;
-  --device-radius: 26px;
+  --device-bezel: 9px;
+  --device-radius: 30px;
+  --device-hole: 8px;
+  --device-button-gap: 2.5rem;
   margin-bottom: var(--space-2);
 }
 
