@@ -101,16 +101,22 @@
   --radius-lg: 16px;
   --radius-full: 999px;
 
-  /* Shadows (soft, tinted with the text color) */
-  /* Shadows tinted with the brand blue #003797 */
-  --shadow-sm: 0 1px 2px rgb(0 55 151 / 0.06), 0 4px 12px rgb(0 55 151 / 0.06);
-  --shadow-md: 0 6px 16px rgb(0 55 151 / 0.1);
-  --shadow-lg: 0 14px 32px rgb(0 55 151 / 0.14);
-  --shadow-xl: 0 24px 48px rgb(0 32 92 / 0.28);
-  --shadow-panel: 0 2px 4px rgb(0 55 151 / 0.04), 0 12px 30px -8px rgb(0 55 151 / 0.16);
-  --shadow-panel-raised: 0 4px 8px rgb(0 55 151 / 0.06), 0 20px 40px -12px rgb(0 55 151 / 0.22);
-  --border-accent: 2px solid var(--color-brand); /* top edge of cards and boxes */
+  /* Elevation: each level stacks 2-3 soft layers tinted with the brand blue
+     (never black). Blue areas (.hero, .page-header, .section--brand,
+     .cta-band) redefine the same levels in dark navy, so white cards on blue
+     still lift. White cards also get --shadow-highlight, a crisp 1px inner
+     top edge, listed first: box-shadow: var(--shadow-highlight), var(--shadow-sm).
+     xs: buttons at rest, small inset items
+     sm: cards, FAQ, tables, callouts, list panels; buttons on hover
+     md: hover/focus lift, navbar, section frames
+     lg: download card, phone frames */
+  --shadow-xs: 0 1px 2px rgb(0 55 151 / 0.05);
+  --shadow-sm: 0 1px 2px rgb(0 55 151 / 0.06), 0 2px 6px rgb(0 55 151 / 0.06);
+  --shadow-md: 0 2px 4px rgb(0 55 151 / 0.05), 0 8px 20px rgb(0 55 151 / 0.08);
+  --shadow-lg: 0 4px 8px rgb(0 55 151 / 0.06), 0 16px 40px rgb(0 55 151 / 0.1), 0 32px 64px rgb(0 55 151 / 0.06);
+  --shadow-highlight: inset 0 1px 0 rgb(255 255 255 / 0.6);
   --shadow-pressed: inset 0 2px 4px rgb(0 32 92 / 0.35);
+  --border-accent: 2px solid var(--color-brand); /* top edge of cards and boxes */
 
   /* Motion */
   --duration-fast: 150ms;
@@ -348,12 +354,12 @@ h3 {
 .button--primary {
   background: var(--color-brand);
   color: var(--color-text-inverse);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-xs);
 }
 
 .button--primary:hover {
   background: var(--color-brand-hover);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-sm);
 }
 
 .button--primary:active {
@@ -365,12 +371,13 @@ h3 {
   border-color: var(--color-brand);
   background: var(--color-bg);
   color: var(--color-brand-text);
+  box-shadow: var(--shadow-xs);
 }
 
 .button--secondary:hover {
   border-color: var(--color-brand);
   background: var(--color-bg);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-sm);
 }
 
 .button--secondary:active {
@@ -382,12 +389,12 @@ h3 {
 .button--inverse {
   background: var(--color-text-inverse);
   color: var(--color-brand-text);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-xs);
 }
 
 .button--inverse:hover {
   background: var(--color-bg);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-sm);
   color: var(--color-brand-hover);
 }
 
@@ -466,6 +473,14 @@ h3 {
 }
 
 
+
+/* The same elevation levels on solid blue, in dark navy so they still read */
+:is(.hero, .page-header, .section--brand, .cta-band) {
+  --shadow-xs: 0 1px 2px rgb(0 32 92 / 0.2);
+  --shadow-sm: 0 1px 2px rgb(0 32 92 / 0.18), 0 4px 10px rgb(0 32 92 / 0.16);
+  --shadow-md: 0 2px 4px rgb(0 32 92 / 0.18), 0 10px 24px rgb(0 32 92 / 0.22);
+  --shadow-lg: 0 4px 8px rgb(0 32 92 / 0.2), 0 20px 44px rgb(0 32 92 / 0.3), 0 40px 80px rgb(0 32 92 / 0.22);
+}
 
 /* Two white sections in a row are separated by a thin line */
 .section:not(.section--brand) + .section:not(.section--brand) {
@@ -562,7 +577,7 @@ h3 {
   border-radius: var(--radius-lg);
   padding: var(--space-5);
   background: var(--color-bg);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-highlight), var(--shadow-sm);
   transition:
     box-shadow var(--duration-medium) var(--ease),
     transform var(--duration-medium) var(--ease);
@@ -627,11 +642,11 @@ h3 {
     transform var(--duration-medium) var(--ease);
 }
 
-/* Linked cards: border deepens to the full blue, deeper shadow, small lift */
+/* Linked cards: border deepens to the full blue, md shadow, small lift */
 .card--link:hover {
   border-color: var(--color-brand);
-  box-shadow: var(--shadow-lg);
-  transform: translateY(-4px);
+  box-shadow: var(--shadow-highlight), var(--shadow-md);
+  transform: translateY(-2px);
 }
 
 .card-more {
@@ -665,6 +680,13 @@ h3 {
   z-index: 50;
   border-bottom: 1px solid var(--color-border);
   background: var(--color-bg);
+  box-shadow: var(--shadow-md);
+  transition: box-shadow var(--duration-medium) var(--ease);
+}
+
+/* Slightly stronger once the page has scrolled (data-scrolled: Navbar.tsx) */
+.site-header[data-scrolled] {
+  box-shadow: 0 2px 4px rgb(0 55 151 / 0.06), 0 10px 28px rgb(0 55 151 / 0.12);
 }
 
 .navbar {
@@ -898,9 +920,9 @@ h3 {
 }
 
 
+/* Uses lg in dark navy (blue-area tokens): the strongest shadow on the page */
 .hero-visual .phone {
   z-index: 1;
-  box-shadow: var(--shadow-xl);
 }
 
 /* Decorative outline shapes in thin white lines, partly behind the phone.
@@ -1180,7 +1202,7 @@ h3 {
   border-radius: var(--radius-lg);
   padding: var(--space-6);
   background: var(--color-bg);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-highlight), var(--shadow-sm);
   text-align: center;
 }
 
@@ -1344,7 +1366,7 @@ p a:not(.button) {
   border-radius: var(--radius-lg);
   padding: var(--space-5);
   background: var(--color-bg);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-highlight), var(--shadow-sm);
 }
 
 /* "flow": steps in a row with a number circle (home page); stacked on mobile */
@@ -1558,7 +1580,7 @@ p a:not(.button) {
   border-radius: var(--radius-lg);
   padding-inline: var(--space-5);
   background: var(--color-bg);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-highlight), var(--shadow-sm);
 }
 
 .faq-item + .faq-item {
@@ -1682,7 +1704,7 @@ p a:not(.button) {
   border-radius: var(--radius-lg);
   padding: var(--space-5);
   background: var(--color-bg);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-highlight), var(--shadow-lg);
 }
 
 @media (min-width: 768px) {
@@ -1747,7 +1769,7 @@ p a:not(.button) {
   border-radius: var(--radius-md);
   padding: var(--space-3);
   background: var(--color-bg);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-xs);
   color: var(--color-brand-text);
 }
 
@@ -2112,7 +2134,7 @@ p a:not(.button) {
   border-top: var(--border-accent);
   border-radius: var(--radius-lg);
   background: var(--color-bg);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-highlight), var(--shadow-sm);
   color: var(--color-text);
 }
 
@@ -2266,7 +2288,7 @@ p a:not(.button) {
   border-radius: var(--radius-lg);
   padding: var(--space-5);
   background: var(--color-bg);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-highlight), var(--shadow-sm);
 }
 
 
@@ -2386,10 +2408,13 @@ p a:not(.button) {
 
 
 
-/* Content surfaces share a soft blue shadow and a small corner detail. */
+/* Content surfaces share a small corner detail. */
 :is(.card, .step-list--cards .step, .compare-panel, .faq-card, .download-card, .qr, .callout, .table-wrap) {
   position: relative;
-  box-shadow: var(--shadow-panel);
+}
+
+.qr {
+  box-shadow: var(--shadow-highlight), var(--shadow-sm);
 }
 
 :is(.compare-panel, .qr) {
@@ -2414,18 +2439,15 @@ p a:not(.button) {
   padding-bottom: var(--space-3);
 }
 
-.card--link:hover,
-:is(.card, .faq-card, .download-card, .callout, .qr):focus-within {
-  box-shadow: var(--shadow-panel-raised);
+/* Keyboard focus inside a surface lifts it one level (the download card
+   already sits at lg) */
+:is(.card, .faq-card, .callout, .qr):focus-within {
+  box-shadow: var(--shadow-highlight), var(--shadow-md);
 }
 
 .screenshot {
   border-radius: var(--radius-md);
-  box-shadow: var(--shadow-panel);
-}
-
-.site-header {
-  box-shadow: 0 4px 18px -8px rgb(0 55 151 / 0.2);
+  box-shadow: var(--shadow-sm);
 }
 
 /* Frame each main content container, with breathing room on small screens. */
@@ -2435,13 +2457,13 @@ p a:not(.button) {
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   padding: clamp(var(--space-4), 3vw, var(--space-6));
-  box-shadow: var(--shadow-panel);
+  box-shadow: var(--shadow-md);
 }
 
 :is(.hero, .page-header, .cta-band) > .site-container,
 .section--brand > .site-container {
   border-color: var(--color-border-inverse);
-  box-shadow: 0 12px 32px -12px rgb(0 32 92 / 0.35), inset 0 1px 0 rgb(255 255 255 / 0.12);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.12), var(--shadow-md);
 }
 
 :is(.section, .hero, .page-header, .cta-band) > .site-container::after {
@@ -2468,7 +2490,7 @@ p a:not(.button) {
   border-radius: var(--radius-lg);
   padding: clamp(var(--space-4), 2.5vw, var(--space-6));
   background: var(--color-bg);
-  box-shadow: var(--shadow-panel);
+  box-shadow: var(--shadow-highlight), var(--shadow-sm);
 }
 
 .fact-number {
@@ -2524,7 +2546,7 @@ p a:not(.button) {
   border-radius: var(--radius-lg);
   padding-inline: var(--space-5);
   background: var(--color-bg);
-  box-shadow: var(--shadow-panel);
+  box-shadow: var(--shadow-highlight), var(--shadow-sm);
 }
 
 .numbered-item:last-child,

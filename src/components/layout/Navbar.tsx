@@ -24,6 +24,15 @@ export default function Navbar() {
     setMenuOpen(false);
   }
 
+  // Mark the header once the page has scrolled, for a slightly stronger shadow.
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const update = () => setScrolled(window.scrollY > 8);
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    return () => window.removeEventListener("scroll", update);
+  }, []);
+
   // Close the mobile menu with Escape and return focus to the toggle button.
   useEffect(() => {
     if (!menuOpen) return;
@@ -42,7 +51,7 @@ export default function Navbar() {
   const closeMenu = () => setMenuOpen(false);
 
   return (
-    <header className="site-header">
+    <header className="site-header" data-scrolled={scrolled || undefined}>
       <Container>
         <nav className="navbar" aria-label="Main">
           {/* The visible "TactileLens" text is the Home link's accessible name. */}
