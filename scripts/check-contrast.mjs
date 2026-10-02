@@ -82,6 +82,14 @@ const pairs = [
   ["focus ring (white) on the blue band", white, blue, UI],
   ["white button: blue on soft-blue hover", blue, softBlue, TEXT],
 
+  // Deep blue navbar pill
+  ["navbar links and brand (white) on the blue pill", white, blue, TEXT],
+  ["navbar link hover: white on the 12% white pill", white, mix(blue, white, 0.12), TEXT],
+  ["current page: blue on the white pill", blue, white, TEXT],
+  ["Download App hover: blue on soft blue", blue, softBlue, TEXT],
+  ["menu button: blue icon on white", blue, white, UI],
+  ["focus ring (white) on the blue pill", white, blue, UI],
+
   // UI parts
   ["focus ring (blue) on white", blue, white, UI],
   ["focus ring (white) on blue", white, blue, UI],

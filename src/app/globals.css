@@ -58,9 +58,10 @@
   --color-border: var(--blue-border);
   --color-divider: rgb(0 55 151 / 0.1); /* 1px line between sections */
   --color-focus: var(--blue);
-  --color-nav-border: rgb(0 55 151 / 0.14); /* navbar pill and menu panel */
-  --color-nav-active: rgb(0 55 151 / 0.08); /* current page pill */
-  --color-nav-hover: rgb(0 55 151 / 0.04); /* hover pill */
+  --color-nav-border: rgb(0 55 151 / 0.14); /* mobile menu panel */
+  --color-nav-active: rgb(0 55 151 / 0.08); /* current page pill (white panel) */
+  --color-nav-hover: rgb(0 55 151 / 0.04); /* hover pill (white panel) */
+  --color-nav-hover-inverse: rgb(255 255 255 / 0.12); /* hover pill on the blue navbar */
 
   /* Spacing: 4/8px scale */
   --space-1: 0.25rem; /*   4px */
@@ -666,7 +667,7 @@ h3 {
 }
 
 /* =========================================================================
- * Navbar — a floating white pill
+ * Navbar — a floating deep blue pill
  * The header is a transparent sticky strip; the container inside it is the
  * pill, --nav-offset from the top and sides. Clicks pass through the strip
  * around the pill. The mobile menu opens as a rounded panel below the pill,
@@ -682,20 +683,21 @@ h3 {
 }
 
 .site-header > .navbar-pill {
+  --color-focus: var(--white);
   position: relative;
   max-width: var(--nav-max);
-  border: 1px solid var(--color-nav-border);
+  border: 1px solid var(--blue-hover);
   border-radius: var(--radius-full);
   padding-inline: var(--space-3);
-  background: var(--color-bg);
-  box-shadow: var(--shadow-md);
+  background: var(--blue);
+  box-shadow: 0 8px 24px rgb(0 32 92 / 0.25);
   pointer-events: auto;
   transition: box-shadow var(--duration-medium) var(--ease);
 }
 
 /* Slightly stronger once the page has scrolled (data-scrolled: Navbar.tsx) */
 .site-header[data-scrolled] > .navbar-pill {
-  box-shadow: 0 2px 4px rgb(0 55 151 / 0.08), 0 16px 40px rgb(0 55 151 / 0.16);
+  box-shadow: 0 2px 6px rgb(0 32 92 / 0.2), 0 12px 32px rgb(0 32 92 / 0.32);
 }
 
 .navbar {
@@ -713,7 +715,7 @@ h3 {
   gap: var(--space-3);
   border-radius: var(--radius-full);
   padding-right: var(--space-2);
-  color: var(--color-brand-text);
+  color: var(--white);
   font-size: var(--text-lg);
   font-weight: var(--weight-bold);
   letter-spacing: -0.02em;
@@ -728,8 +730,10 @@ h3 {
   flex-shrink: 0;
 }
 
+/* White ring so the blue logo doesn't blend into the blue pill */
 .navbar-logo {
   border-radius: var(--radius-sm);
+  box-shadow: 0 0 0 2px var(--white);
   object-fit: contain;
 }
 
@@ -738,7 +742,7 @@ h3 {
   border-radius: var(--radius-sm);
 }
 
-/* Round menu button (mobile) */
+/* Round white menu button (mobile) */
 .navbar-menu-toggle {
   display: inline-flex;
   width: var(--tap-target);
@@ -746,20 +750,22 @@ h3 {
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--color-brand);
+  border: 0;
   border-radius: var(--radius-full);
-  background: var(--color-bg);
-  color: var(--color-brand-text);
+  background: var(--white);
+  color: var(--blue);
   font-size: var(--text-lg);
   cursor: pointer;
 }
 
 .navbar-menu-toggle:hover {
-  background: var(--color-nav-hover);
+  background: var(--soft-blue);
 }
 
-/* Mobile first: the menu is a rounded white panel under the pill */
+/* Mobile first: the menu is a rounded white panel under the pill, with blue
+   text, the soft current-page pill and a solid blue Download button */
 .navbar-menu {
+  --color-focus: var(--blue);
   position: absolute;
   top: calc(100% + var(--space-2));
   right: 0;
@@ -844,7 +850,9 @@ h3 {
     display: none;
   }
 
+  /* On the blue pill: white links, white focus rings */
   .navbar-menu {
+    --color-focus: var(--white);
     display: contents;
   }
 
@@ -855,12 +863,36 @@ h3 {
 
   .navbar-link {
     min-height: 2.5rem;
+    color: var(--white);
     font-size: var(--text-sm);
   }
 
-  .navbar-download {
+  .navbar-link:hover {
+    background: var(--color-nav-hover-inverse);
+    color: var(--white);
+  }
+
+  /* Current page: solid white pill with blue text */
+  .navbar-link[aria-current="page"] {
+    background: var(--white);
+    color: var(--blue);
+  }
+
+  /* Download App: white pill with blue text, very light blue on hover */
+  .navbar .navbar-download {
     width: auto;
     justify-self: end;
+    background: var(--white);
+    color: var(--blue);
+  }
+
+  .navbar .navbar-download:hover,
+  .navbar .navbar-download:active {
+    background: var(--soft-blue);
+  }
+
+  .navbar .navbar-download[aria-current="page"] {
+    box-shadow: 0 0 0 3px rgb(255 255 255 / 0.4);
   }
 }
 
