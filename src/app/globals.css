@@ -61,7 +61,6 @@
   --color-nav-border: rgb(0 55 151 / 0.14); /* mobile menu panel edge */
   --color-nav-active: rgb(0 55 151 / 0.08); /* current page pill (white panel) */
   --color-nav-hover: rgb(0 55 151 / 0.04); /* hover pill (white panel) */
-  --color-nav-hover-inverse: rgb(255 255 255 / 0.12); /* hover pill on the blue navbar */
 
   /* Spacing: 4/8px scale */
   --space-1: 0.25rem; /*   4px */
@@ -140,6 +139,7 @@
   --container-max: 1120px; /* max content width */
   --gutter: 1.25rem; /* 20px; 32px from 768px */
   --header-height: 56px; /* navbar bar; 64px from 960px (px: SmoothScroll.tsx reads it) */
+  --hero-overlap: 6rem; /* how far the Home hero color blocks overlap the image panel */
   --tap-target: 44px;
   --button-height: 48px;
   --qr-size: 10.5rem;
@@ -439,6 +439,19 @@ h3 {
   --color-bg: var(--soft-blue);
 }
 
+/* Navy band for key moments: white text, links, accents and focus rings */
+[data-tone="navy"] {
+  --color-bg: var(--blue-pressed);
+  --color-text: var(--white);
+  --color-text-muted: rgb(255 255 255 / 0.85);
+  --color-brand: var(--white);
+  --color-brand-text: var(--white);
+  --color-brand-hover: var(--white);
+  --color-border: rgb(255 255 255 / 0.24);
+  --color-focus: var(--white);
+  background: var(--color-bg);
+}
+
 [data-tone="mist"],
 [data-tone="soft"] {
   /* Phones and the Download card lift a little more on a tint */
@@ -665,25 +678,26 @@ h3 {
 }
 
 /* =========================================================================
- * Navbar — a full-width deep blue bar, sticky at the very top
- * The bar spans the screen edge to edge; its content stays aligned to the
- * 1120px content width. The mobile menu opens as a full-width white panel
+ * Navbar — a minimal white bar, full width, sticky at the very top
+ * Logo left; links on the right in a lighter weight with generous spacing;
+ * a small solid blue Download App button at the far right. Thin bottom
+ * border, no heavy shadow. The mobile menu opens as a full-width white panel
  * directly under the bar, so the bar itself never changes height.
  * ========================================================================= */
 
 .site-header {
-  --color-focus: var(--white);
+  --color-focus: var(--blue);
   position: sticky;
   top: 0;
   z-index: 50;
-  background: var(--blue);
-  box-shadow: 0 2px 12px rgb(0 32 92 / 0.18);
+  border-bottom: 1px solid var(--color-divider);
+  background: var(--white);
   transition: box-shadow var(--duration-medium) var(--ease);
 }
 
-/* Slightly stronger once the page has scrolled (data-scrolled: Navbar.tsx) */
+/* A whisper of shadow once the page has scrolled (data-scrolled: Navbar.tsx) */
 .site-header[data-scrolled] {
-  box-shadow: 0 2px 6px rgb(0 32 92 / 0.18), 0 6px 20px rgb(0 32 92 / 0.24);
+  box-shadow: 0 1px 8px rgb(0 55 151 / 0.06);
 }
 
 .navbar {
@@ -701,7 +715,7 @@ h3 {
   gap: var(--space-3);
   border-radius: var(--radius-full);
   padding-right: var(--space-2);
-  color: var(--white);
+  color: var(--ink);
   font-size: var(--text-lg);
   font-weight: var(--weight-bold);
   letter-spacing: -0.02em;
@@ -716,10 +730,8 @@ h3 {
   flex-shrink: 0;
 }
 
-/* White ring so the blue logo doesn't blend into the blue pill */
 .navbar-logo {
   border-radius: var(--radius-sm);
-  box-shadow: 0 0 0 2px var(--white);
   object-fit: contain;
 }
 
@@ -728,7 +740,7 @@ h3 {
   border-radius: var(--radius-sm);
 }
 
-/* Round white menu button (mobile) */
+/* Round menu button (mobile) */
 .navbar-menu-toggle {
   display: inline-flex;
   width: var(--tap-target);
@@ -736,7 +748,7 @@ h3 {
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
-  border: 0;
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-full);
   background: var(--white);
   color: var(--blue);
@@ -809,7 +821,6 @@ h3 {
 /* Download App: solid blue pill; full width at the bottom of the mobile menu */
 .navbar-download {
   width: 100%;
-  border-radius: var(--radius-full);
 }
 
 /* On /download, a light ring marks the button as the current page */
@@ -823,185 +834,369 @@ h3 {
    its list and button become the 2nd and 3rd grid columns. */
 @media (min-width: 960px) {
   .navbar {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    gap: var(--space-5);
-  }
-
-  .navbar-brand {
-    justify-self: start;
+    gap: var(--space-7);
   }
 
   .navbar-menu-toggle {
     display: none;
   }
 
-  /* On the blue pill: white links, white focus rings */
+  /* The list and the button become items of the bar, pushed to the right */
   .navbar-menu {
-    --color-focus: var(--white);
     display: contents;
   }
 
   .navbar-links {
     flex-direction: row;
-    gap: var(--space-1);
+    gap: var(--space-6);
+    margin-left: auto;
   }
 
   .navbar-link {
+    position: relative;
     min-height: 2.5rem;
-    color: var(--white);
-    font-size: var(--text-sm);
+    padding-inline: 0;
+    color: var(--ink);
+    font-size: var(--text-base);
+    font-weight: var(--weight-regular);
   }
 
   .navbar-link:hover {
-    background: var(--color-nav-hover-inverse);
-    color: var(--white);
+    background: none;
+    color: var(--blue);
   }
 
-  /* Current page: solid white pill with blue text */
+  /* Current page: blue text with a short blue bar under it (not color alone) */
   .navbar-link[aria-current="page"] {
-    background: var(--white);
+    background: none;
     color: var(--blue);
+    font-weight: var(--weight-semibold);
   }
 
-  /* Download App: white pill with blue text, very light blue on hover */
-  .navbar .navbar-download {
+  .navbar-link[aria-current="page"]::after {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    background: var(--blue);
+    content: "";
+  }
+
+  /* Download App: a small solid blue button */
+  .navbar-download {
     width: auto;
-    justify-self: end;
-    background: var(--white);
-    color: var(--blue);
-  }
-
-  .navbar .navbar-download:hover,
-  .navbar .navbar-download:active {
-    background: var(--soft-blue);
-  }
-
-  .navbar .navbar-download[aria-current="page"] {
-    box-shadow: 0 0 0 3px rgb(255 255 255 / 0.4);
+    border-radius: var(--radius-sm);
   }
 }
 
 /* =========================================================================
- * Hero
+ * Editorial layout grid
+ * --side is the gutter outside the 1120px content width; .bleed grids put
+ * 20 equal content tracks between two --side tracks, so a panel can run to
+ * the screen edge while text stays aligned with the rest of the page.
+ * Lines: 1 = screen left, 2 = content left, 22 = content right, 23 = screen right.
  * ========================================================================= */
 
-/* Mobile first: tighter top spacing so the Download button is visible
-   without scrolling on a typical phone. */
+.hero,
+.ed-split {
+  --side: max(var(--gutter), calc((100% - var(--container-max)) / 2));
+  display: grid;
+  grid-template-columns: var(--side) repeat(20, minmax(0, 1fr)) var(--side);
+}
+
+/* =========================================================================
+ * Hero — editorial split (Home)
+ * Desktop: headline on white over 45% of the content width, a full-bleed
+ * soft blue-gray phone panel on the right 55%, and two color blocks that
+ * overlap the bottom of the panel (navy straddles the split, blue runs to
+ * the right edge). Tablet and phone: headline, then the panel, then the
+ * blocks, all full width.
+ * ========================================================================= */
+
 .hero {
   position: relative;
-  overflow: hidden; /* clips the outline shapes, so nothing scrolls sideways */
-  padding-block: clamp(var(--space-6), 8vw, var(--space-9));
+  overflow-x: clip; /* angled phones never cause sideways scrolling */
+  background: var(--color-bg);
+}
+
+.hero-copy {
+  grid-column: 2 / 22;
+  padding-block: clamp(var(--space-7), 8vw, var(--space-9)) var(--space-7);
+}
+
+.hero-title {
+  max-width: 12ch;
+  color: var(--ink);
+  font-size: clamp(2.75rem, 1.5rem + 5vw, 5rem);
+  font-weight: var(--weight-extrabold);
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+}
+
+.hero-lead {
+  max-width: 34ch;
+  margin-top: var(--space-5);
+  color: var(--color-text-muted);
+  font-size: var(--text-lg);
+  line-height: var(--leading-normal);
+}
+
+/* Phones only: the blocks with the main call to action sit further down */
+.hero-mobile-cta {
+  margin-top: var(--space-6);
+}
+
+@media (min-width: 640px) {
+  .hero-mobile-cta {
+    display: none;
+  }
+}
+
+.hero-media {
+  display: grid;
+  grid-column: 1 / -1;
+  place-items: center;
+  overflow: clip;
+  padding-block: var(--space-8);
+  background: var(--soft-blue);
+}
+
+/* Two phones stacked in one grid cell: the main one large and slightly
+   angled, a smaller one behind it */
+.hero-phones {
+  display: grid;
+  place-items: center;
+}
+
+.hero-phone {
+  grid-area: 1 / 1;
+}
+
+.hero-phone--front {
+  --device-width: clamp(13rem, 20vw, 18rem);
+  z-index: 1;
+  transform: translateX(18%) rotate(-6deg);
+}
+
+.hero-phone--back {
+  --device-width: clamp(10.5rem, 15vw, 14rem);
+  transform: translate(-38%, -4%) rotate(7deg);
+}
+
+@media (min-width: 960px) {
+  .hero-phone--back {
+    transform: translate(-48%, -4%) rotate(7deg);
+  }
+}
+
+.hero-phone .phone {
+  box-shadow: var(--shadow-lg);
+}
+
+/* No corner marks around the angled hero phones */
+.hero .screen-preview-stage::before,
+.hero .screen-preview-stage::after {
+  display: none;
+}
+
+/* Color blocks */
+.hero-block {
+  grid-column: 1 / -1;
+  padding: clamp(var(--space-6), 4vw, var(--space-8)) var(--side);
+  color: var(--white);
+  --color-focus: var(--white);
+}
+
+.hero-block--navy {
+  background: var(--blue-pressed);
+}
+
+.hero-block--blue {
+  background: var(--blue);
+}
+
+.hero-features {
+  display: grid;
+  gap: var(--space-6);
+}
+
+@media (min-width: 640px) {
+  .hero-features {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.hero-block-title {
+  color: var(--white);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-snug);
+}
+
+.hero-block-heading {
+  max-width: 16ch;
+  color: var(--white);
+  font-size: clamp(1.75rem, 1.2rem + 1.6vw, 2.5rem);
+  font-weight: var(--weight-extrabold);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+.hero-block-text {
+  max-width: 40ch;
+  margin-top: var(--space-2);
+  color: var(--white);
+}
+
+.hero-block-button {
+  margin-top: var(--space-6);
+}
+
+@media (min-width: 960px) {
+  .hero-copy {
+    grid-column: 2 / 11;
+    grid-row: 1;
+    align-self: center;
+    padding-right: var(--space-6);
+    padding-bottom: calc(var(--hero-overlap) + var(--space-8));
+  }
+
+  .hero-media {
+    grid-column: 11 / -1;
+    grid-row: 1;
+    min-height: 44rem;
+    padding-bottom: calc(var(--hero-overlap) + var(--space-6));
+  }
+
+  /* Both blocks sit on row 2 and are pulled up over the panel's bottom edge */
+  .hero-block {
+    position: relative;
+    z-index: 2;
+    grid-row: 2;
+    margin-top: calc(-1 * var(--hero-overlap));
+    padding: var(--space-7) var(--space-7);
+  }
+
+  .hero-block--navy {
+    grid-column: 6 / 14;
+  }
+
+  .hero-block--blue {
+    grid-column: 14 / -1;
+    padding-right: var(--side);
+  }
+}
+
+/* =========================================================================
+ * Editorial sections: big bold left-aligned headlines, short text, lots of
+ * white space. Bands are white, soft blue-gray or navy (see data-tone).
+ * ========================================================================= */
+
+.ed-section {
+  padding-block: var(--section-pad-y);
   background: var(--color-bg);
   color: var(--color-text);
 }
 
-.hero-grid {
+.ed-header {
+  max-width: 44rem;
+  margin-bottom: var(--section-header-gap);
+}
+
+.ed-title {
+  margin-top: var(--space-3);
+  color: var(--color-text);
+  font-size: clamp(2.25rem, 1.3rem + 3vw, 3.75rem);
+  font-weight: var(--weight-extrabold);
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+}
+
+.ed-lead {
+  max-width: 40ch;
+  margin-top: var(--space-4);
+  color: var(--color-text-muted);
+  font-size: var(--text-lg);
+}
+
+/* "side": headline left, content right on wide screens */
+@media (min-width: 960px) {
+  .ed-layout--side {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    align-items: start;
+    gap: var(--space-8);
+  }
+
+  .ed-layout--side .ed-header {
+    margin-bottom: 0;
+  }
+}
+
+/* Asymmetric split with a full-bleed soft panel for the image */
+.ed-split {
+  background: var(--color-bg);
+}
+
+.ed-split-text {
+  grid-column: 2 / 22;
+  padding-block: var(--section-pad-y) var(--space-8);
+}
+
+.ed-split-media {
   display: grid;
-  gap: var(--space-8);
+  grid-column: 1 / -1;
+  place-items: center;
+  padding-block: var(--space-8);
+  background: var(--soft-blue);
+}
+
+.ed-split-media .phone {
+  box-shadow: var(--shadow-lg);
 }
 
 @media (min-width: 960px) {
-  .hero-grid {
-    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
-    align-items: center;
+  .ed-split-text {
+    grid-row: 1;
+    align-self: center;
+    padding-block: var(--section-pad-y);
+  }
+
+  .ed-split-media {
+    grid-row: 1;
+    padding-block: var(--section-pad-y);
+  }
+
+  .ed-split--media-left .ed-split-media {
+    grid-column: 1 / 11;
+  }
+
+  .ed-split--media-left .ed-split-text {
+    grid-column: 12 / 22;
+  }
+
+  .ed-split--media-right .ed-split-media {
+    grid-column: 12 / -1;
+  }
+
+  .ed-split--media-right .ed-split-text {
+    grid-column: 2 / 11;
   }
 }
 
-.hero-content {
-  max-width: 720px;
+/* "See it in action": the printed expression and its braille, large */
+.compare--large .compare-printed {
+  font-size: clamp(2.5rem, 1.5rem + 3vw, 4rem);
 }
 
-
-.hero-chips {
-  margin-top: var(--space-5);
-  margin-bottom: 0;
+.compare--large .compare-braille {
+  font-size: clamp(3rem, 2rem + 3.5vw, 5rem);
 }
 
-.hero-title {
-  margin-top: var(--space-5);
-  color: var(--color-text);
-  font-size: var(--text-3xl);
-  font-weight: var(--weight-extrabold);
-  line-height: var(--leading-tight);
-  letter-spacing: -0.02em;
+.compare--large .compare-panel {
+  min-height: 12rem;
 }
-
-/* The one blue key word in the home h1 */
-.hero-title-highlight {
-  color: var(--color-brand-text);
-}
-
-.hero-lead {
-  max-width: var(--measure);
-  margin-top: var(--space-4);
-  color: var(--color-text-muted);
-}
-
-@media (min-width: 768px) {
-  .hero-lead {
-    margin-top: var(--space-5);
-    font-size: var(--text-lg);
-  }
-}
-
-.hero-actions {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  gap: var(--space-3) var(--space-4);
-  margin-top: var(--space-6);
-}
-
-
-
-
-/* Phone frame next to the hero text */
-.hero-visual {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  padding: var(--space-5) var(--space-5);
-}
-
-
-.hero-visual .phone {
-  z-index: 1;
-}
-
-/* Decorative outline shapes in thin light-blue lines, partly behind the phone.
-   They stay inside the visual column, never under the hero text. */
-.hero-visual::before,
-.hero-visual::after {
-  position: absolute;
-  z-index: 0;
-  top: 50%;
-  left: 50%;
-  border: 1px solid var(--color-border);
-  content: "";
-  pointer-events: none;
-}
-
-.hero-visual::before {
-  width: min(26rem, 95vw);
-  aspect-ratio: 1;
-  border-radius: var(--radius-full);
-  transform: translate(-35%, -58%);
-}
-
-.hero-visual::after {
-  width: min(15rem, 60vw);
-  aspect-ratio: 15 / 19;
-  border-radius: 2rem;
-  transform: translate(-92%, -18%) rotate(-8deg);
-}
-
-
-
-
-
-
-
 
 /* =========================================================================
  * Download call to action
@@ -1857,9 +2052,9 @@ p a:not(.button) {
 }
 
 /* =========================================================================
- * CTA — "Ready to try TactileLens?": the only deep blue band, full width,
- * with centered white text and a white Download button. Links and focus
- * rings on it are white.
+ * CTA — "Ready to try TactileLens?": a full-width brand blue block with a
+ * big white headline on the left and a white Download button on the right.
+ * Links and focus rings on it are white.
  * ========================================================================= */
 
 .cta-band {
@@ -1875,9 +2070,16 @@ p a:not(.button) {
 .cta-band-inner {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   gap: var(--space-6);
-  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .cta-band-inner {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
 }
 
 .cta-band-text {
@@ -1887,7 +2089,6 @@ p a:not(.button) {
 .cta-band-heading {
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: var(--space-4);
 }
 
@@ -1902,10 +2103,10 @@ p a:not(.button) {
 
 .cta-band-title {
   color: var(--color-brand-text);
-  font-size: var(--text-2xl);
+  font-size: clamp(2rem, 1.2rem + 2.6vw, 3.25rem);
   font-weight: var(--weight-extrabold);
-  line-height: var(--leading-heading);
-  letter-spacing: -0.02em;
+  line-height: 1.05;
+  letter-spacing: -0.035em;
 }
 
 .cta-band-description {

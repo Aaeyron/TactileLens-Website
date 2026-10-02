@@ -1,46 +1,61 @@
-import { downloadCta, hero } from "@/content/site";
+import { downloadCta, hero, heroBlocks } from "@/content/site";
 import Button from "@/components/ui/Button";
-import Chip from "@/components/ui/Chip";
-import Container from "@/components/ui/Container";
 import Screenshot from "@/components/ui/Screenshot";
 
+/**
+ * Editorial split hero: a very large headline on white (left) and a
+ * full-bleed soft blue-gray panel with two angled phones (right). Two solid
+ * color blocks overlap the bottom of the panel: navy (what the app does)
+ * and brand blue (the download call to action, running to the right edge).
+ * The headline has no button on wide screens; the blue block is the call to
+ * action there. Phones get a Download button under the headline instead,
+ * because the blocks sit further down on small screens.
+ */
 export default function HeroSection() {
   return (
     <section className="hero" data-tone="white" aria-labelledby="hero-title">
-      <Container className="hero-grid">
-        <div className="hero-content">
-          <Chip>{hero.badge}</Chip>
+      <div className="hero-copy">
+        <h1 id="hero-title" className="hero-title">
+          {hero.headline}
+        </h1>
+        <p className="hero-lead">{hero.lead}</p>
+        <div className="hero-mobile-cta">
+          <Button href={downloadCta.pageHref} variant="primary">
+            {downloadCta.label}
+          </Button>
+        </div>
+      </div>
 
-          <h1 id="hero-title" className="hero-title">
-            {hero.titleLead}{" "}
-            <span className="hero-title-highlight">{hero.titleHighlight}</span>
-          </h1>
-
-          <p className="hero-lead">{hero.description}</p>
-
-          <div className="hero-actions">
-            <Button href={downloadCta.pageHref} variant="primary">
-              {downloadCta.label}
-            </Button>
-            <Button href={hero.secondaryCta.href} variant="secondary">
-              {hero.secondaryCta.label}
-            </Button>
+      <div className="hero-media">
+        <div className="hero-phones">
+          {/* TODO: screenshots — see screens.camera and screens.scanResult in site.ts */}
+          <div className="hero-phone hero-phone--back">
+            <Screenshot screen={hero.backScreen} frame caption={false} sizes="(min-width: 960px) 230px, 170px" />
           </div>
-
-          <ul className="chip-row hero-chips" role="list">
-            {hero.trustBadges.map((badge) => (
-              <li key={badge.label}>
-                <Chip>{badge.label}</Chip>
-              </li>
-            ))}
-          </ul>
+          <div className="hero-phone hero-phone--front">
+            <Screenshot screen={hero.screen} frame caption={false} preload sizes="(min-width: 960px) 290px, 220px" />
+          </div>
         </div>
+      </div>
 
-        <div className="hero-visual">
-          {/* TODO: screenshot — see screens.scanResult in site.ts */}
-          <Screenshot screen={hero.screen} frame preload sizes="(min-width: 960px) 272px, 240px" />
-        </div>
-      </Container>
+      <div className="hero-block hero-block--navy">
+        <ul className="hero-features" role="list">
+          {heroBlocks.features.map((feature) => (
+            <li key={feature.title}>
+              <h2 className="hero-block-title">{feature.title}</h2>
+              <p className="hero-block-text">{feature.text}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div className="hero-block hero-block--blue">
+        <h2 className="hero-block-heading">{heroBlocks.download.title}</h2>
+        <p className="hero-block-text">{heroBlocks.download.text}</p>
+        <Button href={downloadCta.pageHref} variant="inverse" className="hero-block-button">
+          {heroBlocks.download.buttonLabel}
+        </Button>
+      </div>
     </section>
   );
 }

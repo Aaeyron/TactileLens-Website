@@ -22,13 +22,15 @@ type ScreenshotProps = {
   preload?: boolean;
   /** Rendered width hint for next/image. */
   sizes: string;
+  /** Show the label and "coming soon" caption under the image (default). */
+  caption?: boolean;
 };
 
 /**
  * A captioned app screenshot. Missing images get a branded placeholder
  * and an explicit coming-soon caption.
  */
-export default function Screenshot({ screen, frame = false, preload = false, sizes }: ScreenshotProps) {
+export default function Screenshot({ screen, frame = false, preload = false, sizes, caption = true }: ScreenshotProps) {
   const content = screen.src ? (
     <Image
       className="screenshot-image"
@@ -57,10 +59,12 @@ export default function Screenshot({ screen, frame = false, preload = false, siz
           <div className="screenshot">{content}</div>
         )}
       </div>
-      <figcaption className="screen-caption">
-        {screen.label.replace(/^App screen: /, "")}
-        {!screen.src && <span className="screen-caption-status">{screenPreview.pending}</span>}
-      </figcaption>
+      {caption && (
+        <figcaption className="screen-caption">
+          {screen.label.replace(/^App screen: /, "")}
+          {!screen.src && <span className="screen-caption-status">{screenPreview.pending}</span>}
+        </figcaption>
+      )}
     </figure>
   );
 }

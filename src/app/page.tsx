@@ -3,10 +3,12 @@ import { homeBeforeAfter, homeHighlights, homeSteps, homeWhy, site } from "@/con
 import HeroSection from "@/components/home/HeroSection";
 import SeeItInAction from "@/components/home/SeeItInAction";
 import CtaBanner from "@/components/download/CtaBanner";
+import EdSection from "@/components/editorial/EdSection";
+import EdSplit from "@/components/editorial/EdSplit";
 import ItemGrid from "@/components/ui/ItemGrid";
 import FactNumbers from "@/components/ui/FactNumbers";
-import Section from "@/components/ui/Section";
-import StepList from "@/components/ui/StepList";
+import NumberedList from "@/components/ui/NumberedList";
+import Screenshot from "@/components/ui/Screenshot";
 import TextLink from "@/components/ui/TextLink";
 
 // Title and description come from the root layout defaults.
@@ -17,43 +19,46 @@ export default function HomePage() {
     <>
       <HeroSection />
 
-      <Section
+      {/* How it works: phone panel on the left (the hero's is on the right) */}
+      <EdSplit
         id="what-it-does"
-        tone="soft"
+        mediaSide="left"
         eyebrow={homeSteps.eyebrow}
         title={homeSteps.title}
         description={homeSteps.description}
+        media={
+          // TODO: screenshot — see screens.brailleOutput in site.ts
+          <div className="ed-phone">
+            <Screenshot screen={homeSteps.steps[2].screen} frame sizes="(min-width: 960px) 272px, 240px" />
+          </div>
+        }
       >
-        <StepList steps={homeSteps.steps} variant="flow" />
+        <NumberedList
+          items={homeSteps.steps.map((step) => ({ title: step.title, text: step.description }))}
+        />
         <div className="section-footer">
           <TextLink href={homeSteps.link.href}>{homeSteps.link.label}</TextLink>
         </div>
-      </Section>
+      </EdSplit>
 
-      <Section
-        id="why"
-        eyebrow={homeWhy.eyebrow}
-        title={homeWhy.title}
-        description={homeWhy.description}
-      >
+      <EdSection id="why" eyebrow={homeWhy.eyebrow} title={homeWhy.title} description={homeWhy.description}>
         <ItemGrid items={homeWhy.items} columns={3} numbered />
-      </Section>
+      </EdSection>
 
-      <Section
+      <SeeItInAction />
+
+      <EdSection
         id="before-and-after"
-        tone="soft"
+        tone="navy"
         eyebrow={homeBeforeAfter.eyebrow}
         title={homeBeforeAfter.title}
         description={homeBeforeAfter.description}
       >
         <ItemGrid items={homeBeforeAfter.items} layout="split" />
-      </Section>
+      </EdSection>
 
-      <SeeItInAction />
-
-      <Section
+      <EdSection
         id="highlights"
-        tone="mist"
         eyebrow={homeHighlights.eyebrow}
         title={homeHighlights.title}
         description={homeHighlights.description}
@@ -65,7 +70,7 @@ export default function HomePage() {
         <div className="section-footer">
           <TextLink href={homeHighlights.link.href}>{homeHighlights.link.label}</TextLink>
         </div>
-      </Section>
+      </EdSection>
 
       <CtaBanner />
     </>

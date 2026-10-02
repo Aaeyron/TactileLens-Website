@@ -158,6 +158,9 @@ export const footer = {
  * ------------------------------------------------------------------------- */
 
 export const hero = {
+  // DRAFT: review — editorial hero headline and short (two-line) lead.
+  headline: "Braille from print, in seconds.",
+  lead: "Scan a printed page with your Android phone. TactileLens turns its text and math into braille.",
   badge: "Accessible learning materials",
   titleLead: "Make printed learning materials more accessible with",
   titleHighlight: "TactileLens.",
@@ -173,6 +176,21 @@ export const hero = {
     { label: "Nemeth math" },
   ],
   screen: screens.scanResult,
+  /** Smaller phone behind the main one in the hero image panel. */
+  backScreen: screens.camera,
+} as const;
+
+// DRAFT: review — the two color blocks that overlap the bottom of the Home hero.
+export const heroBlocks = {
+  features: [
+    { title: "Scan printed text", text: "Point your phone at a worksheet, handout or book page." },
+    { title: "Convert math to Nemeth", text: "Algebra comes out in the braille code for math." },
+  ],
+  download: {
+    title: "Get TactileLens for Android",
+    text: "Download the app and follow our step-by-step install guide.",
+    buttonLabel: "Download",
+  },
 } as const;
 
 export const homeSteps = {
