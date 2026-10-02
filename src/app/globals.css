@@ -785,8 +785,9 @@ h3 {
   letter-spacing: -0.02em;
 }
 
+/* The one blue key word in the home h1 */
 .hero-title-highlight {
-  color: var(--color-text);
+  color: var(--color-brand-text);
 }
 
 .hero-lead {
@@ -1685,16 +1686,18 @@ p a:not(.button) {
 }
 
 /* =========================================================================
- * CTA band — full-width solid blue "Ready to try TactileLens?"
+ * CTA — "Ready to try TactileLens?" as a white card with a blue border
  * ========================================================================= */
 
 .cta-band {
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
   padding-block: var(--section-pad-y);
   background: var(--color-bg);
   color: var(--color-text);
+}
+
+/* The section frame becomes the card: full blue border instead of the light one */
+.cta-band > .site-container.cta-band-inner {
+  border-color: var(--color-brand);
 }
 
 .cta-band-inner {
@@ -1730,7 +1733,7 @@ p a:not(.button) {
 }
 
 .cta-band-title {
-  color: var(--color-text);
+  color: var(--color-brand-text);
   font-size: var(--text-2xl);
   font-weight: var(--weight-extrabold);
   line-height: var(--leading-heading);
@@ -2393,20 +2396,6 @@ p a:not(.button) {
   border-radius: var(--radius-full);
   background: currentColor;
   content: "";
-}
-
-.cta-band::before {
-  position: absolute;
-  right: -5rem;
-  bottom: -12rem;
-  z-index: -1;
-  width: 28rem;
-  aspect-ratio: 1;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-full);
-  box-shadow: 0 0 0 32px var(--color-bg), 0 0 0 33px var(--color-border);
-  content: "";
-  pointer-events: none;
 }
 
 :is(.numbered-list, .info-list, .on-this-page) {
