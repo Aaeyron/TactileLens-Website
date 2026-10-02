@@ -1860,7 +1860,7 @@ p a:not(.button) {
   color: var(--color-brand-text);
   font-family: var(--font-display);
   font-size: var(--text-xl);
-  font-weight: var(--weight-bold);
+  font-weight: var(--weight-regular);
   letter-spacing: -0.03em;
   text-decoration: none;
 }
@@ -1876,10 +1876,12 @@ p a:not(.button) {
   margin-top: var(--space-3);
 }
 
+/* No bold anywhere in the footer: headings are small uppercase dark navy,
+   links are the lighter muted color. */
 .footer-heading {
   margin-bottom: var(--space-3);
-  color: var(--color-brand-text);
-  font-weight: var(--weight-bold);
+  color: var(--color-text);
+  font-weight: var(--weight-regular);
   font-size: 0.75rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -1904,8 +1906,8 @@ p a:not(.button) {
   align-items: center;
   gap: var(--space-2);
   padding-block: var(--space-2);
-  color: var(--color-text);
-  font-weight: var(--weight-semibold);
+  color: var(--color-text-muted);
+  font-weight: var(--weight-regular);
   text-underline-offset: 3px;
   text-decoration: none;
 }
@@ -1921,6 +1923,7 @@ p a:not(.button) {
 }
 
 .footer-link:hover {
+  color: var(--color-brand-text);
   text-decoration: underline;
   text-decoration-thickness: 2px;
 }
