@@ -3,7 +3,8 @@ import type { ComponentPropsWithoutRef } from "react";
 
 type ButtonProps = ComponentPropsWithoutRef<"a"> & {
   href: string;
-  variant?: "primary" | "secondary";
+  /** "inverse" is the white button for deep blue areas. */
+  variant?: "primary" | "secondary" | "inverse";
   size?: "md" | "sm";
 };
 

@@ -18,7 +18,7 @@ export default function TeamPage() {
     <>
       <PageHeader {...header} />
 
-      <Section id="members" eyebrow={members.eyebrow} title={members.title}>
+      <Section id="members" tone="mist" eyebrow={members.eyebrow} title={members.title}>
         <ul className="item-grid item-grid--4" role="list">
           {members.list.map((member, index) => (
             // Index in the key: placeholder entries share the same name.
@@ -36,7 +36,7 @@ export default function TeamPage() {
         <ItemGrid items={projectFacts.items} columns={4} />
       </Section>
 
-      <Section id="school" eyebrow={school.eyebrow} title={school.title}>
+      <Section id="school" tone="mist" eyebrow={school.eyebrow} title={school.title}>
         <div className="split">
           <MemberProfile
             as="div"

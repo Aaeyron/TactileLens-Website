@@ -12,7 +12,7 @@ type PageHeaderProps = {
 /** The solid blue top of every inner page. Holds the page's only <h1>. */
 export default function PageHeader({ eyebrow, title, intro, children }: PageHeaderProps) {
   return (
-    <section className="page-header" aria-labelledby="page-title">
+    <section className="page-header" data-tone="white" aria-labelledby="page-title">
       <Container>
         <div className="page-header-content">
           <p className="section-eyebrow">{eyebrow}</p>

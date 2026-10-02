@@ -18,7 +18,7 @@ export default function FeaturesPage() {
     <>
       <PageHeader {...header} />
 
-      <Section id="all-features" eyebrow={list.eyebrow} title={list.title} description={list.description}>
+      <Section id="all-features" tone="mist" eyebrow={list.eyebrow} title={list.title} description={list.description}>
         <FeatureRows items={list.items} />
         <div className="section-callout">
           <Callout variant="tip" text={list.tip} />
@@ -27,6 +27,7 @@ export default function FeaturesPage() {
 
       <Section
         id={howItWorks.id}
+        tone="soft"
         eyebrow={howItWorks.eyebrow}
         title={howItWorks.title}
         description={howItWorks.description}

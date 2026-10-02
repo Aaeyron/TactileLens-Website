@@ -18,13 +18,16 @@
 
 /* =========================================================================
  * Design tokens — the single source of truth for every design value.
- * Palette: white everywhere; the app logo's dark blue (#003797) is the
+ * Palette: white first; the app logo's dark blue (#003797) is the
  * secondary/accent color, plus its darker shades (hover, pressed). Headings
- * and body text are dark navy. No gradients or patterns.
+ * and body text are dark navy. Section bands alternate white, mist (#F6F8FB)
+ * and soft blue (#EDF3FB); deep blue is only for the "Ready to try" band and
+ * the navbar. No gradients or patterns.
  *
  * Contrast (WCAG 2.2 AA), verified by `npm run check:contrast`:
  * - Blue #003797 on white and white on blue are both 10.5:1.
  * - Body text #0f1f36 is 16.5:1 and muted text #4a5a72 is 7.0:1 on white.
+ * - On both tints: body ≥14.8:1, muted ≥6.28:1, blue ≥9.44:1.
  * - --color-border and --color-divider are light lines made from the same
  *   blue (decorative); controls use the full blue.
  * ========================================================================= */
@@ -40,6 +43,8 @@
   --ink: #0f1f36; /* body text */
   --ink-muted: #4a5a72; /* secondary text (7.0:1 on white) */
   --blue-border: #ccd7ea; /* light border: 20% of the blue on white */
+  --mist: #f6f8fb; /* very light cool gray section tone */
+  --soft-blue: #edf3fb; /* soft blue section tone, button hover on blue */
 
   /* Roles (components use these) */
   --color-bg: var(--white);
@@ -390,6 +395,23 @@ h3 {
   box-shadow: var(--shadow-pressed);
 }
 
+/* White button for deep blue areas (the "Ready to try" band, the navbar) */
+.button--inverse {
+  background: var(--white);
+  color: var(--blue);
+  box-shadow: var(--shadow-xs);
+}
+
+.button--inverse:hover {
+  background: var(--soft-blue);
+  box-shadow: var(--shadow-sm);
+}
+
+.button--inverse:active {
+  background: var(--soft-blue);
+  box-shadow: var(--shadow-pressed);
+}
+
 .button--sm {
   min-height: var(--tap-target);
   padding: var(--space-2) var(--space-4);
@@ -405,9 +427,31 @@ h3 {
   background: var(--color-bg);
 }
 
-/* Every page is white; consecutive blocks are separated by spacing and a
-   thin 1px divider, never by a background color. */
-:is(.hero, .page-header, .section) + :is(.section, .cta-band) {
+/* Section tones: full-width bands set with data-tone (Section, PageHeader,
+   HeroSection, CtaBanner). A tinted band also redefines --color-bg, so small
+   details (chips, avatars, the braille diagram) blend into it; real objects
+   (phone screens, the Download card) stay white. Pages never place two bands
+   of the same tone next to each other, and the first band is white. */
+[data-tone="mist"] {
+  --color-bg: var(--mist);
+}
+
+[data-tone="soft"] {
+  --color-bg: var(--soft-blue);
+}
+
+[data-tone="mist"],
+[data-tone="soft"] {
+  /* Phones and the Download card lift a little more on a tint */
+  --shadow-lg: 0 4px 8px rgb(0 55 151 / 0.08), 0 16px 40px rgb(0 55 151 / 0.14), 0 32px 64px rgb(0 55 151 / 0.1);
+  background: var(--color-bg);
+}
+
+/* A 1px divider only where two bands of the same tone meet; everywhere else
+   the color change is enough. */
+[data-tone="white"] + [data-tone="white"],
+[data-tone="mist"] + [data-tone="mist"],
+[data-tone="soft"] + [data-tone="soft"] {
   border-top: 1px solid var(--color-divider);
 }
 
@@ -1022,7 +1066,7 @@ h3 {
   overflow: hidden;
   aspect-ratio: 9 / 19.5;
   border-radius: calc(var(--device-radius) - var(--device-bezel));
-  background: var(--color-bg);
+  background: var(--white);
 }
 
 
@@ -1687,6 +1731,7 @@ p a:not(.button) {
  * ========================================================================= */
 
 .download-card {
+  --color-bg: var(--white);
   display: grid;
   gap: var(--space-7);
   border: 1px solid var(--color-border);
@@ -1794,13 +1839,18 @@ p a:not(.button) {
 }
 
 /* =========================================================================
- * CTA — "Ready to try TactileLens?": a full-width open band with centered
- * text and the Download button, between the section and footer lines
+ * CTA — "Ready to try TactileLens?": the only deep blue band, full width,
+ * with centered white text and a white Download button. Links and focus
+ * rings on it are white.
  * ========================================================================= */
 
 .cta-band {
+  --color-text: var(--white);
+  --color-text-muted: var(--white);
+  --color-brand-text: var(--white);
+  --color-focus: var(--white);
   padding-block: var(--section-pad-y);
-  background: var(--color-bg);
+  background: var(--blue);
   color: var(--color-text);
 }
 
@@ -1823,11 +1873,13 @@ p a:not(.button) {
   gap: var(--space-4);
 }
 
+/* White ring so the blue logo stands out on the blue band */
 .cta-band-logo {
   width: 2.25rem;
   height: 2.25rem;
   flex-shrink: 0;
   border-radius: var(--radius-sm);
+  box-shadow: 0 0 0 2px var(--white);
 }
 
 .cta-band-title {
@@ -1850,11 +1902,15 @@ p a:not(.button) {
 /* White footer (the blue CTA band sits right above it) with a clear brand
    block, navigation and project credit. */
 .site-footer {
-  border-top: 1px solid var(--color-divider);
   padding-block: clamp(var(--space-7), 6vw, var(--space-8)) var(--space-5);
   background: var(--color-bg);
   color: var(--color-text);
   font-size: var(--text-sm);
+}
+
+/* Line above the footer only when the page ends on a white band */
+.site-main:has(> .page-transition > [data-tone="white"]:last-child) + .site-footer {
+  border-top: 1px solid var(--color-divider);
 }
 
 /* Brand + contact on the left, three link columns on the right */

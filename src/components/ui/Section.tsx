@@ -6,6 +6,8 @@ type SectionProps = {
   title: string;
   eyebrow?: string;
   description?: string;
+  /** Full-width background band; never the same tone as a neighbor. */
+  tone?: "white" | "mist" | "soft";
   /** Small supporting visual beside the header on wide screens. */
   aside?: ReactNode;
   children?: ReactNode;
@@ -16,6 +18,7 @@ export default function Section({
   title,
   eyebrow,
   description,
+  tone = "white",
   aside,
   children,
 }: SectionProps) {
@@ -37,6 +40,7 @@ export default function Section({
     <section
       id={id}
       className="section"
+      data-tone={tone}
       aria-labelledby={titleId}
       data-reveal
     >

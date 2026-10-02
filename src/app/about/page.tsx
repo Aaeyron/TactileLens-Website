@@ -23,6 +23,7 @@ export default function AboutPage() {
 
       <Section
         id="why"
+        tone="mist"
         eyebrow={comparison.eyebrow}
         title={comparison.title}
         description={comparison.description}
@@ -42,6 +43,7 @@ export default function AboutPage() {
 
       <Section
         id="objectives"
+        tone="mist"
         eyebrow={objectives.eyebrow}
         title={objectives.title}
         description={objectives.description}
@@ -50,7 +52,7 @@ export default function AboutPage() {
       </Section>
 
       {/* Mission as a full-width pull-quote band */}
-      <Section id="mission" eyebrow={mission.eyebrow} title={mission.title}>
+      <Section id="mission" tone="soft" eyebrow={mission.eyebrow} title={mission.title}>
         <MissionQuote quote={mission.quote} attribution={mission.attribution} />
       </Section>
 
@@ -68,6 +70,7 @@ export default function AboutPage() {
 
       <Section
         id="timeline"
+        tone="mist"
         eyebrow={timeline.eyebrow}
         title={timeline.title}
         description={timeline.description}

@@ -6,7 +6,7 @@ import Screenshot from "@/components/ui/Screenshot";
 
 export default function HeroSection() {
   return (
-    <section className="hero" aria-labelledby="hero-title">
+    <section className="hero" data-tone="white" aria-labelledby="hero-title">
       <Container className="hero-grid">
         <div className="hero-content">
           <Chip>{hero.badge}</Chip>

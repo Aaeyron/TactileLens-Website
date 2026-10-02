@@ -11,7 +11,7 @@ export default function DownloadCard() {
   const { card, release, qr } = downloadPage;
 
   return (
-    <section className="section download-section" aria-labelledby="download-card-title">
+    <section className="section download-section" data-tone="mist" aria-labelledby="download-card-title">
       <Container>
         <div className="download-card">
           <div className="download-card-main">

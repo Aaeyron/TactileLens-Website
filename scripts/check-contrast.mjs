@@ -1,8 +1,8 @@
 // Checks WCAG 2.x contrast for every text/UI color pair in the design tokens.
 // Run with: npm run check:contrast
 // Keep these values in sync with the tokens in src/app/globals.css.
-// Palette: two colors only — white and the app logo blue #003797, plus darker
-// shades of that blue (hover, pressed) and dark navy body text.
+// Palette: white first, app logo blue #003797 as the accent (plus darker
+// shades), dark navy text, and two light section tones (mist, soft blue).
 
 const luminance = (hex) => {
   const [r, g, b] = [1, 3, 5]
@@ -40,6 +40,8 @@ const bluePressed = "#00205c";
 const ink = "#0f1f36"; // body text
 const inkMuted = "#4a5a72"; // secondary text
 const blueBorder = "#ccd7ea"; // light border made from the blue (decorative)
+const mist = "#f6f8fb"; // section tone
+const softBlue = "#edf3fb"; // section tone, white-button hover
 
 // Outline button hover on blue: 25% pressed-blue overlay (only darker).
 const outlineHover = mix(blue, bluePressed, 0.25);
@@ -65,6 +67,20 @@ const pairs = [
   ["white text on solid blue", white, blue, TEXT],
   ["white links on solid blue (footer, blue sections)", white, blue, TEXT],
   ["timeline numbers (blue on white circle) in a blue section", blue, white, TEXT],
+
+  // Tinted section bands (mist, soft blue)
+  ["body text on mist", ink, mist, TEXT],
+  ["muted text on mist", inkMuted, mist, TEXT],
+  ["blue text on mist", blue, mist, TEXT],
+  ["body text on soft blue", ink, softBlue, TEXT],
+  ["muted text on soft blue", inkMuted, softBlue, TEXT],
+  ["blue text on soft blue", blue, softBlue, TEXT],
+  ["focus ring (blue) on soft blue", blue, softBlue, UI],
+
+  // Deep blue "Ready to try" band
+  ["white text and links on the blue band", white, blue, TEXT],
+  ["focus ring (white) on the blue band", white, blue, UI],
+  ["white button: blue on soft-blue hover", blue, softBlue, TEXT],
 
   // UI parts
   ["focus ring (blue) on white", blue, white, UI],

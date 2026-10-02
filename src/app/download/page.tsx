@@ -35,6 +35,7 @@ export default function DownloadPage() {
 
       <Section
         id="install"
+        tone="soft"
         eyebrow={install.eyebrow}
         title={install.title}
         description={install.description}
@@ -69,6 +70,7 @@ export default function DownloadPage() {
 
       <Section
         id="version-history"
+        tone="mist"
         eyebrow={versions.eyebrow}
         title={versions.title}
         description={versions.description}

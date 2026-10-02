@@ -19,7 +19,7 @@ export default function FaqPage() {
     <>
       <PageHeader {...header} />
 
-      <div className="section">
+      <div className="section" data-tone="soft">
         <Container>
           <OnThisPage
             links={[
