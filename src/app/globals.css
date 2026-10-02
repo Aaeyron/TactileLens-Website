@@ -53,6 +53,9 @@
   --color-border: var(--blue-border);
   --color-divider: rgb(0 55 151 / 0.1); /* 1px line between sections */
   --color-focus: var(--blue);
+  --color-nav-border: rgb(0 55 151 / 0.14); /* navbar pill and menu panel */
+  --color-nav-active: rgb(0 55 151 / 0.08); /* current page pill */
+  --color-nav-hover: rgb(0 55 151 / 0.04); /* hover pill */
 
   /* Spacing: 4/8px scale */
   --space-1: 0.25rem; /*   4px */
@@ -129,7 +132,9 @@
   /* Layout */
   --container-max: 1120px; /* max content width */
   --gutter: 1.25rem; /* 20px; 32px from 768px */
-  --header-height: 72px;
+  --header-height: 64px; /* navbar pill (px: SmoothScroll.tsx reads it) */
+  --nav-offset: 12px; /* pill gap from the top and sides; 16px from 768px */
+  --nav-max: 1100px;
   --tap-target: 44px;
   --button-height: 48px;
   --qr-size: 10.5rem;
@@ -152,6 +157,7 @@
 @media (min-width: 768px) {
   :root {
     --gutter: var(--space-6);
+    --nav-offset: 16px;
   }
 }
 
@@ -195,9 +201,9 @@ html.lenis body {
   outline: none;
 }
 
-/* Anchor targets and keyboard-focused elements stop below the sticky header */
+/* Anchor targets and keyboard-focused elements stop below the floating navbar */
 :where([id], a, button, summary, [tabindex]) {
-  scroll-margin-top: calc(var(--header-height) + var(--space-4));
+  scroll-margin-top: calc(var(--nav-offset) + var(--header-height) + var(--space-4));
 }
 
 body {
@@ -577,28 +583,41 @@ h3 {
 }
 
 /* =========================================================================
- * Navbar
+ * Navbar — a floating white pill
+ * The header is a transparent sticky strip; the container inside it is the
+ * pill, --nav-offset from the top and sides. Clicks pass through the strip
+ * around the pill. The mobile menu opens as a rounded panel below the pill,
+ * so the pill itself never changes height.
  * ========================================================================= */
 
 .site-header {
   position: sticky;
   top: 0;
   z-index: 50;
-  border-bottom: 1px solid var(--color-border);
+  padding: var(--nav-offset) var(--nav-offset) 0;
+  pointer-events: none;
+}
+
+.site-header > .navbar-pill {
+  position: relative;
+  max-width: var(--nav-max);
+  border: 1px solid var(--color-nav-border);
+  border-radius: var(--radius-full);
+  padding-inline: var(--space-3);
   background: var(--color-bg);
   box-shadow: var(--shadow-md);
+  pointer-events: auto;
   transition: box-shadow var(--duration-medium) var(--ease);
 }
 
 /* Slightly stronger once the page has scrolled (data-scrolled: Navbar.tsx) */
-.site-header[data-scrolled] {
-  box-shadow: 0 2px 4px rgb(0 55 151 / 0.06), 0 10px 28px rgb(0 55 151 / 0.12);
+.site-header[data-scrolled] > .navbar-pill {
+  box-shadow: 0 2px 4px rgb(0 55 151 / 0.08), 0 16px 40px rgb(0 55 151 / 0.16);
 }
 
 .navbar {
   display: flex;
   min-height: var(--header-height);
-  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: var(--space-4);
@@ -609,7 +628,8 @@ h3 {
   min-height: var(--tap-target);
   align-items: center;
   gap: var(--space-3);
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-full);
+  padding-right: var(--space-2);
   color: var(--color-brand-text);
   font-size: var(--text-lg);
   font-weight: var(--weight-bold);
@@ -635,27 +655,42 @@ h3 {
   border-radius: var(--radius-sm);
 }
 
+/* Round menu button (mobile) */
 .navbar-menu-toggle {
   display: inline-flex;
-  min-width: var(--tap-target);
-  min-height: var(--tap-target);
+  width: var(--tap-target);
+  height: var(--tap-target);
+  flex-shrink: 0;
   align-items: center;
   justify-content: center;
   border: 1px solid var(--color-brand);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-full);
   background: var(--color-bg);
   color: var(--color-brand-text);
   font-size: var(--text-lg);
   cursor: pointer;
 }
 
-/* Mobile first: the menu is a collapsible panel under the header row */
+.navbar-menu-toggle:hover {
+  background: var(--color-nav-hover);
+}
+
+/* Mobile first: the menu is a rounded white panel under the pill */
 .navbar-menu {
+  position: absolute;
+  top: calc(100% + var(--space-2));
+  right: 0;
+  left: 0;
   display: none;
-  width: 100%;
+  max-height: calc(100dvh - var(--nav-offset) - var(--header-height) - var(--space-5));
+  overflow-y: auto;
   flex-direction: column;
   gap: var(--space-3);
-  padding-bottom: var(--space-4);
+  border: 1px solid var(--color-nav-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-3);
+  background: var(--color-bg);
+  box-shadow: var(--shadow-lg);
 }
 
 .navbar-menu--open {
@@ -665,6 +700,7 @@ h3 {
 .navbar-links {
   display: flex;
   flex-direction: column;
+  gap: var(--space-1);
 }
 
 .navbar-link {
@@ -672,28 +708,33 @@ h3 {
   min-height: var(--tap-target);
   align-items: center;
   border-radius: var(--radius-full);
-  padding-inline: var(--space-3);
+  padding-inline: var(--space-4);
   color: var(--color-text-muted);
   font-size: var(--text-base);
   font-weight: var(--weight-semibold);
   text-decoration: none;
+  transition:
+    background-color var(--duration-fast) var(--ease),
+    color var(--duration-fast) var(--ease);
 }
 
+/* Hover: a lighter version of the current-page pill */
 .navbar-link:hover {
+  background: var(--color-nav-hover);
   color: var(--color-brand-text);
 }
 
-/* Current page: solid blue pill with bold white text, so it never relies on
-   color alone. No animation. */
+/* Current page: soft blue pill with blue text. aria-current marks it for
+   screen readers; the pill shape marks it visually, not color alone. */
 .navbar-link[aria-current="page"] {
-  background: var(--color-brand);
-  color: var(--color-text-inverse);
-  font-weight: var(--weight-bold);
+  background: var(--color-nav-active);
+  color: var(--color-brand-text);
 }
 
-/* Mobile: Download App is a full-width button at the bottom of the menu */
+/* Download App: solid blue pill; full width at the bottom of the mobile menu */
 .navbar-download {
   width: 100%;
+  border-radius: var(--radius-full);
 }
 
 /* On /download, a light ring marks the button as the current page */
@@ -702,14 +743,14 @@ h3 {
 }
 
 /* Desktop: logo left, links truly centered, Download App right.
-   1fr auto 1fr keeps the middle column centered in the header no matter how
+   1fr auto 1fr keeps the middle column centered in the pill no matter how
    wide the logo or the button is. The menu wrapper uses display: contents so
    its list and button become the 2nd and 3rd grid columns. */
 @media (min-width: 960px) {
   .navbar {
     display: grid;
     grid-template-columns: 1fr auto 1fr;
-    gap: var(--space-6);
+    gap: var(--space-5);
   }
 
   .navbar-brand {
@@ -726,11 +767,11 @@ h3 {
 
   .navbar-links {
     flex-direction: row;
-    gap: var(--space-2);
+    gap: var(--space-1);
   }
 
   .navbar-link {
-    min-height: 2.25rem;
+    min-height: 2.5rem;
     font-size: var(--text-sm);
   }
 

@@ -30,8 +30,13 @@ function hashTarget(hash: string) {
 
 function scrollToTarget(lenis: Lenis, target: HTMLElement, immediate = false) {
   const margin = parseFloat(getComputedStyle(target).scrollMarginTop) || 0;
+  // scroll-margin-top already covers the floating navbar (offset + pill);
+  // only add anything the header grows beyond that.
   const headerHeight = document.querySelector(".site-header")?.getBoundingClientRect().height || 0;
-  const expectedHeight = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--header-height")) || 0;
+  const rootStyle = getComputedStyle(document.documentElement);
+  const expectedHeight =
+    (parseFloat(rootStyle.getPropertyValue("--header-height")) || 0) +
+    (parseFloat(rootStyle.getPropertyValue("--nav-offset")) || 0);
   const page = target.closest(".page-transition");
   const transform = page ? getComputedStyle(page).transform : "none";
   const pageShift = transform === "none" ? 0 : new DOMMatrixReadOnly(transform).m42;
