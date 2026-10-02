@@ -3,7 +3,7 @@ import { ctaBanner, downloadCta, logo } from "@/content/site";
 import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
 
-/** "Ready to try TactileLens?" white card with a blue border. Ends every page except /download. */
+/** "Ready to try TactileLens?" full-width open band, centered. Ends every page except /download. */
 export default function CtaBanner() {
   return (
     <section className="cta-band" aria-labelledby="cta-band-title" data-reveal>

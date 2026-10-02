@@ -263,7 +263,7 @@ h3 {
 
 .site-container {
   width: 100%;
-  max-width: var(--container-max);
+  max-width: calc(var(--container-max) + 2 * var(--gutter)); /* 1120px of content */
   margin-inline: auto;
   padding-inline: var(--gutter);
 }
@@ -1727,7 +1727,8 @@ p a:not(.button) {
 }
 
 /* =========================================================================
- * CTA — "Ready to try TactileLens?" as a white card with a blue border
+ * CTA — "Ready to try TactileLens?": a full-width open band with centered
+ * text and the Download button, between the section and footer lines
  * ========================================================================= */
 
 .cta-band {
@@ -1736,24 +1737,12 @@ p a:not(.button) {
   color: var(--color-text);
 }
 
-/* The section frame becomes the card: full blue border instead of the light one */
-.cta-band > .site-container.cta-band-inner {
-  border-color: var(--color-brand);
-}
-
 .cta-band-inner {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   gap: var(--space-6);
-}
-
-@media (min-width: 768px) {
-  .cta-band-inner {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-  }
+  text-align: center;
 }
 
 .cta-band-text {
@@ -1763,6 +1752,7 @@ p a:not(.button) {
 .cta-band-heading {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: var(--space-4);
 }
 
@@ -2377,29 +2367,6 @@ p a:not(.button) {
   box-shadow: var(--shadow-sm);
 }
 
-/* Frame each main content container, with breathing room on small screens. */
-:is(.section, .hero, .page-header, .cta-band) > .site-container {
-  position: relative;
-  width: calc(100% - 2 * var(--gutter));
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  padding: clamp(var(--space-3), 3vw, var(--space-6)); /* 12px on phones, so cards inside keep room */
-  box-shadow: var(--shadow-md);
-}
-
-:is(.section, .hero, .page-header, .cta-band) > .site-container::after {
-  position: absolute;
-  top: var(--space-3);
-  right: var(--space-3);
-  width: var(--space-5);
-  height: var(--space-5);
-  border-top: 2px solid var(--color-border);
-  border-right: 2px solid var(--color-border);
-  border-top-right-radius: var(--radius-sm);
-  content: "";
-  pointer-events: none;
-}
-
 :is(.feature-row, .step-list--flow .step, .fact-number) {
   min-width: 0;
   border: 1px solid var(--color-border);
@@ -2413,19 +2380,6 @@ p a:not(.button) {
 .fact-number {
   border-top: 1px solid var(--color-border);
   border-left: var(--border-accent);
-}
-
-/* Small edge markers add rhythm without placing decoration behind text. */
-.section > .site-container::before {
-  position: absolute;
-  top: var(--space-6);
-  left: -1px;
-  width: 3px;
-  height: var(--space-7);
-  border-radius: 0 var(--radius-full) var(--radius-full) 0;
-  background: var(--color-brand-text);
-  content: "";
-  pointer-events: none;
 }
 
 .section-eyebrow {
