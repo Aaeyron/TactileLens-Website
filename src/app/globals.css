@@ -18,16 +18,15 @@
 
 /* =========================================================================
  * Design tokens — the single source of truth for every design value.
- * Palette: two colors only — white and the app logo's dark blue (#003797),
- * plus darker shades of that blue (hover, pressed) and dark navy body text.
- * No tints, gradients or patterns.
+ * Palette: white everywhere; the app logo's dark blue (#003797) is the
+ * secondary/accent color, plus its darker shades (hover, pressed). Headings
+ * and body text are dark navy. No gradients or patterns.
  *
  * Contrast (WCAG 2.2 AA), verified by `npm run check:contrast`:
  * - Blue #003797 on white and white on blue are both 10.5:1.
  * - Body text #0f1f36 is 16.5:1 and muted text #4a5a72 is 7.0:1 on white.
- * - On solid blue areas, all text is white.
- * - --color-border is a light border made from the same blue (decorative);
- *   controls use the full blue.
+ * - --color-border and --color-divider are light lines made from the same
+ *   blue (decorative); controls use the full blue.
  * ========================================================================= */
 :root {
   color-scheme: light;
@@ -42,20 +41,18 @@
   --ink-muted: #4a5a72; /* secondary text (7.0:1 on white) */
   --blue-border: #ccd7ea; /* light border: 20% of the blue on white */
 
-  /* Roles (components use these; .section--brand remaps them for blue areas) */
+  /* Roles (components use these) */
   --color-bg: var(--white);
   --color-text: var(--ink);
   --color-text-muted: var(--ink-muted);
   --color-text-inverse: var(--white);
-  --color-brand: var(--blue); /* buttons, step numbers, logo, solid blue areas */
+  --color-brand: var(--blue); /* buttons, step numbers, accents */
   --color-brand-hover: var(--blue-hover);
   --color-brand-active: var(--blue-pressed); /* pressed; also gets an inset shadow */
   --color-brand-text: var(--blue); /* links, eyebrows, chips, key terms */
   --color-border: var(--blue-border);
-  --color-border-inverse: rgb(255 255 255 / 0.25); /* dividers on blue */
-  --line-inverse: rgb(255 255 255 / 0.35); /* thin decorative outline shapes on blue */
-  --color-focus: var(--blue); /* focus ring on white */
-  --color-focus-inverse: var(--white); /* focus ring on blue */
+  --color-divider: rgb(0 55 151 / 0.1); /* 1px line between sections */
+  --color-focus: var(--blue);
 
   /* Spacing: 4/8px scale */
   --space-1: 0.25rem; /*   4px */
@@ -105,10 +102,8 @@
   --radius-full: 999px;
 
   /* Elevation: each level stacks 2-3 soft layers tinted with the brand blue
-     (never black). Blue areas (.hero, .page-header, .section--brand,
-     .cta-band) redefine the same levels in dark navy, so white cards on blue
-     still lift. White cards also get --shadow-highlight, a crisp 1px inner
-     top edge, listed first: box-shadow: var(--shadow-highlight), var(--shadow-sm).
+     (never black). White cards also get --shadow-highlight, a crisp 1px
+     inner top edge, listed first: box-shadow: var(--shadow-highlight), var(--shadow-sm).
      xs: buttons at rest, small inset items
      sm: cards, FAQ, tables, callouts, list panels; buttons on hover
      md: hover/focus lift, navbar, section frames
@@ -388,41 +383,6 @@ h3 {
   box-shadow: var(--shadow-pressed);
 }
 
-/* For solid blue backgrounds */
-.button--inverse {
-  background: var(--color-text-inverse);
-  color: var(--color-brand-text);
-  box-shadow: var(--shadow-xs);
-}
-
-.button--inverse:hover {
-  background: var(--color-bg);
-  box-shadow: var(--shadow-sm);
-  color: var(--color-brand-hover);
-}
-
-.button--inverse:active {
-  background: var(--color-bg);
-  box-shadow: var(--shadow-pressed);
-}
-
-/* Secondary action on solid blue backgrounds. Hover gets darker, never
-   lighter, so white text keeps its contrast. */
-.button--outline-inverse {
-  border-color: var(--color-text-inverse);
-  background: transparent;
-  color: var(--color-text-inverse);
-}
-
-.button--outline-inverse:hover {
-  background: rgb(0 32 92 / 0.25);
-}
-
-.button--outline-inverse:active {
-  background: rgb(0 32 92 / 0.35);
-  box-shadow: var(--shadow-pressed);
-}
-
 .button--sm {
   min-height: var(--tap-target);
   padding: var(--space-2) var(--space-4);
@@ -438,56 +398,10 @@ h3 {
   background: var(--color-bg);
 }
 
-/* Solid blue section. Text, links and lines directly on the blue become
-   white; white containers inside (cards, callouts, ...) switch back to the
-   normal colors, so their content stays dark on white. */
-.section--brand {
-  --color-text: var(--color-text-inverse);
-  --color-text-muted: var(--color-text-inverse);
-  --color-brand-text: var(--color-text-inverse);
-  --color-border: var(--color-border-inverse);
-  --color-focus: var(--color-focus-inverse);
-  background: var(--color-brand);
-  color: var(--color-text);
-}
-
-.section--brand :is(
-    .card,
-    .callout,
-    .step-list--cards .step,
-    .faq-card,
-    .compare-panel,
-    .table-wrap,
-    .qr,
-    .fact-number,
-    .feature-row,
-    .step-list--flow .step,
-    .numbered-list,
-    .info-list,
-    .on-this-page,
-    .cell-diagram-svg
-  ) {
-  --color-text: var(--ink);
-  --color-text-muted: var(--ink-muted);
-  --color-brand-text: var(--blue);
-  --color-border: var(--blue-border);
-  --color-focus: var(--blue);
-  color: var(--color-text);
-}
-
-
-
-/* The same elevation levels on solid blue, in dark navy so they still read */
-:is(.hero, .page-header, .section--brand, .cta-band) {
-  --shadow-xs: 0 1px 2px rgb(0 32 92 / 0.2);
-  --shadow-sm: 0 1px 2px rgb(0 32 92 / 0.18), 0 4px 10px rgb(0 32 92 / 0.16);
-  --shadow-md: 0 2px 4px rgb(0 32 92 / 0.18), 0 10px 24px rgb(0 32 92 / 0.22);
-  --shadow-lg: 0 4px 8px rgb(0 32 92 / 0.2), 0 20px 44px rgb(0 32 92 / 0.3), 0 40px 80px rgb(0 32 92 / 0.22);
-}
-
-/* Two white sections in a row are separated by a thin line */
-.section:not(.section--brand) + .section:not(.section--brand) {
-  border-top: 1px solid var(--color-border);
+/* Every page is white; consecutive blocks are separated by spacing and a
+   thin 1px divider, never by a background color. */
+:is(.hero, .page-header, .section) + :is(.section, .cta-band) {
+  border-top: 1px solid var(--color-divider);
 }
 
 .section-header {
@@ -528,11 +442,6 @@ h3 {
   border-left: 2.5rem solid var(--color-brand-text);
   box-shadow: inset 0 -1px 0 var(--color-border);
   content: "";
-}
-
-.page-title::after {
-  border-left-color: var(--color-text-inverse);
-  box-shadow: inset 0 -1px 0 var(--color-border-inverse);
 }
 
 .section-description {
@@ -841,12 +750,8 @@ h3 {
   position: relative;
   overflow: hidden; /* clips the outline shapes, so nothing scrolls sideways */
   padding-block: clamp(var(--space-6), 8vw, var(--space-9));
-  background: var(--color-brand);
-  color: var(--color-text-inverse);
-}
-
-.hero :focus-visible {
-  outline-color: var(--color-focus-inverse);
+  background: var(--color-bg);
+  color: var(--color-text);
 }
 
 .hero-grid {
@@ -873,7 +778,7 @@ h3 {
 
 .hero-title {
   margin-top: var(--space-5);
-  color: var(--color-text-inverse);
+  color: var(--color-text);
   font-size: var(--text-3xl);
   font-weight: var(--weight-extrabold);
   line-height: var(--leading-tight);
@@ -881,13 +786,13 @@ h3 {
 }
 
 .hero-title-highlight {
-  color: var(--color-text-inverse);
+  color: var(--color-text);
 }
 
 .hero-lead {
   max-width: var(--measure);
   margin-top: var(--space-4);
-  color: var(--color-text-inverse);
+  color: var(--color-text-muted);
 }
 
 @media (min-width: 768px) {
@@ -917,12 +822,11 @@ h3 {
 }
 
 
-/* Uses lg in dark navy (blue-area tokens): the strongest shadow on the page */
 .hero-visual .phone {
   z-index: 1;
 }
 
-/* Decorative outline shapes in thin white lines, partly behind the phone.
+/* Decorative outline shapes in thin light-blue lines, partly behind the phone.
    They stay inside the visual column, never under the hero text. */
 .hero-visual::before,
 .hero-visual::after {
@@ -930,7 +834,7 @@ h3 {
   z-index: 0;
   top: 50%;
   left: 50%;
-  border: 1px solid var(--line-inverse);
+  border: 1px solid var(--color-border);
   content: "";
   pointer-events: none;
 }
@@ -1166,8 +1070,6 @@ h3 {
   font-weight: var(--weight-regular);
 }
 
-.hero .screen-preview { --screen-outline: var(--line-inverse); }
-.hero :is(.screen-caption, .screen-caption-status) { color: var(--white); }
 .step-list--flow .screen-preview { --device-width: 11rem; }
 
 /* =========================================================================
@@ -1238,16 +1140,8 @@ h3 {
   isolation: isolate;
   overflow: hidden;
   padding-block: clamp(var(--space-7), 6vw, var(--space-9));
-  background: var(--color-brand);
-  color: var(--color-text-inverse);
-}
-
-.page-header :focus-visible {
-  outline-color: var(--color-focus-inverse);
-}
-
-.page-header .section-eyebrow {
-  color: var(--color-text-inverse);
+  background: var(--color-bg);
+  color: var(--color-text);
 }
 
 
@@ -1260,7 +1154,7 @@ h3 {
 
 .page-title {
   margin-top: var(--space-3);
-  color: var(--color-text-inverse);
+  color: var(--color-text);
   font-size: var(--text-h1);
   font-weight: var(--weight-extrabold);
   line-height: var(--leading-tight);
@@ -1270,7 +1164,7 @@ h3 {
 .page-intro {
   max-width: var(--measure);
   margin-top: var(--space-4);
-  color: var(--color-text-inverse);
+  color: var(--color-text-muted);
   font-size: var(--text-lg);
 }
 
@@ -1799,13 +1693,8 @@ p a:not(.button) {
   isolation: isolate;
   overflow: hidden;
   padding-block: var(--section-pad-y);
-  background: var(--color-brand);
-  color: var(--color-text-inverse);
-}
-
-
-.cta-band :focus-visible {
-  outline-color: var(--color-focus-inverse);
+  background: var(--color-bg);
+  color: var(--color-text);
 }
 
 .cta-band-inner {
@@ -1833,17 +1722,15 @@ p a:not(.button) {
   gap: var(--space-4);
 }
 
-/* White ring so the blue logo stands out on the blue band. */
 .cta-band-logo {
   width: 2.25rem;
   height: 2.25rem;
   flex-shrink: 0;
   border-radius: var(--radius-sm);
-  box-shadow: 0 0 0 2px var(--color-text-inverse);
 }
 
 .cta-band-title {
-  color: var(--color-text-inverse);
+  color: var(--color-text);
   font-size: var(--text-2xl);
   font-weight: var(--weight-extrabold);
   line-height: var(--leading-heading);
@@ -1852,7 +1739,7 @@ p a:not(.button) {
 
 .cta-band-description {
   margin-top: var(--space-2);
-  color: var(--color-text-inverse);
+  color: var(--color-text-muted);
 }
 
 /* =========================================================================
@@ -1862,7 +1749,7 @@ p a:not(.button) {
 /* White footer (the blue CTA band sits right above it) with a clear brand
    block, navigation and project credit. */
 .site-footer {
-  border-top: 1px solid var(--color-border);
+  border-top: 1px solid var(--color-divider);
   padding-block: clamp(var(--space-7), 6vw, var(--space-8)) var(--space-5);
   background: var(--color-bg);
   color: var(--color-text);
@@ -2452,12 +2339,6 @@ p a:not(.button) {
   box-shadow: var(--shadow-md);
 }
 
-:is(.hero, .page-header, .cta-band) > .site-container,
-.section--brand > .site-container {
-  border-color: var(--color-border-inverse);
-  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.12), var(--shadow-md);
-}
-
 :is(.section, .hero, .page-header, .cta-band) > .site-container::after {
   position: absolute;
   top: var(--space-3);
@@ -2469,10 +2350,6 @@ p a:not(.button) {
   border-top-right-radius: var(--radius-sm);
   content: "";
   pointer-events: none;
-}
-
-:is(.hero, .page-header, .cta-band) > .site-container::after {
-  border-color: var(--color-border-inverse);
 }
 
 :is(.feature-row, .step-list--flow .step, .fact-number) {
@@ -2525,9 +2402,9 @@ p a:not(.button) {
   z-index: -1;
   width: 28rem;
   aspect-ratio: 1;
-  border: 1px solid var(--line-inverse);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-full);
-  box-shadow: 0 0 0 32px var(--blue), 0 0 0 33px var(--line-inverse);
+  box-shadow: 0 0 0 32px var(--color-bg), 0 0 0 33px var(--color-border);
   content: "";
   pointer-events: none;
 }

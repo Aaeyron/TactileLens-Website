@@ -32,7 +32,6 @@ export default function AboutPage() {
 
       <Section
         id="braille-basics"
-        tone="brand"
         eyebrow={basics.eyebrow}
         title={basics.title}
         description={basics.description}
@@ -51,7 +50,7 @@ export default function AboutPage() {
       </Section>
 
       {/* Mission as a full-width pull-quote band */}
-      <Section id="mission" tone="brand" eyebrow={mission.eyebrow} title={mission.title}>
+      <Section id="mission" eyebrow={mission.eyebrow} title={mission.title}>
         <MissionQuote quote={mission.quote} attribution={mission.attribution} />
       </Section>
 
@@ -69,7 +68,6 @@ export default function AboutPage() {
 
       <Section
         id="timeline"
-        tone="brand"
         eyebrow={timeline.eyebrow}
         title={timeline.title}
         description={timeline.description}

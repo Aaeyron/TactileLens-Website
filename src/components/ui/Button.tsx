@@ -3,8 +3,7 @@ import type { ComponentPropsWithoutRef } from "react";
 
 type ButtonProps = ComponentPropsWithoutRef<"a"> & {
   href: string;
-  /** "inverse" and "outline-inverse" are for solid blue backgrounds. */
-  variant?: "primary" | "secondary" | "inverse" | "outline-inverse";
+  variant?: "primary" | "secondary";
   size?: "md" | "sm";
 };
 

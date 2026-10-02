@@ -24,7 +24,7 @@ export default function CtaBanner() {
           </div>
           <p className="cta-band-description">{ctaBanner.text}</p>
         </div>
-        <Button href={downloadCta.pageHref} variant="inverse">
+        <Button href={downloadCta.pageHref} variant="primary">
           {downloadCta.label}
         </Button>
       </Container>

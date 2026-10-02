@@ -26,7 +26,6 @@ export default function DownloadPage() {
 
       <Section
         id="requirements"
-        tone="brand"
         eyebrow={requirements.eyebrow}
         title={requirements.title}
         description={requirements.description}
@@ -61,7 +60,6 @@ export default function DownloadPage() {
 
       <Section
         id="troubleshooting"
-        tone="brand"
         eyebrow={troubleshooting.eyebrow}
         title={troubleshooting.title}
         description={troubleshooting.description}

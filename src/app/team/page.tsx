@@ -32,7 +32,7 @@ export default function TeamPage() {
         </ul>
       </Section>
 
-      <Section id="project" tone="brand" eyebrow={projectFacts.eyebrow} title={projectFacts.title}>
+      <Section id="project" eyebrow={projectFacts.eyebrow} title={projectFacts.title}>
         <CardGrid items={projectFacts.items} columns={4} />
       </Section>
 

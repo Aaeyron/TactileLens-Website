@@ -19,10 +19,10 @@ export default function HeroSection() {
           <p className="hero-lead">{hero.description}</p>
 
           <div className="hero-actions">
-            <Button href={downloadCta.pageHref} variant="inverse">
+            <Button href={downloadCta.pageHref} variant="primary">
               {downloadCta.label}
             </Button>
-            <Button href={hero.secondaryCta.href} variant="outline-inverse">
+            <Button href={hero.secondaryCta.href} variant="secondary">
               {hero.secondaryCta.label}
             </Button>
           </div>

@@ -6,8 +6,6 @@ type SectionProps = {
   title: string;
   eyebrow?: string;
   description?: string;
-  /** "brand" is a solid blue section (white text); "default" is white. */
-  tone?: "default" | "brand";
   /** Small supporting visual beside the header on wide screens. */
   aside?: ReactNode;
   children?: ReactNode;
@@ -18,7 +16,6 @@ export default function Section({
   title,
   eyebrow,
   description,
-  tone = "default",
   aside,
   children,
 }: SectionProps) {
@@ -39,7 +36,7 @@ export default function Section({
   return (
     <section
       id={id}
-      className={`section ${tone === "brand" ? "section--brand" : ""}`.trim()}
+      className="section"
       aria-labelledby={titleId}
       data-reveal
     >

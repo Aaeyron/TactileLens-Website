@@ -31,7 +31,6 @@ export default function HomePage() {
 
       <Section
         id="why"
-        tone="brand"
         eyebrow={homeWhy.eyebrow}
         title={homeWhy.title}
         description={homeWhy.description}
