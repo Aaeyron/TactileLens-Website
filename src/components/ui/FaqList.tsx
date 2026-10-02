@@ -23,7 +23,7 @@ export default function FaqList({ categories }: FaqListProps) {
             <h2 id={category.id} className="block-title">
               {category.title}
             </h2>
-            <div className="faq-card">
+            <div className="faq-list">
               {category.items.map((item) => (
                 <details className="faq-item" key={item.question}>
                   <summary className="faq-question">

@@ -3,7 +3,7 @@ import { homeBeforeAfter, homeHighlights, homeSteps, homeWhy, site } from "@/con
 import HeroSection from "@/components/home/HeroSection";
 import SeeItInAction from "@/components/home/SeeItInAction";
 import CtaBanner from "@/components/download/CtaBanner";
-import CardGrid from "@/components/ui/CardGrid";
+import ItemGrid from "@/components/ui/ItemGrid";
 import FactNumbers from "@/components/ui/FactNumbers";
 import Section from "@/components/ui/Section";
 import StepList from "@/components/ui/StepList";
@@ -35,7 +35,7 @@ export default function HomePage() {
         title={homeWhy.title}
         description={homeWhy.description}
       >
-        <CardGrid items={homeWhy.items} columns={3} numbered />
+        <ItemGrid items={homeWhy.items} columns={3} numbered />
       </Section>
 
       <Section
@@ -44,7 +44,7 @@ export default function HomePage() {
         title={homeBeforeAfter.title}
         description={homeBeforeAfter.description}
       >
-        <CardGrid items={homeBeforeAfter.items} />
+        <ItemGrid items={homeBeforeAfter.items} layout="split" />
       </Section>
 
       <SeeItInAction />
@@ -55,7 +55,7 @@ export default function HomePage() {
         title={homeHighlights.title}
         description={homeHighlights.description}
       >
-        <CardGrid items={homeHighlights.items} columns={3} linkLabel={homeHighlights.cardLinkLabel} />
+        <ItemGrid items={homeHighlights.items} columns={3} linkLabel={homeHighlights.linkLabel} />
         <div className="section-block">
           <FactNumbers label={homeHighlights.facts.label} items={homeHighlights.facts.items} />
         </div>

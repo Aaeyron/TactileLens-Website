@@ -3,7 +3,7 @@ import { pageMetadata } from "@/lib/metadata";
 import { downloadPage } from "@/content/site";
 import DownloadCard from "@/components/download/DownloadCard";
 import Callout from "@/components/ui/Callout";
-import CardGrid from "@/components/ui/CardGrid";
+import ItemGrid from "@/components/ui/ItemGrid";
 import DataTable from "@/components/ui/DataTable";
 import NumberedList from "@/components/ui/NumberedList";
 import PageHeader from "@/components/ui/PageHeader";
@@ -42,12 +42,12 @@ export default function DownloadPage() {
         <div className="section-callout section-callout--top">
           <Callout variant="tip" text={install.safetyTip} />
         </div>
-        <StepList steps={install.steps} variant="cards" />
+        <StepList steps={install.steps} variant="row" />
         <p className="section-note">{install.note}</p>
 
         <div className="after-install">
           <div>
-            <h3 className="card-title">{install.afterInstall.title}</h3>
+            <h3 className="item-title">{install.afterInstall.title}</h3>
             <p className="section-description">{install.afterInstall.text}</p>
           </div>
           {/* TODO: screenshot — see screens.home in site.ts */}
@@ -64,7 +64,7 @@ export default function DownloadPage() {
         title={troubleshooting.title}
         description={troubleshooting.description}
       >
-        <CardGrid items={troubleshooting.items} />
+        <ItemGrid items={troubleshooting.items} />
       </Section>
 
       <Section

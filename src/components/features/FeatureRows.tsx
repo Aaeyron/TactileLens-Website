@@ -20,7 +20,7 @@ type FeatureRowsProps = {
   items: readonly Feature[];
 };
 
-/** A row of feature cards: an app screenshot above numbered text. */
+/** Open feature columns: an app screenshot above numbered text. */
 export default function FeatureRows({ items }: FeatureRowsProps) {
   return (
     <ol className="feature-rows" role="list">
@@ -30,11 +30,11 @@ export default function FeatureRows({ items }: FeatureRowsProps) {
             <Screenshot screen={item.screen} sizes="15rem" />
           </div>
           <div className="feature-text">
-            <div className="card-top" aria-hidden="true">
-              <span className="card-number">{pad(index + 1)}</span>
+            <div className="item-top" aria-hidden="true">
+              <span className="item-number">{pad(index + 1)}</span>
               {item.chip && <Chip>{item.chip}</Chip>}
             </div>
-            <h3 className="card-title">{item.title}</h3>
+            <h3 className="item-title">{item.title}</h3>
             <p className="feature-description">{item.description}</p>
             {item.bullets && <CheckList items={item.bullets} />}
             {item.helps && (
@@ -43,7 +43,7 @@ export default function FeatureRows({ items }: FeatureRowsProps) {
                 {item.helps}
               </p>
             )}
-            {item.note && <p className="card-note">{item.note}</p>}
+            {item.note && <p className="item-note">{item.note}</p>}
           </div>
         </li>
       ))}

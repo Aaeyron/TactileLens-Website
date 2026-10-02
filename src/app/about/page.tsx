@@ -6,7 +6,7 @@ import CtaBanner from "@/components/download/CtaBanner";
 import BrailleCellDiagram from "@/components/ui/BrailleCellDiagram";
 import Callout from "@/components/ui/Callout";
 import NumberedList from "@/components/ui/NumberedList";
-import CardGrid from "@/components/ui/CardGrid";
+import ItemGrid from "@/components/ui/ItemGrid";
 import PageHeader from "@/components/ui/PageHeader";
 import Prose from "@/components/ui/Prose";
 import Section from "@/components/ui/Section";
@@ -27,7 +27,7 @@ export default function AboutPage() {
         title={comparison.title}
         description={comparison.description}
       >
-        <CardGrid items={comparison.items} />
+        <ItemGrid items={comparison.items} layout="split" />
       </Section>
 
       <Section
@@ -37,7 +37,7 @@ export default function AboutPage() {
         description={basics.description}
         aside={<BrailleCellDiagram label={basics.diagramLabel} caption={basics.diagramCaption} />}
       >
-        <CardGrid items={basics.items} />
+        <ItemGrid items={basics.items} />
       </Section>
 
       <Section
@@ -60,7 +60,7 @@ export default function AboutPage() {
         title={audience.title}
         description={audience.description}
       >
-        <CardGrid items={audience.items} />
+        <ItemGrid items={audience.items} />
         <div className="section-callout">
           <Callout variant="fact" text={audience.fact} />
         </div>

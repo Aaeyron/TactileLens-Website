@@ -12,13 +12,15 @@ type StepListProps = {
   steps: readonly Step[];
   /**
    * - "flow": steps in a row, each under a framed screenshot (home page)
-   * - "cards": numbered step cards (How it works, install guide)
+   * - "row": open steps in a row (How it works, install guide)
+   * Both: large blue numbers joined by a thin line on wide screens, stacked
+   * on mobile. No boxes.
    */
-  variant?: "flow" | "cards";
+  variant?: "flow" | "row";
 };
 
 /** Numbered steps. Uses <ol> so screen readers announce the count and order. */
-export default function StepList({ steps, variant = "cards" }: StepListProps) {
+export default function StepList({ steps, variant = "row" }: StepListProps) {
   return (
     <ol className={`step-list step-list--${variant}`} role="list" data-reveal-group>
       {steps.map((step, index) => (
@@ -26,14 +28,13 @@ export default function StepList({ steps, variant = "cards" }: StepListProps) {
           {variant === "flow" && step.screen && (
             <Screenshot screen={step.screen} frame sizes="11rem" />
           )}
-          {/* Visual "STEP 01"; screen readers get "Step n:" in the heading instead. */}
-          <div className="card-top step-top" aria-hidden="true">
-            <span className="card-number">{pad(index + 1)}</span>
-            <span className="label">Step</span>
+          {/* Visual "01"; screen readers get "Step n:" in the heading instead. */}
+          <div className="step-top" aria-hidden="true">
+            <span className="item-number">{pad(index + 1)}</span>
           </div>
 
           <div className="step-content">
-            <h3 className="card-title">
+            <h3 className="item-title">
               <span className="visually-hidden">Step {index + 1}: </span>
               {step.title}
             </h3>

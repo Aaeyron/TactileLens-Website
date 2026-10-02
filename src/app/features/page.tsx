@@ -4,7 +4,7 @@ import { featuresPage } from "@/content/site";
 import CtaBanner from "@/components/download/CtaBanner";
 import FeatureRows from "@/components/features/FeatureRows";
 import Callout from "@/components/ui/Callout";
-import CardGrid from "@/components/ui/CardGrid";
+import ItemGrid from "@/components/ui/ItemGrid";
 import PageHeader from "@/components/ui/PageHeader";
 import Section from "@/components/ui/Section";
 import StepList from "@/components/ui/StepList";
@@ -31,7 +31,7 @@ export default function FeaturesPage() {
         title={howItWorks.title}
         description={howItWorks.description}
       >
-        <StepList steps={howItWorks.steps} variant="cards" />
+        <StepList steps={howItWorks.steps} variant="row" />
       </Section>
 
       <Section
@@ -40,7 +40,7 @@ export default function FeaturesPage() {
         title={scanTips.title}
         description={scanTips.description}
       >
-        <CardGrid items={scanTips.items} columns={4} />
+        <ItemGrid items={scanTips.items} columns={4} />
         <div className="section-callout">
           <Callout variant="note" text={scanTips.note} />
         </div>

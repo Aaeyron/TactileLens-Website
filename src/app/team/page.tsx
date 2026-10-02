@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/metadata";
 import { teamPage } from "@/content/site";
 import CtaBanner from "@/components/download/CtaBanner";
-import MemberCard from "@/components/team/MemberCard";
-import CardGrid from "@/components/ui/CardGrid";
+import MemberProfile from "@/components/team/MemberProfile";
+import ItemGrid from "@/components/ui/ItemGrid";
 import InfoList from "@/components/ui/InfoList";
 import PageHeader from "@/components/ui/PageHeader";
 import Prose from "@/components/ui/Prose";
@@ -19,10 +19,10 @@ export default function TeamPage() {
       <PageHeader {...header} />
 
       <Section id="members" eyebrow={members.eyebrow} title={members.title}>
-        <ul className="card-grid card-grid--4" role="list">
+        <ul className="item-grid item-grid--4" role="list">
           {members.list.map((member, index) => (
             // Index in the key: placeholder entries share the same name.
-            <MemberCard
+            <MemberProfile
               key={`${member.name}-${index}`}
               name={member.name}
               role={member.role}
@@ -33,12 +33,12 @@ export default function TeamPage() {
       </Section>
 
       <Section id="project" eyebrow={projectFacts.eyebrow} title={projectFacts.title}>
-        <CardGrid items={projectFacts.items} columns={4} />
+        <ItemGrid items={projectFacts.items} columns={4} />
       </Section>
 
       <Section id="school" eyebrow={school.eyebrow} title={school.title}>
         <div className="split">
-          <MemberCard
+          <MemberProfile
             as="div"
             name={school.adviser.name}
             role={school.adviser.role}

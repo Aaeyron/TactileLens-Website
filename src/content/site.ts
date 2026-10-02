@@ -90,7 +90,7 @@ export const screens = {
 };
 
 /**
- * Sample shown in the "See it in action" card.
+ * Sample shown in "See it in action".
  * TODO: A teammate who reads Nemeth must verify this braille before launch.
  * Intended as "x + 1" in Nemeth code: x (⠭), plus (⠬), 1 (⠂).
  */
@@ -290,7 +290,7 @@ export const homeHighlights = {
       href: "/features",
     },
   ],
-  cardLinkLabel: "Learn more",
+  linkLabel: "Learn more",
   // DRAFT: review. Big typographic facts — confirmed or general facts only.
   facts: {
     label: "TactileLens at a glance",

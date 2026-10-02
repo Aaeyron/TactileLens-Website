@@ -16,7 +16,7 @@ type CalloutProps = {
   children?: ReactNode;
 };
 
-/** "Tip", "Note" or "Did you know?" box: white with a blue left border. */
+/** "Tip", "Note" or "Did you know?": text beside a thin blue left line. */
 export default function Callout({ variant, text, children }: CalloutProps) {
   return (
     <div className="callout" role="note">

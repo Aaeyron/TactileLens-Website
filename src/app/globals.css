@@ -71,7 +71,7 @@
   /* Spacing roles, all built from the scale above */
   --section-pad-y: clamp(4.5rem, 9vw, 7.5rem); /* 72→120px above/below sections */
   --section-header-gap: clamp(2.5rem, 4vw, var(--space-7)); /* 40→48px header to content */
-  --card-padding: clamp(var(--space-5), 2.5vw, var(--space-6)); /* 24→32px */
+  --card-padding: clamp(var(--space-5), 2.5vw, var(--space-6)); /* 24→32px, download card */
 
   /* Typography */
   /* Body: Atkinson Hyperlegible Next (Braille Institute, for low-vision readers).
@@ -80,7 +80,7 @@
   --font-display: var(--font-heading), var(--font-sans);
   --text-sm: 0.875rem; /*   14px: eyebrows, nav, footer */
   --text-base: 1.0625rem; /* 17px: body */
-  --text-lg: 1.25rem; /*    20px: lead paragraph, h3 and card titles */
+  --text-lg: 1.25rem; /*    20px: lead paragraph, h3 and item titles */
   --text-xl: 1.5rem; /*     24px: larger subheadings, quotes */
   --text-2xl: clamp(1.75rem, 1.3rem + 1.8vw, 2.75rem); /* 28→44px: h2 */
   --text-h1: clamp(2rem, 1.4rem + 2.6vw, 3.5rem); /*     32→56px: inner page h1 */
@@ -107,10 +107,11 @@
   /* Elevation: each level stacks 2-3 soft layers tinted with the brand blue
      (never black). White cards also get --shadow-highlight, a crisp 1px
      inner top edge, listed first: box-shadow: var(--shadow-highlight), var(--shadow-sm).
-     xs: buttons at rest, small inset items
-     sm: cards, FAQ, tables, callouts, list panels; buttons on hover
-     md: hover/focus lift, navbar, section frames
-     lg: download card, phone frames */
+     Content sits open on the page, so only real objects cast shadows:
+     xs: buttons at rest
+     sm: buttons on hover
+     md: navbar pill
+     lg: phone frames, the download card, the mobile menu panel */
   --shadow-xs: 0 1px 2px rgb(0 55 151 / 0.05);
   --shadow-sm: 0 1px 2px rgb(0 55 151 / 0.06), 0 8px 24px rgb(0 55 151 / 0.08);
   --shadow-md: 0 2px 4px rgb(0 55 151 / 0.06), 0 12px 32px rgb(0 55 151 / 0.12);
@@ -460,63 +461,110 @@ h3 {
 }
 
 /* =========================================================================
- * Card
+ * Open items — reasons, features, tips, people, facts
+ * No boxes: each item sits on the white page under a thin top line that
+ * starts with a short blue segment, then a blue number or label, a heading
+ * and a short description. Items flow into columns on wider screens.
  * ========================================================================= */
 
-.card-grid {
+.item-grid {
   display: grid;
-  gap: var(--space-5);
+  gap: var(--space-7) var(--space-6);
 }
 
 @media (min-width: 640px) {
-  .card-grid {
+  .item-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (min-width: 960px) {
-  .card-grid--3 {
+  .item-grid--3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
 @media (min-width: 1024px) {
-  .card-grid--4 {
+  .item-grid--4 {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 
-.card {
+/* The shared open-item frame: a thin top line with a short blue start */
+:is(.item, .member, .fact-number, .feature-text) {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  border: 1px solid var(--color-border);
-  border-top: var(--border-accent);
-  border-radius: var(--radius-lg);
-  padding: var(--card-padding);
-  background: var(--color-bg);
-  box-shadow: var(--shadow-highlight), var(--shadow-sm);
-  transition:
-    box-shadow var(--duration-medium) var(--ease),
-    transform var(--duration-medium) var(--ease);
+  min-width: 0;
+  border-top: 1px solid var(--color-border);
+  padding-top: var(--space-5);
 }
 
-/* h3 and card titles share one size so headings stay consistent */
-.card-title {
+:is(.item, .member, .fact-number, .feature-text)::before {
+  position: absolute;
+  top: -1px;
+  left: 0;
+  width: var(--space-6);
+  height: 2px;
+  background: var(--color-brand);
+  content: "";
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Comparisons: two open columns divided by one thin vertical line
+   (stacked on mobile, with the line between them) */
+.item-grid--split {
+  gap: 0;
+}
+
+.item-grid--split .item {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.item-grid--split .item::before {
+  display: none;
+}
+
+.item-grid--split .item + .item {
+  margin-top: var(--space-6);
+  border-top: 1px solid var(--color-border);
+  padding-top: var(--space-6);
+}
+
+@media (min-width: 640px) {
+  .item-grid--split .item {
+    padding-right: var(--space-6);
+  }
+
+  .item-grid--split .item + .item {
+    margin-top: 0;
+    border-top: 0;
+    border-left: 1px solid var(--color-border);
+    padding-top: 0;
+    padding-right: 0;
+    padding-left: var(--space-6);
+  }
+}
+
+/* h3 and item titles share one size so headings stay consistent */
+.item-title {
   color: var(--color-text);
   font-size: var(--text-lg);
   font-weight: var(--weight-semibold);
   line-height: var(--leading-snug);
 }
 
-.card-body {
+.item-body {
   flex: 1;
-  margin-top: var(--space-3);
+  margin-top: var(--space-2);
   color: var(--color-text-muted);
 }
 
 /* Visible TODO / extra detail under a description */
-.card-note {
+.item-note {
   margin-top: var(--space-3);
   border-top: 1px dashed var(--color-brand);
   padding-top: var(--space-3);
@@ -524,44 +572,35 @@ h3 {
   font-size: var(--text-sm);
 }
 
-/* Clickable cards: the title link stretches over the whole card.
-   Only these cards lift on hover. The focus ring goes around the card. */
-.card-link {
+/* Linked items: the title link stretches over the whole item. Hover turns
+   the title blue and nudges the arrow; keyboard focus rings the item. */
+.item-link {
   color: inherit;
   text-decoration: none;
+  transition: color var(--duration-fast) var(--ease);
 }
 
-.card-link::after {
+.item-link::after {
   position: absolute;
   inset: 0;
-  border-radius: inherit;
   content: "";
 }
 
-.card-link:focus-visible {
+.item-link:focus-visible {
   outline: none;
 }
 
-.card--link:focus-within {
+.item--link:focus-within {
+  border-radius: var(--radius-sm);
   outline: 3px solid var(--color-focus);
-  outline-offset: 3px;
+  outline-offset: var(--space-2);
 }
 
-.card--link {
-  transition:
-    border-color var(--duration-medium) var(--ease),
-    box-shadow var(--duration-medium) var(--ease),
-    transform var(--duration-medium) var(--ease);
+.item--link:hover .item-link {
+  color: var(--color-brand-text);
 }
 
-/* Linked cards: border deepens to the full blue, md shadow, small lift */
-.card--link:hover {
-  border-color: var(--color-brand);
-  box-shadow: var(--shadow-highlight), var(--shadow-md);
-  transform: translateY(-2px);
-}
-
-.card-more {
+.item-more {
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
@@ -570,15 +609,15 @@ h3 {
   font-weight: var(--weight-semibold);
 }
 
-.card-more svg {
+.item-more svg {
   transition: transform var(--duration-fast) var(--ease);
 }
 
-.card--link:hover .card-more {
+.item--link:hover .item-more {
   color: var(--color-brand-hover);
 }
 
-.card--link:hover .card-more svg {
+.item--link:hover .item-more svg {
   transform: translateX(2px);
 }
 
@@ -1115,41 +1154,41 @@ h3 {
 .step-list--flow .screen-preview { --device-width: 11rem; }
 
 /* =========================================================================
- * See it in action — before/after comparison
+ * See it in action — before/after in two open columns
  * ========================================================================= */
 
 .compare {
   display: grid;
   max-width: var(--width-narrow);
-  align-items: center;
-  gap: var(--space-4);
 }
 
 @media (min-width: 640px) {
   .compare {
-    grid-template-columns: 1fr auto 1fr;
-    gap: var(--space-5);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 .compare-panel {
   display: flex;
-  min-height: 11rem;
+  min-height: 9rem;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: var(--space-3);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  padding: var(--card-padding);
-  background: var(--color-bg);
-  box-shadow: var(--shadow-highlight), var(--shadow-sm);
+  padding: var(--space-5);
   text-align: center;
 }
 
-.compare-panel--output {
-  border-color: var(--color-brand);
-  background: var(--color-bg);
+/* One thin line between the two columns (above the second on mobile) */
+.compare-panel + .compare-panel {
+  border-top: 1px solid var(--color-border);
+}
+
+@media (min-width: 640px) {
+  .compare-panel + .compare-panel {
+    border-top: 0;
+    border-left: 1px solid var(--color-border);
+  }
 }
 
 .compare-label {
@@ -1170,8 +1209,6 @@ h3 {
   font-size: clamp(2.5rem, 2rem + 2vw, 3.5rem);
   line-height: 1.2;
 }
-
-
 
 /* =========================================================================
  * Page header — top of every inner page, holds the page's only <h1>
@@ -1229,7 +1266,7 @@ h3 {
 }
 
 .prose p + p,
-.card-body p + p,
+.item-body p + p,
 .faq-answer p + p {
   margin-top: var(--space-4);
 }
@@ -1264,59 +1301,78 @@ p a:not(.button) {
 }
 
 /* =========================================================================
- * Step lists
+ * Step lists — open steps with large blue numbers. On wide screens the steps
+ * sit in one row and a thin line joins each number to the next; on mobile
+ * they stack.
  * ========================================================================= */
 
 .step-list {
   display: grid;
-  gap: var(--space-5);
+  gap: var(--space-6);
 }
 
+.step {
+  position: relative;
+  min-width: 0;
+}
 
-
+.step-top {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
+}
 
 .step-description {
   margin-top: var(--space-2);
   color: var(--color-text-muted);
 }
 
-/* "cards": numbered step cards (How it works, install guide) */
-
-@media (min-width: 640px) {
-  .step-list--cards {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+/* "row": How it works, install guide. Stacked steps sit under a thin line. */
+.step-list--row .step {
+  border-top: 1px solid var(--color-border);
+  padding-top: var(--space-5);
 }
 
 @media (min-width: 1024px) {
-  .step-list--cards {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+  .step-list--row {
+    grid-auto-columns: minmax(0, 1fr);
+    grid-auto-flow: column;
+  }
+
+  .step-list--row .step {
+    border-top: 0;
+    padding-top: 0;
+  }
+
+  /* The connecting line runs from each number across the gap to the next */
+  .step-list--row .step:not(:last-child) .step-top::after {
+    flex: 1;
+    height: 1px;
+    margin-right: calc(-1 * var(--space-6));
+    background: var(--color-border);
+    content: "";
   }
 }
 
-.step-list--cards .step {
-  position: relative;
-  border: 1px solid var(--color-border);
-  border-top: var(--border-accent);
-  border-radius: var(--radius-lg);
-  padding: var(--card-padding);
-  background: var(--color-bg);
-  box-shadow: var(--shadow-highlight), var(--shadow-sm);
-}
-
-/* "flow": steps in a row with a number circle (home page); stacked on mobile */
-
+/* "flow": home page, each step under a framed phone screenshot */
 .step-list--flow {
-  gap: var(--space-5);
   text-align: center;
 }
 
 .step-list--flow .step {
-  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: var(--space-4);
+}
+
+.step-list--flow .step-top {
+  position: relative;
+  align-self: stretch;
+  justify-self: stretch;
+  justify-content: center;
+  margin-bottom: 0;
 }
 
 .step-list--flow .step-content {
@@ -1335,26 +1391,38 @@ p a:not(.button) {
 @media (min-width: 768px) {
   .step-list--flow {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+    row-gap: var(--space-4);
+  }
+
+  /* Screenshot, number and text share rows across the steps (subgrid), so
+     the numbers line up even when one caption is longer */
+  .step-list--flow .step {
+    display: grid;
+    grid-row: span 3;
+    grid-template-rows: subgrid;
+    align-items: start;
+    justify-items: center;
+  }
+
+  /* Line from this centered number to the next one */
+  .step-list--flow .step:not(:last-child) .step-top::after {
+    position: absolute;
+    top: 50%;
+    left: calc(50% + var(--space-7));
+    width: calc(100% + var(--space-6) - 2 * var(--space-7));
+    height: 1px;
+    background: var(--color-border);
+    content: "";
   }
 }
 
-
-
-
-
-
-
-
-
-
-
 /* =========================================================================
- * Feature rows — a row of cards (Features page)
+ * Feature columns (Features page): a screenshot above open text
  * ========================================================================= */
 
 .feature-rows {
   display: grid;
-  gap: var(--space-5);
+  gap: var(--space-8) var(--space-6);
 }
 
 @media (min-width: 640px) {
@@ -1371,6 +1439,7 @@ p a:not(.button) {
 
 .feature-row {
   display: flex;
+  min-width: 0;
   flex-direction: column;
   gap: var(--space-5);
 }
@@ -1380,13 +1449,9 @@ p a:not(.button) {
   justify-content: center;
 }
 
-
-
-
-
 .feature-description {
   max-width: var(--measure);
-  margin-top: var(--space-3);
+  margin-top: var(--space-2);
   color: var(--color-text-muted);
 }
 
@@ -1408,7 +1473,7 @@ p a:not(.button) {
    white line on the left. Colors follow the section (white on blue). */
 .pull-quote {
   max-width: var(--width-narrow);
-  border-left: var(--space-1) solid currentColor;
+  border-left: 2px solid var(--color-brand);
   padding-left: var(--space-5);
 }
 
@@ -1436,29 +1501,24 @@ p a:not(.button) {
 }
 
 /* =========================================================================
- * Team
+ * Team — open profiles (shared open-item frame) with a round avatar
  * ========================================================================= */
-
-.member-card {
-  align-items: center;
-  text-align: center;
-}
 
 .avatar {
   display: grid;
-  width: var(--space-9);
-  height: var(--space-9);
+  width: var(--space-8);
+  height: var(--space-8);
   place-items: center;
   margin-bottom: var(--space-4);
+  border: 1px solid var(--color-brand);
   border-radius: var(--radius-full);
   background: var(--color-bg);
   box-shadow:
     0 0 0 4px var(--color-bg),
     0 0 0 5px var(--color-border);
   color: var(--color-brand-text);
-  font-size: var(--text-xl);
+  font-size: var(--text-lg);
   font-weight: var(--weight-bold);
-  border: 1px solid var(--color-brand);
 }
 
 .member-role {
@@ -1470,11 +1530,11 @@ p a:not(.button) {
   color: var(--color-text-muted);
 }
 
-/* Two columns: a single card beside a list (Team: adviser + school details) */
+/* Two columns: one profile beside a list (Team: adviser + school details) */
 .split {
   display: grid;
   align-items: start;
-  gap: var(--space-6);
+  gap: var(--space-7);
 }
 
 @media (min-width: 768px) {
@@ -1484,7 +1544,8 @@ p a:not(.button) {
 }
 
 /* =========================================================================
- * FAQ — categories of native <details>/<summary> inside cards
+ * FAQ — categories of native <details>/<summary>, as a clean list of
+ * questions separated by thin lines (no box)
  * ========================================================================= */
 
 .faq-groups {
@@ -1508,16 +1569,11 @@ p a:not(.button) {
   margin-bottom: var(--space-4);
 }
 
-.faq-card {
-  border: 1px solid var(--color-border);
-  border-top: var(--border-accent);
-  border-radius: var(--radius-lg);
-  padding-inline: var(--card-padding);
-  background: var(--color-bg);
-  box-shadow: var(--shadow-highlight), var(--shadow-sm);
+.faq-list {
+  border-bottom: 1px solid var(--color-border);
 }
 
-.faq-item + .faq-item {
+.faq-item {
   border-top: 1px solid var(--color-border);
 }
 
@@ -1594,7 +1650,8 @@ p a:not(.button) {
 }
 
 /* =========================================================================
- * Info list — label/value pairs (<dl>)
+ * Info list — a spec sheet: label on the left, value on the right, thin
+ * lines between rows (<dl>)
  * ========================================================================= */
 
 .info-list {
@@ -1620,7 +1677,6 @@ p a:not(.button) {
   color: var(--color-text);
   font-weight: var(--weight-semibold);
 }
-
 
 .info-value {
   color: var(--color-text-muted);
@@ -1677,6 +1733,8 @@ p a:not(.button) {
   font-weight: var(--weight-semibold);
 }
 
+/* QR code: an open column inside the download card, divided by a thin line
+   (above it on mobile, to its left on wide screens) */
 .qr {
   display: flex;
   max-width: 18rem;
@@ -1684,20 +1742,29 @@ p a:not(.button) {
   align-items: center;
   justify-self: center;
   gap: var(--space-4);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  padding: var(--card-padding);
-  background: var(--color-bg);
+  border-top: 1px solid var(--color-border);
+  padding-top: var(--space-6);
   text-align: center;
+}
+
+@media (min-width: 960px) {
+  .qr {
+    align-self: stretch;
+    justify-content: center;
+    border-top: 0;
+    border-left: 1px solid var(--color-border);
+    padding-top: 0;
+    padding-left: var(--space-7);
+  }
 }
 
 .qr-code {
   display: grid;
   place-items: center;
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   padding: var(--space-3);
   background: var(--color-bg);
-  box-shadow: var(--shadow-xs);
   color: var(--color-brand-text);
 }
 
@@ -1944,10 +2011,10 @@ p a:not(.button) {
 }
 
 /* =========================================================================
- * Typographic details: labels, numbers, dividers, fact numbers
+ * Typographic details: labels, numbers, lists, tables, fact numbers
  * ========================================================================= */
 
-/* Small uppercase label (e.g. "STEP", table headings) */
+/* Small uppercase label (e.g. table headings, roles) */
 .label {
   color: var(--color-text-muted);
   font-size: var(--text-sm);
@@ -1956,8 +2023,8 @@ p a:not(.button) {
   text-transform: uppercase;
 }
 
-/* Large "01" number in a card or step header */
-.card-number {
+/* Large blue "01" number above an item or step */
+.item-number {
   color: var(--color-brand-text);
   font-family: var(--font-display);
   font-size: 2rem;
@@ -1966,16 +2033,7 @@ p a:not(.button) {
   line-height: 1;
 }
 
-.step-top {
-  justify-content: flex-start;
-}
-
-.step-list--flow .step-top {
-  justify-content: center;
-  margin-bottom: 0;
-}
-
-/* Numbered list with large numbers and thin dividers (objectives, timeline) */
+/* Numbered rows with large numbers and thin lines (objectives, timeline) */
 .numbered-list {
   max-width: var(--width-narrow);
   border-top: 1px solid var(--color-border);
@@ -2042,26 +2100,23 @@ p a:not(.button) {
   margin-bottom: var(--space-1);
 }
 
-/* Two-column table (Download: system requirements) in a white box */
+/* Two-column spec sheet (Download: system requirements): rows separated by
+   thin lines, no box. Scrolls sideways inside itself if ever too wide. */
 .table-wrap {
   max-width: var(--width-narrow);
   overflow-x: auto;
-  border: 1px solid var(--color-border);
-  border-top: var(--border-accent);
-  border-radius: var(--radius-lg);
-  background: var(--color-bg);
-  box-shadow: var(--shadow-highlight), var(--shadow-sm);
   color: var(--color-text);
 }
 
 .data-table {
   width: 100%;
   border-collapse: collapse;
+  border-bottom: 1px solid var(--color-border);
 }
 
 .data-table th,
 .data-table td {
-  padding: var(--space-4) var(--space-5);
+  padding: var(--space-4) var(--space-5) var(--space-4) 0;
   text-align: left;
   vertical-align: top;
 }
@@ -2081,20 +2136,19 @@ p a:not(.button) {
 }
 
 .data-table td {
+  padding-right: 0;
   color: var(--color-text-muted);
 }
 
-/* A thin 1px divider between groups of content in one section */
+/* Extra space before a second group of content in one section */
 .section-block {
-  margin-top: var(--space-7);
-  border-top: 1px solid var(--color-border);
-  padding-top: var(--space-7);
+  margin-top: var(--space-8);
 }
 
-/* Big typographic facts, each with a thin blue line on its left */
+/* Big typographic facts in open columns (shared open-item frame) */
 .fact-numbers {
   display: grid;
-  gap: var(--space-5);
+  gap: var(--space-7) var(--space-6);
 }
 
 @media (min-width: 640px) {
@@ -2107,11 +2161,6 @@ p a:not(.button) {
   .fact-numbers {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
-}
-
-.fact-number {
-  border-left: 2px solid var(--color-brand);
-  padding-left: var(--space-4);
 }
 
 .fact-number-value {
@@ -2143,6 +2192,7 @@ p a:not(.button) {
   display: inline-flex;
   align-items: center;
   gap: var(--space-1);
+  border: 1px solid var(--color-brand);
   border-radius: var(--radius-full);
   padding: var(--space-1) var(--space-3);
   background: var(--color-bg);
@@ -2151,7 +2201,6 @@ p a:not(.button) {
   font-weight: var(--weight-semibold);
   line-height: 1.3;
   white-space: nowrap;
-  border: 1px solid var(--color-brand);
 }
 
 .chip-row {
@@ -2161,13 +2210,13 @@ p a:not(.button) {
   margin-bottom: var(--space-5);
 }
 
-/* Chip row at the top of a card */
-.card-top {
+/* Number and/or label row above an item heading */
+.item-top {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--space-3);
-  margin-bottom: var(--space-5);
+  margin-bottom: var(--space-4);
 }
 
 .check-list {
@@ -2193,20 +2242,13 @@ p a:not(.button) {
   content: "";
 }
 
-
+/* Callout: a thin blue left line beside the text, no box */
 .callout {
-  display: block;
   max-width: var(--width-narrow);
-  align-items: flex-start;
-  gap: var(--space-4);
-  border: 1px solid var(--color-border);
-  border-left: var(--space-1) solid var(--color-brand);
-  border-radius: var(--radius-lg);
-  padding: var(--card-padding);
-  background: var(--color-bg);
-  box-shadow: var(--shadow-highlight), var(--shadow-sm);
+  border-left: 2px solid var(--color-brand);
+  padding-block: var(--space-1);
+  padding-left: var(--space-5);
 }
-
 
 .callout-label {
   color: var(--color-brand-text);
@@ -2222,12 +2264,12 @@ p a:not(.button) {
 }
 
 .section-callout {
-  margin-top: var(--space-6);
+  margin-top: var(--space-7);
 }
 
 .section-callout--top {
   margin-top: 0;
-  margin-bottom: var(--space-6);
+  margin-bottom: var(--space-7);
 }
 
 .section-note {
@@ -2255,17 +2297,10 @@ p a:not(.button) {
   }
 }
 
-
-
-
-
-
-
-
 /* "See it in action": comparison + fact side by side on wide screens */
 .compare-layout {
   display: grid;
-  gap: var(--space-6);
+  gap: var(--space-7);
 }
 
 @media (min-width: 1024px) {
@@ -2274,8 +2309,6 @@ p a:not(.button) {
     align-items: center;
   }
 }
-
-
 
 /* Braille cell teaching diagram */
 .cell-diagram {
@@ -2317,71 +2350,6 @@ p a:not(.button) {
   font-size: var(--text-sm);
 }
 
-
-
-
-
-
-
-
-/* Content surfaces share a small corner detail. */
-:is(.card, .step-list--cards .step, .compare-panel, .faq-card, .download-card, .qr, .callout, .table-wrap) {
-  position: relative;
-}
-
-.qr {
-  box-shadow: var(--shadow-highlight), var(--shadow-sm);
-}
-
-:is(.compare-panel, .qr) {
-  border-top: var(--border-accent);
-}
-
-:is(.card, .step-list--cards .step, .compare-panel, .download-card, .qr, .callout)::before {
-  position: absolute;
-  right: var(--space-3);
-  bottom: var(--space-3);
-  width: 14px;
-  height: 14px;
-  border-right: 2px solid var(--color-border);
-  border-bottom: 2px solid var(--color-border);
-  border-bottom-right-radius: var(--space-1);
-  content: "";
-  pointer-events: none;
-}
-
-/* Less space under a card title than above it, so it sits with its text */
-.card-title {
-  border-bottom: 1px solid var(--color-border);
-  padding-bottom: var(--space-2);
-}
-
-/* Keyboard focus inside a surface lifts it one level (the download card
-   already sits at lg) */
-:is(.card, .faq-card, .callout, .qr):focus-within {
-  box-shadow: var(--shadow-highlight), var(--shadow-md);
-}
-
-.screenshot {
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-sm);
-}
-
-:is(.feature-row, .step-list--flow .step, .fact-number) {
-  min-width: 0;
-  border: 1px solid var(--color-border);
-  border-top: var(--border-accent);
-  border-radius: var(--radius-lg);
-  padding: var(--card-padding);
-  background: var(--color-bg);
-  box-shadow: var(--shadow-highlight), var(--shadow-sm);
-}
-
-.fact-number {
-  border-top: 1px solid var(--color-border);
-  border-left: var(--border-accent);
-}
-
 .section-eyebrow {
   display: flex;
   align-items: center;
@@ -2397,23 +2365,8 @@ p a:not(.button) {
   content: "";
 }
 
-:is(.numbered-list, .info-list, .on-this-page) {
-  border: 1px solid var(--color-border);
-  border-top: var(--border-accent);
-  border-radius: var(--radius-lg);
-  padding-inline: var(--card-padding);
-  background: var(--color-bg);
-  box-shadow: var(--shadow-highlight), var(--shadow-sm);
-}
-
-.numbered-item:last-child,
-.info-row:last-child {
-  border-bottom: 0;
-}
-
 @media print {
-  .site-container,
-  :is(.card, .step, .compare-panel, .faq-card, .download-card, .qr, .callout, .table-wrap, .screenshot, .feature-row, .fact-number, .numbered-list, .info-list, .on-this-page) {
+  * {
     box-shadow: none !important;
   }
 }
@@ -2497,8 +2450,8 @@ p a:not(.button) {
     animation: none;
   }
 
-  .card--link:hover,
-  .card--link:hover .card-more svg,
+  .item--link:hover,
+  .item--link:hover .item-more svg,
   .text-link:hover .text-link-arrow,
   .button:hover,
   .button:active {

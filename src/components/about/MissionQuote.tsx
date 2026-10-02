@@ -3,7 +3,7 @@ type MissionQuoteProps = {
   attribution: string;
 };
 
-/** Large pull-quote for the mission statement (white text on the solid blue band). */
+/** Large pull-quote for the mission statement, beside a thin blue line. */
 export default function MissionQuote({ quote, attribution }: MissionQuoteProps) {
   return (
     <figure className="pull-quote">

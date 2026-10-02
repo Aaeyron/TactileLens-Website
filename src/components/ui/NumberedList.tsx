@@ -22,12 +22,12 @@ export default function NumberedList({ items }: NumberedListProps) {
     <ol className="numbered-list" role="list" data-reveal-group>
       {items.map((item, index) => (
         <li className="numbered-item" key={`${item.title ?? item.text}-${index}`}>
-          <span className="card-number" aria-hidden="true">
+          <span className="item-number" aria-hidden="true">
             {pad(index + 1)}
           </span>
           <div>
             {item.meta && <p className="label numbered-meta">{item.meta}</p>}
-            {item.title && <h3 className="card-title">{item.title}</h3>}
+            {item.title && <h3 className="item-title">{item.title}</h3>}
             {item.text && <p className="numbered-text">{item.text}</p>}
           </div>
         </li>
