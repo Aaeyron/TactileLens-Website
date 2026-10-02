@@ -52,7 +52,7 @@ export default function Navbar() {
 
   return (
     <header className="site-header" data-scrolled={scrolled || undefined}>
-      <Container className="navbar-pill">
+      <Container>
         <nav className="navbar" aria-label="Main">
           {/* The visible "TactileLens" text is the Home link's accessible name. */}
           <Link href="/" className="navbar-brand" onClick={closeMenu}>

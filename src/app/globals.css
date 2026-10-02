@@ -58,7 +58,7 @@
   --color-border: var(--blue-border);
   --color-divider: rgb(0 55 151 / 0.1); /* 1px line between sections */
   --color-focus: var(--blue);
-  --color-nav-border: rgb(0 55 151 / 0.14); /* mobile menu panel */
+  --color-nav-border: rgb(0 55 151 / 0.14); /* mobile menu panel edge */
   --color-nav-active: rgb(0 55 151 / 0.08); /* current page pill (white panel) */
   --color-nav-hover: rgb(0 55 151 / 0.04); /* hover pill (white panel) */
   --color-nav-hover-inverse: rgb(255 255 255 / 0.12); /* hover pill on the blue navbar */
@@ -139,9 +139,7 @@
   /* Layout */
   --container-max: 1120px; /* max content width */
   --gutter: 1.25rem; /* 20px; 32px from 768px */
-  --header-height: 64px; /* navbar pill (px: SmoothScroll.tsx reads it) */
-  --nav-offset: 12px; /* pill gap from the top and sides; 16px from 768px */
-  --nav-max: 1100px;
+  --header-height: 56px; /* navbar bar; 64px from 960px (px: SmoothScroll.tsx reads it) */
   --tap-target: 44px;
   --button-height: 48px;
   --qr-size: 10.5rem;
@@ -158,13 +156,13 @@
 @media (min-width: 960px) {
   :root {
     --device-width: 272px;
+    --header-height: 64px;
   }
 }
 
 @media (min-width: 768px) {
   :root {
     --gutter: var(--space-6);
-    --nav-offset: 16px;
   }
 }
 
@@ -210,7 +208,7 @@ html.lenis body {
 
 /* Anchor targets and keyboard-focused elements stop below the floating navbar */
 :where([id], a, button, summary, [tabindex]) {
-  scroll-margin-top: calc(var(--nav-offset) + var(--header-height) + var(--space-4));
+  scroll-margin-top: calc(var(--header-height) + var(--space-4));
 }
 
 body {
@@ -667,37 +665,25 @@ h3 {
 }
 
 /* =========================================================================
- * Navbar — a floating deep blue pill
- * The header is a transparent sticky strip; the container inside it is the
- * pill, --nav-offset from the top and sides. Clicks pass through the strip
- * around the pill. The mobile menu opens as a rounded panel below the pill,
- * so the pill itself never changes height.
+ * Navbar — a full-width deep blue bar, sticky at the very top
+ * The bar spans the screen edge to edge; its content stays aligned to the
+ * 1120px content width. The mobile menu opens as a full-width white panel
+ * directly under the bar, so the bar itself never changes height.
  * ========================================================================= */
 
 .site-header {
+  --color-focus: var(--white);
   position: sticky;
   top: 0;
   z-index: 50;
-  padding: var(--nav-offset) var(--nav-offset) 0;
-  pointer-events: none;
-}
-
-.site-header > .navbar-pill {
-  --color-focus: var(--white);
-  position: relative;
-  max-width: var(--nav-max);
-  border: 1px solid var(--blue-hover);
-  border-radius: var(--radius-full);
-  padding-inline: var(--space-3);
   background: var(--blue);
-  box-shadow: 0 8px 24px rgb(0 32 92 / 0.25);
-  pointer-events: auto;
+  box-shadow: 0 2px 12px rgb(0 32 92 / 0.18);
   transition: box-shadow var(--duration-medium) var(--ease);
 }
 
 /* Slightly stronger once the page has scrolled (data-scrolled: Navbar.tsx) */
-.site-header[data-scrolled] > .navbar-pill {
-  box-shadow: 0 2px 6px rgb(0 32 92 / 0.2), 0 12px 32px rgb(0 32 92 / 0.32);
+.site-header[data-scrolled] {
+  box-shadow: 0 2px 6px rgb(0 32 92 / 0.18), 0 6px 20px rgb(0 32 92 / 0.24);
 }
 
 .navbar {
@@ -762,23 +748,23 @@ h3 {
   background: var(--soft-blue);
 }
 
-/* Mobile first: the menu is a rounded white panel under the pill, with blue
-   text, the soft current-page pill and a solid blue Download button */
+/* Mobile first: the menu is a full-width white panel directly under the bar
+   (positioned against the sticky header), with blue text, the soft
+   current-page pill and a full-width solid blue Download button */
 .navbar-menu {
   --color-focus: var(--blue);
   position: absolute;
-  top: calc(100% + var(--space-2));
+  top: 100%;
   right: 0;
   left: 0;
   display: none;
-  max-height: calc(100dvh - var(--nav-offset) - var(--header-height) - var(--space-5));
+  max-height: calc(100dvh - var(--header-height));
   overflow-y: auto;
   flex-direction: column;
   gap: var(--space-3);
-  border: 1px solid var(--color-nav-border);
-  border-radius: var(--radius-lg);
-  padding: var(--space-3);
-  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-nav-border);
+  padding: var(--space-3) var(--gutter) var(--space-5);
+  background: var(--white);
   box-shadow: var(--shadow-lg);
 }
 
