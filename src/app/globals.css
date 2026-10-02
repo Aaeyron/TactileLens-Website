@@ -109,8 +109,8 @@
      md: hover/focus lift, navbar, section frames
      lg: download card, phone frames */
   --shadow-xs: 0 1px 2px rgb(0 55 151 / 0.05);
-  --shadow-sm: 0 1px 2px rgb(0 55 151 / 0.06), 0 2px 6px rgb(0 55 151 / 0.06);
-  --shadow-md: 0 2px 4px rgb(0 55 151 / 0.05), 0 8px 20px rgb(0 55 151 / 0.08);
+  --shadow-sm: 0 1px 2px rgb(0 55 151 / 0.06), 0 8px 24px rgb(0 55 151 / 0.08);
+  --shadow-md: 0 2px 4px rgb(0 55 151 / 0.06), 0 12px 32px rgb(0 55 151 / 0.12);
   --shadow-lg: 0 4px 8px rgb(0 55 151 / 0.06), 0 16px 40px rgb(0 55 151 / 0.1), 0 32px 64px rgb(0 55 151 / 0.06);
   --shadow-highlight: inset 0 1px 0 rgb(255 255 255 / 0.6);
   --shadow-pressed: inset 0 2px 4px rgb(0 32 92 / 0.35);
@@ -127,7 +127,7 @@
   --page-distance: 8px;
 
   /* Layout */
-  --container-max: 1200px;
+  --container-max: 1120px; /* max content width */
   --gutter: 1.25rem; /* 20px; 32px from 768px */
   --header-height: 72px;
   --tap-target: 44px;
@@ -2316,9 +2316,10 @@ p a:not(.button) {
   pointer-events: none;
 }
 
+/* Less space under a card title than above it, so it sits with its text */
 .card-title {
   border-bottom: 1px solid var(--color-border);
-  padding-bottom: var(--space-3);
+  padding-bottom: var(--space-2);
 }
 
 /* Keyboard focus inside a surface lifts it one level (the download card
