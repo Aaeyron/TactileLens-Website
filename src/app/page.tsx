@@ -41,7 +41,14 @@ export default function HomePage() {
         </div>
       </EdSplit>
 
-      <EdSection id="why" eyebrow={homeWhy.eyebrow} title={homeWhy.title} description={homeWhy.description}>
+      <EdSection
+        id="why"
+        tone="soft"
+        layout="side"
+        eyebrow={homeWhy.eyebrow}
+        title={homeWhy.title}
+        description={homeWhy.description}
+      >
         <ItemGrid items={homeWhy.items} columns={3} numbered />
       </EdSection>
 

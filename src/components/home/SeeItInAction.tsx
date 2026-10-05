@@ -2,12 +2,12 @@ import { sampleMath, seeItInAction } from "@/content/site";
 import EdSection from "@/components/editorial/EdSection";
 import Callout from "@/components/ui/Callout";
 
-/** Soft blue-gray block: printed "x + 1" → Nemeth braille, shown large, with a fact. */
+/** A white example band between the soft benefits section and navy comparison. */
 export default function SeeItInAction() {
   return (
     <EdSection
       id="see-it-in-action"
-      tone="soft"
+      tone="white"
       layout="side"
       eyebrow={seeItInAction.eyebrow}
       title={seeItInAction.title}
