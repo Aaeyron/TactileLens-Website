@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { screenPreview, site } from "@/content/site";
+import { logo, screenPreview, site } from "@/content/site";
 
 export type ScreenConfig = {
   /** Which app screen goes here, e.g. "App screen: Camera". */
@@ -43,8 +43,10 @@ export default function Screenshot({ screen, frame = false, preload = false, siz
     />
   ) : (
     <div className="screenshot-placeholder" aria-hidden="true">
+      <Image className="preview-brand-mark" src={logo.src} alt="" width={48} height={48} />
       <p className="screenshot-label">{site.name}</p>
       <p className="screenshot-preview-label">{screenPreview.label}</p>
+      <span className="preview-page-lines"><span /><span /><span /></span>
     </div>
   );
 

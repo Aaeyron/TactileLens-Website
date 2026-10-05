@@ -160,6 +160,8 @@ export const footer = {
 export const hero = {
   // DRAFT: review — editorial hero headline and short (two-line) lead.
   headline: "Turn printed pages into braille.",
+  headlinePrefix: "Turn printed pages into",
+  headlineHighlight: "braille.",
   lead: "Scan a printed page with your Android phone. TactileLens turns its text and math into braille.",
   badge: "Accessible learning materials",
   titleLead: "Make printed learning materials more accessible with",
@@ -280,7 +282,7 @@ export const seeItInAction = {
 
 export const homeHighlights = {
   eyebrow: "Highlights",
-  title: "Built for teachers",
+  title: "Text, math, and offline text scanning",
   description: "The main things TactileLens does for you and your students.",
   // DRAFT: review (chips and bullets).
   items: [
