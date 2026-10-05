@@ -1,3 +1,5 @@
+import { UserRound } from "lucide-react";
+
 type MemberProfileProps = {
   name: string;
   role: string;
@@ -27,7 +29,7 @@ export default function MemberProfile({ name, role, description, as: Tag = "li" 
   return (
     <Tag className="member">
       <span className="avatar" aria-hidden="true">
-        {isPlaceholder ? null : initials(name)}
+        {isPlaceholder ? <UserRound size={28} aria-hidden="true" /> : initials(name)}
       </span>
       <h3 className="item-title">{name}</h3>
       <p className="label member-role">{role}</p>

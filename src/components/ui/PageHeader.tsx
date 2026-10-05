@@ -9,18 +9,22 @@ type PageHeaderProps = {
   children?: ReactNode;
 };
 
-/** The solid blue top of every inner page. Holds the page's only <h1>. */
+/** A split title and introduction on a grey surface, shared by inner pages. */
 export default function PageHeader({ eyebrow, title, intro, children }: PageHeaderProps) {
   return (
-    <section className="page-header" data-tone="white" aria-labelledby="page-title">
+    <section className="page-header" data-tone="mist" aria-labelledby="page-title">
       <Container>
         <div className="page-header-content">
-          <p className="section-eyebrow">{eyebrow}</p>
-          <h1 id="page-title" className="page-title">
-            {title}
-          </h1>
-          <p className="page-intro">{intro}</p>
-          {children && <div className="page-header-actions">{children}</div>}
+          <div className="page-header-title">
+            <p className="section-eyebrow">{eyebrow}</p>
+            <h1 id="page-title" className="page-title">
+              {title}
+            </h1>
+          </div>
+          <div className="page-header-introduction">
+            <p className="page-intro">{intro}</p>
+            {children && <div className="page-header-actions">{children}</div>}
+          </div>
         </div>
       </Container>
     </section>

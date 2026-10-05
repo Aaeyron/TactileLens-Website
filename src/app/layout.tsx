@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Atkinson_Hyperlegible_Next, Manrope } from "next/font/google";
+import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import SkipLink from "@/components/layout/SkipLink";
@@ -8,26 +8,21 @@ import SmoothScroll from "@/components/layout/SmoothScroll";
 import { site } from "@/content/site";
 import { baseOpenGraph } from "@/lib/metadata";
 import "./globals.css";
+import "./redesign.css";
 
-// Body: designed by the Braille Institute for low-vision readers.
-// "swap" so the font always appears, even on slow Wi-Fi. Next.js has no
-// built-in fallback metrics for this font, so we provide our own tuned
-// fallback ("Atkinson Hyperlegible Next Fallback" in globals.css) to keep the
-// layout from shifting when the font arrives.
-const bodyFont = Atkinson_Hyperlegible_Next({
+// A readable neutral body face paired with expressive geometric headings.
+const bodyFont = Inter({
   variable: "--font-body",
   subsets: ["latin"],
-  weight: ["400", "700"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
-  adjustFontFallback: false,
-  fallback: ["Atkinson Hyperlegible Next Fallback"],
 });
 
-// Headings, buttons and the navbar: clean, straight geometric sans.
-const headingFont = Manrope({
+const headingFont = Plus_Jakarta_Sans({
   variable: "--font-heading",
   subsets: ["latin"],
   weight: ["600", "700", "800"],
+  display: "swap",
 });
 
 // TODO: When the social preview image is ready, add src/app/opengraph-image.png

@@ -40,8 +40,8 @@ const bluePressed = "#00205c";
 const ink = "#0f1f36"; // body text
 const inkMuted = "#4a5a72"; // secondary text
 const blueBorder = "#ccd7ea"; // light border made from the blue (decorative)
-const mist = "#f6f8fb"; // section tone
-const softBlue = "#edf3fb"; // section tone, white-button hover
+const mist = "#f3f4f6"; // neutral grey section tone
+const softBlue = "#edf2fa"; // blue accent surface, white-button hover
 
 // Outline button hover on blue: 25% pressed-blue overlay (only darker).
 const outlineHover = mix(blue, bluePressed, 0.25);
