@@ -1,32 +1,20 @@
-import Image from "next/image";
-import { ctaBanner, downloadCta, logo } from "@/content/site";
+import { ctaBanner, downloadCta } from "@/content/site";
 import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
 
-/** "Ready to try TactileLens?" deep blue full-width band, centered. Ends every page except /download. */
+/** A quiet closing section with one clearly named download action. */
 export default function CtaBanner() {
   return (
-    <section className="cta-band" data-tone="blue" aria-labelledby="cta-band-title" data-reveal>
+    <section className="cta-band" data-tone="mist" aria-labelledby="cta-band-title" data-reveal>
       <Container className="cta-band-inner">
         <div className="cta-band-text">
-          <div className="cta-band-heading">
-            <Image
-              className="cta-band-logo"
-              src={logo.src}
-              alt={logo.alt}
-              width={logo.width}
-              height={logo.height}
-              sizes="2.25rem"
-            />
-            <h2 id="cta-band-title" className="cta-band-title">
-              {ctaBanner.title}
-            </h2>
-          </div>
+          <h2 id="cta-band-title" className="cta-band-title">{ctaBanner.title}</h2>
           <p className="cta-band-description">{ctaBanner.text}</p>
         </div>
-        <Button href={downloadCta.pageHref} variant="inverse">
-          {downloadCta.label}
-        </Button>
+        <div className="closing-action">
+          <Button href={downloadCta.pageHref}>{downloadCta.label}</Button>
+          <span className="action-caption">View download details</span>
+        </div>
       </Container>
     </section>
   );

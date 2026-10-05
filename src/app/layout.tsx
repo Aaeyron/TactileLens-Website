@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Plus_Jakarta_Sans } from "next/font/google";
+import { DM_Sans } from "next/font/google";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import SkipLink from "@/components/layout/SkipLink";
@@ -10,18 +10,11 @@ import { baseOpenGraph } from "@/lib/metadata";
 import "./globals.css";
 import "./redesign.css";
 
-// A readable neutral body face paired with expressive geometric headings.
-const bodyFont = Inter({
-  variable: "--font-body",
+// One friendly, readable family gives headings and body text a quieter rhythm.
+const siteFont = DM_Sans({
+  variable: "--font-dm-sans",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
-  display: "swap",
-});
-
-const headingFont = Plus_Jakarta_Sans({
-  variable: "--font-heading",
-  subsets: ["latin"],
-  weight: ["600", "700", "800"],
   display: "swap",
 });
 
@@ -58,7 +51,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     // changes jump straight to the top (Next.js 16 opt-in).
     <html
       lang="en"
-      className={`${bodyFont.variable} ${headingFont.variable}`}
+      className={siteFont.variable}
       data-scroll-behavior="smooth"
     >
       <body className="site-body" id="top">

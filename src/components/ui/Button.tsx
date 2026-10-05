@@ -1,11 +1,13 @@
 import Link from "next/link";
 import type { ComponentPropsWithoutRef } from "react";
+import Icon, { type IconName } from "./Icon";
 
 type ButtonProps = ComponentPropsWithoutRef<"a"> & {
   href: string;
   /** "inverse" is the white button for deep blue areas. */
   variant?: "primary" | "secondary" | "inverse";
   size?: "md" | "sm";
+  icon?: IconName;
 };
 
 /**
@@ -18,10 +20,13 @@ export default function Button({
   variant = "primary",
   size = "md",
   className = "",
+  icon = "download",
+  children,
   ...props
 }: ButtonProps) {
   const classes = [
     "button",
+    "button--icon",
     `button--${variant}`,
     size === "sm" ? "button--sm" : "",
     className,
@@ -30,10 +35,12 @@ export default function Button({
     .join(" ");
 
   const isInternalPage = href.startsWith("/") && !href.startsWith("//") && !props.download;
+  const label = props["aria-label"] ?? (typeof children === "string" ? children : undefined);
+  const content = <><Icon name={icon} size={22} /><span className="visually-hidden">{children}</span></>;
 
   if (isInternalPage) {
-    return <Link href={href} className={classes} {...props} />;
+    return <Link href={href} className={classes} title={label} {...props}>{content}</Link>;
   }
 
-  return <a href={href} className={classes} {...props} />;
+  return <a href={href} className={classes} title={label} {...props}>{content}</a>;
 }

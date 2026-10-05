@@ -9,10 +9,10 @@ type PageHeaderProps = {
   children?: ReactNode;
 };
 
-/** A split title and introduction on a grey surface, shared by inner pages. */
+/** A compact, text-first introduction on white, shared by inner pages. */
 export default function PageHeader({ eyebrow, title, intro, children }: PageHeaderProps) {
   return (
-    <section className="page-header" data-tone="mist" aria-labelledby="page-title">
+    <section className="page-header" data-tone="white" aria-labelledby="page-title">
       <Container>
         <div className="page-header-content">
           <div className="page-header-title">

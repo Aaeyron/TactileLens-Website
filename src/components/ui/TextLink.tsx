@@ -10,9 +10,6 @@ export default function TextLink({ href, children }: TextLinkProps) {
   return (
     <Link href={href} className="text-link">
       {children}
-      <span className="text-link-arrow" aria-hidden="true">
-        →
-      </span>
     </Link>
   );
 }

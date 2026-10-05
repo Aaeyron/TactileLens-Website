@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { footer, logo, site } from "@/content/site";
 import Container from "@/components/ui/Container";
-import Icon from "@/components/ui/Icon";
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -35,7 +34,6 @@ export default function Footer() {
               ) : (
                 <Link className="footer-link" href="/faq">
                   {footer.helpLabel}
-                  <Icon name="arrow-right" size={16} />
                 </Link>
               )}
             </div>
@@ -54,7 +52,6 @@ export default function Footer() {
                       <li key={link.href}>
                         <Link className="footer-link" href={link.href}>
                           {link.label}
-                          <Icon name="arrow-right" size={14} />
                         </Link>
                       </li>
                     ))}

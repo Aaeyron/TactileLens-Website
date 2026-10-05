@@ -1,6 +1,5 @@
 import { appRelease, downloadCta, site } from "@/content/site";
 import Button from "@/components/ui/Button";
-import Icon from "@/components/ui/Icon";
 
 type DownloadCtaProps = {
   /** Unique prefix for element ids, needed when used more than once per page. */
@@ -50,7 +49,6 @@ export default function DownloadCta({ idPrefix }: DownloadCtaProps) {
         download={isOwnDomain(apkUrl) || undefined}
         aria-describedby={details.length ? metaId : undefined}
       >
-        <Icon name="download" size={20} />
         {downloadCta.label}
       </Button>
 
