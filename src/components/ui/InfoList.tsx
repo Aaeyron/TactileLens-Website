@@ -9,7 +9,7 @@ export default function InfoList({ items }: InfoListProps) {
       {items.map((item) => (
         <div className="info-row" key={item.label}>
           <dt className="info-label">{item.label}</dt>
-          <dd className="info-value">{item.value}</dd>
+          <dd className="info-value">{item.value.startsWith("TODO") ? "Details to follow." : item.value}</dd>
         </div>
       ))}
     </dl>

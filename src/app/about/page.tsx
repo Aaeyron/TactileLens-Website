@@ -4,11 +4,11 @@ import { aboutPage } from "@/content/site";
 import MissionQuote from "@/components/about/MissionQuote";
 import CtaBanner from "@/components/download/CtaBanner";
 import BrailleCellDiagram from "@/components/ui/BrailleCellDiagram";
-import Callout from "@/components/ui/Callout";
 import NumberedList from "@/components/ui/NumberedList";
 import ItemGrid from "@/components/ui/ItemGrid";
 import PageHeader from "@/components/ui/PageHeader";
 import Prose from "@/components/ui/Prose";
+import RichText from "@/components/ui/RichText";
 import Section from "@/components/ui/Section";
 import TextLink from "@/components/ui/TextLink";
 
@@ -31,15 +31,20 @@ export default function AboutPage() {
         <ItemGrid items={comparison.items} layout="split" />
       </Section>
 
-      <Section
-        id="braille-basics"
-        eyebrow={basics.eyebrow}
-        title={basics.title}
-        description={basics.description}
-        aside={<BrailleCellDiagram label={basics.diagramLabel} caption={basics.diagramCaption} />}
-      >
-        <ItemGrid items={basics.items} />
-      </Section>
+      {basics.items.map((item, index) => (
+        <Section
+          key={item.title}
+          id={index === 0 ? "braille-basics" : `braille-basics-${index + 1}`}
+          eyebrow={basics.eyebrow}
+          title={item.title}
+          description={item.description}
+          aside={index === 0 ? <BrailleCellDiagram label={basics.diagramLabel} caption={basics.diagramCaption} /> : undefined}
+        >
+          <ul className="simple-points" role="list">
+            {item.bullets.map((point) => <li key={point}><RichText text={point} /></li>)}
+          </ul>
+        </Section>
+      ))}
 
       <Section
         id="objectives"
@@ -48,7 +53,7 @@ export default function AboutPage() {
         title={objectives.title}
         description={objectives.description}
       >
-        <NumberedList items={objectives.items} />
+        <p className="section-description">The full project objectives will be added when the capstone paper is ready to share.</p>
       </Section>
 
       {/* Mission as a full-width pull-quote band */}
@@ -62,10 +67,7 @@ export default function AboutPage() {
         title={audience.title}
         description={audience.description}
       >
-        <ItemGrid items={audience.items} />
-        <div className="section-callout">
-          <Callout variant="fact" text={audience.fact} />
-        </div>
+        <ItemGrid items={audience.items.map((item) => ({ title: item.title, description: item.description }))} />
       </Section>
 
       <Section
@@ -75,7 +77,7 @@ export default function AboutPage() {
         title={timeline.title}
         description={timeline.description}
       >
-        <NumberedList items={timeline.items} />
+        <NumberedList items={timeline.items.map((item) => ({ title: item.title }))} />
       </Section>
 
       <Section id="capstone" eyebrow={capstone.eyebrow} title={capstone.title}>

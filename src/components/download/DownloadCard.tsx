@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { downloadCta, downloadPage, logo, site } from "@/content/site";
-import Chip from "@/components/ui/Chip";
 import Container from "@/components/ui/Container";
 import InfoList from "@/components/ui/InfoList";
 import DownloadCta from "./DownloadCta";
@@ -31,14 +30,6 @@ export default function DownloadCard() {
                 <p className="download-card-subtitle">{card.subtitle}</p>
               </div>
             </div>
-
-            <ul className="chip-row" role="list" aria-label="App details">
-              {card.chips.map((chip) => (
-                <li key={chip}>
-                  <Chip>{chip}</Chip>
-                </li>
-              ))}
-            </ul>
 
             <DownloadCta idPrefix="download-page" />
 

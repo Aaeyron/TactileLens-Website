@@ -1,6 +1,5 @@
 import { sampleMath, seeItInAction } from "@/content/site";
 import EdSection from "@/components/editorial/EdSection";
-import Callout from "@/components/ui/Callout";
 
 /** A white example band between the soft benefits section and navy comparison. */
 export default function SeeItInAction() {
@@ -27,9 +26,6 @@ export default function SeeItInAction() {
         </div>
       </figure>
 
-      <div className="section-callout">
-        <Callout variant="fact" text={seeItInAction.fact} />
-      </div>
     </EdSection>
   );
 }

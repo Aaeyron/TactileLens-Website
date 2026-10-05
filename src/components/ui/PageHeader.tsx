@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import Container from "./Container";
 
 type PageHeaderProps = {
+  id?: string;
   eyebrow: string;
   title: string;
   intro: string;
@@ -10,9 +11,9 @@ type PageHeaderProps = {
 };
 
 /** A compact, text-first introduction on white, shared by inner pages. */
-export default function PageHeader({ eyebrow, title, intro, children }: PageHeaderProps) {
+export default function PageHeader({ id, eyebrow, title, intro, children }: PageHeaderProps) {
   return (
-    <section className="page-header" data-tone="white" aria-labelledby="page-title">
+    <section id={id} className="page-header" data-tone="white" aria-labelledby="page-title">
       <Container>
         <div className="page-header-content">
           <div className="page-header-title">

@@ -26,9 +26,9 @@ export default function NumberedList({ items }: NumberedListProps) {
             {pad(index + 1)}
           </span>
           <div>
-            {item.meta && <p className="label numbered-meta">{item.meta}</p>}
+            {item.meta && !item.meta.startsWith("TODO") && <p className="label numbered-meta">{item.meta}</p>}
             {item.title && <h3 className="item-title">{item.title}</h3>}
-            {item.text && <p className="numbered-text">{item.text}</p>}
+            {item.text && <p className="numbered-text">{item.text.startsWith("TODO") ? "Details will be shared once confirmed." : item.text}</p>}
           </div>
         </li>
       ))}

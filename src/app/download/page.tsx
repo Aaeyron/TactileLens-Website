@@ -46,14 +46,10 @@ export default function DownloadPage() {
         <StepList steps={install.steps} variant="row" />
         <p className="section-note">{install.note}</p>
 
-        <div className="after-install">
-          <div>
-            <h3 className="item-title">{install.afterInstall.title}</h3>
-            <p className="section-description">{install.afterInstall.text}</p>
-          </div>
-          {/* TODO: screenshot — see screens.home in site.ts */}
-          <Screenshot screen={install.afterInstall.screen} sizes="15rem" />
-        </div>
+      </Section>
+
+      <Section id="after-install" title={install.afterInstall.title} description={install.afterInstall.text}>
+        {install.afterInstall.screen.src && <Screenshot screen={install.afterInstall.screen} sizes="240px" />}
         <div className="section-footer">
           <TextLink href={install.scanTipsLink.href}>{install.scanTipsLink.label}</TextLink>
         </div>

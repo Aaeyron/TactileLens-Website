@@ -282,7 +282,7 @@ export const seeItInAction = {
 
 export const homeHighlights = {
   eyebrow: "Highlights",
-  title: "Text, math, and offline text scanning",
+  title: "Text and math, made accessible",
   description: "The main things TactileLens does for you and your students.",
   // DRAFT: review (chips and bullets).
   items: [
@@ -338,22 +338,21 @@ export const aboutPage = {
     eyebrow: "About",
     title: "Why we built TactileLens",
     intro:
-      "TactileLens is a capstone project. It helps teachers make printed learning materials ready for students who read braille.",
+      "We built TactileLens to help teachers prepare printed lessons for students who read braille. It began as a student capstone project.",
   },
   comparison: {
     eyebrow: "Why it matters",
     title: "Braille takes time to prepare",
     // DRAFT: review.
-    description: "Here is what makes braille slow today, and how TactileLens helps.",
+    description: "Less retyping gives teachers a better place to start.",
     items: [
       {
         // DRAFT: review. Plain-language draft, no statistics.
         title: "The problem",
         bullets: [
-          "Most worksheets, handouts and textbooks are printed. Students who read braille need them in braille.",
-          "Materials often have to be **retyped** before they can be turned into braille.",
-          "Turning printed text into braille takes time, and every page needs **checking**.",
-          "Math takes even longer, because equations must be written in a special braille code called **Nemeth**.",
+          "Printed lessons often need to be **retyped** for braille.",
+          "Math needs its own braille code, called **Nemeth**.",
+          "Every page still needs careful **checking**.",
         ],
       },
       {
@@ -361,10 +360,9 @@ export const aboutPage = {
         // TODO: Confirm whether math recognition works offline.
         title: "Our solution",
         bullets: [
-          "Scan printed pages with an Android phone camera.",
-          "Turn printed text into braille.",
-          "Turn printed algebra into **Nemeth** code.",
-          "Recognize printed text online or offline.",
+          "Start with a scan on your Android phone.",
+          "Turn text into braille and algebra into **Nemeth**.",
+          "Scan printed text even without internet.",
         ],
       },
     ],
@@ -416,7 +414,7 @@ export const aboutPage = {
     eyebrow: "Our mission",
     title: "Faster braille for every lesson",
     quote:
-      "We want to help teachers turn printed text and math into braille faster, so students who read braille can work with the same materials as their classmates, at the same time.",
+      "Help teachers prepare braille lessons, so more students can take part in the same classroom activities.",
     attribution: "The TactileLens team",
   },
   // DRAFT: review.
@@ -456,7 +454,7 @@ export const aboutPage = {
   objectives: {
     eyebrow: "Project objectives",
     title: "What this project set out to do",
-    description: "The goals of our capstone project, from our capstone paper.",
+    description: "The goals behind our student project.",
     items: [
       { text: "TODO: General objective from the capstone paper." },
       { text: "TODO: Specific objective 1." },
@@ -481,7 +479,7 @@ export const aboutPage = {
     title: "A student capstone project",
     paragraphs: [
       "TactileLens was developed as a capstone project.",
-      "TODO: course name, school, school year, and adviser.",
+      "School, course, and adviser details will be shared here once confirmed.",
     ],
     link: { label: "Meet the team", href: "/team" },
   },
@@ -585,7 +583,7 @@ export const featuresPage = {
       {
         title: "Use",
         description:
-          "TODO: what teachers do with the braille (for example, view it on screen, save a BRF file, or send it to an embosser).",
+          "Check the braille output before preparing it for a lesson. Export and sharing options will be described once confirmed.",
       },
     ],
   },
@@ -637,7 +635,7 @@ export const faqPage = {
   },
   header: {
     eyebrow: "FAQ",
-    title: "Frequently asked questions",
+    title: "How can we help?",
     intro: "Short answers to the questions teachers ask most.",
   },
   categories: [
@@ -653,7 +651,7 @@ export const faqPage = {
         },
         {
           question: "Is TactileLens free?",
-          answer: "TODO: confirm whether the app is free.",
+          answer: "Pricing has not been confirmed yet. We will share it with the release details.",
         },
         {
           question: "Is there an iPhone (iOS) version?",
@@ -668,7 +666,7 @@ export const faqPage = {
         {
           question: "Which braille codes does it use?",
           answer:
-            "Math is translated into Nemeth code. TODO: braille code used for regular text (for example, UEB Grade 1 or Grade 2).",
+            "Math uses Nemeth code. Details about the braille code used for regular text will be shared once confirmed.",
         },
         {
           // Confirmed: general algebra.
@@ -696,7 +694,7 @@ export const faqPage = {
           question: "What phone do I need?",
           answer: appRelease.minAndroidVersion
             ? `An Android phone with a camera, running Android ${appRelease.minAndroidVersion} or newer.`
-            : "An Android phone with a camera. TODO: minimum Android version and free storage space.",
+            : "An Android phone with a camera. Minimum Android version and storage requirements will be shared with the release.",
         },
       ],
     },
@@ -713,7 +711,7 @@ export const faqPage = {
         {
           question: "What happens to the photos I scan?",
           answer:
-            "TODO: explain what happens to scanned images in online mode (sent to the server? stored? for how long?) and in offline mode.",
+            "Offline text recognition happens on your phone. Details about how scanned images are handled in online mode will be published once confirmed.",
         },
       ],
     },
@@ -815,7 +813,7 @@ export const teamPage = {
     eyebrow: "Acknowledgements",
     title: "Thank you",
     paragraphs: [
-      "TODO: People and organizations the team wants to thank (for example, teachers or schools who gave feedback, and family and friends).",
+      "The team's acknowledgements will be shared here once they are ready.",
     ],
   },
 } as const;

@@ -27,9 +27,9 @@ export default function MemberProfile({ name, role, description, as: Tag = "li" 
   return (
     <Tag className="member">
       {!isPlaceholder && <span className="avatar" aria-hidden="true">{initials(name)}</span>}
-      <h3 className="item-title">{name}</h3>
-      <p className="label member-role">{role}</p>
-      {description && <p className="member-description">{description}</p>}
+      <h3 className="item-title">{isPlaceholder ? "Profile coming soon" : name}</h3>
+      <p className="label member-role">{role.startsWith("TODO") ? "TactileLens team" : role}</p>
+      {description && <p className="member-description">{description.startsWith("TODO") ? "We'll share more about this person and their work soon." : description}</p>}
     </Tag>
   );
 }

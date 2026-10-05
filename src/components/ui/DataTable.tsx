@@ -25,7 +25,7 @@ export default function DataTable({ caption, columns, rows }: DataTableProps) {
           {rows.map((row) => (
             <tr key={row.label}>
               <th scope="row">{row.label}</th>
-              <td>{row.value}</td>
+              <td>{row.value.startsWith("TODO") ? "Details to follow." : row.value}</td>
             </tr>
           ))}
         </tbody>
