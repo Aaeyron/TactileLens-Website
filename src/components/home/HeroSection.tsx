@@ -1,6 +1,7 @@
 import { downloadCta, hero, heroBlocks } from "@/content/site";
 import Button from "@/components/ui/Button";
 import Screenshot from "@/components/ui/Screenshot";
+import TextLink from "@/components/ui/TextLink";
 
 /**
  * Editorial split hero: a very large headline on white (left) and a
@@ -15,15 +16,20 @@ export default function HeroSection() {
   return (
     <section className="hero" data-tone="white" aria-labelledby="hero-title">
       <div className="hero-copy">
+        <p className="section-eyebrow">{hero.badge}</p>
         <h1 id="hero-title" className="hero-title">
           {hero.headline}
         </h1>
         <p className="hero-lead">{hero.lead}</p>
-        <div className="hero-mobile-cta">
+        <div className="hero-actions">
           <Button href={downloadCta.pageHref} variant="primary">
             {downloadCta.label}
           </Button>
+          <TextLink href={hero.secondaryCta.href}>{hero.secondaryCta.label}</TextLink>
         </div>
+        <ul className="hero-capabilities" role="list" aria-label="Product capabilities">
+          {hero.trustBadges.map((badge) => <li key={badge.label}>{badge.label}</li>)}
+        </ul>
       </div>
 
       <div className="hero-media">

@@ -159,7 +159,7 @@ export const footer = {
 
 export const hero = {
   // DRAFT: review — editorial hero headline and short (two-line) lead.
-  headline: "Braille from print, in seconds.",
+  headline: "Turn printed pages into braille.",
   lead: "Scan a printed page with your Android phone. TactileLens turns its text and math into braille.",
   badge: "Accessible learning materials",
   titleLead: "Make printed learning materials more accessible with",

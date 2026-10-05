@@ -926,6 +926,7 @@ h3 {
 }
 
 .hero-title {
+  margin-top: var(--space-4);
   max-width: 12ch;
   color: var(--ink);
   font-size: clamp(2.75rem, 1.5rem + 5vw, 5rem);
@@ -942,15 +943,40 @@ h3 {
   line-height: var(--leading-normal);
 }
 
-/* Phones only: the blocks with the main call to action sit further down */
-.hero-mobile-cta {
+/* Visitors can choose a next step directly below the headline at every size. */
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4) var(--space-5);
   margin-top: var(--space-6);
 }
 
-@media (min-width: 640px) {
-  .hero-mobile-cta {
-    display: none;
-  }
+.hero-actions .text-link {
+  min-height: var(--tap-target);
+}
+
+.hero-capabilities {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-4);
+  margin-top: var(--space-5);
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.hero-capabilities li {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.hero-capabilities li::before {
+  width: 4px;
+  height: 4px;
+  border-radius: var(--radius-full);
+  background: var(--blue);
+  content: "";
 }
 
 .hero-media {
