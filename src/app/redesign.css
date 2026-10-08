@@ -160,17 +160,18 @@ p { text-wrap: pretty; }
   .section > .site-container, .ed-section > .site-container { flex: 1; }
 }
 
+
+
+
 /* ============================================
-   TACTILELENS — HOMEPAGE HERO REFINEMENT
+   TACTILELENS — HOMEPAGE HERO
    ============================================ */
 
 .landing-hero {
-  position: relative;
-  min-height: calc(100svh - var(--header-height));
   display: flex;
   align-items: center;
-  overflow: hidden;
-  padding-block: clamp(4rem, 8vw, 7rem);
+  min-height: calc(100svh - var(--header-height));
+  padding-block: clamp(3rem, 5vw, 4.5rem);
   background: var(--white);
 }
 
@@ -178,22 +179,34 @@ p { text-wrap: pretty; }
   width: 100%;
 }
 
-.landing-hero-copy {
-  width: 100%;
-  max-width: 820px;
+.landing-hero-layout {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1.1fr)
+    minmax(0, 0.9fr);
+  align-items: center;
+  gap: clamp(2rem, 4vw, 4rem);
 }
 
-/* Small introduction */
+/* ============================================
+   LEFT — HERO INTRODUCTION
+   ============================================ */
+
+.landing-hero-copy {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+}
+
 .landing-hero-eyebrow {
   display: flex;
-  align-items: center;
   flex-wrap: wrap;
+  align-items: center;
   gap: 12px;
-
   color: var(--blue);
   font-size: 0.875rem;
   font-weight: 600;
-  letter-spacing: 0.015em;
+  letter-spacing: 0.01em;
 }
 
 .landing-hero-eyebrow-line {
@@ -203,16 +216,14 @@ p { text-wrap: pretty; }
   background: var(--blue);
 }
 
-/* Main headline */
 .landing-hero-title {
-  max-width: 19ch;
+  max-width: 20ch;
   margin-top: 24px;
-
   color: var(--ink);
-  font-size: clamp(2.75rem, 5.5vw, 5rem);
+  font-size: clamp(2.4rem, 4vw, 4rem);
   font-weight: 700;
-  line-height: 1.1;
-  letter-spacing: -0.045em;
+  line-height: 1.12;
+  letter-spacing: -0.04em;
   text-wrap: balance;
 }
 
@@ -220,23 +231,20 @@ p { text-wrap: pretty; }
   color: var(--blue);
 }
 
-/* Description */
 .landing-hero-lead {
-  max-width: 56ch;
-  margin-top: 28px;
-
+  max-width: 52ch;
+  margin-top: 24px;
   color: var(--ink-muted);
-  font-size: clamp(1rem, 1.3vw, 1.1875rem);
-  line-height: 1.8;
+  font-size: clamp(1rem, 1.3vw, 1.125rem);
+  line-height: 1.75;
 }
 
-/* Primary action */
 .landing-hero .hero-actions {
   display: flex;
-  align-items: center;
   flex-wrap: wrap;
-  gap: 20px;
-  margin-top: 36px;
+  align-items: center;
+  gap: 16px;
+  margin-top: 32px;
 }
 
 .landing-hero .action-caption {
@@ -244,17 +252,12 @@ p { text-wrap: pretty; }
   font-size: 0.875rem;
 }
 
-/* Subtle footer detail within hero */
-.landing-hero-bottom {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 20px;
+/* Small detail below introduction */
 
-  margin-top: clamp(3.5rem, 8vw, 6rem);
+.landing-hero-bottom {
+  margin-top: 3rem;
   border-top: 1px solid var(--color-divider);
-  padding-top: 20px;
+  padding-top: 16px;
 }
 
 .landing-hero-bottom-label {
@@ -263,33 +266,79 @@ p { text-wrap: pretty; }
   line-height: 1.6;
 }
 
-.landing-hero-bottom-decoration {
-  color: var(--blue);
-  font-family: var(--font-braille);
-  font-size: 1.25rem;
-  letter-spacing: 0.16em;
+/* ============================================
+   RIGHT — APP SHOWCASE IMAGE
+   ============================================ */
+
+.landing-hero-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-width: 0;
 }
 
-/* Tablet */
+.landing-hero-image-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 520px;
+  margin-inline: auto;
+}
+
+/* Transparent phone and hand image */
+
+.landing-hero-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(
+    0 16px 28px rgb(0 32 92 / 0.06)
+  );
+}
+
+/* ============================================
+   TABLET RESPONSIVENESS
+   ============================================ */
+
 @media (max-width: 959px) {
   .landing-hero {
     min-height: auto;
-    padding-block: 5rem;
-  }
-
-  .landing-hero-title {
-    max-width: 18ch;
-  }
-}
-
-/* Mobile */
-@media (max-width: 639px) {
-  .landing-hero {
     padding-block: 4rem;
   }
 
+  .landing-hero-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2.5rem;
+  }
+
+  .landing-hero-copy {
+    max-width: 42rem;
+  }
+
+  .landing-hero-image-wrapper {
+    max-width: 440px;
+  }
+}
+
+/* ============================================
+   MOBILE RESPONSIVENESS
+   ============================================ */
+
+@media (max-width: 639px) {
+  .landing-hero {
+    padding-block: 3rem;
+  }
+
+  .landing-hero-layout {
+    gap: 2rem;
+  }
+
   .landing-hero-title {
-    font-size: clamp(2.3rem, 9vw, 3.5rem);
+    font-size: clamp(2.25rem, 8vw, 3rem);
     letter-spacing: -0.035em;
   }
 
@@ -299,12 +348,20 @@ p { text-wrap: pretty; }
   }
 
   .landing-hero .hero-actions {
-    margin-top: 28px;
     gap: 14px;
+    margin-top: 28px;
   }
 
   .landing-hero-bottom {
-    margin-top: 3.5rem;
+    margin-top: 2.5rem;
+  }
+
+  .landing-hero-image-wrapper {
+    width: 100%;
+    max-width: 340px;
   }
 }
+
+
+
 
