@@ -363,5 +363,118 @@ p { text-wrap: pretty; }
 }
 
 
+/* ============================================
+   TACTILELENS — HERO IMAGE SHOWCASE DETAILS
+   ============================================ */
+
+.landing-hero-showcase {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 540px;
+  margin-inline: auto;
+}
+
+/* Large subtle blue backdrop */
+.landing-hero-showcase-circle {
+  position: absolute;
+  z-index: -1;
+  top: 46%;
+  left: 50%;
+  width: 88%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #edf3fb;
+  transform: translate(-50%, -50%);
+}
+
+/* Small Braille-inspired decorative dots */
+.landing-hero-showcase-dots {
+  position: absolute;
+  z-index: 0;
+  top: 8%;
+  right: 2%;
+  width: 70px;
+  height: 90px;
+  opacity: 0.4;
+  background-image: radial-gradient(
+    circle,
+    var(--blue) 2px,
+    transparent 3px
+  );
+  background-size: 18px 18px;
+  pointer-events: none;
+}
+
+/* Phone image remains above decorations */
+.landing-hero-showcase .landing-hero-image-wrapper {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 520px;
+}
+
+/* Small caption below phone */
+.landing-hero-showcase-caption {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 12px;
+  color: var(--ink-muted);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  text-align: center;
+}
+
+.landing-hero-showcase-caption-line {
+  width: 24px;
+  height: 2px;
+  flex-shrink: 0;
+  background: var(--blue);
+}
+
+/* Tablet */
+@media (max-width: 959px) {
+  .landing-hero-showcase {
+    max-width: 460px;
+  }
+
+  .landing-hero-showcase-dots {
+    right: 4%;
+  }
+}
+
+/* Mobile */
+@media (max-width: 639px) {
+  .landing-hero-showcase {
+    max-width: 350px;
+  }
+
+  .landing-hero-showcase-circle {
+    width: 90%;
+  }
+
+  .landing-hero-showcase-dots {
+    width: 54px;
+    height: 72px;
+    background-size: 15px 15px;
+  }
+
+  .landing-hero-showcase-caption {
+    margin-top: 6px;
+    font-size: 0.75rem;
+  }
+}
+
+
+
 
 

@@ -49,20 +49,44 @@ export default function HeroSection() {
             </div>
           </div>
 
-          {/* RIGHT — TactileLens app showcase */}
-          <div className="landing-hero-visual">
-            <div className="landing-hero-image-wrapper">
-              <Image
-                src="/homescreen.png"
-                alt="A hand holding a smartphone displaying the TactileLens Android application home screen, including Quick Scan, Materials, and History."
-                width={1148}
-                height={1370}
-                priority
-                sizes="(max-width: 639px) 90vw, (max-width: 959px) 440px, 45vw"
-                className="landing-hero-image"
-              />
+          
+            {/* RIGHT — TactileLens app showcase */}
+            <div className="landing-hero-visual">
+              <div className="landing-hero-showcase">
+
+                {/* Decorative background */}
+                <div
+                  className="landing-hero-showcase-circle"
+                  aria-hidden="true"
+                />
+
+                <div
+                  className="landing-hero-showcase-dots"
+                  aria-hidden="true"
+                />
+
+                {/* Actual TactileLens app image */}
+                <div className="landing-hero-image-wrapper">
+                  <Image
+                    src="/homescreen.png"
+                    alt="A hand holding a smartphone displaying the TactileLens app home screen, including Quick Scan, Materials, and History."
+                    width={1148}
+                    height={1370}
+                    priority
+                    sizes="(max-width: 639px) 90vw, (max-width: 959px) 440px, 45vw"
+                    className="landing-hero-image"
+                  />
+                </div>
+
+                {/* Showcase caption */}
+                <div className="landing-hero-showcase-caption">
+                  <span className="landing-hero-showcase-caption-line" />
+                  <span>TactileLens Android Application</span>
+                </div>
+
+              </div>
             </div>
-          </div>
+
         </div>
       </Container>
     </section>
