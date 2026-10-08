@@ -311,15 +311,6 @@ h3 {
  * Brand: braille text
  * ========================================================================= */
 
-
-
-
-
-
-
-
-
-
 .braille-text {
   color: var(--color-brand);
   font-family: var(--font-braille);
