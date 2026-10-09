@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/metadata";
 import { featuresPage } from "@/content/site";
-import CtaBanner from "@/components/download/CtaBanner";
+import CtaBanner from "@/components/ui/CtaBanner";
 import CheckList from "@/components/ui/CheckList";
 import ItemGrid from "@/components/ui/ItemGrid";
 import PageHeader from "@/components/ui/PageHeader";

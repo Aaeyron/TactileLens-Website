@@ -7,8 +7,8 @@ import RevealOnScroll from "@/components/layout/RevealOnScroll";
 import SmoothScroll from "@/components/layout/SmoothScroll";
 import { site } from "@/content/site";
 import { baseOpenGraph } from "@/lib/metadata";
-import "./globals.css";
-import "./redesign.css";
+import "@/styles/globals.css";
+import "@/styles/redesign.css";
 
 // One friendly, readable family gives headings and body text a quieter rhythm.
 const siteFont = DM_Sans({

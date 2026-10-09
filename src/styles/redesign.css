@@ -54,21 +54,18 @@ p { text-wrap: pretty; }
 .section-header, .ed-header { margin-bottom: var(--space-6); }
 .section-heading-copy { display: block; max-width: 48rem; }
 
-.page-header, .landing-hero {
+.page-header {
   display: flex;
   align-items: center;
   min-height: calc(100svh - var(--header-height));
   padding-block: var(--section-pad-y);
 }
-.page-header > .site-container, .landing-hero > .site-container { flex: 1; }
+.page-header > .site-container { flex: 1; }
 .page-header-content { display: block; max-width: 48rem; }
-.page-title, .landing-hero-title { max-width: 18ch; font-size: clamp(2.25rem, 1.5rem + 3.4vw, 4rem); font-weight: 600; line-height: 1.14; letter-spacing: -0.035em; }
+.page-title { max-width: 18ch; font-size: clamp(2.25rem, 1.5rem + 3.4vw, 4rem); font-weight: 600; line-height: 1.14; letter-spacing: -0.035em; }
 .page-header-introduction { border: 0; padding: 0; }
-.page-intro, .landing-hero-lead { max-width: 52ch; margin-top: var(--space-5); font-size: 1.0625rem; color: var(--ink-muted); }
-.landing-hero-copy { max-width: 48rem; }
-.landing-hero-title { margin-top: var(--space-4); }
-.landing-hero-title span { color: var(--blue); }
-.hero-actions, .closing-action { display: flex; align-items: center; flex-wrap: wrap; gap: var(--space-4); margin-top: var(--space-5); }
+.page-intro { max-width: 52ch; margin-top: var(--space-5); font-size: 1.0625rem; color: var(--ink-muted); }
+.closing-action { display: flex; align-items: center; flex-wrap: wrap; gap: var(--space-4); margin-top: var(--space-5); }
 .action-caption { font-size: 0.875rem; color: var(--ink-muted); }
 
 /* Icon-only actions retain a name for assistive technology and a hover title. */
@@ -110,11 +107,7 @@ p { text-wrap: pretty; }
 .numbered-item:last-child, .info-row:last-child { border-bottom: 0; }
 .table-wrap { max-width: 52rem; border-radius: 12px; background: transparent; }
 .callout { max-width: 52rem; border-radius: 0; padding: var(--space-3) var(--space-4); background: transparent; }
-.pull-quote { max-width: 48rem; border-left-width: 2px; padding-block: var(--space-3); }
-.pull-quote-text { font-size: clamp(1.25rem, 2.2vw, 1.75rem); }
 .fact-number-value { font-size: clamp(1.5rem, 2.4vw, 2rem); }
-.compare-panel { border: 1px solid var(--color-divider); border-radius: 12px; padding: var(--space-5); background: transparent; }
-.compare--large { max-width: none; }
 
 .feature-rows { grid-template-columns: minmax(0, 1fr); gap: var(--space-5); }
 .feature-row { display: grid; border: 0; border-radius: 0; padding: 0; background: transparent; box-shadow: none; gap: var(--space-6); }
@@ -126,7 +119,6 @@ p { text-wrap: pretty; }
 .feature-detail { display: grid; gap: var(--space-6); }
 .feature-detail .check-list { margin-top: 0; }
 .feature-detail .screenshot { max-width: 240px; }
-.simple-points { max-width: 48rem; display: grid; gap: var(--space-3); padding-left: 1.25rem; list-style: disc; color: var(--ink-muted); }
 .feature-helps { display: none; }
 .screen-caption { font-size: 0.8125rem; }
 .faq-groups { display: block; max-width: 52rem; }
@@ -160,319 +152,6 @@ p { text-wrap: pretty; }
   .section > .site-container, .ed-section > .site-container { flex: 1; }
 }
 
-
-
-
-/* ============================================
-   TACTILELENS — HOMEPAGE HERO
-   ============================================ */
-
-.landing-hero {
-  display: flex;
-  align-items: center;
-  min-height: calc(100svh - var(--header-height));
-  padding-block: clamp(3rem, 5vw, 4.5rem);
-  background: var(--white);
-}
-
-.landing-hero > .site-container {
-  width: 100%;
-}
-
-.landing-hero-layout {
-  display: grid;
-  grid-template-columns:
-    minmax(0, 1.1fr)
-    minmax(0, 0.9fr);
-  align-items: center;
-  gap: clamp(2rem, 4vw, 4rem);
-}
-
-/* ============================================
-   LEFT — HERO INTRODUCTION
-   ============================================ */
-
-.landing-hero-copy {
-  width: 100%;
-  min-width: 0;
-  max-width: 100%;
-}
-
-.landing-hero-eyebrow {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 12px;
-  color: var(--blue);
-  font-size: 0.875rem;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-}
-
-.landing-hero-eyebrow-line {
-  width: 26px;
-  height: 2px;
-  flex-shrink: 0;
-  background: var(--blue);
-}
-
-.landing-hero-title {
-  max-width: 20ch;
-  margin-top: 24px;
-  color: var(--ink);
-  font-size: clamp(2.4rem, 4vw, 4rem);
-  font-weight: 700;
-  line-height: 1.12;
-  letter-spacing: -0.04em;
-  text-wrap: balance;
-}
-
-.landing-hero-title span {
-  color: var(--blue);
-}
-
-.landing-hero-lead {
-  max-width: 52ch;
-  margin-top: 24px;
-  color: var(--ink-muted);
-  font-size: clamp(1rem, 1.3vw, 1.125rem);
-  line-height: 1.75;
-}
-
-.landing-hero .hero-actions {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 16px;
-  margin-top: 32px;
-}
-
-.landing-hero .action-caption {
-  color: var(--ink-muted);
-  font-size: 0.875rem;
-}
-
-/* Small detail below introduction */
-
-.landing-hero-bottom {
-  margin-top: 3rem;
-  border-top: 1px solid var(--color-divider);
-  padding-top: 16px;
-}
-
-.landing-hero-bottom-label {
-  color: var(--ink-muted);
-  font-size: 0.8125rem;
-  line-height: 1.6;
-}
-
-/* ============================================
-   RIGHT — APP SHOWCASE IMAGE
-   ============================================ */
-
-.landing-hero-visual {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  min-width: 0;
-}
-
-.landing-hero-image-wrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  max-width: 520px;
-  margin-inline: auto;
-}
-
-/* Transparent phone and hand image */
-
-.landing-hero-image {
-  display: block;
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-  filter: drop-shadow(
-    0 16px 28px rgb(0 32 92 / 0.06)
-  );
-}
-
-/* ============================================
-   TABLET RESPONSIVENESS
-   ============================================ */
-
-@media (max-width: 959px) {
-  .landing-hero {
-    min-height: auto;
-    padding-block: 4rem;
-  }
-
-  .landing-hero-layout {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 2.5rem;
-  }
-
-  .landing-hero-copy {
-    max-width: 42rem;
-  }
-
-  .landing-hero-image-wrapper {
-    max-width: 440px;
-  }
-}
-
-/* ============================================
-   MOBILE RESPONSIVENESS
-   ============================================ */
-
-@media (max-width: 639px) {
-  .landing-hero {
-    padding-block: 3rem;
-  }
-
-  .landing-hero-layout {
-    gap: 2rem;
-  }
-
-  .landing-hero-title {
-    font-size: clamp(2.25rem, 8vw, 3rem);
-    letter-spacing: -0.035em;
-  }
-
-  .landing-hero-lead {
-    margin-top: 22px;
-    line-height: 1.7;
-  }
-
-  .landing-hero .hero-actions {
-    gap: 14px;
-    margin-top: 28px;
-  }
-
-  .landing-hero-bottom {
-    margin-top: 2.5rem;
-  }
-
-  .landing-hero-image-wrapper {
-    width: 100%;
-    max-width: 340px;
-  }
-}
-
-
-/* ============================================
-   TACTILELENS — HERO IMAGE SHOWCASE DETAILS
-   ============================================ */
-
-.landing-hero-showcase {
-  position: relative;
-  isolation: isolate;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  max-width: 540px;
-  margin-inline: auto;
-}
-
-/* Large subtle blue backdrop */
-.landing-hero-showcase-circle {
-  position: absolute;
-  z-index: -1;
-  top: 46%;
-  left: 50%;
-  width: 88%;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background: #edf3fb;
-  transform: translate(-50%, -50%);
-}
-
-/* Small Braille-inspired decorative dots */
-.landing-hero-showcase-dots {
-  position: absolute;
-  z-index: 0;
-  top: 8%;
-  right: 2%;
-  width: 70px;
-  height: 90px;
-  opacity: 0.4;
-  background-image: radial-gradient(
-    circle,
-    var(--blue) 2px,
-    transparent 3px
-  );
-  background-size: 18px 18px;
-  pointer-events: none;
-}
-
-/* Phone image remains above decorations */
-.landing-hero-showcase .landing-hero-image-wrapper {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  max-width: 520px;
-}
-
-/* Small caption below phone */
-.landing-hero-showcase-caption {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 12px;
-  color: var(--ink-muted);
-  font-size: 0.8125rem;
-  font-weight: 500;
-  letter-spacing: 0.01em;
-  text-align: center;
-}
-
-.landing-hero-showcase-caption-line {
-  width: 24px;
-  height: 2px;
-  flex-shrink: 0;
-  background: var(--blue);
-}
-
-/* Tablet */
-@media (max-width: 959px) {
-  .landing-hero-showcase {
-    max-width: 460px;
-  }
-
-  .landing-hero-showcase-dots {
-    right: 4%;
-  }
-}
-
-/* Mobile */
-@media (max-width: 639px) {
-  .landing-hero-showcase {
-    max-width: 350px;
-  }
-
-  .landing-hero-showcase-circle {
-    width: 90%;
-  }
-
-  .landing-hero-showcase-dots {
-    width: 54px;
-    height: 72px;
-    background-size: 15px 15px;
-  }
-
-  .landing-hero-showcase-caption {
-    margin-top: 6px;
-    font-size: 0.75rem;
-  }
-}
 
 
 

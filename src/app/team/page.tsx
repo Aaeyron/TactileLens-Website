@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/metadata";
 import { teamPage } from "@/content/site";
-import CtaBanner from "@/components/download/CtaBanner";
+import CtaBanner from "@/components/ui/CtaBanner";
 import MemberProfile from "@/components/team/MemberProfile";
 import ItemGrid from "@/components/ui/ItemGrid";
 import InfoList from "@/components/ui/InfoList";

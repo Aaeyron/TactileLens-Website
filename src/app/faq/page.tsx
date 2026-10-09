@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/metadata";
 import { faqPage } from "@/content/site";
-import CtaBanner from "@/components/download/CtaBanner";
+import CtaBanner from "@/components/ui/CtaBanner";
 import FaqList from "@/components/ui/FaqList";
 import InfoList from "@/components/ui/InfoList";
 import OnThisPage from "@/components/ui/OnThisPage";
