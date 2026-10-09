@@ -1,78 +1,10 @@
 import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/metadata";
 import { downloadPage } from "@/content/site";
-import DownloadCard from "@/components/download/DownloadCard";
-import Callout from "@/components/ui/Callout";
-import ItemGrid from "@/components/ui/ItemGrid";
-import DataTable from "@/components/ui/DataTable";
-import NumberedList from "@/components/ui/NumberedList";
-import PageHeader from "@/components/ui/PageHeader";
-import Screenshot from "@/components/ui/Screenshot";
-import Section from "@/components/ui/Section";
-import StepList from "@/components/ui/StepList";
-import TextLink from "@/components/ui/TextLink";
+import Download from "@/components/download/Download";
 
 export const metadata: Metadata = pageMetadata({ ...downloadPage.meta, path: "/download" });
 
 export default function DownloadPage() {
-  const { header, requirements, install, troubleshooting, versions } = downloadPage;
-
-  return (
-    <>
-      <PageHeader {...header} />
-
-      {/* The only place on the site that downloads the APK directly. */}
-      <DownloadCard />
-
-      <Section
-        id="requirements"
-        eyebrow={requirements.eyebrow}
-        title={requirements.title}
-        description={requirements.description}
-      >
-        <DataTable caption={requirements.caption} columns={requirements.columns} rows={requirements.rows} />
-      </Section>
-
-      <Section
-        id="install"
-        tone="soft"
-        eyebrow={install.eyebrow}
-        title={install.title}
-        description={install.description}
-      >
-        <div className="section-callout section-callout--top">
-          <Callout variant="tip" text={install.safetyTip} />
-        </div>
-        <StepList steps={install.steps} variant="row" />
-        <p className="section-note">{install.note}</p>
-
-      </Section>
-
-      <Section id="after-install" title={install.afterInstall.title} description={install.afterInstall.text}>
-        {install.afterInstall.screen.src && <Screenshot screen={install.afterInstall.screen} sizes="240px" />}
-        <div className="section-footer">
-          <TextLink href={install.scanTipsLink.href}>{install.scanTipsLink.label}</TextLink>
-        </div>
-      </Section>
-
-      <Section
-        id="troubleshooting"
-        eyebrow={troubleshooting.eyebrow}
-        title={troubleshooting.title}
-        description={troubleshooting.description}
-      >
-        <ItemGrid items={troubleshooting.items} />
-      </Section>
-
-      <Section
-        id="version-history"
-        tone="mist"
-        eyebrow={versions.eyebrow}
-        title={versions.title}
-        description={versions.description}
-      >
-        <NumberedList items={versions.items} />
-      </Section>
-    </>
-  );
+  return <Download />;
 }

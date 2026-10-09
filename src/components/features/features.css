@@ -1,0 +1,17 @@
+/* ==========================================
+   FEATURES — FEATURE DETAILS
+   ========================================== */
+
+.feature-detail {
+  display: grid;
+  max-width: 48rem;
+  gap: var(--space-6);
+}
+
+.feature-detail .check-list {
+  margin-top: 0;
+}
+
+.feature-detail .screenshot {
+  max-width: 240px;
+}

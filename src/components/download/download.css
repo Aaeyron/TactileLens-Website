@@ -1,0 +1,236 @@
+/* ==========================================
+   DOWNLOAD — PRIMARY DOWNLOAD ACTION
+   ========================================== */
+
+.download-cta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.download-pending {
+  display: inline-flex;
+  min-height: var(--button-height);
+  align-items: center;
+  align-self: flex-start;
+  border: 1px dashed var(--color-brand);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-5);
+  background: var(--color-bg);
+  color: var(--color-brand-text);
+  font-weight: var(--weight-semibold);
+  line-height: 1.2;
+}
+
+.download-meta {
+  max-width: 32ch;
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.download-meta-separator {
+  margin-inline: var(--space-2);
+}
+
+/* ==========================================
+   DOWNLOAD — APP CARD
+   ========================================== */
+
+.block-title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  color: var(--color-text);
+  font-size: var(--text-xl);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-snug);
+}
+
+.download-card {
+  --color-bg: var(--white);
+  display: grid;
+  gap: var(--space-7);
+  border: 1px solid var(--color-border);
+  border-top: var(--border-accent);
+  border-radius: var(--radius-lg);
+  padding: var(--card-padding);
+  background: var(--color-bg);
+  box-shadow: var(--shadow-highlight), var(--shadow-lg);
+}
+
+.download-card-app {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.download-card-logo {
+  width: 4.5rem;
+  height: 4.5rem;
+  flex-shrink: 0;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.download-card-subtitle {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.download-card-heading {
+  margin-top: var(--space-7);
+  margin-bottom: var(--space-3);
+  color: var(--color-text);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-semibold);
+}
+
+/* ==========================================
+   DOWNLOAD — QR CODE
+   ========================================== */
+
+.qr {
+  display: flex;
+  max-width: 18rem;
+  flex-direction: column;
+  align-items: center;
+  justify-self: center;
+  gap: var(--space-4);
+  border-top: 1px solid var(--color-border);
+  padding-top: var(--space-6);
+  text-align: center;
+}
+
+.qr-code {
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+  background: var(--color-bg);
+  color: var(--color-brand-text);
+}
+
+.qr-placeholder {
+  display: block;
+  width: var(--qr-size);
+  height: var(--qr-size);
+}
+
+.qr-title {
+  color: var(--color-text);
+  font-weight: var(--weight-semibold);
+}
+
+.qr-text {
+  margin-top: var(--space-1);
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.qr-url {
+  margin-top: var(--space-2);
+  color: var(--color-brand-text);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  overflow-wrap: anywhere;
+}
+
+/* ==========================================
+   DOWNLOAD — REQUIREMENTS TABLE
+   ========================================== */
+
+.table-wrap {
+  max-width: 52rem;
+  overflow-x: auto;
+  border-radius: 12px;
+  background: transparent;
+  color: var(--color-text);
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.data-table th,
+.data-table td {
+  padding: var(--space-4) var(--space-5) var(--space-4) 0;
+  text-align: left;
+  vertical-align: top;
+}
+
+.data-table thead th {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.data-table tbody tr + tr {
+  border-top: 1px solid var(--color-border);
+}
+
+.data-table tbody th {
+  width: 38%;
+  color: var(--color-text);
+  font-weight: var(--weight-semibold);
+}
+
+.data-table td {
+  padding-right: 0;
+  color: var(--color-text-muted);
+}
+
+/* ==========================================
+   DOWNLOAD — INSTALLATION CALLOUT
+   ========================================== */
+
+.callout {
+  max-width: 52rem;
+  border-left: 2px solid var(--color-brand);
+  border-radius: 0;
+  padding: var(--space-3) var(--space-4);
+  background: transparent;
+}
+
+.callout-label {
+  color: var(--color-brand-text);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.callout-text {
+  margin-top: var(--space-1);
+  color: var(--color-text);
+}
+
+.section-callout {
+  margin-top: var(--space-7);
+}
+
+.section-callout--top {
+  margin-top: 0;
+  margin-bottom: var(--space-7);
+}
+
+/* ==========================================
+   DOWNLOAD — RESPONSIVE STYLES
+   ========================================== */
+
+@media (min-width: 960px) {
+  .download-card {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: start;
+  }
+
+  .qr {
+    align-self: stretch;
+    justify-content: center;
+    border-top: 0;
+    border-left: 1px solid var(--color-border);
+    padding-top: 0;
+    padding-left: var(--space-7);
+  }
+}

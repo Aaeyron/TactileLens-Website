@@ -538,14 +538,14 @@ h3 {
 }
 
 /* The shared open-item frame: a thin top line with a short blue start */
-:is(.item, .member, .fact-number, .feature-text) {
+.item {
   position: relative;
   min-width: 0;
   border-top: 1px solid var(--color-border);
   padding-top: var(--space-5);
 }
 
-:is(.item, .member, .fact-number, .feature-text)::before {
+.item::before {
   position: absolute;
   top: -1px;
   left: 0;
@@ -882,175 +882,6 @@ h3 {
 }
 
 /* =========================================================================
- * Editorial layout grid
- * --side is the gutter outside the 1120px content width; .bleed grids put
- * 20 equal content tracks between two --side tracks, so a panel can run to
- * the screen edge while text stays aligned with the rest of the page.
- * Lines: 1 = screen left, 2 = content left, 22 = content right, 23 = screen right.
- * ========================================================================= */
-
-.hero,
-.ed-split {
-  --side: max(var(--gutter), calc((100% - var(--container-max)) / 2));
-  display: grid;
-  grid-template-columns: var(--side) repeat(20, minmax(0, 1fr)) var(--side);
-}
-
-/* =========================================================================
- * Editorial sections: big bold left-aligned headlines, short text, lots of
- * white space. Bands are white, soft blue-gray or navy (see data-tone).
- * ========================================================================= */
-
-.ed-section {
-  padding-block: var(--section-pad-y);
-  background: var(--color-bg);
-  color: var(--color-text);
-}
-
-.ed-header {
-  max-width: 44rem;
-  margin-bottom: var(--section-header-gap);
-}
-
-.ed-title {
-  margin-top: var(--space-3);
-  color: var(--color-text);
-  font-size: clamp(2.25rem, 1.3rem + 3vw, 3.75rem);
-  font-weight: var(--weight-extrabold);
-  line-height: 1.05;
-  letter-spacing: -0.035em;
-}
-
-.ed-lead {
-  max-width: 40ch;
-  margin-top: var(--space-4);
-  color: var(--color-text-muted);
-  font-size: var(--text-lg);
-}
-
-/* "side": headline left, content right on wide screens */
-.ed-layout--side .item-grid--3 {
-  grid-template-columns: minmax(0, 1fr);
-  gap: var(--space-6);
-}
-
-.ed-layout--side .item-grid--3 .item {
-  display: grid;
-  grid-template-columns: 3rem minmax(0, 1fr);
-  gap: var(--space-2) var(--space-4);
-}
-
-.ed-layout--side .item-grid--3 .item-top {
-  grid-row: 1 / 3;
-  margin-bottom: 0;
-}
-
-.ed-layout--side .item-grid--3 :is(.item-title, .item-body) {
-  grid-column: 2;
-  margin-top: 0;
-}
-
-@media (min-width: 960px) {
-  .ed-layout--side {
-    display: grid;
-    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-    align-items: start;
-    gap: var(--space-8);
-  }
-
-  .ed-layout--side .ed-header {
-    margin-bottom: 0;
-  }
-}
-
-/* Asymmetric split with a full-bleed soft panel for the image */
-.ed-split {
-  background: var(--color-bg);
-}
-
-.ed-split-text {
-  grid-column: 2 / 22;
-  padding-block: var(--section-pad-y) var(--space-8);
-}
-
-.ed-split-media {
-  display: grid;
-  grid-column: 1 / -1;
-  place-items: center;
-  padding-block: var(--space-8);
-  background: var(--soft-blue);
-}
-
-.ed-split-media .phone {
-  box-shadow: var(--shadow-lg);
-}
-
-@media (min-width: 960px) {
-  .ed-split-text {
-    grid-row: 1;
-    align-self: center;
-    padding-block: var(--section-pad-y);
-  }
-
-  .ed-split-media {
-    grid-row: 1;
-    padding-block: var(--section-pad-y);
-  }
-
-  .ed-split--media-left .ed-split-media {
-    grid-column: 1 / 11;
-  }
-
-  .ed-split--media-left .ed-split-text {
-    grid-column: 12 / 22;
-  }
-
-  .ed-split--media-right .ed-split-media {
-    grid-column: 12 / -1;
-  }
-
-  .ed-split--media-right .ed-split-text {
-    grid-column: 2 / 11;
-  }
-}
-
-/* =========================================================================
- * Download call to action
- * ========================================================================= */
-
-.download-cta {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-}
-
-/* Shown instead of a link while the APK URL is still a TODO.
-   Deliberately not styled like a button: it is a notice, not a control. */
-.download-pending {
-  display: inline-flex;
-  min-height: var(--button-height);
-  align-items: center;
-  align-self: flex-start;
-  border: 1px dashed var(--color-brand);
-  border-radius: var(--radius-md);
-  padding: var(--space-3) var(--space-5);
-  background: var(--color-bg);
-  color: var(--color-brand-text);
-  font-weight: var(--weight-semibold);
-  line-height: 1.2;
-}
-
-.download-meta {
-  max-width: 32ch;
-  color: var(--color-text-muted);
-  font-size: var(--text-sm);
-}
-
-.download-meta-separator {
-  margin-inline: var(--space-2);
-}
-
-/* =========================================================================
  * Screenshots: phone frame + labeled placeholder (until real images exist)
  * ========================================================================= */
 
@@ -1098,23 +929,6 @@ h3 {
   background: var(--white);
 }
 
-
-/* Download page: "What you'll see after installing" — text beside a screenshot */
-.after-install {
-  display: grid;
-  max-width: var(--width-narrow);
-  align-items: center;
-  gap: var(--space-5);
-  margin-top: var(--space-7);
-  border-top: 1px solid var(--color-border);
-  padding-top: var(--space-7);
-}
-
-@media (min-width: 640px) {
-  .after-install {
-    grid-template-columns: minmax(0, 1fr) 15rem;
-  }
-}
 
 /* A screenshot without the phone frame (Features rows, Download page) */
 .screenshot {
@@ -1282,8 +1096,7 @@ h3 {
 }
 
 .prose p + p,
-.item-body p + p,
-.faq-answer p + p {
+.item-body p + p {
   margin-top: var(--space-4);
 }
 
@@ -1433,193 +1246,9 @@ p a:not(.button) {
 }
 
 /* =========================================================================
- * Feature columns (Features page): a screenshot above open text
- * ========================================================================= */
-
-.feature-rows {
-  display: grid;
-  gap: var(--space-8) var(--space-6);
-}
-
-@media (min-width: 640px) {
-  .feature-rows {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (min-width: 1024px) {
-  .feature-rows {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-}
-
-.feature-row {
-  display: flex;
-  min-width: 0;
-  flex-direction: column;
-  gap: var(--space-5);
-}
-
-.feature-visual {
-  display: flex;
-  justify-content: center;
-}
-
-.feature-description {
-  max-width: var(--measure);
-  margin-top: var(--space-2);
-  color: var(--color-text-muted);
-}
-
-
-/* =========================================================================
- * Team — open profiles (shared open-item frame) with a round avatar
- * ========================================================================= */
-
-.avatar {
-  display: grid;
-  width: var(--space-8);
-  height: var(--space-8);
-  place-items: center;
-  margin-bottom: var(--space-4);
-  border: 1px solid var(--color-brand);
-  border-radius: var(--radius-full);
-  background: var(--color-bg);
-  box-shadow:
-    0 0 0 4px var(--color-bg),
-    0 0 0 5px var(--color-border);
-  color: var(--color-brand-text);
-  font-size: var(--text-lg);
-  font-weight: var(--weight-bold);
-}
-
-.member-role {
-  margin-top: var(--space-2);
-}
-
-.member-description {
-  margin-top: var(--space-3);
-  color: var(--color-text-muted);
-}
-
-/* Two columns: one profile beside a list (Team: adviser + school details) */
-.split {
-  display: grid;
-  align-items: start;
-  gap: var(--space-7);
-}
-
-@media (min-width: 768px) {
-  .split {
-    grid-template-columns: minmax(0, 18rem) minmax(0, 1fr);
-  }
-}
-
-/* =========================================================================
  * FAQ — categories of native <details>/<summary>, as a clean list of
  * questions separated by thin lines (no box)
  * ========================================================================= */
-
-.faq-groups {
-  display: grid;
-  max-width: var(--width-narrow);
-  gap: var(--space-8);
-}
-
-/* Subsection heading inside a page section (FAQ groups, download card) */
-.block-title {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  color: var(--color-text);
-  font-size: var(--text-xl);
-  font-weight: var(--weight-bold);
-  line-height: var(--leading-snug);
-}
-
-.faq-group .block-title {
-  margin-bottom: var(--space-4);
-}
-
-.faq-list {
-  border-bottom: 1px solid var(--color-border);
-}
-
-.faq-item {
-  border-top: 1px solid var(--color-border);
-}
-
-/* Smooth open/close where the browser supports it (ignored elsewhere) */
-.faq-item::details-content {
-  overflow: hidden;
-  block-size: 0;
-  transition:
-    block-size var(--duration-medium) var(--ease),
-    content-visibility var(--duration-medium) var(--ease) allow-discrete;
-}
-
-.faq-item[open]::details-content {
-  block-size: auto;
-}
-
-.faq-question {
-  display: flex;
-  min-height: var(--tap-target);
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-4);
-  padding-block: var(--space-5);
-  color: var(--color-text);
-  font-size: var(--text-lg);
-  font-weight: var(--weight-semibold);
-  line-height: var(--leading-snug);
-  list-style: none;
-  cursor: pointer;
-}
-
-.faq-question::-webkit-details-marker {
-  display: none;
-}
-
-.faq-question:hover {
-  color: var(--color-brand-text);
-}
-
-/* Plus/minus icon drawn with two bars */
-.faq-icon {
-  position: relative;
-  width: var(--space-5);
-  height: var(--space-5);
-  flex-shrink: 0;
-}
-
-.faq-icon::before,
-.faq-icon::after {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 100%;
-  height: 2px;
-  border-radius: var(--radius-full);
-  background: var(--color-brand);
-  content: "";
-  transform: translate(-50%, -50%);
-  transition: transform var(--duration-fast) var(--ease);
-}
-
-.faq-icon::after {
-  transform: translate(-50%, -50%) rotate(90deg);
-}
-
-.faq-item[open] .faq-icon::after {
-  transform: translate(-50%, -50%) rotate(0deg);
-}
-
-.faq-answer {
-  max-width: var(--measure);
-  padding-bottom: var(--space-5);
-  color: var(--color-text-muted);
-}
 
 /* =========================================================================
  * Info list — a spec sheet: label on the left, value on the right, thin
@@ -1652,118 +1281,6 @@ p a:not(.button) {
 
 .info-value {
   color: var(--color-text-muted);
-}
-
-/* =========================================================================
- * Download page: download card and QR code
- * ========================================================================= */
-
-.download-card {
-  --color-bg: var(--white);
-  display: grid;
-  gap: var(--space-7);
-  border: 1px solid var(--color-border);
-  border-top: var(--border-accent);
-  border-radius: var(--radius-lg);
-  padding: var(--card-padding);
-  background: var(--color-bg);
-  box-shadow: var(--shadow-highlight), var(--shadow-lg);
-}
-
-@media (min-width: 960px) {
-  .download-card {
-    grid-template-columns: minmax(0, 1fr) auto;
-    align-items: start;
-  }
-}
-
-.download-card-app {
-  display: flex;
-  align-items: center;
-  gap: var(--space-4);
-  margin-bottom: var(--space-6);
-}
-
-.download-card-logo {
-  width: 4.5rem;
-  height: 4.5rem;
-  flex-shrink: 0;
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
-}
-
-
-.download-card-subtitle {
-  color: var(--color-text-muted);
-  font-size: var(--text-sm);
-}
-
-.download-card-heading {
-  margin-top: var(--space-7);
-  margin-bottom: var(--space-3);
-  color: var(--color-text);
-  font-size: var(--text-lg);
-  font-weight: var(--weight-semibold);
-}
-
-/* QR code: an open column inside the download card, divided by a thin line
-   (above it on mobile, to its left on wide screens) */
-.qr {
-  display: flex;
-  max-width: 18rem;
-  flex-direction: column;
-  align-items: center;
-  justify-self: center;
-  gap: var(--space-4);
-  border-top: 1px solid var(--color-border);
-  padding-top: var(--space-6);
-  text-align: center;
-}
-
-@media (min-width: 960px) {
-  .qr {
-    align-self: stretch;
-    justify-content: center;
-    border-top: 0;
-    border-left: 1px solid var(--color-border);
-    padding-top: 0;
-    padding-left: var(--space-7);
-  }
-}
-
-.qr-code {
-  display: grid;
-  place-items: center;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  padding: var(--space-3);
-  background: var(--color-bg);
-  color: var(--color-brand-text);
-}
-
-.qr-placeholder {
-  display: block;
-  width: var(--qr-size);
-  height: var(--qr-size);
-}
-
-.qr-title {
-  color: var(--color-text);
-  font-weight: var(--weight-semibold);
-}
-
-.qr-text {
-  margin-top: var(--space-1);
-  color: var(--color-text-muted);
-  font-size: var(--text-sm);
-}
-
-.qr-url {
-  margin-top: var(--space-2);
-  color: var(--color-brand-text);
-  font-size: var(--text-sm);
-  font-weight: var(--weight-semibold);
-  overflow-wrap: anywhere;
 }
 
 /* =========================================================================
@@ -2046,130 +1563,8 @@ p a:not(.button) {
   color: var(--color-text);
 }
 
-/* "On this page" mini navigation between thin lines */
-.on-this-page {
-  max-width: var(--width-narrow);
-  margin-bottom: var(--section-header-gap);
-  border-block: 1px solid var(--color-border);
-  padding-block: var(--space-4);
-}
-
-.on-this-page-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-1) var(--space-5);
-  margin-top: var(--space-2);
-}
-
-.on-this-page-link {
-  display: inline-flex;
-  min-height: var(--tap-target);
-  align-items: center;
-  color: var(--color-brand-text);
-  font-weight: var(--weight-semibold);
-  text-decoration: none;
-}
-
-.on-this-page-link:hover {
-  color: var(--color-brand-hover);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
-/* Features: "How it helps teachers" line under a thin divider */
-.feature-helps {
-  max-width: var(--measure);
-  margin-top: var(--space-5);
-  border-top: 1px solid var(--color-border);
-  padding-top: var(--space-4);
-  color: var(--color-text);
-}
-
-.feature-helps .label {
-  display: block;
-  margin-bottom: var(--space-1);
-}
-
-/* Two-column spec sheet (Download: system requirements): rows separated by
-   thin lines, no box. Scrolls sideways inside itself if ever too wide. */
-.table-wrap {
-  max-width: var(--width-narrow);
-  overflow-x: auto;
-  color: var(--color-text);
-}
-
-.data-table {
-  width: 100%;
-  border-collapse: collapse;
-  border-bottom: 1px solid var(--color-border);
-}
-
-.data-table th,
-.data-table td {
-  padding: var(--space-4) var(--space-5) var(--space-4) 0;
-  text-align: left;
-  vertical-align: top;
-}
-
-.data-table thead th {
-  border-bottom: 1px solid var(--color-border);
-}
-
-.data-table tbody tr + tr {
-  border-top: 1px solid var(--color-border);
-}
-
-.data-table tbody th {
-  width: 38%;
-  color: var(--color-text);
-  font-weight: var(--weight-semibold);
-}
-
-.data-table td {
-  padding-right: 0;
-  color: var(--color-text-muted);
-}
-
-/* Extra space before a second group of content in one section */
-.section-block {
-  margin-top: var(--space-8);
-}
-
-/* Big typographic facts in open columns (shared open-item frame) */
-.fact-numbers {
-  display: grid;
-  gap: var(--space-7) var(--space-6);
-}
-
-@media (min-width: 640px) {
-  .fact-numbers {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (min-width: 1024px) {
-  .fact-numbers {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-}
-
-.fact-number-value {
-  color: var(--color-brand-text);
-  font-family: var(--font-display);
-  font-size: var(--text-2xl);
-  font-weight: var(--weight-extrabold);
-  letter-spacing: -0.02em;
-  line-height: 1.1;
-}
-
-.fact-number-text {
-  margin-top: var(--space-2);
-  color: var(--color-text-muted);
-}
-
 /* =========================================================================
- * Detail components: key terms, chips, check lists, callouts,
- * braille cell diagram
+ * Detail components: key terms, chips, and check lists
  * ========================================================================= */
 
 /* Key terms marked **like this** in site.ts */
@@ -2232,36 +1627,6 @@ p a:not(.button) {
   content: "";
 }
 
-/* Callout: a thin blue left line beside the text, no box */
-.callout {
-  max-width: var(--width-narrow);
-  border-left: 2px solid var(--color-brand);
-  padding-block: var(--space-1);
-  padding-left: var(--space-5);
-}
-
-.callout-label {
-  color: var(--color-brand-text);
-  font-size: var(--text-sm);
-  font-weight: var(--weight-bold);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-.callout-text {
-  margin-top: var(--space-1);
-  color: var(--color-text);
-}
-
-.section-callout {
-  margin-top: var(--space-7);
-}
-
-.section-callout--top {
-  margin-top: 0;
-  margin-bottom: var(--space-7);
-}
-
 .section-note {
   max-width: var(--measure);
   margin-top: var(--space-5);
@@ -2284,19 +1649,6 @@ p a:not(.button) {
   .section-header-row {
     grid-template-columns: minmax(0, 1fr) auto;
     align-items: end;
-  }
-}
-
-/* "See it in action": comparison + fact side by side on wide screens */
-.compare-layout {
-  display: grid;
-  gap: var(--space-7);
-}
-
-@media (min-width: 1024px) {
-  .compare-layout {
-    grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
-    align-items: center;
   }
 }
 

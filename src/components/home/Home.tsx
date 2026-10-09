@@ -1,4 +1,5 @@
 import Image from "next/image";
+import type { ReactNode } from "react";
 import {
   downloadCta,
   hero,
@@ -12,12 +13,46 @@ import {
 import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
 import CtaBanner from "@/components/ui/CtaBanner";
-import EdSection from "@/components/ui/EdSection";
 import ItemGrid from "@/components/ui/ItemGrid";
 import Section from "@/components/ui/Section";
 import StepList from "@/components/ui/StepList";
 import TextLink from "@/components/ui/TextLink";
 import "./home.css";
+
+type EditorialSectionProps = {
+  id: string;
+  title: string;
+  eyebrow?: string;
+  description?: string;
+  tone?: "white" | "soft" | "navy";
+  layout?: "stack" | "side";
+  children?: ReactNode;
+};
+
+function EditorialSection({
+  id,
+  title,
+  eyebrow,
+  description,
+  tone = "white",
+  layout = "stack",
+  children,
+}: EditorialSectionProps) {
+  const titleId = `${id}-title`;
+
+  return (
+    <section id={id} className="ed-section" data-tone={tone} aria-labelledby={titleId} data-reveal>
+      <Container className={`ed-layout ed-layout--${layout}`}>
+        <header className="ed-header">
+          {eyebrow && <p className="section-eyebrow">{eyebrow}</p>}
+          <h2 id={titleId} className="ed-title">{title}</h2>
+          {description && <p className="ed-lead">{description}</p>}
+        </header>
+        <div className="ed-body">{children}</div>
+      </Container>
+    </section>
+  );
+}
 
 export default function Home() {
   return (
@@ -116,7 +151,7 @@ export default function Home() {
       </Section>
 
       {/* See It in Action */}
-      <EdSection
+      <EditorialSection
         id="see-it-in-action"
         tone="white"
         layout="side"
@@ -137,7 +172,7 @@ export default function Home() {
             <p className="braille-text compare-braille">{sampleMath.braille}</p>
           </div>
         </figure>
-      </EdSection>
+      </EditorialSection>
 
       {/* Why TactileLens */}
       <Section id="why" tone="mist" eyebrow={homeWhy.eyebrow} title={homeWhy.title} description={homeWhy.description}>
