@@ -113,6 +113,7 @@ p { text-wrap: pretty; }
   padding-block: var(--section-pad-y);
   background: var(--mist);
 }
+/* The shared closing band keeps one tone regardless of its section position. */
 .page-transition > .cta-band {
   --color-bg: var(--mist);
   background: var(--mist);
