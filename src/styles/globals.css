@@ -1284,18 +1284,18 @@ p a:not(.button) {
 }
 
 /* =========================================================================
- * CTA — "Ready to try TactileLens?": a full-width brand blue block with a
- * big white headline on the left and a white Download button on the right.
- * Links and focus rings on it are white.
+ * CTA — "Ready to try TactileLens?": a quiet gray closing band with a
+ * prominent blue download action. Shared by every page using CtaBanner.
  * ========================================================================= */
 
 .cta-band {
-  --color-text: var(--white);
-  --color-text-muted: var(--white);
-  --color-brand-text: var(--white);
-  --color-focus: var(--white);
+  --color-text: var(--ink);
+  --color-text-muted: var(--ink-muted);
+  --color-brand: var(--blue);
+  --color-brand-text: var(--blue);
+  --color-focus: var(--blue);
   padding-block: var(--section-pad-y);
-  background: var(--blue);
+  background: var(--mist);
   color: var(--color-text);
 }
 
@@ -1324,13 +1324,13 @@ p a:not(.button) {
   gap: var(--space-4);
 }
 
-/* White ring so the blue logo stands out on the blue band */
+/* Optional brand mark treatment retained for future CTA variants. */
 .cta-band-logo {
   width: 2.25rem;
   height: 2.25rem;
   flex-shrink: 0;
   border-radius: var(--radius-sm);
-  box-shadow: 0 0 0 2px var(--white);
+  box-shadow: 0 0 0 1px var(--blue-border);
 }
 
 .cta-band-title {
@@ -1350,7 +1350,7 @@ p a:not(.button) {
  * Footer
  * ========================================================================= */
 
-/* White footer (the blue CTA band sits right above it) with a clear brand
+/* White footer (the CTA band sits right above it) with a clear brand
    block, navigation and project credit. */
 .site-footer {
   padding-block: clamp(var(--space-7), 6vw, var(--space-8)) var(--space-5);

@@ -158,7 +158,6 @@
     max-width: 440px;
   }
 }
-
 /* ============================================
    MOBILE RESPONSIVENESS
    ============================================ */
@@ -845,81 +844,5 @@
   #before-and-after .item-grid--split .item + .item {
     padding-right: 0;
     padding-left: clamp(var(--space-5), 4vw, var(--space-8));
-  }
-}
-
-/* ============================================
-   HOME DOWNLOAD CTA
-   ============================================ */
-
-.home-cta .cta-band {
-  position: relative;
-  overflow: hidden;
-  border-top: 1px solid var(--blue-pressed);
-}
-
-.home-cta .cta-band-inner {
-  gap: var(--space-7);
-}
-
-.home-cta .cta-band-text {
-  max-width: 42rem;
-}
-
-.home-cta .cta-band-title {
-  max-width: 18ch;
-  font-weight: 700;
-  line-height: 1.12;
-}
-
-.home-cta .cta-band-description {
-  max-width: 48ch;
-  margin-top: var(--space-3);
-  line-height: 1.7;
-}
-
-.home-cta .closing-action {
-  display: flex;
-  align-items: center;
-  gap: var(--space-4);
-  margin-top: 0;
-  border-top: 1px solid rgb(255 255 255 / 0.24);
-  padding-top: var(--space-5);
-}
-
-.home-cta .button--primary {
-  background: var(--white);
-  box-shadow: var(--shadow-xs);
-  color: var(--blue);
-}
-
-.home-cta .button--primary:hover {
-  background: var(--soft-blue);
-  color: var(--blue-hover);
-}
-
-.home-cta .button--primary:active {
-  background: var(--white);
-  box-shadow: var(--shadow-pressed);
-  color: var(--blue-pressed);
-}
-
-.home-cta .action-caption {
-  color: rgb(255 255 255 / 0.84);
-}
-
-@media (min-width: 768px) {
-  .home-cta .closing-action {
-    flex-shrink: 0;
-    border-top: 0;
-    border-left: 1px solid rgb(255 255 255 / 0.24);
-    padding-top: 0;
-    padding-left: var(--space-7);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .home-cta .button--primary {
-    transition: none;
   }
 }
