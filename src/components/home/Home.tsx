@@ -201,25 +201,29 @@ export default function Home() {
 
       {/* Highlights */}
       <Section id="highlights" eyebrow={homeHighlights.eyebrow} title={homeHighlights.title} description={homeHighlights.description}>
-        <ul className="item-grid item-grid--3 highlights-grid" role="list" data-reveal-group>
-          {homeHighlights.items.map((item) => {
+        <div className="highlights-sequence" data-reveal-group>
+          {homeHighlights.items.map((item, index) => {
             const HighlightIcon = highlightIcons[item.chip];
+            const num = String(index + 1).padStart(2, "0");
 
             return (
-              <li className="item highlights-item" key={item.title}>
-                <span className="highlights-icon" aria-hidden="true">
-                  <HighlightIcon size={20} strokeWidth={1.75} />
-                </span>
-                <p className="highlights-label">{item.chip}</p>
-                <h3 className="item-title">{item.title}</h3>
-                <div className="item-body">
-                  <p><RichText text={item.description} /></p>
+              <article className="highlights-block" key={item.title}>
+                <div className="highlights-anchor">
+                  <span className="highlights-num" aria-hidden="true">{num}</span>
+                  <span className="highlights-icon" aria-hidden="true">
+                    <HighlightIcon size={20} strokeWidth={1.75} />
+                  </span>
+                </div>
+                <div className="highlights-content">
+                  <p className="highlights-chip">{item.chip}</p>
+                  <h3 className="highlights-title">{item.title}</h3>
+                  <p className="highlights-desc"><RichText text={item.description} /></p>
                   <CheckList items={item.bullets} />
                 </div>
-              </li>
+              </article>
             );
           })}
-        </ul>
+        </div>
         <div className="section-footer highlights-footer">
           <TextLink href={homeHighlights.link.href}>{homeHighlights.link.label}</TextLink>
           <span className="highlights-link-arrow" aria-hidden="true">→</span>
