@@ -1,6 +1,15 @@
 import Image from "next/image";
 import type { ReactNode } from "react";
 import {
+  Calculator,
+  Camera,
+  FileText,
+  Grid3X3,
+  ScanLine,
+  ScanText,
+  type LucideIcon,
+} from "lucide-react";
+import {
   downloadCta,
   hero,
   homeBeforeAfter,
@@ -11,13 +20,64 @@ import {
   seeItInAction,
 } from "@/content/site";
 import Button from "@/components/ui/Button";
+import CheckList from "@/components/ui/CheckList";
 import Container from "@/components/ui/Container";
 import CtaBanner from "@/components/ui/CtaBanner";
 import ItemGrid from "@/components/ui/ItemGrid";
+import RichText from "@/components/ui/RichText";
 import Section from "@/components/ui/Section";
-import StepList from "@/components/ui/StepList";
 import TextLink from "@/components/ui/TextLink";
 import "./home.css";
+
+const highlightIcons = {
+  Text: FileText,
+  Math: Calculator,
+  Offline: ScanLine,
+};
+
+const stepPreviews = [
+  {
+    label: "Scan Screen",
+    description: "Capture printed learning materials",
+    icon: Camera,
+  },
+  {
+    label: "Recognition Results",
+    description: "View recognized text and algebraic expressions",
+    icon: ScanText,
+  },
+  {
+    label: "Braille Output",
+    description: "Accessible Braille and Nemeth translation",
+    icon: Grid3X3,
+  },
+] as const;
+
+type AppPreviewProps = {
+  label: string;
+  description: string;
+  icon: LucideIcon;
+  className?: string;
+};
+
+function AppPreview({ label, description, icon: PreviewIcon, className = "" }: AppPreviewProps) {
+  return (
+    <figure className={`app-preview ${className}`.trim()}>
+      <div className="app-preview-frame">
+        <div className="app-preview-screen" role="img" aria-label={`${label} screenshot placeholder`}>
+          <div className="app-preview-marker" aria-hidden="true">
+            <PreviewIcon size={24} strokeWidth={1.6} />
+            <span>Screenshot placeholder</span>
+          </div>
+        </div>
+      </div>
+      <figcaption className="app-preview-caption">
+        <strong>{label}</strong>
+        <span>{description}</span>
+      </figcaption>
+    </figure>
+  );
+}
 
 type EditorialSectionProps = {
   id: string;
@@ -141,37 +201,86 @@ export default function Home() {
 
       {/* Highlights */}
       <Section id="highlights" eyebrow={homeHighlights.eyebrow} title={homeHighlights.title} description={homeHighlights.description}>
-        <ItemGrid items={homeHighlights.items.map((item) => ({ title: item.title, description: item.description, bullets: item.bullets }))} columns={3} />
-        <div className="section-footer"><TextLink href={homeHighlights.link.href}>{homeHighlights.link.label}</TextLink></div>
+        <ul className="item-grid item-grid--3 highlights-grid" role="list" data-reveal-group>
+          {homeHighlights.items.map((item) => {
+            const HighlightIcon = highlightIcons[item.chip];
+
+            return (
+              <li className="item highlights-item" key={item.title}>
+                <span className="highlights-icon" aria-hidden="true">
+                  <HighlightIcon size={20} strokeWidth={1.75} />
+                </span>
+                <p className="highlights-label">{item.chip}</p>
+                <h3 className="item-title">{item.title}</h3>
+                <div className="item-body">
+                  <p><RichText text={item.description} /></p>
+                  <CheckList items={item.bullets} />
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+        <div className="section-footer highlights-footer">
+          <TextLink href={homeHighlights.link.href}>{homeHighlights.link.label}</TextLink>
+          <span className="highlights-link-arrow" aria-hidden="true">→</span>
+        </div>
       </Section>
 
       {/* How It Works */}
-      <Section id="what-it-does" tone="mist" eyebrow={homeSteps.eyebrow} title={homeSteps.title} description={homeSteps.description}>
-        <StepList steps={homeSteps.steps} variant="row" />
+      <Section id="what-it-does" eyebrow={homeSteps.eyebrow} title={homeSteps.title} description={homeSteps.description}>
+        <ol className="home-steps" role="list" data-reveal-group>
+          {homeSteps.steps.map((step, index) => {
+            const preview = stepPreviews[index];
+
+            return (
+              <li className="home-step" key={step.title}>
+                <AppPreview {...preview} />
+                <div className="home-step-marker" aria-hidden="true">
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                </div>
+                <div className="home-step-content">
+                  <h3 className="item-title">
+                    <span className="visually-hidden">Step {index + 1}: </span>
+                    {step.title}
+                  </h3>
+                  <p className="step-description">{step.description}</p>
+                </div>
+              </li>
+            );
+          })}
+        </ol>
       </Section>
 
       {/* See It in Action */}
       <EditorialSection
         id="see-it-in-action"
-        tone="white"
-        layout="side"
+        tone="soft"
+        layout="stack"
         eyebrow={seeItInAction.eyebrow}
         title={seeItInAction.title}
         description={seeItInAction.description}
       >
-        <figure className="compare compare--large">
-          <figcaption className="visually-hidden">{seeItInAction.srText}</figcaption>
+        <div className="action-demo">
+          <figure className="compare compare--large">
+            <figcaption className="visually-hidden">{seeItInAction.srText}</figcaption>
 
-          <div className="compare-panel" aria-hidden="true">
-            <p className="compare-label">{seeItInAction.beforeLabel}</p>
-            <p className="compare-printed">{sampleMath.printed}</p>
-          </div>
+            <div className="compare-panel" aria-hidden="true">
+              <p className="compare-label">{seeItInAction.beforeLabel}</p>
+              <p className="compare-printed">{sampleMath.printed}</p>
+            </div>
 
-          <div className="compare-panel" aria-hidden="true">
-            <p className="compare-label">{seeItInAction.afterLabel}</p>
-            <p className="braille-text compare-braille">{sampleMath.braille}</p>
-          </div>
-        </figure>
+            <div className="compare-panel" aria-hidden="true">
+              <p className="compare-label">{seeItInAction.afterLabel}</p>
+              <p className="braille-text compare-braille">{sampleMath.braille}</p>
+            </div>
+          </figure>
+          <AppPreview
+            className="app-preview--supporting"
+            label="Braille Output"
+            description="Accessible Braille and Nemeth translation"
+            icon={Grid3X3}
+          />
+        </div>
       </EditorialSection>
 
       {/* Why TactileLens */}
@@ -185,7 +294,9 @@ export default function Home() {
       </Section>
 
       {/* Download CTA */}
-      <CtaBanner />
+      <div className="home-cta">
+        <CtaBanner />
+      </div>
     </>
   );
 }
